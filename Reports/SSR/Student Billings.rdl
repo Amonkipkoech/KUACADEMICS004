@@ -1,0 +1,1499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>ff065fad-8c23-44c5-8ba0-eae18981c977</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Student_Billings_AnalysisCaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Student_Billings_AnalysisCaption.Value)</Value>
+                    <Style>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>0cm</Top>
+            <Left>0cm</Left>
+            <Height>0.423cm</Height>
+            <Width>7.5cm</Width>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="COMPANYNAME">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!COMPANYNAME.Value)</Value>
+                    <Style>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>0.423cm</Top>
+            <Left>0cm</Left>
+            <Height>0.423cm</Height>
+            <Width>7.5cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Course_Registration_Programme">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Course_Registration_Programme.Value)</Value>
+                    <Style>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>1.269cm</Top>
+            <Left>2.55cm</Left>
+            <Height>0.423cm</Height>
+            <Width>2.1cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Course_Registration_ProgrammeCaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Course_Registration_ProgrammeCaption.Value)</Value>
+                    <Style>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>1.269cm</Top>
+            <Left>0cm</Left>
+            <Height>0.423cm</Height>
+            <Width>2.55cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <VerticalAlign>Bottom</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Course_Registration_Stage">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Course_Registration_Stage.Value)</Value>
+                    <Style>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>1.692cm</Top>
+            <Left>2.55cm</Left>
+            <Height>0.423cm</Height>
+            <Width>2.1cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Course_Registration_StageCaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Course_Registration_StageCaption.Value)</Value>
+                    <Style>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>1.692cm</Top>
+            <Left>0cm</Left>
+            <Height>0.423cm</Height>
+            <Width>2.55cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <VerticalAlign>Bottom</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Tablix Name="Table1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>2.5cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>4.65cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.81633cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.5cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.5cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.91267cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.589cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.735cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.846cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto" />
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
+                          <Style>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Course_Registration__Student_No__Caption">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">=First(Fields!Course_Registration__Student_No__Caption.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="NamesCaption">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">=First(Fields!NamesCaption.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">Programme</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox2</rd:DefaultName>
+                          <Style>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">Stage</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                          <Style>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Course_Registration__Registration_Date_Caption">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">=First(Fields!Course_Registration__Registration_Date_Caption.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Course_Registration__Total_Billed_Caption">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">=First(Fields!Course_Registration__Total_Billed_Caption.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Course_Registration__Fees_Billed_Caption">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">=First(Fields!Course_Registration__Fees_Billed_Caption.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.423cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="seq">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">=Fields!seq.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>seq</rd:DefaultName>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Course_Registration__Student_No__">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">=Fields!Course_Registration__Student_No__.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Cust_Name">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">=Fields!Cust_Name.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Course_Registration_Programme2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">=Fields!Course_Registration_Programme.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Course_Registration_Programme2</rd:DefaultName>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Course_Registration_Stage1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">=Fields!Course_Registration_Stage.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Course_Registration_Stage1</rd:DefaultName>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <rd:Selected>true</rd:Selected>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Course_Registration__Registration_Date_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">=Fields!Course_Registration__Registration_Date_.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <Format>d</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Course_Registration__Total_Billed_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">=Fields!Course_Registration__Total_Billed_.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <Format>=Fields!Course_Registration__Total_Billed_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Course_Registration__Fees_Billed_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">=Fields!Course_Registration__Fees_Billed_.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <Format>=Fields!Course_Registration__Fees_Billed_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.423cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto" />
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox3</rd:DefaultName>
+                          <Style>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="TotalsCaption">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">=First(Fields!TotalsCaption.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Student_CountCaption">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto" />
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto" />
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox4</rd:DefaultName>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox7">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto" />
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox7</rd:DefaultName>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="SCount">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto" />
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Course_Registration__Total_Billed__Control1102760065">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">=Sum(Fields!Course_Registration__Total_Billed_.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <Format>=First(Fields!Course_Registration__Total_Billed__Control1102760065Format.Value)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Course_Registration__Fees_Billed__Control1102760066">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">=Sum(Fields!Course_Registration__Fees_Billed_.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <Format>=First(Fields!Course_Registration__Fees_Billed__Control1102760066Format.Value)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                  <RepeatOnNewPage>true</RepeatOnNewPage>
+                  <KeepTogether>true</KeepTogether>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Table1_Details_Group">
+                    <DataElementName>Detail</DataElementName>
+                  </Group>
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
+                  <DataElementName>Detail_Collection</DataElementName>
+                  <DataElementOutput>Output</DataElementOutput>
+                  <KeepTogether>true</KeepTogether>
+                </TablixMember>
+                <TablixMember>
+                  <KeepWithGroup>Before</KeepWithGroup>
+                  <KeepTogether>true</KeepTogether>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet_Result</DataSetName>
+            <Top>2.538cm</Top>
+            <Height>1.692cm</Height>
+            <Width>25.203cm</Width>
+            <ZIndex>6</ZIndex>
+            <Style />
+          </Tablix>
+        </ReportItems>
+        <Height>4.23cm</Height>
+        <Style />
+      </Body>
+      <Width>39.30001cm</Width>
+      <Page>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>43.10001cm</PageWidth>
+        <LeftMargin>2.1cm</LeftMargin>
+        <RightMargin>1cm</RightMargin>
+        <TopMargin>2cm</TopMargin>
+        <BottomMargin>2cm</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>c27a9730-0654-408c-af58-9236fde790b7</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="Course_Registration_Programme">
+          <DataField>Course_Registration_Programme</DataField>
+        </Field>
+        <Field Name="Course_Registration_Stage">
+          <DataField>Course_Registration_Stage</DataField>
+        </Field>
+        <Field Name="ColumnH_1_">
+          <DataField>ColumnH_1_</DataField>
+        </Field>
+        <Field Name="ColumnH_8_">
+          <DataField>ColumnH_8_</DataField>
+        </Field>
+        <Field Name="ColumnH_6_">
+          <DataField>ColumnH_6_</DataField>
+        </Field>
+        <Field Name="ColumnH_7_">
+          <DataField>ColumnH_7_</DataField>
+        </Field>
+        <Field Name="ColumnH_4_">
+          <DataField>ColumnH_4_</DataField>
+        </Field>
+        <Field Name="ColumnH_3_">
+          <DataField>ColumnH_3_</DataField>
+        </Field>
+        <Field Name="ColumnH_5_">
+          <DataField>ColumnH_5_</DataField>
+        </Field>
+        <Field Name="ColumnH_2_">
+          <DataField>ColumnH_2_</DataField>
+        </Field>
+        <Field Name="ColumnH_15_">
+          <DataField>ColumnH_15_</DataField>
+        </Field>
+        <Field Name="ColumnH_14_">
+          <DataField>ColumnH_14_</DataField>
+        </Field>
+        <Field Name="ColumnH_13_">
+          <DataField>ColumnH_13_</DataField>
+        </Field>
+        <Field Name="ColumnH_12_">
+          <DataField>ColumnH_12_</DataField>
+        </Field>
+        <Field Name="ColumnH_10_">
+          <DataField>ColumnH_10_</DataField>
+        </Field>
+        <Field Name="ColumnH_9_">
+          <DataField>ColumnH_9_</DataField>
+        </Field>
+        <Field Name="ColumnH_11_">
+          <DataField>ColumnH_11_</DataField>
+        </Field>
+        <Field Name="ColumnH_23_">
+          <DataField>ColumnH_23_</DataField>
+        </Field>
+        <Field Name="ColumnH_22_">
+          <DataField>ColumnH_22_</DataField>
+        </Field>
+        <Field Name="ColumnH_21_">
+          <DataField>ColumnH_21_</DataField>
+        </Field>
+        <Field Name="ColumnH_20_">
+          <DataField>ColumnH_20_</DataField>
+        </Field>
+        <Field Name="ColumnH_19_">
+          <DataField>ColumnH_19_</DataField>
+        </Field>
+        <Field Name="ColumnH_18_">
+          <DataField>ColumnH_18_</DataField>
+        </Field>
+        <Field Name="ColumnH_17_">
+          <DataField>ColumnH_17_</DataField>
+        </Field>
+        <Field Name="ColumnH_16_">
+          <DataField>ColumnH_16_</DataField>
+        </Field>
+        <Field Name="Course_Registration__Student_No__">
+          <DataField>Course_Registration__Student_No__</DataField>
+        </Field>
+        <Field Name="Course_Registration__Registration_Date_">
+          <DataField>Course_Registration__Registration_Date_</DataField>
+        </Field>
+        <Field Name="Cust_Name">
+          <DataField>Cust_Name</DataField>
+        </Field>
+        <Field Name="Course_Registration__Fees_Billed_">
+          <DataField>Course_Registration__Fees_Billed_</DataField>
+        </Field>
+        <Field Name="Course_Registration__Fees_Billed_Format">
+          <DataField>Course_Registration__Fees_Billed_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_1_">
+          <DataField>ColumnV_1_</DataField>
+        </Field>
+        <Field Name="ColumnV_1_Format">
+          <DataField>ColumnV_1_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_8_">
+          <DataField>ColumnV_8_</DataField>
+        </Field>
+        <Field Name="ColumnV_8_Format">
+          <DataField>ColumnV_8_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_7_">
+          <DataField>ColumnV_7_</DataField>
+        </Field>
+        <Field Name="ColumnV_7_Format">
+          <DataField>ColumnV_7_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_6_">
+          <DataField>ColumnV_6_</DataField>
+        </Field>
+        <Field Name="ColumnV_6_Format">
+          <DataField>ColumnV_6_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_5_">
+          <DataField>ColumnV_5_</DataField>
+        </Field>
+        <Field Name="ColumnV_5_Format">
+          <DataField>ColumnV_5_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_4_">
+          <DataField>ColumnV_4_</DataField>
+        </Field>
+        <Field Name="ColumnV_4_Format">
+          <DataField>ColumnV_4_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_3_">
+          <DataField>ColumnV_3_</DataField>
+        </Field>
+        <Field Name="ColumnV_3_Format">
+          <DataField>ColumnV_3_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_2_">
+          <DataField>ColumnV_2_</DataField>
+        </Field>
+        <Field Name="ColumnV_2_Format">
+          <DataField>ColumnV_2_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_14_">
+          <DataField>ColumnV_14_</DataField>
+        </Field>
+        <Field Name="ColumnV_14_Format">
+          <DataField>ColumnV_14_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_13_">
+          <DataField>ColumnV_13_</DataField>
+        </Field>
+        <Field Name="ColumnV_13_Format">
+          <DataField>ColumnV_13_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_12_">
+          <DataField>ColumnV_12_</DataField>
+        </Field>
+        <Field Name="ColumnV_12_Format">
+          <DataField>ColumnV_12_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_11_">
+          <DataField>ColumnV_11_</DataField>
+        </Field>
+        <Field Name="ColumnV_11_Format">
+          <DataField>ColumnV_11_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_10_">
+          <DataField>ColumnV_10_</DataField>
+        </Field>
+        <Field Name="ColumnV_10_Format">
+          <DataField>ColumnV_10_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_9_">
+          <DataField>ColumnV_9_</DataField>
+        </Field>
+        <Field Name="ColumnV_9_Format">
+          <DataField>ColumnV_9_Format</DataField>
+        </Field>
+        <Field Name="Course_Registration__Total_Billed_">
+          <DataField>Course_Registration__Total_Billed_</DataField>
+        </Field>
+        <Field Name="Course_Registration__Total_Billed_Format">
+          <DataField>Course_Registration__Total_Billed_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_23_">
+          <DataField>ColumnV_23_</DataField>
+        </Field>
+        <Field Name="ColumnV_23_Format">
+          <DataField>ColumnV_23_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_22_">
+          <DataField>ColumnV_22_</DataField>
+        </Field>
+        <Field Name="ColumnV_22_Format">
+          <DataField>ColumnV_22_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_21_">
+          <DataField>ColumnV_21_</DataField>
+        </Field>
+        <Field Name="ColumnV_21_Format">
+          <DataField>ColumnV_21_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_20_">
+          <DataField>ColumnV_20_</DataField>
+        </Field>
+        <Field Name="ColumnV_20_Format">
+          <DataField>ColumnV_20_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_19_">
+          <DataField>ColumnV_19_</DataField>
+        </Field>
+        <Field Name="ColumnV_19_Format">
+          <DataField>ColumnV_19_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_18_">
+          <DataField>ColumnV_18_</DataField>
+        </Field>
+        <Field Name="ColumnV_18_Format">
+          <DataField>ColumnV_18_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_17_">
+          <DataField>ColumnV_17_</DataField>
+        </Field>
+        <Field Name="ColumnV_17_Format">
+          <DataField>ColumnV_17_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_16_">
+          <DataField>ColumnV_16_</DataField>
+        </Field>
+        <Field Name="ColumnV_16_Format">
+          <DataField>ColumnV_16_Format</DataField>
+        </Field>
+        <Field Name="ColumnV_15_">
+          <DataField>ColumnV_15_</DataField>
+        </Field>
+        <Field Name="ColumnV_15_Format">
+          <DataField>ColumnV_15_Format</DataField>
+        </Field>
+        <Field Name="Course_Registration__Total_Billed__Control1102760065">
+          <DataField>Course_Registration__Total_Billed__Control1102760065</DataField>
+        </Field>
+        <Field Name="Course_Registration__Total_Billed__Control1102760065Format">
+          <DataField>Course_Registration__Total_Billed__Control1102760065Format</DataField>
+        </Field>
+        <Field Name="Course_Registration__Fees_Billed__Control1102760066">
+          <DataField>Course_Registration__Fees_Billed__Control1102760066</DataField>
+        </Field>
+        <Field Name="Course_Registration__Fees_Billed__Control1102760066Format">
+          <DataField>Course_Registration__Fees_Billed__Control1102760066Format</DataField>
+        </Field>
+        <Field Name="TColumnV_1_">
+          <DataField>TColumnV_1_</DataField>
+        </Field>
+        <Field Name="TColumnV_1_Format">
+          <DataField>TColumnV_1_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_8_">
+          <DataField>TColumnV_8_</DataField>
+        </Field>
+        <Field Name="TColumnV_8_Format">
+          <DataField>TColumnV_8_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_7_">
+          <DataField>TColumnV_7_</DataField>
+        </Field>
+        <Field Name="TColumnV_7_Format">
+          <DataField>TColumnV_7_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_6_">
+          <DataField>TColumnV_6_</DataField>
+        </Field>
+        <Field Name="TColumnV_6_Format">
+          <DataField>TColumnV_6_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_5_">
+          <DataField>TColumnV_5_</DataField>
+        </Field>
+        <Field Name="TColumnV_5_Format">
+          <DataField>TColumnV_5_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_4_">
+          <DataField>TColumnV_4_</DataField>
+        </Field>
+        <Field Name="TColumnV_4_Format">
+          <DataField>TColumnV_4_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_3_">
+          <DataField>TColumnV_3_</DataField>
+        </Field>
+        <Field Name="TColumnV_3_Format">
+          <DataField>TColumnV_3_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_2_">
+          <DataField>TColumnV_2_</DataField>
+        </Field>
+        <Field Name="TColumnV_2_Format">
+          <DataField>TColumnV_2_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_14_">
+          <DataField>TColumnV_14_</DataField>
+        </Field>
+        <Field Name="TColumnV_14_Format">
+          <DataField>TColumnV_14_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_13_">
+          <DataField>TColumnV_13_</DataField>
+        </Field>
+        <Field Name="TColumnV_13_Format">
+          <DataField>TColumnV_13_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_12_">
+          <DataField>TColumnV_12_</DataField>
+        </Field>
+        <Field Name="TColumnV_12_Format">
+          <DataField>TColumnV_12_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_11_">
+          <DataField>TColumnV_11_</DataField>
+        </Field>
+        <Field Name="TColumnV_11_Format">
+          <DataField>TColumnV_11_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_10_">
+          <DataField>TColumnV_10_</DataField>
+        </Field>
+        <Field Name="TColumnV_10_Format">
+          <DataField>TColumnV_10_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_9_">
+          <DataField>TColumnV_9_</DataField>
+        </Field>
+        <Field Name="TColumnV_9_Format">
+          <DataField>TColumnV_9_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_23_">
+          <DataField>TColumnV_23_</DataField>
+        </Field>
+        <Field Name="TColumnV_23_Format">
+          <DataField>TColumnV_23_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_22_">
+          <DataField>TColumnV_22_</DataField>
+        </Field>
+        <Field Name="TColumnV_22_Format">
+          <DataField>TColumnV_22_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_21_">
+          <DataField>TColumnV_21_</DataField>
+        </Field>
+        <Field Name="TColumnV_21_Format">
+          <DataField>TColumnV_21_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_20_">
+          <DataField>TColumnV_20_</DataField>
+        </Field>
+        <Field Name="TColumnV_20_Format">
+          <DataField>TColumnV_20_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_19_">
+          <DataField>TColumnV_19_</DataField>
+        </Field>
+        <Field Name="TColumnV_19_Format">
+          <DataField>TColumnV_19_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_18_">
+          <DataField>TColumnV_18_</DataField>
+        </Field>
+        <Field Name="TColumnV_18_Format">
+          <DataField>TColumnV_18_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_17_">
+          <DataField>TColumnV_17_</DataField>
+        </Field>
+        <Field Name="TColumnV_17_Format">
+          <DataField>TColumnV_17_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_16_">
+          <DataField>TColumnV_16_</DataField>
+        </Field>
+        <Field Name="TColumnV_16_Format">
+          <DataField>TColumnV_16_Format</DataField>
+        </Field>
+        <Field Name="TColumnV_15_">
+          <DataField>TColumnV_15_</DataField>
+        </Field>
+        <Field Name="TColumnV_15_Format">
+          <DataField>TColumnV_15_Format</DataField>
+        </Field>
+        <Field Name="SCount">
+          <DataField>SCount</DataField>
+        </Field>
+        <Field Name="Student_Billings_AnalysisCaption">
+          <DataField>Student_Billings_AnalysisCaption</DataField>
+        </Field>
+        <Field Name="Course_Registration_ProgrammeCaption">
+          <DataField>Course_Registration_ProgrammeCaption</DataField>
+        </Field>
+        <Field Name="Course_Registration_StageCaption">
+          <DataField>Course_Registration_StageCaption</DataField>
+        </Field>
+        <Field Name="Course_Registration__Student_No__Caption">
+          <DataField>Course_Registration__Student_No__Caption</DataField>
+        </Field>
+        <Field Name="Course_Registration__Registration_Date_Caption">
+          <DataField>Course_Registration__Registration_Date_Caption</DataField>
+        </Field>
+        <Field Name="NamesCaption">
+          <DataField>NamesCaption</DataField>
+        </Field>
+        <Field Name="Course_Registration__Fees_Billed_Caption">
+          <DataField>Course_Registration__Fees_Billed_Caption</DataField>
+        </Field>
+        <Field Name="Course_Registration__Total_Billed_Caption">
+          <DataField>Course_Registration__Total_Billed_Caption</DataField>
+        </Field>
+        <Field Name="TotalsCaption">
+          <DataField>TotalsCaption</DataField>
+        </Field>
+        <Field Name="Student_CountCaption">
+          <DataField>Student_CountCaption</DataField>
+        </Field>
+        <Field Name="Course_Registration_Reg__Transacton_ID">
+          <DataField>Course_Registration_Reg__Transacton_ID</DataField>
+        </Field>
+        <Field Name="Course_Registration_Semester">
+          <DataField>Course_Registration_Semester</DataField>
+        </Field>
+        <Field Name="Course_Registration_Register_for">
+          <DataField>Course_Registration_Register_for</DataField>
+        </Field>
+        <Field Name="Course_Registration_Unit">
+          <DataField>Course_Registration_Unit</DataField>
+        </Field>
+        <Field Name="Course_Registration_Student_Type">
+          <DataField>Course_Registration_Student_Type</DataField>
+        </Field>
+        <Field Name="Course_Registration_Entry_No_">
+          <DataField>Course_Registration_Entry_No_</DataField>
+        </Field>
+        <Field Name="seq">
+          <DataField>seq</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

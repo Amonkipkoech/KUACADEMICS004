@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="RegNo">
+          <DataField>RegNo</DataField>
+        </Field>
+        <Field Name="Names">
+          <DataField>Names</DataField>
+        </Field>
+        <Field Name="Compname">
+          <DataField>Compname</DataField>
+        </Field>
+        <Field Name="Pics">
+          <DataField>Pics</DataField>
+        </Field>
+        <Field Name="StatusOrderCompiled">
+          <DataField>StatusOrderCompiled</DataField>
+        </Field>
+        <Field Name="statusCompiled">
+          <DataField>statusCompiled</DataField>
+        </Field>
+        <Field Name="StatusCode">
+          <DataField>StatusCode</DataField>
+        </Field>
+        <Field Name="StatusDesc">
+          <DataField>StatusDesc</DataField>
+        </Field>
+        <Field Name="SummaryPageCaption">
+          <DataField>SummaryPageCaption</DataField>
+        </Field>
+        <Field Name="StatusOrder">
+          <DataField>StatusOrder</DataField>
+        </Field>
+        <Field Name="StatCodes">
+          <DataField>StatCodes</DataField>
+        </Field>
+        <Field Name="ApprovalsClaimer">
+          <DataField>ApprovalsClaimer</DataField>
+        </Field>
+        <Field Name="RegTrans">
+          <DataField>RegTrans</DataField>
+        </Field>
+        <Field Name="StudNo">
+          <DataField>StudNo</DataField>
+        </Field>
+        <Field Name="Progs">
+          <DataField>Progs</DataField>
+        </Field>
+        <Field Name="ProgName">
+          <DataField>ProgName</DataField>
+        </Field>
+        <Field Name="Sems">
+          <DataField>Sems</DataField>
+        </Field>
+        <Field Name="RegFor">
+          <DataField>RegFor</DataField>
+        </Field>
+        <Field Name="CourseStage">
+          <DataField>CourseStage</DataField>
+        </Field>
+        <Field Name="Units">
+          <DataField>Units</DataField>
+        </Field>
+        <Field Name="StudType">
+          <DataField>StudType</DataField>
+        </Field>
+        <Field Name="EntryNo">
+          <DataField>EntryNo</DataField>
+        </Field>
+        <Field Name="CampusCode">
+          <DataField>CampusCode</DataField>
+        </Field>
+        <Field Name="ExamStatus">
+          <DataField>ExamStatus</DataField>
+        </Field>
+        <Field Name="FailedUnits">
+          <DataField>FailedUnits</DataField>
+        </Field>
+        <Field Name="facCode">
+          <DataField>facCode</DataField>
+        </Field>
+        <Field Name="FacDesc">
+          <DataField>FacDesc</DataField>
+        </Field>
+        <Field Name="YoS">
+          <DataField>YoS</DataField>
+        </Field>
+        <Field Name="AcadYear">
+          <DataField>AcadYear</DataField>
+        </Field>
+        <Field Name="GraduationGroup">
+          <DataField>GraduationGroup</DataField>
+        </Field>
+        <Field Name="YearOfStudyText">
+          <DataField>YearOfStudyText</DataField>
+        </Field>
+        <Field Name="NextYear">
+          <DataField>NextYear</DataField>
+        </Field>
+        <Field Name="SaltedExamStatusDesc">
+          <DataField>SaltedExamStatusDesc</DataField>
+        </Field>
+        <Field Name="SaltedExamStatus">
+          <DataField>SaltedExamStatus</DataField>
+        </Field>
+        <Field Name="counts">
+          <DataField>counts</DataField>
+        </Field>
+        <Field Name="YoSTexed">
+          <DataField>YoSTexed</DataField>
+        </Field>
+        <Field Name="UnitCodeLabel">
+          <DataField>UnitCodeLabel</DataField>
+        </Field>
+        <Field Name="UnitDescriptionLabel">
+          <DataField>UnitDescriptionLabel</DataField>
+        </Field>
+        <Field Name="PercentageFailedCaption">
+          <DataField>PercentageFailedCaption</DataField>
+        </Field>
+        <Field Name="NumberOfCoursesFailedCaption">
+          <DataField>NumberOfCoursesFailedCaption</DataField>
+        </Field>
+        <Field Name="PercentageFailedValue">
+          <DataField>PercentageFailedValue</DataField>
+        </Field>
+        <Field Name="PercentageFailedValueFormat">
+          <DataField>PercentageFailedValueFormat</DataField>
+        </Field>
+        <Field Name="NoOfCausesFailedValue">
+          <DataField>NoOfCausesFailedValue</DataField>
+        </Field>
+        <Field Name="YoA">
+          <DataField>YoA</DataField>
+        </Field>
+        <Field Name="SpecialUnitReg">
+          <DataField>SpecialUnitReg</DataField>
+        </Field>
+        <Field Name="IsSpecialAndSupp">
+          <DataField>IsSpecialAndSupp</DataField>
+        </Field>
+        <Field Name="IsSpecialOnly">
+          <DataField>IsSpecialOnly</DataField>
+        </Field>
+        <Field Name="NotSpecialNotSuppSpecial">
+          <DataField>NotSpecialNotSuppSpecial</DataField>
+        </Field>
+        <Field Name="UnitCode">
+          <DataField>UnitCode</DataField>
+        </Field>
+        <Field Name="UnitDesc">
+          <DataField>UnitDesc</DataField>
+        </Field>
+        <Field Name="SpecialReason">
+          <DataField>SpecialReason</DataField>
+        </Field>
+        <Field Name="IsSpecialUnit">
+          <DataField>IsSpecialUnit</DataField>
+        </Field>
+        <Field Name="failExists">
+          <DataField>failExists</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

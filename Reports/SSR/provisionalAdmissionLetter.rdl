@@ -1,0 +1,1238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>40cae671-c964-4901-aba9-5e15932ba2c6</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Adm No: </Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!Admission_No.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Our Ref: </Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!Application_No_.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Label>First Name</Label>
+                    <Value>=First(Fields!First_Name.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Middle Name</Label>
+                    <Value>=First(Fields!Other_Names.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Last Name</Label>
+                    <Value>=First(Fields!Surname.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Kenya</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>3.4928cm</Top>
+            <Left>0.32456cm</Left>
+            <Height>1.70744cm</Height>
+            <Width>7.47183cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Dear </Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!First_Name.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve">  </Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!Surname.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>5.40485cm</Top>
+            <Left>0.32456cm</Left>
+            <Height>0.52917cm</Height>
+            <Width>4.14866cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox3">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>RE: PROVISIONAL ADMISSION AS A STUDENT AT THE CATHOLIC UNIVERSITY OF EASTERN AFRICA </Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!Campus.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> CAMPUS</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>6.22328cm</Top>
+            <Left>0.32456cm</Left>
+            <Height>0.65617cm</Height>
+            <Width>19.12197cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>I am pleased to inform you that you have been provisionally admitted in the </Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!faculty.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>  for
+</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>PROGRAM</Label>
+                    <Value>=First(Fields!programName.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>(</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>setttype</Label>
+                    <Value>=First(Fields!Settlement_Type.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>) </Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!Provisional_Admision_Reason.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>
+You are expected to report on</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>date</Label>
+                    <Value>=First(Fields!EndDateText.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> . There will be a compulsory orientation at </Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>10.00 a.m</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>. for all first year students on the reporting day in </Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!campusText.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> . Parents, guardians and sponsors are welcome. You are expected to pay a total first Semester fee of </Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>Ksh.  </Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!fee.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>(tuition and administrative fees)</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve">
+</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Kindly deposit cash at any of the following University’s bank A/C - No:National Commercial Bank of Africa: </Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>6479 000 011 or Co-operative Bank of Kenya: 0112 9005 722 200 or Equity Bank: 0610 292 352 491.</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve">
+</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>Please carry your </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>original</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> academic certificates, transcripts, other relevant academic documents and the admission letter on the reporting/registration day.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>DOCUMENTS NEEDED IF NOT ALREADY SUBMITTED</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>1. Two recent passport size photographs;</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>2 A recent medical certificate of good health (see the attached copy);
+3. Photocopies of school /college leaving certificates;
+4. Photocopies of official academic documents/results slips;
+5. Photocopy of the Nation al ID/passport;
+6. English proficiency certificate/result slip (for applicants from Non-English speaking countries).</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!provisionalAdmission.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>7.02056cm</Top>
+            <Left>0.32456cm</Left>
+            <Height>10.72444cm</Height>
+            <Width>20.0533cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Image Name="Image1">
+            <Source>Database</Source>
+            <Value>=First(Fields!CompanyInformation.Value, "DataSet_Result")</Value>
+            <MIMEType>image/png</MIMEType>
+            <Sizing>FitProportional</Sizing>
+            <Top>0cm</Top>
+            <Left>0cm</Left>
+            <Height>2.75167cm</Height>
+            <Width>3.30199cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Textbox Name="Textbox6">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Meanwhile, I congratulate you for securing a provisional admission at The Catholic University of Eastern Africa.
+Yours sincirely</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Prof. George Kimathi
+</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>UNIVERSITY REGISTRAR</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>18.51828cm</Top>
+            <Left>0.32456cm</Left>
+            <Height>4.99534cm</Height>
+            <Width>20.0533cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Image Name="Image2">
+            <Source>Embedded</Source>
+            <Value>AdmissionSignature1</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>20.24267cm</Top>
+            <Left>0.32456cm</Left>
+            <Height>1.5cm</Height>
+            <Width>2.97743cm</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="Image3">
+            <Source>Embedded</Source>
+            <Value>AdmissionStamp</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>19.85462cm</Top>
+            <Left>5.72912cm</Left>
+            <Height>3.659cm</Height>
+            <Width>3.76483cm</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Label>appDate</Label>
+                    <Value>=First(Fields!appDate.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox4</rd:DefaultName>
+            <Top>2.15167cm</Top>
+            <Left>15.1765cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4.53813cm</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox7">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!name.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>A.M.E.C.E.A</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>OFFICE OF THE ACADEMIC REGISTRAR</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>13pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Admissions Office</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>13pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>0cm</Top>
+            <Left>3.47839cm</Left>
+            <Height>0.6985cm</Height>
+            <Width>13.54808cm</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>P.O BOX 62157</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Nairobi, 00200, Kenya</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Email: admissions@cuea.edu</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Website: www.cuea.edu</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Mobile:</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>0709691073/72</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>0cm</Top>
+            <Left>16.67933cm</Left>
+            <Height>1.65101cm</Height>
+            <Width>4.16419cm</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>24.11617cm</Height>
+        <Style />
+      </Body>
+      <Width>20.84352cm</Width>
+      <Page>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <LeftMargin>0cm</LeftMargin>
+        <RightMargin>0cm</RightMargin>
+        <TopMargin>0cm</TopMargin>
+        <BottomMargin>0cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <EmbeddedImages>
+    <EmbeddedImage Name="AdmissionSignature1">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="AdmissionStamp">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Admission_No">
+          <DataField>Admission_No</DataField>
+        </Field>
+        <Field Name="Application_No_">
+          <DataField>Application_No_</DataField>
+        </Field>
+        <Field Name="programName">
+          <DataField>programName</DataField>
+        </Field>
+        <Field Name="Programme_Faculty">
+          <DataField>Programme_Faculty</DataField>
+        </Field>
+        <Field Name="Faculty_Name">
+          <DataField>Faculty_Name</DataField>
+        </Field>
+        <Field Name="Application_Date">
+          <DataField>Application_Date</DataField>
+        </Field>
+        <Field Name="Other_Names">
+          <DataField>Other_Names</DataField>
+        </Field>
+        <Field Name="First_Name">
+          <DataField>First_Name</DataField>
+        </Field>
+        <Field Name="Surname">
+          <DataField>Surname</DataField>
+        </Field>
+        <Field Name="First_Degree_Choice">
+          <DataField>First_Degree_Choice</DataField>
+        </Field>
+        <Field Name="CompanyInformation">
+          <DataField>CompanyInformation</DataField>
+        </Field>
+        <Field Name="Fee_payable">
+          <DataField>Fee_payable</DataField>
+        </Field>
+        <Field Name="Reporting_date">
+          <DataField>Reporting_date</DataField>
+        </Field>
+        <Field Name="fee">
+          <DataField>fee</DataField>
+        </Field>
+        <Field Name="Intake_Code">
+          <DataField>Intake_Code</DataField>
+        </Field>
+        <Field Name="ReportingDate">
+          <DataField>ReportingDate</DataField>
+        </Field>
+        <Field Name="Date_of_Admission">
+          <DataField>Date_of_Admission</DataField>
+        </Field>
+        <Field Name="name">
+          <DataField>name</DataField>
+        </Field>
+        <Field Name="faculty">
+          <DataField>faculty</DataField>
+        </Field>
+        <Field Name="Settlement_Type">
+          <DataField>Settlement_Type</DataField>
+        </Field>
+        <Field Name="EndDateText">
+          <DataField>EndDateText</DataField>
+        </Field>
+        <Field Name="appDate">
+          <DataField>appDate</DataField>
+        </Field>
+        <Field Name="Campus">
+          <DataField>Campus</DataField>
+        </Field>
+        <Field Name="campusText">
+          <DataField>campusText</DataField>
+        </Field>
+        <Field Name="letterHead">
+          <DataField>letterHead</DataField>
+        </Field>
+        <Field Name="letterHead2">
+          <DataField>letterHead2</DataField>
+        </Field>
+        <Field Name="letterHead3">
+          <DataField>letterHead3</DataField>
+        </Field>
+        <Field Name="letterHead4">
+          <DataField>letterHead4</DataField>
+        </Field>
+        <Field Name="footer1">
+          <DataField>footer1</DataField>
+        </Field>
+        <Field Name="footer2">
+          <DataField>footer2</DataField>
+        </Field>
+        <Field Name="footer3">
+          <DataField>footer3</DataField>
+        </Field>
+        <Field Name="Provisional_Admision_Reason">
+          <DataField>Provisional_Admision_Reason</DataField>
+        </Field>
+        <Field Name="provisionalAdmission">
+          <DataField>provisionalAdmission</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

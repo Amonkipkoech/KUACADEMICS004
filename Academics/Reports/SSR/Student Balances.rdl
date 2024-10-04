@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Customer__No__">
+          <DataField>Customer__No__</DataField>
+        </Field>
+        <Field Name="Customer_Name">
+          <DataField>Customer_Name</DataField>
+        </Field>
+        <Field Name="Customer__Debit_Amount__LCY__">
+          <DataField>Customer__Debit_Amount__LCY__</DataField>
+        </Field>
+        <Field Name="Customer__Debit_Amount__LCY__Format">
+          <DataField>Customer__Debit_Amount__LCY__Format</DataField>
+        </Field>
+        <Field Name="Customer__Credit_Amount__LCY__">
+          <DataField>Customer__Credit_Amount__LCY__</DataField>
+        </Field>
+        <Field Name="Customer__Credit_Amount__LCY__Format">
+          <DataField>Customer__Credit_Amount__LCY__Format</DataField>
+        </Field>
+        <Field Name="Customer__Balance__LCY__">
+          <DataField>Customer__Balance__LCY__</DataField>
+        </Field>
+        <Field Name="Customer__Balance__LCY__Format">
+          <DataField>Customer__Balance__LCY__Format</DataField>
+        </Field>
+        <Field Name="Hesabu">
+          <DataField>Hesabu</DataField>
+        </Field>
+        <Field Name="totalc">
+          <DataField>totalc</DataField>
+        </Field>
+        <Field Name="totalcFormat">
+          <DataField>totalcFormat</DataField>
+        </Field>
+        <Field Name="Totald">
+          <DataField>Totald</DataField>
+        </Field>
+        <Field Name="TotaldFormat">
+          <DataField>TotaldFormat</DataField>
+        </Field>
+        <Field Name="totalb">
+          <DataField>totalb</DataField>
+        </Field>
+        <Field Name="totalbFormat">
+          <DataField>totalbFormat</DataField>
+        </Field>
+        <Field Name="ClassCode">
+          <DataField>ClassCode</DataField>
+        </Field>
+        <Field Name="CurrentProgramme_Customer">
+          <DataField>CurrentProgramme_Customer</DataField>
+        </Field>
+        <Field Name="BalPerc">
+          <DataField>BalPerc</DataField>
+        </Field>
+        <Field Name="BalPercFormat">
+          <DataField>BalPercFormat</DataField>
+        </Field>
+        <Field Name="ProgDesc">
+          <DataField>ProgDesc</DataField>
+        </Field>
+        <Field Name="Logo">
+          <DataField>Logo</DataField>
+        </Field>
+        <Field Name="CompName">
+          <DataField>CompName</DataField>
+        </Field>
+        <Field Name="CurrentSettlementType_Customer">
+          <DataField>CurrentSettlementType_Customer</DataField>
+        </Field>
+        <Field Name="CurrentStage_Customer">
+          <DataField>CurrentStage_Customer</DataField>
+        </Field>
+        <Field Name="fac">
+          <DataField>fac</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

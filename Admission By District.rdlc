@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="UPPERCASE_COMPANYNAME_">
+          <DataField>UPPERCASE_COMPANYNAME_</DataField>
+        </Field>
+        <Field Name="Application_Setup_County_Code">
+          <DataField>Application_Setup_County_Code</DataField>
+        </Field>
+        <Field Name="Application_Setup_County__Application_Setup_County__Description">
+          <DataField>Application_Setup_County__Application_Setup_County__Description</DataField>
+        </Field>
+        <Field Name="IntC">
+          <DataField>IntC</DataField>
+        </Field>
+        <Field Name="GIntC">
+          <DataField>GIntC</DataField>
+        </Field>
+        <Field Name="STUDENTS_STATISTICS_PER_DISTRICTCaption">
+          <DataField>STUDENTS_STATISTICS_PER_DISTRICTCaption</DataField>
+        </Field>
+        <Field Name="OFFICE_OF_THE_DEPUTY_REGISTRAR__ACADEMIC_AFFAIRSCaption">
+          <DataField>OFFICE_OF_THE_DEPUTY_REGISTRAR__ACADEMIC_AFFAIRSCaption</DataField>
+        </Field>
+        <Field Name="SERIAL_NO_Caption">
+          <DataField>SERIAL_NO_Caption</DataField>
+        </Field>
+        <Field Name="DISTRICTCaption">
+          <DataField>DISTRICTCaption</DataField>
+        </Field>
+        <Field Name="TOTALSCaption">
+          <DataField>TOTALSCaption</DataField>
+        </Field>
+        <Field Name="GRAND_TOTALSCaption">
+          <DataField>GRAND_TOTALSCaption</DataField>
+        </Field>
+        <Field Name="Number">
+          <DataField>Number</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

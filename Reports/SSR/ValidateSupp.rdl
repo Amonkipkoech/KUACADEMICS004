@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="AcademicYear_suppReg">
+          <DataField>AcademicYear_suppReg</DataField>
+        </Field>
+        <Field Name="CATMarks_suppReg">
+          <DataField>CATMarks_suppReg</DataField>
+        </Field>
+        <Field Name="CATMarks_suppRegFormat">
+          <DataField>CATMarks_suppRegFormat</DataField>
+        </Field>
+        <Field Name="Campus_suppReg">
+          <DataField>Campus_suppReg</DataField>
+        </Field>
+        <Field Name="Catogory_suppReg">
+          <DataField>Catogory_suppReg</DataField>
+        </Field>
+        <Field Name="ChargePosted_suppReg">
+          <DataField>ChargePosted_suppReg</DataField>
+        </Field>
+        <Field Name="CostPerExam_suppReg">
+          <DataField>CostPerExam_suppReg</DataField>
+        </Field>
+        <Field Name="CostPerExam_suppRegFormat">
+          <DataField>CostPerExam_suppRegFormat</DataField>
+        </Field>
+        <Field Name="CurrentAcademicYear_suppReg">
+          <DataField>CurrentAcademicYear_suppReg</DataField>
+        </Field>
+        <Field Name="StudentNo_suppReg">
+          <DataField>StudentNo_suppReg</DataField>
+        </Field>
+        <Field Name="Semester_suppReg">
+          <DataField>Semester_suppReg</DataField>
+        </Field>
+        <Field Name="Stage_suppReg">
+          <DataField>Stage_suppReg</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

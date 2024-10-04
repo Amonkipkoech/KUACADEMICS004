@@ -1,0 +1,1112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!CompName.Value</Value>
+                    <Style>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0.16333in</Top>
+            <Height>0.35417in</Height>
+            <Width>10.53834in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>OFFICE OF THE REGISTRAR</Value>
+                    <Style>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>0.63208in</Top>
+            <Height>0.25in</Height>
+            <Width>10.53834in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox3">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>TEL</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>:+254 0729721200/020217613</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>1.40292in</Top>
+            <Left>0.10083in</Left>
+            <Height>0.25in</Height>
+            <Width>2.60417in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Private Bag</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>MASENO</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>1.30223in</Top>
+            <Left>7.93417in</Left>
+            <Height>0.40625in</Height>
+            <Width>2.60417in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Line Name="Line2">
+            <Top>1.77792in</Top>
+            <Left>0.10083in</Left>
+            <Height>0in</Height>
+            <Width>10.43751in</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+                <Width>3pt</Width>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="Line3">
+            <Top>1.84597in</Top>
+            <Left>0.10083in</Left>
+            <Height>0in</Height>
+            <Width>10.43751in</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Textbox Name="Textbox5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Ref: </Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!ApplicationNo_ApplicationFormHeader.Value</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>2.28833in</Top>
+            <Left>0.1425in</Left>
+            <Height>0.25in</Height>
+            <Width>3.72917in</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox6">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>DATE: </Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!DateStr.Value</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>2.28833in</Top>
+            <Left>7.9325in</Left>
+            <Height>0.23958in</Height>
+            <Width>2.60583in</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox7">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!FNames.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>3.17375in</Top>
+            <Left>0.16333in</Left>
+            <Height>0.25in</Height>
+            <Width>3.98958in</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!AddressforCorrespondence1_ApplicationFormHeader.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!AddressforCorrespondence2_ApplicationFormHeader.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>3.45153in</Top>
+            <Left>0.16333in</Left>
+            <Height>0.42708in</Height>
+            <Width>3.98958in</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!TelephoneNo1_ApplicationFormHeader.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>3.92028in</Top>
+            <Left>0.16333in</Left>
+            <Height>0.25in</Height>
+            <Width>3.96875in</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox10">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Dear </Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!Surname_ApplicationFormHeader.Value</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>,</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox10</rd:DefaultName>
+            <Top>4.78833in</Top>
+            <Left>0.22583in</Left>
+            <Height>0.25in</Height>
+            <Width>4.17708in</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox13">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>RE: ADMISSION TO THE DEGREE PROGRAMME FOR PRIVATELY SPONSORED STUDENTS DURING THE </Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!AcademicYear_ApplicationFormHeader.Value</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> ACADEMIC YEAR</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox13</rd:DefaultName>
+            <Top>5.44458in</Top>
+            <Left>0.22583in</Left>
+            <Height>0.48264in</Height>
+            <Width>10.31251in</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox15">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Your application for admission to the Privately Sponsered Degree Programme at </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!CompName.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> has been considered. I am pleased to offer you admission as a </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!StageName.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!ModeofStudy_ApplicationFormHeader.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> student in the </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!Faculty.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>to pursue a course leading to the </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!ProgName.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> which commences on </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!RepDate.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>This offer is made on the basis of the statement of your qualifications presented on your aplication form. It  is also  subject to the satisfactory verification of these qualifications by the University Authorities. Any informatiuon found untrue will automatically lead to your disqualification. In this regard, you will be required to produce your original certificates on the day of registration for verification purposes.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>All fees are payabel by Bankers Draft in favour of </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!CompName.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> and the Cheques submitted to the Finance ofiice upon registration. The University does not accept Personal Cheques, Money Order, Postal Orders or Cash </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>(A Fees Structure enclosed )</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>I take this opportunity to congratulate you on your admission and welcome you to </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!CompName.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Yours sincerely,</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox15</rd:DefaultName>
+            <Top>6.18417in</Top>
+            <Left>0.25708in</Left>
+            <Height>3.80208in</Height>
+            <Width>8.82458in</Width>
+            <ZIndex>13</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>13.85083in</Height>
+        <Style />
+      </Body>
+      <Width>11.43417in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ApplicationNo_ApplicationFormHeader">
+          <DataField>ApplicationNo_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="Date_ApplicationFormHeader">
+          <DataField>Date_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="ApplicationDate_ApplicationFormHeader">
+          <DataField>ApplicationDate_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="Surname_ApplicationFormHeader">
+          <DataField>Surname_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="OtherNames_ApplicationFormHeader">
+          <DataField>OtherNames_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="DateOfBirth_ApplicationFormHeader">
+          <DataField>DateOfBirth_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="Gender_ApplicationFormHeader">
+          <DataField>Gender_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="MaritalStatus_ApplicationFormHeader">
+          <DataField>MaritalStatus_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="Nationality_ApplicationFormHeader">
+          <DataField>Nationality_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="CountryofOrigin_ApplicationFormHeader">
+          <DataField>CountryofOrigin_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="AddressforCorrespondence1_ApplicationFormHeader">
+          <DataField>AddressforCorrespondence1_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="AddressforCorrespondence2_ApplicationFormHeader">
+          <DataField>AddressforCorrespondence2_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="AddressforCorrespondence3_ApplicationFormHeader">
+          <DataField>AddressforCorrespondence3_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="TelephoneNo1_ApplicationFormHeader">
+          <DataField>TelephoneNo1_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="TelephoneNo2_ApplicationFormHeader">
+          <DataField>TelephoneNo2_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="FirstDegreeChoice_ApplicationFormHeader">
+          <DataField>FirstDegreeChoice_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="Faculty1_ApplicationFormHeader">
+          <DataField>Faculty1_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="SecondDegreeChoice_ApplicationFormHeader">
+          <DataField>SecondDegreeChoice_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="Faculty2_ApplicationFormHeader">
+          <DataField>Faculty2_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="DateofReceipt_ApplicationFormHeader">
+          <DataField>DateofReceipt_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="UserID_ApplicationFormHeader">
+          <DataField>UserID_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="County_ApplicationFormHeader">
+          <DataField>County_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="FormerSchoolCode_ApplicationFormHeader">
+          <DataField>FormerSchoolCode_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="DateofAdmission_ApplicationFormHeader">
+          <DataField>DateofAdmission_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="DateofCompletion_ApplicationFormHeader">
+          <DataField>DateofCompletion_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="YearofExamination_ApplicationFormHeader">
+          <DataField>YearofExamination_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="ExaminationBody_ApplicationFormHeader">
+          <DataField>ExaminationBody_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="MeanGradeAcquired_ApplicationFormHeader">
+          <DataField>MeanGradeAcquired_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="PointsAcquired_ApplicationFormHeader">
+          <DataField>PointsAcquired_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="PrincipalPasses_ApplicationFormHeader">
+          <DataField>PrincipalPasses_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="SubsidiaryPasses_ApplicationFormHeader">
+          <DataField>SubsidiaryPasses_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="Examination_ApplicationFormHeader">
+          <DataField>Examination_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="ApplicationFormReceiptNo_ApplicationFormHeader">
+          <DataField>ApplicationFormReceiptNo_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="IndexNumber_ApplicationFormHeader">
+          <DataField>IndexNumber_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="NoSeries_ApplicationFormHeader">
+          <DataField>NoSeries_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="HODUserID_ApplicationFormHeader">
+          <DataField>HODUserID_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="HODDate_ApplicationFormHeader">
+          <DataField>HODDate_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="HODTime_ApplicationFormHeader">
+          <DataField>HODTime_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="HODRecommendations_ApplicationFormHeader">
+          <DataField>HODRecommendations_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="DeanUserID_ApplicationFormHeader">
+          <DataField>DeanUserID_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="DeanDate_ApplicationFormHeader">
+          <DataField>DeanDate_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="DeanTime_ApplicationFormHeader">
+          <DataField>DeanTime_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="DeanRecommendations_ApplicationFormHeader">
+          <DataField>DeanRecommendations_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="Status_ApplicationFormHeader">
+          <DataField>Status_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="Select_ApplicationFormHeader">
+          <DataField>Select_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="BatchNo_ApplicationFormHeader">
+          <DataField>BatchNo_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="BatchDate_ApplicationFormHeader">
+          <DataField>BatchDate_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="BatchTime_ApplicationFormHeader">
+          <DataField>BatchTime_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="AdmissionBoardRecommendation_ApplicationFormHeader">
+          <DataField>AdmissionBoardRecommendation_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="AdmissionBoardDate_ApplicationFormHeader">
+          <DataField>AdmissionBoardDate_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="AdmissionBoardTime_ApplicationFormHeader">
+          <DataField>AdmissionBoardTime_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="AdmittedDegree_ApplicationFormHeader">
+          <DataField>AdmittedDegree_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="AdmittedDepartment_ApplicationFormHeader">
+          <DataField>AdmittedDepartment_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="DeferredUntil_ApplicationFormHeader">
+          <DataField>DeferredUntil_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="DateOfMeeting_ApplicationFormHeader">
+          <DataField>DateOfMeeting_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="DateOfReceiptSlip_ApplicationFormHeader">
+          <DataField>DateOfReceiptSlip_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="ReceiptSlipNo_ApplicationFormHeader">
+          <DataField>ReceiptSlipNo_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="AcademicYear_ApplicationFormHeader">
+          <DataField>AcademicYear_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="AdmissionNo_ApplicationFormHeader">
+          <DataField>AdmissionNo_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="AdmittedToStage_ApplicationFormHeader">
+          <DataField>AdmittedToStage_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="AdmittedSemester_ApplicationFormHeader">
+          <DataField>AdmittedSemester_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="FirstChoiceStage_ApplicationFormHeader">
+          <DataField>FirstChoiceStage_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="FirstChoiceSemester_ApplicationFormHeader">
+          <DataField>FirstChoiceSemester_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="SecondChoiceStage_ApplicationFormHeader">
+          <DataField>SecondChoiceStage_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="SecondChoiceSemester_ApplicationFormHeader">
+          <DataField>SecondChoiceSemester_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="IntakeCode_ApplicationFormHeader">
+          <DataField>IntakeCode_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="SettlementType_ApplicationFormHeader">
+          <DataField>SettlementType_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="IDNumber_ApplicationFormHeader">
+          <DataField>IDNumber_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="DateSentforApproval_ApplicationFormHeader">
+          <DataField>DateSentforApproval_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="IssuedDate_ApplicationFormHeader">
+          <DataField>IssuedDate_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="PostGraduate_ApplicationFormHeader">
+          <DataField>PostGraduate_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="Email_ApplicationFormHeader">
+          <DataField>Email_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="Campus_ApplicationFormHeader">
+          <DataField>Campus_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="AdmissableStatus_ApplicationFormHeader">
+          <DataField>AdmissableStatus_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="ModeofStudy_ApplicationFormHeader">
+          <DataField>ModeofStudy_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="EnquiryNo_ApplicationFormHeader">
+          <DataField>EnquiryNo_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="ResponsibilityCenter_ApplicationFormHeader">
+          <DataField>ResponsibilityCenter_ApplicationFormHeader</DataField>
+        </Field>
+        <Field Name="CompName">
+          <DataField>CompName</DataField>
+        </Field>
+        <Field Name="RepDate">
+          <DataField>RepDate</DataField>
+        </Field>
+        <Field Name="FNames">
+          <DataField>FNames</DataField>
+        </Field>
+        <Field Name="ProgName">
+          <DataField>ProgName</DataField>
+        </Field>
+        <Field Name="DateStr">
+          <DataField>DateStr</DataField>
+        </Field>
+        <Field Name="Faculty">
+          <DataField>Faculty</DataField>
+        </Field>
+        <Field Name="StageName">
+          <DataField>StageName</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

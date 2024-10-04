@@ -1,0 +1,1635 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!CompName.Value</Value>
+                    <Style>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0.20847in</Top>
+            <Left>2.07434cm</Left>
+            <Height>0.35417in</Height>
+            <Width>7.44875in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>OFFICE OF THE REGISTRAR (ACADEMIC, RESEARCH &amp; STUDENT AFFAIRS)</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>0.63208in</Top>
+            <Left>2.07434cm</Left>
+            <Height>0.25in</Height>
+            <Width>7.44875in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox3">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>TEL</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>:+254 0729721200/020217613</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>1.40292in</Top>
+            <Left>0.81667in</Left>
+            <Height>0.25in</Height>
+            <Width>2.60417in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Private Bag</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>MASENO</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>1.24667in</Top>
+            <Left>6.84458in</Left>
+            <Height>0.40625in</Height>
+            <Width>1.42083in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Line Name="Line2">
+            <Top>1.77792in</Top>
+            <Left>0.81667in</Left>
+            <Height>0in</Height>
+            <Width>6.90626in</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+                <Width>3pt</Width>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="Line3">
+            <Top>1.84597in</Top>
+            <Left>0.81667in</Left>
+            <Height>0in</Height>
+            <Width>7.44875in</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Textbox Name="Textbox5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Ref: </Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!AdmissionNo_AdmissionFormHeader.Value</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>2.28833in</Top>
+            <Left>0.81667in</Left>
+            <Height>0.25in</Height>
+            <Width>4.31333in</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox6">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>DATE: </Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!DateStr.Value</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>2.28833in</Top>
+            <Left>6.64083in</Left>
+            <Height>0.23958in</Height>
+            <Width>1.62458in</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox7">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!FNames.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>2.71889in</Top>
+            <Left>0.81667in</Left>
+            <Height>0.25in</Height>
+            <Width>4.57374in</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!CorrespondenceAddress1_AdmissionFormHeader.Value</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>,</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!CorrespondenceAddress3_AdmissionFormHeader.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!CorrespondenceAddress2_AdmissionFormHeader.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>2.99667in</Top>
+            <Left>0.81667in</Left>
+            <Height>0.42708in</Height>
+            <Width>4.57374in</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!TelephoneNo1_AdmissionFormHeader.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>3.46542in</Top>
+            <Left>0.81667in</Left>
+            <Height>0.25in</Height>
+            <Width>4.55291in</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox10">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Dear </Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!Surname_AdmissionFormHeader.Value</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>,</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox10</rd:DefaultName>
+            <Top>3.83in</Top>
+            <Left>0.81667in</Left>
+            <Height>0.25in</Height>
+            <Width>4.76124in</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox13">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>RE: ADMISSION INTO THE University FOR </Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!AcademicYear_AdmissionFormHeader.Value</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> ACADEMIC YEAR</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox13</rd:DefaultName>
+            <Top>4.28625in</Top>
+            <Left>0.81667in</Left>
+            <Height>0.325in</Height>
+            <Width>7.33417in</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox15">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Following your application to the University, I am pleased to offer you a place in the School of </Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!Faculty.Value</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> to pursue a course leading to the degree of </Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!ProgName.Value</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>which will commence on </Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!RepDate.Value</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>.</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Your Registration Number is </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!AdmissionNo_AdmissionFormHeader.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>This offer is made on the basis of the statement of your qualifications presented in your application forms.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>This offer is subject to the satisfactory verification of these qualifications by the University authorities. Any information found to be untrue will automatically lead to your disqualification and expulsion from the University. This offer is also subject to the following conditions.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>a.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve">       </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>7pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>Your acceptance to pay the required fees in the University (</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>the current fee structure is attached)</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>2</ListLevel>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>b.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve">       </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>7pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>Your agreement to adhere to Rules and Regulations Governing the Conduct and Discipline of Students of MASENO UNIVERSITY .</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>2</ListLevel>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>c.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve">       </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>7pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>Production of Original Certificates on the day of registration for verification purposes.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>2</ListLevel>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Please note that all fees is paid at the beginning of every year or at the beginning of every semester. </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>No</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>Student shall be registered in the University without paying all the requisite fees.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <LeftIndent>0cm</LeftIndent>
+                <RightIndent>0cm</RightIndent>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Kenyan students who are unable to raise fees from their families or other sources are advised to apply for a loan from the Higher Education Loans Board. The loan application form is to be filled online and printed from their website: </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> . Please note that KRA PIN is not mandatory.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <LeftIndent>0cm</LeftIndent>
+                <RightIndent>0cm</RightIndent>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <LeftIndent>0cm</LeftIndent>
+                <RightIndent>0cm</RightIndent>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Students are required to pay fees in </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>Bankers Cheque</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> drawn in favour of “</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>MASENO UNIVERSITY</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>” or deposit cash in the accounts provided on the attached fee structure. (The University does not accept personal Cheques, Money Orders, Postal Orders or Cash)</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <LeftIndent>0cm</LeftIndent>
+                <RightIndent>0cm</RightIndent>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <LeftIndent>0cm</LeftIndent>
+                <RightIndent>0cm</RightIndent>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <LeftIndent>0cm</LeftIndent>
+                <RightIndent>0cm</RightIndent>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox15</rd:DefaultName>
+            <Top>4.80917in</Top>
+            <Left>0.81667in</Left>
+            <Height>5.41875in</Height>
+            <Width>7.33417in</Width>
+            <ZIndex>13</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox11">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Please note that admission to this University does not automatically guarantee you a place in the Halls of Residence. If you are not offered a place in the Halls of Residence you will be required to make your own private arrangements.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <LeftIndent>0cm</LeftIndent>
+                <RightIndent>0cm</RightIndent>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>If you accept admission under these conditions, then you are required to sign the enclosed forms KAF/001, PDT/002 and KMF/003. Form KAF/001 should be returned to the University before the opening date. In case you are unable to accept this offer, please send e-mail of decline to admissions@kilimambogoUniversity,co.ke.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <LeftIndent>0cm</LeftIndent>
+                <RightIndent>0cm</RightIndent>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <LeftIndent>0cm</LeftIndent>
+                <RightIndent>0cm</RightIndent>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>I congratulate you on your admission to MASENO UNIVERSITY and wish you success in your academic pursuit at the University.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Yours sincerely,</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>DR. WANGARI GATHUTHI</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>REGISTRAR (ACADEMIC, RESEARCH &amp; STUDENT AFFAIRS)</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <LeftIndent>0cm</LeftIndent>
+                <RightIndent>0cm</RightIndent>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <LeftIndent>0cm</LeftIndent>
+                <RightIndent>0cm</RightIndent>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Encl.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <LeftIndent>0cm</LeftIndent>
+                <RightIndent>0cm</RightIndent>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox11</rd:DefaultName>
+            <Top>11.23902in</Top>
+            <Left>0.81667in</Left>
+            <Height>3.01319in</Height>
+            <Width>7.33417in</Width>
+            <ZIndex>14</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>14.25222in</Height>
+        <Style />
+      </Body>
+      <Width>8.32376in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="AdmissionNo_AdmissionFormHeader">
+          <DataField>AdmissionNo_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="Date_AdmissionFormHeader">
+          <DataField>Date_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="AdmissionType_AdmissionFormHeader">
+          <DataField>AdmissionType_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="JABSNo_AdmissionFormHeader">
+          <DataField>JABSNo_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="AcademicYear_AdmissionFormHeader">
+          <DataField>AcademicYear_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="ApplicationNo_AdmissionFormHeader">
+          <DataField>ApplicationNo_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="Surname_AdmissionFormHeader">
+          <DataField>Surname_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="OtherNames_AdmissionFormHeader">
+          <DataField>OtherNames_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="FacultyAdmittedTo_AdmissionFormHeader">
+          <DataField>FacultyAdmittedTo_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="DegreeAdmittedTo_AdmissionFormHeader">
+          <DataField>DegreeAdmittedTo_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="DateOfBirth_AdmissionFormHeader">
+          <DataField>DateOfBirth_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="Gender_AdmissionFormHeader">
+          <DataField>Gender_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="MaritalStatus_AdmissionFormHeader">
+          <DataField>MaritalStatus_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="SpouseName_AdmissionFormHeader">
+          <DataField>SpouseName_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="SpouseAddress1_AdmissionFormHeader">
+          <DataField>SpouseAddress1_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="SpouseAddress2_AdmissionFormHeader">
+          <DataField>SpouseAddress2_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="SpouseAddress3_AdmissionFormHeader">
+          <DataField>SpouseAddress3_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="PlaceOfBirthVillage_AdmissionFormHeader">
+          <DataField>PlaceOfBirthVillage_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="PlaceOfBirthLocation_AdmissionFormHeader">
+          <DataField>PlaceOfBirthLocation_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="PlaceOfBirthDistrict_AdmissionFormHeader">
+          <DataField>PlaceOfBirthDistrict_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="NameofChief_AdmissionFormHeader">
+          <DataField>NameofChief_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="NearestPoliceStation_AdmissionFormHeader">
+          <DataField>NearestPoliceStation_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="Nationality_AdmissionFormHeader">
+          <DataField>Nationality_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="Religion_AdmissionFormHeader">
+          <DataField>Religion_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="CorrespondenceAddress1_AdmissionFormHeader">
+          <DataField>CorrespondenceAddress1_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="CorrespondenceAddress2_AdmissionFormHeader">
+          <DataField>CorrespondenceAddress2_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="CorrespondenceAddress3_AdmissionFormHeader">
+          <DataField>CorrespondenceAddress3_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="TelephoneNo1_AdmissionFormHeader">
+          <DataField>TelephoneNo1_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="TelephoneNo2_AdmissionFormHeader">
+          <DataField>TelephoneNo2_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="FaxNo_AdmissionFormHeader">
+          <DataField>FaxNo_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="EMail_AdmissionFormHeader">
+          <DataField>EMail_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="MotherAliveOrDead_AdmissionFormHeader">
+          <DataField>MotherAliveOrDead_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="MotherFullName_AdmissionFormHeader">
+          <DataField>MotherFullName_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="FatherAliveOrDead_AdmissionFormHeader">
+          <DataField>FatherAliveOrDead_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="FatherFullName_AdmissionFormHeader">
+          <DataField>FatherFullName_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="GuardianFullName_AdmissionFormHeader">
+          <DataField>GuardianFullName_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="MotherOccupation_AdmissionFormHeader">
+          <DataField>MotherOccupation_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="FatherOccupation_AdmissionFormHeader">
+          <DataField>FatherOccupation_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="GuardianOccupation_AdmissionFormHeader">
+          <DataField>GuardianOccupation_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="FormerSchoolCode_AdmissionFormHeader">
+          <DataField>FormerSchoolCode_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="IndexNumber_AdmissionFormHeader">
+          <DataField>IndexNumber_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="MeanGrade_AdmissionFormHeader">
+          <DataField>MeanGrade_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="PhysicalImpairmentDetails_AdmissionFormHeader">
+          <DataField>PhysicalImpairmentDetails_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="CommunicationtoUniversity_AdmissionFormHeader">
+          <DataField>CommunicationtoUniversity_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="Photo_AdmissionFormHeader">
+          <DataField>Photo_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="Height_AdmissionFormHeader">
+          <DataField>Height_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="Height_AdmissionFormHeaderFormat">
+          <DataField>Height_AdmissionFormHeaderFormat</DataField>
+        </Field>
+        <Field Name="Weight_AdmissionFormHeader">
+          <DataField>Weight_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="Weight_AdmissionFormHeaderFormat">
+          <DataField>Weight_AdmissionFormHeaderFormat</DataField>
+        </Field>
+        <Field Name="WithoutGlassesR6_AdmissionFormHeader">
+          <DataField>WithoutGlassesR6_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="WithoutGlassesR6_AdmissionFormHeaderFormat">
+          <DataField>WithoutGlassesR6_AdmissionFormHeaderFormat</DataField>
+        </Field>
+        <Field Name="WithoutGlassesL6_AdmissionFormHeader">
+          <DataField>WithoutGlassesL6_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="WithoutGlassesL6_AdmissionFormHeaderFormat">
+          <DataField>WithoutGlassesL6_AdmissionFormHeaderFormat</DataField>
+        </Field>
+        <Field Name="WithGlassesR6_AdmissionFormHeader">
+          <DataField>WithGlassesR6_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="WithGlassesR6_AdmissionFormHeaderFormat">
+          <DataField>WithGlassesR6_AdmissionFormHeaderFormat</DataField>
+        </Field>
+        <Field Name="WithGlassesL6_AdmissionFormHeader">
+          <DataField>WithGlassesL6_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="WithGlassesL6_AdmissionFormHeaderFormat">
+          <DataField>WithGlassesL6_AdmissionFormHeaderFormat</DataField>
+        </Field>
+        <Field Name="HearingRightEar_AdmissionFormHeader">
+          <DataField>HearingRightEar_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="HearingRightEar_AdmissionFormHeaderFormat">
+          <DataField>HearingRightEar_AdmissionFormHeaderFormat</DataField>
+        </Field>
+        <Field Name="HearingLeftEar_AdmissionFormHeader">
+          <DataField>HearingLeftEar_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="HearingLeftEar_AdmissionFormHeaderFormat">
+          <DataField>HearingLeftEar_AdmissionFormHeaderFormat</DataField>
+        </Field>
+        <Field Name="ConditionOfTeeth_AdmissionFormHeader">
+          <DataField>ConditionOfTeeth_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="ConditionOfThroat_AdmissionFormHeader">
+          <DataField>ConditionOfThroat_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="ConditionOfEars_AdmissionFormHeader">
+          <DataField>ConditionOfEars_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="ConditionOfLymphaticGlands_AdmissionFormHeader">
+          <DataField>ConditionOfLymphaticGlands_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="ConditionOfNose_AdmissionFormHeader">
+          <DataField>ConditionOfNose_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="CirculatorySystemPulse_AdmissionFormHeader">
+          <DataField>CirculatorySystemPulse_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="ExaminingOfficer_AdmissionFormHeader">
+          <DataField>ExaminingOfficer_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="MedicalExamDate_AdmissionFormHeader">
+          <DataField>MedicalExamDate_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="MedicalDetailsNotCovered_AdmissionFormHeader">
+          <DataField>MedicalDetailsNotCovered_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="EmergencyConsentRelationship_AdmissionFormHeader">
+          <DataField>EmergencyConsentRelationship_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="EmergencyConsentFullName_AdmissionFormHeader">
+          <DataField>EmergencyConsentFullName_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="EmergencyConsentAddress1_AdmissionFormHeader">
+          <DataField>EmergencyConsentAddress1_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="EmergencyConsentAddress2_AdmissionFormHeader">
+          <DataField>EmergencyConsentAddress2_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="EmergencyConsentAddress3_AdmissionFormHeader">
+          <DataField>EmergencyConsentAddress3_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="EmergencyDateofConsent_AdmissionFormHeader">
+          <DataField>EmergencyDateofConsent_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="EmergencyNationalIDCardNo_AdmissionFormHeader">
+          <DataField>EmergencyNationalIDCardNo_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="DeclarationFullName_AdmissionFormHeader">
+          <DataField>DeclarationFullName_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="DeclarationRelationship_AdmissionFormHeader">
+          <DataField>DeclarationRelationship_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="DeclarationNationalIDNo_AdmissionFormHeader">
+          <DataField>DeclarationNationalIDNo_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="DeclarationDate_AdmissionFormHeader">
+          <DataField>DeclarationDate_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="AcceptanceDate_AdmissionFormHeader">
+          <DataField>AcceptanceDate_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="Accepted_AdmissionFormHeader">
+          <DataField>Accepted_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="FamilyProblem_AdmissionFormHeader">
+          <DataField>FamilyProblem_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="HealthProblem_AdmissionFormHeader">
+          <DataField>HealthProblem_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="OverseasScholarship_AdmissionFormHeader">
+          <DataField>OverseasScholarship_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="CourseNotPreference_AdmissionFormHeader">
+          <DataField>CourseNotPreference_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="Employment_AdmissionFormHeader">
+          <DataField>Employment_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="OtherReason_AdmissionFormHeader">
+          <DataField>OtherReason_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="HomeDistrict_AdmissionFormHeader">
+          <DataField>HomeDistrict_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="ResDistrict_AdmissionFormHeader">
+          <DataField>ResDistrict_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="Status_AdmissionFormHeader">
+          <DataField>Status_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="DeclarationIDNumber_AdmissionFormHeader">
+          <DataField>DeclarationIDNumber_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="Select_AdmissionFormHeader">
+          <DataField>Select_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="StageAdmittedTo_AdmissionFormHeader">
+          <DataField>StageAdmittedTo_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="SemesterAdmittedTo_AdmissionFormHeader">
+          <DataField>SemesterAdmittedTo_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="Tribe_AdmissionFormHeader">
+          <DataField>Tribe_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="SettlementType_AdmissionFormHeader">
+          <DataField>SettlementType_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="IntakeCode_AdmissionFormHeader">
+          <DataField>IntakeCode_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="IDNumber_AdmissionFormHeader">
+          <DataField>IDNumber_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="Campus_AdmissionFormHeader">
+          <DataField>Campus_AdmissionFormHeader</DataField>
+        </Field>
+        <Field Name="CompName">
+          <DataField>CompName</DataField>
+        </Field>
+        <Field Name="RepDate">
+          <DataField>RepDate</DataField>
+        </Field>
+        <Field Name="FNames">
+          <DataField>FNames</DataField>
+        </Field>
+        <Field Name="ProgName">
+          <DataField>ProgName</DataField>
+        </Field>
+        <Field Name="DateStr">
+          <DataField>DateStr</DataField>
+        </Field>
+        <Field Name="Faculty">
+          <DataField>Faculty</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

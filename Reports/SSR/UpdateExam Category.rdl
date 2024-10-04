@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ProgrammeCode_subjects">
+          <DataField>ProgrammeCode_subjects</DataField>
+        </Field>
+        <Field Name="StageCode_subjects">
+          <DataField>StageCode_subjects</DataField>
+        </Field>
+        <Field Name="Code_subjects">
+          <DataField>Code_subjects</DataField>
+        </Field>
+        <Field Name="Desription_subjects">
+          <DataField>Desription_subjects</DataField>
+        </Field>
+        <Field Name="CreditHours_subjects">
+          <DataField>CreditHours_subjects</DataField>
+        </Field>
+        <Field Name="CreditHours_subjectsFormat">
+          <DataField>CreditHours_subjectsFormat</DataField>
+        </Field>
+        <Field Name="Amount_subjects">
+          <DataField>Amount_subjects</DataField>
+        </Field>
+        <Field Name="Amount_subjectsFormat">
+          <DataField>Amount_subjectsFormat</DataField>
+        </Field>
+        <Field Name="GLAccount_subjects">
+          <DataField>GLAccount_subjects</DataField>
+        </Field>
+        <Field Name="Department_subjects">
+          <DataField>Department_subjects</DataField>
+        </Field>
+        <Field Name="Remarks_subjects">
+          <DataField>Remarks_subjects</DataField>
+        </Field>
+        <Field Name="TotalIncome_subjects">
+          <DataField>TotalIncome_subjects</DataField>
+        </Field>
+        <Field Name="TotalIncome_subjectsFormat">
+          <DataField>TotalIncome_subjectsFormat</DataField>
+        </Field>
+        <Field Name="StudentsRegistered_subjects">
+          <DataField>StudentsRegistered_subjects</DataField>
+        </Field>
+        <Field Name="UnitType_subjects">
+          <DataField>UnitType_subjects</DataField>
+        </Field>
+        <Field Name="StudentType_subjects">
+          <DataField>StudentType_subjects</DataField>
+        </Field>
+        <Field Name="Allocation_subjects">
+          <DataField>Allocation_subjects</DataField>
+        </Field>
+        <Field Name="Allocation_subjectsFormat">
+          <DataField>Allocation_subjectsFormat</DataField>
+        </Field>
+        <Field Name="Tested_subjects">
+          <DataField>Tested_subjects</DataField>
+        </Field>
+        <Field Name="Prerequisite_subjects">
+          <DataField>Prerequisite_subjects</DataField>
+        </Field>
+        <Field Name="LessonFilter_subjects">
+          <DataField>LessonFilter_subjects</DataField>
+        </Field>
+        <Field Name="CommonUnit_subjects">
+          <DataField>CommonUnit_subjects</DataField>
+        </Field>
+        <Field Name="NoUnits_subjects">
+          <DataField>NoUnits_subjects</DataField>
+        </Field>
+        <Field Name="NoUnits_subjectsFormat">
+          <DataField>NoUnits_subjectsFormat</DataField>
+        </Field>
+        <Field Name="ProgrammeOption_subjects">
+          <DataField>ProgrammeOption_subjects</DataField>
+        </Field>
+        <Field Name="TotalScore_subjects">
+          <DataField>TotalScore_subjects</DataField>
+        </Field>
+        <Field Name="TotalScore_subjectsFormat">
+          <DataField>TotalScore_subjectsFormat</DataField>
+        </Field>
+        <Field Name="UnitRegistered_subjects">
+          <DataField>UnitRegistered_subjects</DataField>
+        </Field>
+        <Field Name="ReSit_subjects">
+          <DataField>ReSit_subjects</DataField>
+        </Field>
+        <Field Name="Audit_subjects">
+          <DataField>Audit_subjects</DataField>
+        </Field>
+        <Field Name="Submited_subjects">
+          <DataField>Submited_subjects</DataField>
+        </Field>
+        <Field Name="ExamStatus_subjects">
+          <DataField>ExamStatus_subjects</DataField>
+        </Field>
+        <Field Name="PrintedCopies_subjects">
+          <DataField>PrintedCopies_subjects</DataField>
+        </Field>
+        <Field Name="IssuedCopies_subjects">
+          <DataField>IssuedCopies_subjects</DataField>
+        </Field>
+        <Field Name="ReturnedCopies_subjects">
+          <DataField>ReturnedCopies_subjects</DataField>
+        </Field>
+        <Field Name="ExamRemarks_subjects">
+          <DataField>ExamRemarks_subjects</DataField>
+        </Field>
+        <Field Name="DetailsCount_subjects">
+          <DataField>DetailsCount_subjects</DataField>
+        </Field>
+        <Field Name="NotAllocated_subjects">
+          <DataField>NotAllocated_subjects</DataField>
+        </Field>
+        <Field Name="TimetablePriority_subjects">
+          <DataField>TimetablePriority_subjects</DataField>
+        </Field>
+        <Field Name="NormalSlots_subjects">
+          <DataField>NormalSlots_subjects</DataField>
+        </Field>
+        <Field Name="LabSlots_subjects">
+          <DataField>LabSlots_subjects</DataField>
+        </Field>
+        <Field Name="SlotsVarience_subjects">
+          <DataField>SlotsVarience_subjects</DataField>
+        </Field>
+        <Field Name="TimeTable_subjects">
+          <DataField>TimeTable_subjects</DataField>
+        </Field>
+        <Field Name="ExamNotAllocated_subjects">
+          <DataField>ExamNotAllocated_subjects</DataField>
+        </Field>
+        <Field Name="ExamSlotsVarience_subjects">
+          <DataField>ExamSlotsVarience_subjects</DataField>
+        </Field>
+        <Field Name="Show_subjects">
+          <DataField>Show_subjects</DataField>
+        </Field>
+        <Field Name="EstimateReg_subjects">
+          <DataField>EstimateReg_subjects</DataField>
+        </Field>
+        <Field Name="ExamsDone_subjects">
+          <DataField>ExamsDone_subjects</DataField>
+        </Field>
+        <Field Name="DefaultExamCategory_subjects">
+          <DataField>DefaultExamCategory_subjects</DataField>
+        </Field>
+        <Field Name="ProgrammeName_subjects">
+          <DataField>ProgrammeName_subjects</DataField>
+        </Field>
+        <Field Name="LecturerCode_subjects">
+          <DataField>LecturerCode_subjects</DataField>
+        </Field>
+        <Field Name="NewUnit_subjects">
+          <DataField>NewUnit_subjects</DataField>
+        </Field>
+        <Field Name="ProgrammeCodelkup_subjects">
+          <DataField>ProgrammeCodelkup_subjects</DataField>
+        </Field>
+        <Field Name="LecturerLkup_subjects">
+          <DataField>LecturerLkup_subjects</DataField>
+        </Field>
+        <Field Name="EntryNo_subjects">
+          <DataField>EntryNo_subjects</DataField>
+        </Field>
+        <Field Name="Attachment_subjects">
+          <DataField>Attachment_subjects</DataField>
+        </Field>
+        <Field Name="Research_subjects">
+          <DataField>Research_subjects</DataField>
+        </Field>
+        <Field Name="CombinationCount_subjects">
+          <DataField>CombinationCount_subjects</DataField>
+        </Field>
+        <Field Name="Prerequisite2_subjects">
+          <DataField>Prerequisite2_subjects</DataField>
+        </Field>
+        <Field Name="UsedCount_subjects">
+          <DataField>UsedCount_subjects</DataField>
+        </Field>
+        <Field Name="ScoreBuffer_subjects">
+          <DataField>ScoreBuffer_subjects</DataField>
+        </Field>
+        <Field Name="ScoreBuffer_subjectsFormat">
+          <DataField>ScoreBuffer_subjectsFormat</DataField>
+        </Field>
+        <Field Name="Project_subjects">
+          <DataField>Project_subjects</DataField>
+        </Field>
+        <Field Name="IgnoreinFinalAverage_subjects">
+          <DataField>IgnoreinFinalAverage_subjects</DataField>
+        </Field>
+        <Field Name="FailedTotalScore_subjects">
+          <DataField>FailedTotalScore_subjects</DataField>
+        </Field>
+        <Field Name="FailedTotalScore_subjectsFormat">
+          <DataField>FailedTotalScore_subjectsFormat</DataField>
+        </Field>
+        <Field Name="TimeTabledCount_subjects">
+          <DataField>TimeTabledCount_subjects</DataField>
+        </Field>
+        <Field Name="OldUnit_subjects">
+          <DataField>OldUnit_subjects</DataField>
+        </Field>
+        <Field Name="UnitClassSize_subjects">
+          <DataField>UnitClassSize_subjects</DataField>
+        </Field>
+        <Field Name="UnitClassSize_subjectsFormat">
+          <DataField>UnitClassSize_subjectsFormat</DataField>
+        </Field>
+        <Field Name="ReservedRoom_subjects">
+          <DataField>ReservedRoom_subjects</DataField>
+        </Field>
+        <Field Name="TimeTableCode_subjects">
+          <DataField>TimeTableCode_subjects</DataField>
+        </Field>
+        <Field Name="LecturerRoom_subjects">
+          <DataField>LecturerRoom_subjects</DataField>
+        </Field>
+        <Field Name="TimeTabledUsedCount_subjects">
+          <DataField>TimeTabledUsedCount_subjects</DataField>
+        </Field>
+        <Field Name="LecturerUnitSet_subjects">
+          <DataField>LecturerUnitSet_subjects</DataField>
+        </Field>
+        <Field Name="CorectedUnitCode_subjects">
+          <DataField>CorectedUnitCode_subjects</DataField>
+        </Field>
+        <Field Name="RepeatitionCount_subjects">
+          <DataField>RepeatitionCount_subjects</DataField>
+        </Field>
+        <Field Name="MedicalUnit_subjects">
+          <DataField>MedicalUnit_subjects</DataField>
+        </Field>
+        <Field Name="TotalCreditHours_subjects">
+          <DataField>TotalCreditHours_subjects</DataField>
+        </Field>
+        <Field Name="TotalCreditHours_subjectsFormat">
+          <DataField>TotalCreditHours_subjectsFormat</DataField>
+        </Field>
+        <Field Name="SpecialProgrammeClass_subjects">
+          <DataField>SpecialProgrammeClass_subjects</DataField>
+        </Field>
+        <Field Name="ExamCategory_subjects">
+          <DataField>ExamCategory_subjects</DataField>
+        </Field>
+        <Field Name="SchoolCode_subjects">
+          <DataField>SchoolCode_subjects</DataField>
+        </Field>
+        <Field Name="YearofStudy_subjects">
+          <DataField>YearofStudy_subjects</DataField>
+        </Field>
+        <Field Name="AcademicHours_subjects">
+          <DataField>AcademicHours_subjects</DataField>
+        </Field>
+        <Field Name="AcademicHours_subjectsFormat">
+          <DataField>AcademicHours_subjectsFormat</DataField>
+        </Field>
+        <Field Name="KeyCourse_subjects">
+          <DataField>KeyCourse_subjects</DataField>
+        </Field>
+        <Field Name="UnitBaseCode_subjects">
+          <DataField>UnitBaseCode_subjects</DataField>
+        </Field>
+        <Field Name="UnitBaseTitle_subjects">
+          <DataField>UnitBaseTitle_subjects</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

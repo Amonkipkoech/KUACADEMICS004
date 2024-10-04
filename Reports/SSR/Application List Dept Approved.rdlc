@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="Application_Form_Header__Application_No__">
+          <DataField>Application_Form_Header__Application_No__</DataField>
+        </Field>
+        <Field Name="Application_Form_Header__Application_Date_">
+          <DataField>Application_Form_Header__Application_Date_</DataField>
+        </Field>
+        <Field Name="Surname_________Other_Names_">
+          <DataField>Surname_________Other_Names_</DataField>
+        </Field>
+        <Field Name="Application_Form_Header__Date_Of_Birth_">
+          <DataField>Application_Form_Header__Date_Of_Birth_</DataField>
+        </Field>
+        <Field Name="Application_Form_Header_Gender">
+          <DataField>Application_Form_Header_Gender</DataField>
+        </Field>
+        <Field Name="Application_Form_Header__Marital_Status_">
+          <DataField>Application_Form_Header__Marital_Status_</DataField>
+        </Field>
+        <Field Name="DegreeName">
+          <DataField>DegreeName</DataField>
+        </Field>
+        <Field Name="Application_Form_Header__Mean_Grade_Acquired_">
+          <DataField>Application_Form_Header__Mean_Grade_Acquired_</DataField>
+        </Field>
+        <Field Name="Application_Form_Header_Status">
+          <DataField>Application_Form_Header_Status</DataField>
+        </Field>
+        <Field Name="IntC">
+          <DataField>IntC</DataField>
+        </Field>
+        <Field Name="Applications_ListingCaption">
+          <DataField>Applications_ListingCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="No_Caption">
+          <DataField>No_Caption</DataField>
+        </Field>
+        <Field Name="DateCaption">
+          <DataField>DateCaption</DataField>
+        </Field>
+        <Field Name="Applicant_NamesCaption">
+          <DataField>Applicant_NamesCaption</DataField>
+        </Field>
+        <Field Name="Application_Form_Header__Date_Of_Birth_Caption">
+          <DataField>Application_Form_Header__Date_Of_Birth_Caption</DataField>
+        </Field>
+        <Field Name="Application_Form_Header_GenderCaption">
+          <DataField>Application_Form_Header_GenderCaption</DataField>
+        </Field>
+        <Field Name="Application_Form_Header__Marital_Status_Caption">
+          <DataField>Application_Form_Header__Marital_Status_Caption</DataField>
+        </Field>
+        <Field Name="Degree_Applied_ForCaption">
+          <DataField>Degree_Applied_ForCaption</DataField>
+        </Field>
+        <Field Name="GradeCaption">
+          <DataField>GradeCaption</DataField>
+        </Field>
+        <Field Name="Application_Form_Header_StatusCaption">
+          <DataField>Application_Form_Header_StatusCaption</DataField>
+        </Field>
+        <Field Name="TOTALCaption">
+          <DataField>TOTALCaption</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>
