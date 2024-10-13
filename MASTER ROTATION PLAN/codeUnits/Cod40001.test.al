@@ -4,46 +4,28 @@ codeunit 40001 "Rotation Management"
     var
         StudentRec: Record "ACA-Course Registration";
         RotationGroupRec: Record "Rotation Group";
-        LabRec: Record "Lab";
-        LabAssignmentTemp: Record "Lab Assignment Temp";
         GroupSize: Integer;
         TotalStudents: Integer;
         TotalLabs: Integer;
-        TotalGroups: Integer;
-        Week: Integer;
         LabID: Integer;
         GroupID: Integer;
         AcademicYear: Code[20];
         Semester: Code[10];
         StudentsProcessed: Integer;
+        Week: Integer; // Week counter
+        i: Integer; // Loop variable for student assignment
     begin
         GroupSize := 7; // Example group size
         AcademicYear := '2024'; // Example academic year
         Semester := 'SEP'; // Example semester
 
-        // Initialize the temporary table
-        LabAssignmentTemp.DeleteAll(); // Clear existing records if needed
-
-        // Initialize records for weeks and labs
-        for Week := 1 to 12 do begin
-            for LabID := 1 to 10 do begin
-                LabAssignmentTemp.Init();
-                LabAssignmentTemp."Week" := Week;
-                LabAssignmentTemp."Lab ID" := LabID;
-                LabAssignmentTemp."Assigned" := false; // Set initial as not assigned
-
-                // Check if the record already exists
-                if not LabAssignmentTemp.Insert() then begin
-                    // Handle existing record (optional)
-                    // You could use an update logic or simply skip
-                end;
-            end;
-        end;
+        // Initialize lab assignments before starting
+        InitializeLabAssignments();
 
         // Count total number of students
         TotalStudents := StudentRec.Count();
         // Count total number of labs
-        TotalLabs := LabRec.Count();
+        TotalLabs := 10; // Assuming there are 10 labs
 
         // Ensure there are no divisions by zero
         if (TotalStudents = 0) or (TotalLabs = 0) then begin
@@ -51,48 +33,76 @@ codeunit 40001 "Rotation Management"
             exit;
         end;
 
-        // Calculate total number of groups
-        TotalGroups := (TotalStudents + GroupSize - 1) DIV GroupSize;
+        // Process students for each week
+        for Week := 1 to 12 do begin
+            GroupID := 1; // Reset GroupID for the new week
+            StudentsProcessed := 0; // Reset for each week
 
-        // Assign students to groups and rotate them through labs
-        GroupID := 1;
-        Week := 1;
-        StudentsProcessed := 0;
+            // Fetch students for the current week
+            StudentRec.Reset(); // Ensure to reset the record
+            if not StudentRec.FindSet() then
+                exit; // Exit if no students are found
 
-        StudentRec.FindSet();
-        repeat
-            // Get the next available lab for the week
-            LabID := GetNextAvailableLab(Week, TotalLabs);
-            if LabID = 0 then begin
-                Message('No available labs for week %1.', Week);
-                exit;
-            end;
+            // Process students for the current week
+            repeat
+                // Check if a new group needs to be created
+                if StudentsProcessed MOD GroupSize = 0 then begin
+                    // Assign a lab for this group
+                    LabID := GetNextAvailableLab(Week, TotalLabs);
+                    if LabID = 0 then begin
+                        Message('No available labs for week %1.', Week);
+                        exit;
+                    end;
 
-            // Assign all students in a group to the same lab and week
-            RotationGroupRec.Init();
-            RotationGroupRec."Group ID" := GroupID;
-            RotationGroupRec."Student No." := StudentRec."Student No.";
-            RotationGroupRec."Lab ID" := LabID;
-            RotationGroupRec."Week" := Week;
-            RotationGroupRec."Academic Year" := AcademicYear;
-            RotationGroupRec."Semester" := Semester;
-            RotationGroupRec.Insert();
+                    // Assign students to the current group
+                    for i := 0 to GroupSize - 1 do begin
+                        // Check if all students are processed
+                        if StudentsProcessed + i >= TotalStudents then
+                            break;
 
-            StudentsProcessed += 1;
+                        // Move to the next student
+                        StudentRec.Next();
+                        // Insert the current student into the rotation group
+                        RotationGroupRec.Init();
+                        RotationGroupRec."Group ID" := GroupID;
+                        RotationGroupRec."Student No." := StudentRec."Student No."; // Use the current student number
+                        RotationGroupRec."Lab ID" := LabID;
+                        RotationGroupRec."Week" := Week;
+                        RotationGroupRec."Academic Year" := AcademicYear;
+                        RotationGroupRec."Semester" := Semester;
+                        RotationGroupRec.Insert();
 
-            // Move to the next group or week after processing a full group
-            if (StudentsProcessed MOD GroupSize = 0) or (StudentRec.Next() = 0) then begin
-                if GroupID >= TotalGroups then begin
-                    GroupID := 1;
-                    Week += 1;
-                    if Week > 12 then
-                        Week := 1; // Reset week counter if needed
-                end else begin
-                    GroupID += 1;
+                        StudentsProcessed += 1; // Increment total students processed
+                    end;
+
+                    GroupID += 1; // Move to the next group after processing
                 end;
-            end;
 
-        until StudentRec.Next() = 0;
+            until StudentsProcessed >= TotalStudents; // Continue until all students are processed
+        end;
+
+        Message('Rotation schedule has been generated.');
+    end;
+
+    procedure InitializeLabAssignments()
+    var
+        LabAssignmentTemp: Record "Lab Assignment Temp";
+        LabID: Integer;
+        Week: Integer;
+    begin
+        // Clear existing records
+        LabAssignmentTemp.DeleteAll();
+
+        // Initialize records for weeks and labs
+        for Week := 1 to 12 do begin
+            for LabID := 1 to 10 do begin // Assuming there are 10 labs
+                LabAssignmentTemp.Init();
+                LabAssignmentTemp."Week" := Week;
+                LabAssignmentTemp."Lab ID" := LabID;
+                LabAssignmentTemp."Assigned" := false; // Set initial as not assigned
+                LabAssignmentTemp.Insert();
+            end;
+        end;
     end;
 
     // Function to get the next available lab for the given week
@@ -101,16 +111,21 @@ codeunit 40001 "Rotation Management"
         LabIndex: Integer;
         LabAssigned: Record "Lab Assignment Temp";
     begin
-        // Iterate through the labs to find the next available one
+        // Iterate through the labs to find the next available one for the current week
         for LabIndex := 1 to TotalLabs do begin
-            // Check if this lab is assigned for the current week
             LabAssigned.SetRange("Week", Week);
             LabAssigned.SetRange("Lab ID", LabIndex);
-            if not LabAssigned.FindFirst() then begin
-                exit(LabIndex); // Return the lab index (or ID if necessary)
+            LabAssigned.SetRange("Assigned", false); // Check only unassigned labs
+
+            if LabAssigned.FindFirst() then begin
+                // Mark the lab as assigned after selecting it
+                LabAssigned."Assigned" := true;
+                LabAssigned.Modify();
+                exit(LabIndex); // Return the lab index
             end;
         end;
 
         exit(0); // Return 0 if no available labs
     end;
 }
+

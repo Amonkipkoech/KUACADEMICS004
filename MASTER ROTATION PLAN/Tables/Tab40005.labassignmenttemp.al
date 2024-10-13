@@ -16,5 +16,12 @@ table 40005 "lab assignment temp"
         {
         }
     }
+    keys
+    {
+        key(PK; "Lab ID", Week)
+        {
+            Clustered = true;
+        }
+    }
 }
 
