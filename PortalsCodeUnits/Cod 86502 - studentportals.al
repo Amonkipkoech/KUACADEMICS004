@@ -72,7 +72,8 @@ codeunit 86502 "studentportals"
         FILESPATH: Label 'C:\inetpub\wwwroot\KUPORTALS\StudentPortal\Downloads\';
         FILESPATH_A: Label 'C:\inetpub\wwwroot\StaffPortal\Downloads\';
         FILESPATH_SSP: Label 'C:\inetpub\wwwroot\StaffPortal\Downloads\';
-        FILESPATH_APP: Label 'C:\inetpub\wwwroot\CUEAApplyMVC\Downloads\';
+        FILESPATH_APP: Label 'C:\inetpub\wwwroot\KUPORTALS\ApplicationsPortal\Documents\';
+        // 'C:\inetpub\wwwroot\CUEAApplyMVC\Downloads\';
         /* FILESPATH_A: Label 'C:\PORTALS\TMUCApply\TMUCApply\Downloads\';
         FILESPATH_SSP: Label 'C:\PORTALS\TMUCApply\TMUCApply\Downloads\'; */
         AdmissionFormHeader: Record "ACA-Applic. Form Header";
