@@ -70,8 +70,8 @@ codeunit 86502 "studentportals"
         ProgramSem: Record "ACA-Programme Semesters";
         filename2: Text[250];
         FILESPATH: Label 'C:\inetpub\wwwroot\KUPORTALS\StudentPortal\Downloads\';
-        FILESPATH_A: Label 'C:\inetpub\wwwroot\StaffPortal\Downloads\';
-        FILESPATH_SSP: Label 'C:\inetpub\wwwroot\StaffPortal\Downloads\';
+        FILESPATH_A: Label 'C:\inetpub\wwwroot\KUPORTALS\StaffPortal\Downloads';//'C:\inetpub\wwwroot\StaffPortal\Downloads\';
+        FILESPATH_SSP: Label 'C:\inetpub\wwwroot\KUPORTALS\StaffPortal\Downloads';//'C:\inetpub\wwwroot\StaffPortal\Downloads\';
         FILESPATH_APP: Label 'C:\inetpub\wwwroot\KUPORTALS\ApplicationsPortal\Documents\';
         // 'C:\inetpub\wwwroot\CUEAApplyMVC\Downloads\';
         /* FILESPATH_A: Label 'C:\PORTALS\TMUCApply\TMUCApply\Downloads\';
@@ -3429,6 +3429,27 @@ codeunit 86502 "studentportals"
                 end;
             UNTIL programs.NEXT = 0;
         END;
+    end;
+    procedure GetPrograms2(progCode:Option;studyMode:Text;Campus:Text;intake:Text) Result:Text
+    begin
+        programs.Reset();
+        programs.SETRANGE(programs.Levels,progCode);
+        programs.SETRANGE(programs."Program Status",programs."Program Status"::Active);
+        IF programs.FIND('-') THEN BEGIN
+        Result := 'FOUND';
+            // REPEAT
+            //     programsetups.Reset;
+            //     programsetups.SetRange(Code, programs.Code);
+            //     programsetups.SetRange(Campus, campus);
+            //     programsetups.SetRange(Modeofstudy, studymode);
+            //     programsetups.SetRange(Semester, intake);
+            //     if programsetups.Find('-') then begin
+            //         Result += programs.Code + ' ::' + programs.Description + ' :::';
+            //     end;
+            // UNTIL programs.NEXT = 0;
+        END;
+        exit(Result);
+
     end;
 
     procedure GetAppliedLevelPrograms(appno: Code[50]) Message: Text
