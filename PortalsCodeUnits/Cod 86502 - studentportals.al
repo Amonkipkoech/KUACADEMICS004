@@ -4133,6 +4133,18 @@ codeunit 86502 "studentportals"
         END;
     end;
 
+    procedure GetRegisteredUnits(studentNo: Text; stage: Text; Programme: Text) Message: Text
+    begin
+        StudentUnits.Reset();
+        StudentUnits.SetRange(StudentUnits."Student No.", studentNo);
+        StudentUnits.SetRange(StudentUnits.stage, stage);
+        StudentUnits.SetRange(StudentUnits.Programme, Programme);
+        if StudentUnits.FIND('-') THEN BEGIN
+            Message += 'SUCCESS' + '::' + StudentUnits.Unit + '::' + StudentUnits."Unit Description" + '[]';
+        END;
+        exit(Message);
+    end;
+
     procedure DownloadExamCards() Msg: Boolean
     begin
         CurrentSem.reset;
