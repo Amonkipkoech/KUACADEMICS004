@@ -3430,23 +3430,28 @@ codeunit 86502 "studentportals"
             UNTIL programs.NEXT = 0;
         END;
     end;
-    procedure GetPrograms2(progCode:Option;studyMode:Text;Campus:Text;intake:Text) Result:Text
+
+    procedure GetPrograms2(progCode: Option; studyMode: Text; Campus: Text; intake: Text) Result: Text
     begin
-        programs.Reset();
-        programs.SETRANGE(programs.Levels,progCode);
-        programs.SETRANGE(programs."Program Status",programs."Program Status"::Active);
-        IF programs.FIND('-') THEN BEGIN
-        Result := 'FOUND';
-            // REPEAT
-            //     programsetups.Reset;
-            //     programsetups.SetRange(Code, programs.Code);
-            //     programsetups.SetRange(Campus, campus);
-            //     programsetups.SetRange(Modeofstudy, studymode);
-            //     programsetups.SetRange(Semester, intake);
-            //     if programsetups.Find('-') then begin
-            //         Result += programs.Code + ' ::' + programs.Description + ' :::';
-            //     end;
-            // UNTIL programs.NEXT = 0;
+        programsetups.Reset();
+        programsetups.SetRange(programsetups.semester, intake);
+        programsetups.SetRange(programsetups.Code, Format(progCode));
+        if programsetups.FIND('-') then begin
+            Result := Format(programsetups.Code);
+
+            programs.Reset();
+            programs.SETRANGE(programs.Levels, progCode);
+            programs.SETRANGE(programs."Program Status", programs."Program Status"::Active);
+            IF programs.FIND('-') THEN BEGIN
+
+                repeat
+
+                    Result += programs.Code + ' ::' + programs.Description + ' :::';
+
+                until programs.Next = 0;
+
+            end
+
         END;
         exit(Result);
 
@@ -3780,7 +3785,7 @@ codeunit 86502 "studentportals"
         appno: Text;
     begin
         CLEAR(appno);
-        appno := NoSeriesMgt.GetNextNo('APPNO', 0D, TRUE);
+        appno := NoSeriesMgt.GetNextNo('APP', 0D, TRUE);
         IF coluniattF = Today THEN begin
             colfrom := 0D;
         end;
