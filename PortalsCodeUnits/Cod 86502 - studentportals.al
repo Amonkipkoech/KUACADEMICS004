@@ -446,7 +446,19 @@ codeunit 86502 "studentportals"
     end;
 
 
+    procedure IsUnitRegistered(unitCode: Text; studentNo: Text; semester: Text) message: Boolean
+    begin
 
+        studentUnits.Reset();
+        StudentUnits.SetRange(StudentUnits."Student No.", studentNo);
+        StudentUnits.SetRange(StudentUnits.Unit, unitcode);
+        StudentUnits.SetRange(StudentUnits."Semester Registered");
+        if StudentUnits.FIND('-') then begin
+            message := true;
+        end else
+            message := false;
+        exit(message);
+    end;
 
 
     procedure PreRegisterStudents2(studentNo: Text; stage: Text; semester: Text; Programme: Text; AcademicYear: Text; settlementType: Text; ProgrammeOption: Code[20]) CourseRegId: Code[30]
