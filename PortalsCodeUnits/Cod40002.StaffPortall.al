@@ -2621,7 +2621,7 @@ codeunit 40002 StaffPortall
                         progname := programs.Description;
                         faculty := programs.Faculty;
                     END;
-                    apps := apps + fablist."Application No." + ' ::' + progname + ' ::' + faculty + ' ::' + FORMAT(fablist."Application Date") + ' ::' + fablist."First Name" + ' ::' + fablist.Surname + ' ::' + FORMAT(fablist."Application Type") + ' :::';
+                    apps += fablist."Application No." + ' ::' + progname + ' ::' + faculty + ' ::' + FORMAT(fablist."Application Date") + ' ::' + fablist."First Name" + ' ::' + fablist.Surname + ' ::' + FORMAT(fablist."Application Type") + ' :::';
                 UNTIL fablist.Next = 0;
             END;
         END;

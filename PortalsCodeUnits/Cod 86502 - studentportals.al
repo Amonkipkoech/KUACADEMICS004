@@ -4133,14 +4133,15 @@ codeunit 86502 "studentportals"
         END;
     end;
 
-    procedure GetRegisteredUnits(studentNo: Text; stage: Text; Programme: Text) Message: Text
+    procedure GetRegisteredUnits(studentNo: Text; stage: Text; semester: Text; Programme: Text) Message: Text
     begin
         StudentUnits.Reset();
         StudentUnits.SetRange(StudentUnits."Student No.", studentNo);
         StudentUnits.SetRange(StudentUnits.stage, stage);
+        StudentUnits.SetRange(StudentUnits.Semester, semester);
         StudentUnits.SetRange(StudentUnits.Programme, Programme);
         if StudentUnits.FIND('-') THEN BEGIN
-            Message += 'SUCCESS' + '::' + StudentUnits.Unit + '::' + StudentUnits."Unit Description" + '[]';
+            Message += StudentUnits.Unit + '::' + StudentUnits."Unit Description" + '[]';
         END;
         exit(Message);
     end;
