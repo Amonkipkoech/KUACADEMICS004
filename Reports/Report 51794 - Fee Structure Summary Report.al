@@ -7,11 +7,31 @@ report 51794 "Fee Structure Summary Report"
     {
         dataitem(DataItem1; 61511)
         {
-            RequestFilterFields =Code, "Settlement Type Filter";
+            RequestFilterFields = Code, "Settlement Type Filter";
             column(Pics; compInf.Picture)
             {
             }
-            column(Code;Code)
+            column(compInf_name2; compInf."Name 2")
+            {
+
+            }
+            column(compInf_name; compInf.Name)
+            {
+
+            }
+            column(compInf_email; compInf."E-Mail")
+            {
+
+            }
+            column(compInf_phone1; compInf."Phone No.")
+            {
+
+            }
+            column(compInf_phone2; compInf."Phone No. 2")
+            {
+
+            }
+            column(Code; Code)
             {
 
             }
