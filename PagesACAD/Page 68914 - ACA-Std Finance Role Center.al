@@ -83,7 +83,7 @@ page 68914 "ACA-Std Finance Role Center"
                 {
                     Caption = 'Student List';
                     ApplicationArea = All;
-                    // RunObject = Report 51392;
+                    RunObject = Report "Student Lists";
                 }
             }
             group("Receipts Reports")
@@ -93,7 +93,7 @@ page 68914 "ACA-Std Finance Role Center"
                 {
                     Caption = 'Cashier Transactions';
                     ApplicationArea = All;
-                    // RunObject = Report 51633;
+                    RunObject = Report Receipts;
                 }
                 action("Receipt Entries By User")
                 {
@@ -116,7 +116,7 @@ page 68914 "ACA-Std Finance Role Center"
             {
                 Caption = 'Missing Balance Imports';
                 Image = Migration;
-               
+
                 ApplicationArea = All;
                 // RunObject = Page 68014;
             }
@@ -154,13 +154,13 @@ page 68914 "ACA-Std Finance Role Center"
             {
                 Caption = 'Official Receipts';
                 ApplicationArea = All;
-                //RunObject = Page 68207;
+                RunObject = report Receipts;
             }
             action("Official Receipt")
             {
                 Caption = 'Official Receipt';
                 ApplicationArea = All;
-                //  RunObject = Page 68207;
+                RunObject = report Receipts2;
             }
             action("Settlement Types")
             {
@@ -180,8 +180,8 @@ page 68914 "ACA-Std Finance Role Center"
                 {
                     Caption = 'Master Fee Structure';
                     Image = Setup;
-                   
-                    
+
+
                     RunObject = Page 68796;
                     Visible = false;
                     ApplicationArea = All;
@@ -190,7 +190,7 @@ page 68914 "ACA-Std Finance Role Center"
                 {
                     Caption = 'Charge Items';
                     Image = Invoice;
-                   
+
                     RunObject = Page 68741;
                     ApplicationArea = All;
                 }
@@ -198,7 +198,7 @@ page 68914 "ACA-Std Finance Role Center"
                 {
                     Caption = 'General Set-Up';
                     Image = GeneralPostingSetup;
-                   
+
                     RunObject = Page 68760;
                     ApplicationArea = All;
                 }
@@ -206,7 +206,7 @@ page 68914 "ACA-Std Finance Role Center"
                 {
                     Caption = 'Academic Year';
                     Image = Calendar;
-                   
+
                     RunObject = Page 68509;
                     ApplicationArea = All;
                 }
@@ -257,7 +257,7 @@ page 68914 "ACA-Std Finance Role Center"
                 {
                     Caption = 'Post Batch Billing';
                     Image = Report2;
-                   
+
                     RunObject = Report 51539;
                     ApplicationArea = All;
                 }
@@ -265,8 +265,8 @@ page 68914 "ACA-Std Finance Role Center"
                 {
                     Caption = 'Import Bank Receipts';
                     Image = ImportExcel;
-                   
-                    
+
+
                     ApplicationArea = All;
                     // RunObject = XMLport 50019;
                 }
@@ -274,8 +274,8 @@ page 68914 "ACA-Std Finance Role Center"
                 {
                     Caption = 'Imported Bank Receipts';
                     Image = ReceiptLines;
-                   
-                    
+
+
                     RunObject = Page 68789;
                     ApplicationArea = All;
                 }
@@ -283,8 +283,8 @@ page 68914 "ACA-Std Finance Role Center"
                 {
                     Caption = 'Posted Receipts Buffer';
                     Image = PostedReceipts;
-                   
-                    
+
+
                     RunObject = Page 68790;
                     ApplicationArea = All;
                 }
@@ -292,8 +292,8 @@ page 68914 "ACA-Std Finance Role Center"
                 {
                     Caption = 'Post Billings (Batch)';
                     Image = Post;
-                   
-                    
+
+
                     RunObject = Report 51539;
                     ApplicationArea = All;
                 }
@@ -313,7 +313,7 @@ page 68914 "ACA-Std Finance Role Center"
                 {
                     Caption = 'Registered Students';
                     Image = PostingEntries;
-                   
+
                     RunObject = Report 51765;
                     ApplicationArea = All;
                 }

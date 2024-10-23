@@ -186,6 +186,7 @@ page 68872 "Application UABC Card"
                 field(Email; Rec.Email)
                 {
                     ApplicationArea = All;
+                    Editable = true;
                     Caption = 'Personal Email Adress';
                 }
                 field("Address for Correspondence1"; Rec."Address for Correspondence1")

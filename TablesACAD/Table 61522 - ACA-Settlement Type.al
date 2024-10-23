@@ -41,9 +41,6 @@ table 61522 "ACA-Settlement Type"
     fieldgroups
     {
     }
-    trigger OnModify()
-    begin
-        if UserId <> 'frankie' then Error('You are mot Allowed to Modify!!');
-    end;
+
 }
 
