@@ -275,6 +275,33 @@ codeunit 86502 "studentportals"
 
     end;
 
+    procedure GetExamCard(StudentNo: Text; Sem: Code[20]; filenameFromApp: Text) Message: Text
+    begin
+        filename := FILESPATH + filenameFromApp;
+        IF EXISTS(filename) THEN
+            ERASE(filename);
+
+        CourseRegistration.RESET;
+        CourseRegistration.SETRANGE(CourseRegistration."Student No.", StudentNo);
+        CourseRegistration.SETRANGE(CourseRegistration.Semester, Sem);
+        IF CourseRegistration.FINDFIRST THEN BEGIN
+            REPORT.SAVEASPDF(report::"Exam Card", filename, CourseRegistration);
+            /*
+            IF CourseRegistration.FIND('-') THEN BEGIN
+              REPORT.SAVEASPDF(51515,filename,CourseRegistration);
+            END;
+            Customer.RESET;
+            Customer.SETRANGE("No.",StudentNo);
+            Customer.SETFILTER("Semester Filter",sem);
+            IF Customer.FINDFIRST THEN BEGIN
+               REPORT.SAVEASPDF(51515,filename,Customer);*/
+            Message := 'SUCCESS'
+        END;
+        EXIT(Message);
+
+
+    end;
+
     procedure GenerateBS64StudentExamCard(StudentNo: Text; Sem: Code[20]; filenameFromApp: Text; var bigtext: BigText) rtnmsg: Text
     var
         tmpBlob: Codeunit "Temp Blob";
