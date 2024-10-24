@@ -22,6 +22,9 @@ report 51370 "Fee Collection"
             column(COMPANYNAME; COMPANYNAME)
             {
             }
+            column(info_picture; info.Picture)
+            {
+            }
 #pragma warning disable AL0667
             column(CurrReport_PAGENO; CurrReport.PAGENO)
 #pragma warning restore AL0667
@@ -137,6 +140,12 @@ report 51370 "Fee Collection"
     labels
     {
     }
+    trigger OnInitReport()
+    begin
+        IF info.GET() THEN
+            //Settlement_Type := compInf."Last Settlement Type";
+        info.CALCFIELDS(info.Picture);
+    end;
 
     var
         LastFieldNo: Integer;
@@ -145,6 +154,7 @@ report 51370 "Fee Collection"
         Totals: Decimal;
         Sname: Text[150];
         Cust: Record 18;
+        info: Record "Company Information";
         Fee_Collection_ReportCaptionLbl: Label 'Fee Collection Report';
         CurrReport_PAGENOCaptionLbl: Label 'Page';
         Amount_PaidCaptionLbl: Label 'Amount Paid';
