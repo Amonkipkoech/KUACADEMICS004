@@ -13,6 +13,10 @@ report 70092 "ACA-Student Balances"
             column(USERID; USERID)
             {
             }
+            column(info; info.Picture)
+            {
+
+            }
             column(COMPANYNAME; COMPANYNAME)
             {
             }
@@ -165,12 +169,19 @@ report 70092 "ACA-Student Balances"
     labels
     {
     }
+    trigger OnInitReport()
+    begin
+        IF info.GET() THEN
+            //Settlement_Type := compInf."Last Settlement Type";
+        info.CALCFIELDS(info.Picture);
+    end;
 
     var
         Hesabu: Integer;
         totalc: Decimal;
         Totald: Decimal;
         totalb: Decimal;
+        info: Record "Company Information";
         CurrReport_PAGENOCaptionLbl: Label 'Page';
         CustomerCaptionLbl: Label 'Customer';
         StageCaptionLbl: Label 'Stage';

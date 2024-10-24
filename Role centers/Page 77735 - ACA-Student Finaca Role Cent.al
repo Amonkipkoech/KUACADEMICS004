@@ -572,6 +572,26 @@ page 77735 "ACA-Student Fin/aca Role Cent"
                     ApplicationArea = All;
                 }
             }
+            group("Scholarship")
+            {
+                action("Official Rece")
+                {
+                    Caption = 'Acknowledgement Receipt';
+                    RunObject = Page "FIN-Receipts List";
+                    ApplicationArea = All;
+                }
+                action("Scholarships")
+                {
+                    RunObject = Page "ACA-Scholarships";
+                    ApplicationArea = All;
+                }
+                action("Scholarship Batches")
+                {
+                    RunObject = Page "ACA-Scholarship Batches";
+                    ApplicationArea = All;
+                }
+
+            }
             group(Approvals)
             {
                 Caption = 'Approvals';
