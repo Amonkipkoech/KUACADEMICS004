@@ -3735,6 +3735,24 @@ codeunit 86502 "studentportals"
         END;
     end;
 
+    procedure CheckIsSemPosted(studentNo: Text; Semester: Text): Boolean
+    var
+        posted: Boolean;
+
+    begin
+        posted := false;
+        CourseRegistration.Reset();
+        CourseRegistration.SetRange(CourseRegistration."Student No.", studentNo);
+        CourseRegistration.SetRange(CourseRegistration.Semester, Semester);
+        CourseRegistration.SetRange(CourseRegistration.Posted, true);
+
+        If CourseRegistration.Find('-') then begin
+            posted := true;
+        end;
+        Exit(posted);
+
+    end;
+
     procedure GetMyReturnedApplications(username: Text) apps: Text
     var
         progname: Text;
@@ -4141,10 +4159,33 @@ codeunit 86502 "studentportals"
         StudentUnits.SetRange(StudentUnits.Semester, semester);
         StudentUnits.SetRange(StudentUnits.Programme, Programme);
         if StudentUnits.FIND('-') THEN BEGIN
-            Message += StudentUnits.Unit + '::' + StudentUnits."Unit Description" + '[]';
+            repeat
+
+                Message += StudentUnits.Unit + '::' + StudentUnits."Unit Description" + '[]';
+
+            until StudentUnits.NEXT = 0;
+
         END;
         exit(Message);
     end;
+
+    procedure DeleteUnit(unitCode: Text; stage: Text; studentNo: Text; programme: Text) Message: Text
+
+    begin
+        StudentUnits.Reset();
+        StudentUnits.SetRange("Student No.", studentNo);
+        StudentUnits.SetRange(stage, stage);
+        StudentUnits.SetRange("Unit", unitCode);
+        StudentUnits.SetRange("Programme", programme);
+
+        if StudentUnits.Find('-') then begin
+            StudentUnits.Delete();
+            Message := 'SUCCESS';
+        end else begin
+            Message := 'Unit not found';
+        end;
+    end;
+
 
     procedure DownloadExamCards() Msg: Boolean
     begin
