@@ -165,6 +165,8 @@ codeunit 40002 StaffPortall
         applicsummaryreport: Report "ACA-APPLICANTS Report";
         settlementtypes: Record "ACA-Settlement Type";
         stdissues: Record studentIssues;
+        masterRotation: Record "MasterRotationPlanTest";
+        group: Record "GroupAssignments";
     // Staff Portal Functions
     procedure CheckStaffLogin(username: Code[20]; userpassword: Text[50]) ReturnMsg: Text[200];
     begin
@@ -193,6 +195,62 @@ codeunit 40002 StaffPortall
         end else begin
             ReturnMsg := 'Invalid Staff Number' + '::';
         end
+
+    end;
+
+    procedure CreateMasterRotationPlan(Block: Text; HOD: Text; department: Text; Campus: Text; StartDate: Date; EndDate: Date; TheoryStart: Date; TheoryEnd: Date; ClinicalStart: Date; ClinicalEnd: Date; ExamStart: Date; ExamEnd: Date) Message: Text
+    var
+        masterNo: Text;
+
+    begin
+        masterNo := NoSeriesMgt.GetNextNo('LEAVE', 0D, TRUE);
+        masterRotation.Reset();
+        masterRotation.SetRange(masterRotation.Block, Block);
+        masterRotation.setRange(masterRotation.Department, department);
+        if masterRotation.FindFirst() then begin
+            Message := 'You have already Created a master Rotation plan for this Block!!';
+        end else begin
+            masterRotation.No_ := masterNo;
+            masterRotation.Block := Block;
+            masterRotation.Hod := HOD;
+            masterRotation.Department := department;
+            masterRotation.Campus := Campus;
+            masterRotation.StartDate := StartDate;
+            masterRotation.EndDate := EndDate;
+            masterRotation.TheoryStart := TheoryStart;
+            masterRotation.TheoryEnd := TheoryEnd;
+            masterRotation.ClinicalsStart := ClinicalStart;
+            masterRotation.ClinicalsEnd := ClinicalEnd;
+            masterRotation.ExaminationsStart := ExamStart;
+            masterRotation.ExaminationsEnd := ExamEnd;
+            if masterRotation.Insert() then begin
+                Message := 'SUCCESS';
+            end;
+            EXIT(Message);
+
+        end;
+
+
+    end;
+
+    procedure CreateMasterGroups(Block: Text; StudentNo: Text; MasterRotNo: Text; StartDate: Date; EndDate: Date; Department: Text) Message: Text
+    var
+        groupId: Text;
+    begin
+        groupId := NoSeriesMgt.GetNextNo('LEAVE', 0D, TRUE);
+        group.Reset();
+        group.setRange(group.StudentNo_, StudentNo);
+        group.setRange(group.Block, Block);
+        if group.FINDFIRST then begin
+            Message := 'Student is already assigned a group';
+        end else begin
+            group.Block := Block;
+            group.Department := Department;
+            group.StartDate := StartDate;
+            group.EndDate := EndDate;
+            group.MasterRotationNo := MasterRotNo;
+            group.groupId := groupId;
+        end;
 
     end;
 
