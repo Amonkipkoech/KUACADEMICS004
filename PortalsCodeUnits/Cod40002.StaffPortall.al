@@ -233,7 +233,7 @@ codeunit 40002 StaffPortall
 
     end;
 
-    procedure CreateMasterGroups(Block: Text; StudentNo: Text; MasterRotNo: Text; Department: Text) Message: Text
+    procedure CreateMasterGroups(Block: Text; StudentNo: Text; numberOfStudents: Integer; MasterRotNo: Text; Department: Text) Message: Text
     var
         groupId: Text;
         studentsAssigned: Integer;
@@ -271,7 +271,7 @@ codeunit 40002 StaffPortall
                 end;
 
                 // If the current group has reached seven students, get the next group number
-                if studentsAssigned >= 7 then begin
+                if studentsAssigned >= numberOfStudents then begin
                     groupId := NoSeriesMgt.GetNextNo('GRPNO', 0D, TRUE);
                     studentsAssigned := 0; // Reset the counter for the new group
                 end;
