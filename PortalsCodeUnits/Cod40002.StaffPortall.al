@@ -293,6 +293,27 @@ codeunit 40002 StaffPortall
         exit(Message);
     end;
 
+    procedure GetNumberOfStudents(unitCode: Text): Integer //; programme: Text
+    var
+        studentCount: Integer;
+    begin
+        studentCount := 0;
+
+
+        StudentUnits.Reset();
+
+        //StudentUnits.SetRange(StudentUnits.Programme, programme);
+        StudentUnits.SetRange(StudentUnits.Semester, GetCurrentSemester());
+        StudentUnits.SetRange(StudentUnits.Unit, unitCode);
+
+        if StudentUnits.Find('-') then begin
+            repeat
+                studentCount := studentCount + 1;
+            until StudentUnits.Next() = 0;
+        end;
+
+        exit(studentCount);
+    end;
 
     procedure CheckStaffLoginForUnchangedPass(Username: Code[20]; password: Text[50]) ReturnMsg: Text[200];
     begin
