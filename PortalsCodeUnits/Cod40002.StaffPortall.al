@@ -203,7 +203,7 @@ codeunit 40002 StaffPortall
         masterNo: Text;
 
     begin
-        masterNo := NoSeriesMgt.GetNextNo('LEAVE', 0D, TRUE);
+        masterNo := NoSeriesMgt.GetNextNo('MAROT', 0D, TRUE);
         masterRotation.Reset();
         masterRotation.SetRange(masterRotation.Block, Block);
         masterRotation.setRange(masterRotation.Department, department);
@@ -224,7 +224,7 @@ codeunit 40002 StaffPortall
             masterRotation.ExaminationsStart := ExamStart;
             masterRotation.ExaminationsEnd := ExamEnd;
             if masterRotation.Insert() then begin
-                Message := 'SUCCESS';
+                Message := 'SUCCESS' + '::' + masterRotation.No_;
             end;
             EXIT(Message);
 
@@ -237,20 +237,25 @@ codeunit 40002 StaffPortall
     var
         groupId: Text;
     begin
-        groupId := NoSeriesMgt.GetNextNo('LEAVE', 0D, TRUE);
+        groupId := NoSeriesMgt.GetNextNo('GRPNO', 0D, TRUE);
         group.Reset();
-        group.setRange(group.StudentNo_, StudentNo);
+        group.setRange(group.StudentNo, StudentNo);
         group.setRange(group.Block, Block);
         if group.FINDFIRST then begin
-            Message := 'Student is already assigned a group';
+            Message := 'Student is already assigned a group' + '::';
         end else begin
             group.Block := Block;
             group.Department := Department;
             group.StartDate := StartDate;
             group.EndDate := EndDate;
             group.MasterRotationNo := MasterRotNo;
-            group.groupId := groupId;
+            group.GroupId := groupId;
+            group.StudentNo := StudentNo;
+            if group.Insert() then begin
+                Message := 'Success' + '::';
+            end;
         end;
+        exit(Message);
 
     end;
 

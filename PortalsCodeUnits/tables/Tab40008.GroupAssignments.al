@@ -13,7 +13,7 @@ table 40008 GroupAssignments
         {
             Caption = 'Block';
         }
-        field(3; StudentNo_; Text[100])
+        field(3; StudentNo; Text[100])
         {
             Caption = 'StudentNo_';
         }
@@ -36,7 +36,7 @@ table 40008 GroupAssignments
     }
     keys
     {
-        key(PK; GroupId, Block, StudentNo_)
+        key(PK; GroupId, Block, StudentNo)
         {
             Clustered = true;
         }
