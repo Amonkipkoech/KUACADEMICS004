@@ -233,31 +233,66 @@ codeunit 40002 StaffPortall
 
     end;
 
-    procedure CreateMasterGroups(Block: Text; StudentNo: Text; MasterRotNo: Text; StartDate: Date; EndDate: Date; Department: Text) Message: Text
+    procedure CreateMasterGroups(Block: Text; StudentNo: Text; MasterRotNo: Text; Department: Text) Message: Text
     var
         groupId: Text;
+        studentsAssigned: Integer;
     begin
-        groupId := NoSeriesMgt.GetNextNo('GRPNO', 0D, TRUE);
+        // Reset the group and master rotation record sets
         group.Reset();
-        group.setRange(group.StudentNo, StudentNo);
-        group.setRange(group.Block, Block);
+        masterRotation.Reset();
+
+        // Check if the student is already assigned to a group within the given block
+        group.SetRange(group.StudentNo, StudentNo);
+        group.SetRange(group.Block, Block);
+
         if group.FINDFIRST then begin
             Message := 'Student is already assigned a group' + '::';
         end else begin
-            group.Block := Block;
-            group.Department := Department;
-            group.StartDate := StartDate;
-            group.EndDate := EndDate;
-            group.MasterRotationNo := MasterRotNo;
-            group.GroupId := groupId;
-            group.StudentNo := StudentNo;
-            if group.Insert() then begin
-                Message := 'Success' + '::';
+            // Find the master rotation details
+            masterRotation.SetRange(masterRotation.No_, MasterRotNo);
+
+            if masterRotation.Find('-') then begin
+                // Reset the group filter and check for the latest groupId for this block
+                group.Reset();
+                group.SetRange(group.Block, Block);
+                group.SetRange(group.MasterRotationNo, MasterRotNo);
+
+                // Get the last assigned groupId or initialize a new one if none exists
+                if group.FindLast then begin
+                    groupId := group.GroupId; // Get the last assigned groupId for this block
+                    group.Reset(); // Reset filters to avoid incorrect counting
+                    group.SetRange(group.GroupId, groupId);
+                    studentsAssigned := group.Count;
+                end else begin
+                    // No group exists yet for this block and rotation, initialize the first groupId
+                    groupId := NoSeriesMgt.GetNextNo('GRPNO', 0D, TRUE);
+                    studentsAssigned := 0;
+                end;
+
+                // If the current group has reached seven students, get the next group number
+                if studentsAssigned >= 7 then begin
+                    groupId := NoSeriesMgt.GetNextNo('GRPNO', 0D, TRUE);
+                    studentsAssigned := 0; // Reset the counter for the new group
+                end;
+
+                // Assign the student to the group
+                group.Block := Block;
+                group.Department := Department;
+                group.StartDate := masterRotation.StartDate;
+                group.EndDate := masterRotation.EndDate;
+                group.MasterRotationNo := MasterRotNo;
+                group.GroupId := groupId;
+                group.StudentNo := StudentNo;
+
+                if group.Insert() then begin
+                    Message := 'Success' + '::';
+                end;
             end;
         end;
         exit(Message);
-
     end;
+
 
     procedure CheckStaffLoginForUnchangedPass(Username: Code[20]; password: Text[50]) ReturnMsg: Text[200];
     begin
