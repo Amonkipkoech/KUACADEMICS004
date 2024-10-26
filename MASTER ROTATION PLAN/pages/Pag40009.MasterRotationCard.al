@@ -1,18 +1,46 @@
-page 40009 "Master Rotation Card"
+page 40009 "Master Rotation Plan Card"
+
 {
-    Caption = 'Master Rotation Card';
     PageType = Card;
-    SourceTable = "Master Rotation Plan";
-    
+    SourceTable = "Master Rotation Table";
+
+    Caption = 'Master Rotation Plan';
+
     layout
     {
-        area(Content)
+        area(content)
         {
-            group(General)
+            group("HoD Information")
             {
-                Caption = 'General';
-                
+                field("HoD Name"; "HoD Name") { ApplicationArea = All; }
+                field("Department"; Department) { ApplicationArea = All; }
+                field("School"; School) { ApplicationArea = All; }
+                field("Phone Number"; "Phone Number") { ApplicationArea = All; }
+                field("Email"; Email) { ApplicationArea = All; }
+                field("Program Code"; "Program Code") { ApplicationArea = All; }
+                field("Program Name"; "Program Name") { ApplicationArea = All; }
+            }
+
+            group("Theoretical Classes")
+            {
+                field("Block Name"; "Block Name") { ApplicationArea = All; }
+                field("Start Date"; "Start Date") { ApplicationArea = All; }
+                field("Start Month"; "Start Month") { ApplicationArea = All; }
+                field("End Date"; "End Date") { ApplicationArea = All; }
+                field("End Month"; "End Month") { ApplicationArea = All; }
+                field("Number of Weeks"; "Number of Weeks") { ApplicationArea = All; }
+                field("Category"; Category) { ApplicationArea = All; }
+            }
+
+            group("Clinical Classes")
+            {
+
+                part("Clinical Rotation List"; "Clinical Rotation List Part")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }
 }
+

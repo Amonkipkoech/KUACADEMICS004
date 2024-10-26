@@ -2,8 +2,8 @@ page 40008 "master rotation list "
 {
     Caption = 'master rotation list ';
     PageType = List;
-    SourceTable = "master rotation plan";
-    
+    SourceTable = "Master Rotation Table";
+
     layout
     {
         area(Content)

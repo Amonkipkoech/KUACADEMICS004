@@ -1,15 +1,23 @@
-page 40010 "master rotation list part"
+page 40010 "Clinical Rotation List Part"
+
 {
-    Caption = 'master rotation list part';
     PageType = ListPart;
-    
+    SourceTable = "Clinical Rotation"; // This should be a separate table for managing weekly rotations
+
+    Caption = 'Clinical Rotation List';
+
     layout
     {
-        area(Content)
+        area(content)
         {
-            repeater(General)
+            repeater("clinical rotation")
             {
+                field("Week"; rec."Week No") { ApplicationArea = All; }
+                field("Group"; rec.Group) { ApplicationArea = All; }
+
+                // Continue with fields up to Site Week 52...
             }
         }
     }
 }
+
