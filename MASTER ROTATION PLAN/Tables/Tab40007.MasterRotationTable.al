@@ -88,6 +88,10 @@ table 40007 "Master Rotation Table"
         {
             DataClassification = ToBeClassified;
         }
+        field(17; status; Option)
+        {
+            OptionMembers = " ",Open,"Pending Approval",Approved;
+        }
     }
 
     keys

@@ -10,7 +10,7 @@ table 40004 "Lab"
             Caption = 'Lab ID';
             DataClassification = ToBeClassified;
         }
-        field(2; "Area cODE"; Text[100])
+        field(2; "Area cODE"; Code[50])
         {
             Caption = 'Area Code';
             DataClassification = ToBeClassified;

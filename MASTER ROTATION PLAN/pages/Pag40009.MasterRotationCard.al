@@ -12,6 +12,7 @@ page 40009 "Master Rotation Plan Card"
         {
             group("HoD Information")
             {
+                field("Plan ID"; rec."Plan ID") { ApplicationArea = All; }
                 field("HoD Name"; "HoD Name") { ApplicationArea = All; }
                 field("Department"; Department) { ApplicationArea = All; }
                 field("School"; School) { ApplicationArea = All; }
@@ -40,6 +41,26 @@ page 40009 "Master Rotation Plan Card"
                     ApplicationArea = All;
                     SubPageLink = "Plan ID" = field("Plan ID");
                 }
+            }
+        }
+    }
+    actions
+    {
+        area(Processing)
+        {
+            action("Send For Approval")
+            {
+                trigger OnAction()
+                begin
+                    rec.status := rec.status::"Pending Approval";
+                end;
+            }
+            action("Approve")
+            {
+                trigger OnAction()
+                begin
+                    rec.status := rec.status::Approved;
+                end;
             }
         }
     }
