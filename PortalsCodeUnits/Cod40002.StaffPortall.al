@@ -167,6 +167,8 @@ codeunit 40002 StaffPortall
         stdissues: Record studentIssues;
         masterRotation: Record "MasterRotationPlanTest";
         group: Record "GroupAssignments";
+        unitsOnOffer: Record "ACA-Units Offered";
+
     // Staff Portal Functions
     procedure CheckStaffLogin(username: Code[20]; userpassword: Text[50]) ReturnMsg: Text[200];
     begin
@@ -314,6 +316,26 @@ codeunit 40002 StaffPortall
 
         exit(studentCount);
     end;
+
+    procedure UnitsToRegister() Message: Text
+    begin
+        unitsOnOffer.Reset();
+        unitsOnOffer.SetRange(unitsOnOffer.Semester, GetCurrentSem());
+        if unitsOnOffer.Find('-') then begin
+            Message += 'SUCCESS' + '::' + unitsOnOffer."Unit Base Code" + '::' + GetUnitName(unitsOnOffer."Unit Base Code") + '::' + unitsOnOffer.Campus + '::' + unitsOnOffer.Lecturer + '::' + unitsOnOffer."Lecture Hall" + '::' + unitsOnOffer.TimeSlot + '[]';
+        end
+    end;
+
+    procedure GetUnitName(unitCode: Text) Name: Text
+    begin
+        UnitSubjects.Reset();
+        UnitSubjects.setRange(UnitSubjects.Code, unitCode);
+        if UnitSubjects.FindFirst() then begin
+            Name := UnitSubjects.Desription;
+        end;
+        Exit(Name);
+    end;
+
 
     procedure CheckStaffLoginForUnchangedPass(Username: Code[20]; password: Text[50]) ReturnMsg: Text[200];
     begin
