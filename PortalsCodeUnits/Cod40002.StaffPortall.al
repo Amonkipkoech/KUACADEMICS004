@@ -317,10 +317,11 @@ codeunit 40002 StaffPortall
         exit(studentCount);
     end;
 
-    procedure UnitsToRegister() Message: Text
+    procedure UnitsToRegister(progCode: Text) Message: Text
     begin
         unitsOnOffer.Reset();
         unitsOnOffer.SetRange(unitsOnOffer.Semester, GetCurrentSem());
+        unitsOnOffer.SetRange(unitsOnOffer.Programs, progCode);
         if unitsOnOffer.Find('-') then begin
             Message += 'SUCCESS' + '::' + unitsOnOffer."Unit Base Code" + '::' + GetUnitName(unitsOnOffer."Unit Base Code") + '::' + unitsOnOffer.Campus + '::' + unitsOnOffer.Lecturer + '::' + unitsOnOffer."Lecture Hall" + '::' + unitsOnOffer.TimeSlot + '[]';
         end
