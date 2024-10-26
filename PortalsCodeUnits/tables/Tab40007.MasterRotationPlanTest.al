@@ -1,8 +1,8 @@
-table 40007 MasterRotationPlanTest
+table 40009 MasterRotationPlanTest
 {
     Caption = 'MasterRotationPlanTest';
     DataClassification = ToBeClassified;
-    
+
     fields
     {
         field(1; No_; Text[400])
@@ -60,7 +60,7 @@ table 40007 MasterRotationPlanTest
     }
     keys
     {
-        key(PK; No_,Block,Department)
+        key(PK; No_, Block, Department)
         {
             Clustered = true;
         }

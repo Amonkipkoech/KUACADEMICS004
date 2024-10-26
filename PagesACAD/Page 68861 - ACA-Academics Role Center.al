@@ -1167,6 +1167,7 @@ page 68861 "ACA-Academics Role Center"
             {
                 Caption = 'Master Rotation Plan';
                 Image = ResourcePlanning;
+<<<<<<< HEAD
                 // action("Students on Session")
                 // {
                 //     Image = Allocate;
@@ -1185,6 +1186,32 @@ page 68861 "ACA-Academics Role Center"
                 //     RunObject = Page "Full Rotation Schedule";
                 //     ApplicationArea = All;
                 // }
+=======
+                action("Students on Session")
+                {
+                    Image = Allocate;
+                    RunObject = Page "Student Session Registration";
+                    ApplicationArea = All;
+                }
+                action("Rotation Areas")
+                {
+                    Image = Allocate;
+                    RunObject = Page "Rotation Areas";
+                    ApplicationArea = All;
+                }
+                action("Rotation Schedule")
+                {
+                    Image = Allocate;
+                    RunObject = Page "Full Rotation Schedule";
+                    ApplicationArea = All;
+                }
+                action("Master Rotation Plan rl")
+                {
+                    Image = Allocate;
+                    RunObject = Page "master rotation list ";
+                    ApplicationArea = All;
+                }
+>>>>>>> origin/main
             }
             group(LectMan)
             {
