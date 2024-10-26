@@ -20,7 +20,7 @@ table 40010 "Clinical rotation"
         field(3; Group; Code[50])
         {
             DataClassification = ToBeClassified;
-            //TableRelation = "Rotation Group"."Group ID";
+            TableRelation = GroupAssignments.GroupId;
         }
 
         field(4; "Month"; Option)
@@ -46,7 +46,7 @@ table 40010 "Clinical rotation"
         field(8; Areas; Code[50])
         {
             DataClassification = ToBeClassified;
-            TableRelation = Lab."Lab ID";
+            TableRelation = Lab."Area cODE";
         }
 
         field(9; "No. Series"; Code[20])
