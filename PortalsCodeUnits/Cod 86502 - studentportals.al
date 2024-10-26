@@ -154,6 +154,7 @@ codeunit 86502 "studentportals"
         associatedunits: Record acaAssosiateUnits;
         settlementtypes: Record "ACA-Settlement Type";
         stdissues: Record studentIssues;
+        AttendanceDetails: Record "Class Attendance Details";
 
 
 
@@ -274,6 +275,17 @@ codeunit 86502 "studentportals"
         END;
 
     end;
+
+    procedure GetClassAttendance(studentNo: text; Sem: Text) Message: Text
+    begin
+        AttendanceDetails.Reset();
+        AttendanceDetails.SetRange(AttendanceDetails."Student No.", studentNo);
+        AttendanceDetails.setRange(AttendanceDetails.Semester, sem);
+        if AttendanceDetails.Find('-') then Begin
+            Message += 'SUCCESS' + '::' + AttendanceDetails."Unit Code" + '::' + Format(AttendanceDetails."Attendance Date") + '::' + Format(AttendanceDetails."Present Counting") + '::' + Format(AttendanceDetails."Absent Counting") + '::' + Format(AttendanceDetails.Counting) + ':::';
+        End;
+    end;
+
 
     procedure GetExamCard(StudentNo: Text; Sem: Code[20]; filenameFromApp: Text) Message: Text
     begin
