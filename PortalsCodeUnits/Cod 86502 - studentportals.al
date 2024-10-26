@@ -293,7 +293,10 @@ codeunit 86502 "studentportals"
         unitsOnOffer.SetRange(unitsOnOffer.Semester, CurrentSemester());
         unitsOnOffer.SetRange(unitsOnOffer.Programs, progCode);
         if unitsOnOffer.Find('-') then begin
-            Message += 'SUCCESS' + '::' + unitsOnOffer."Unit Base Code" + '::' + GetUnitName(unitsOnOffer."Unit Base Code") + '::' + unitsOnOffer.Campus + '::' + GetLectureName(unitsOnOffer.Lecturer) + '::' + unitsOnOffer."Lecture Hall" + '::' + unitsOnOffer.TimeSlot + '[]';
+            repeat
+                Message += 'SUCCESS' + '::' + unitsOnOffer."Unit Base Code" + '::' + GetUnitName(unitsOnOffer."Unit Base Code") +
+                 '::' + unitsOnOffer.Campus + '::' + GetLectureName(unitsOnOffer.Lecturer) + '::' + unitsOnOffer."Lecture Hall" + '::' + unitsOnOffer.TimeSlot + '::' + unitsOnOffer.Day + '[]';
+            until unitsOnOffer.Next() = 0;
         end
     end;
 
@@ -322,7 +325,7 @@ codeunit 86502 "studentportals"
         EmployeeCard.Reset();
         EmployeeCard.SetRange(EmployeeCard."No.", number);
         if EmployeeCard.FindFirst() then begin
-            Name := EmployeeCard."First Name" + EmployeeCard."Last Name";
+            Name := EmployeeCard."First Name" + ' ' + EmployeeCard."Last Name";
         end;
         exit(Name);
     end;
