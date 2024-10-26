@@ -16,6 +16,7 @@ table 40007 "Master Rotation Table"
             DataClassification = ToBeClassified;
         }
 
+
         field(3; "Department"; Text[50])
         {
             DataClassification = ToBeClassified;
@@ -110,6 +111,10 @@ table 40007 "Master Rotation Table"
             DataClassification = ToBeClassified;
         }
         field(22; "Exams EndDate"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(23; "HOD"; Text[50])
         {
             DataClassification = ToBeClassified;
         }

@@ -217,6 +217,7 @@ codeunit 40002 StaffPortall
             masterRotation2."Block Name" := Block;
             masterRotation2."HoD Name" := GetLecturerNames(HOD);
             masterRotation2.Department := department;
+            masterRotation2.HOD := HOD;
             //masterRotation.Campus := Campus;
             masterRotation2."Start Date" := StartDate;
             masterRotation2."End Date" := EndDate;
@@ -263,7 +264,7 @@ codeunit 40002 StaffPortall
     begin
         // Reset the group and master rotation record sets
         group.Reset();
-        masterRotation.Reset();
+        masterRotation2.Reset();
 
         // Check if the student is already assigned to a group within the given block
         group.SetRange(group.StudentNo, StudentNo);
@@ -273,9 +274,9 @@ codeunit 40002 StaffPortall
             Message := 'Student is already assigned a group' + '::';
         end else begin
             // Find the master rotation details
-            masterRotation.SetRange(masterRotation.No_, MasterRotNo);
+            masterRotation2.SetRange(masterRotation2."Plan ID", MasterRotNo);
 
-            if masterRotation.Find('-') then begin
+            if masterRotation2.Find('-') then begin
                 // Reset the group filter and check for the latest groupId for this block
                 group.Reset();
                 group.SetRange(group.Block, Block);
@@ -302,8 +303,8 @@ codeunit 40002 StaffPortall
                 // Assign the student to the group
                 group.Block := Block;
                 group.Department := Department;
-                group.StartDate := masterRotation.StartDate;
-                group.EndDate := masterRotation.EndDate;
+                group.StartDate := masterRotation2."Start Date";
+                group.EndDate := masterRotation2."End Date";
                 group.MasterRotationNo := MasterRotNo;
                 group.GroupId := groupId;
                 group.StudentNo := StudentNo;
@@ -315,6 +316,43 @@ codeunit 40002 StaffPortall
         end;
         exit(Message);
     end;
+
+    procedure GetDistinctGroups(masterNo: Text; block: Text) Message: Text
+    var
+
+        distinctGroupIds: Dictionary of [Text, Boolean]; // To keep track of distinct GroupIds
+    begin
+        group.Reset();
+        group.SetRange(group.MasterRotationNo, masterNo);
+        group.SetRange(group.Block, block);
+
+
+        if group.FindSet() then begin
+            repeat
+                // Check if the GroupId is already in the dictionary
+                if not distinctGroupIds.ContainsKey(group.GroupId) then begin
+                    distinctGroupIds.Add(group.GroupId, true);
+                    Message += 'SUCCESS' + '::' + group.GroupId + ':::';
+                end;
+            until group.Next() = 0;
+        end;
+
+        exit(Message);
+    end;
+
+
+    // procedure GetDistinctGroups(masterNo:Text;block:Text)Message : Text
+    // begin
+    //     group.Reset();
+    //     group.SetRange(group.MasterRotationNo,masterNo);
+    //     group.SetRange(group.Block,block);
+    //     if group.Find('-') then begin
+    //         repeat
+    //         Message += 'SUCCESS'+'::'+group.GroupId;
+    //         until group.Next() = 0;
+    //     exit(Message);
+    // end;
+    // end;
 
     procedure GetNumberOfStudents(unitCode: Text): Integer //; programme: Text
     var
