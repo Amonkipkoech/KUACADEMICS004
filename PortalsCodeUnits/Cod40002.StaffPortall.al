@@ -168,6 +168,7 @@ codeunit 40002 StaffPortall
         masterRotation: Record "MasterRotationPlanTest";
         group: Record "GroupAssignments";
         unitsOnOffer: Record "ACA-Units Offered";
+        masterRotation2: Record "Master Rotation Table";
 
     // Staff Portal Functions
     procedure CheckStaffLogin(username: Code[20]; userpassword: Text[50]) ReturnMsg: Text[200];
@@ -206,33 +207,53 @@ codeunit 40002 StaffPortall
 
     begin
         masterNo := NoSeriesMgt.GetNextNo('MAROT', 0D, TRUE);
-        masterRotation.Reset();
-        masterRotation.SetRange(masterRotation.Block, Block);
-        masterRotation.setRange(masterRotation.Department, department);
-        if masterRotation.FindFirst() then begin
+        masterRotation2.Reset();
+        masterRotation2.SetRange(masterRotation2."Block Name", Block);
+        masterRotation2.setRange(masterRotation2.Department, department);
+        if masterRotation2.FindFirst() then begin
             Message := 'You have already Created a master Rotation plan for this Block!!';
         end else begin
-            masterRotation.No_ := masterNo;
-            masterRotation.Block := Block;
-            masterRotation.Hod := HOD;
-            masterRotation.Department := department;
-            masterRotation.Campus := Campus;
-            masterRotation.StartDate := StartDate;
-            masterRotation.EndDate := EndDate;
-            masterRotation.TheoryStart := TheoryStart;
-            masterRotation.TheoryEnd := TheoryEnd;
-            masterRotation.ClinicalsStart := ClinicalStart;
-            masterRotation.ClinicalsEnd := ClinicalEnd;
-            masterRotation.ExaminationsStart := ExamStart;
-            masterRotation.ExaminationsEnd := ExamEnd;
-            if masterRotation.Insert() then begin
-                Message := 'SUCCESS' + '::' + masterRotation.No_;
+            masterRotation2."Plan ID" := masterNo;
+            masterRotation2."Block Name" := Block;
+            masterRotation2."HoD Name" := GetLecturerNames(HOD);
+            masterRotation2.Department := department;
+            //masterRotation.Campus := Campus;
+            masterRotation2."Start Date" := StartDate;
+            masterRotation2."End Date" := EndDate;
+            masterRotation2."Theory StartDate" := TheoryStart;
+            masterRotation2."Theory EndDate" := TheoryEnd;
+            masterRotation2."Clinical StartDate" := ClinicalStart;
+            masterRotation2."Clinical EndDate" := ClinicalEnd;
+            masterRotation2."Exams StartDate" := ExamStart;
+            masterRotation2."Exams EndDate" := ExamEnd;
+            masterRotation2."No. Series" := 'MAROT';
+            if masterRotation2.Insert() then begin
+                Message := 'SUCCESS' + '::' + masterRotation2."Plan ID";
             end;
             EXIT(Message);
 
         end;
 
 
+    end;
+
+    procedure GetLecturerNames(no: Code[20]) fullname: Text
+    begin
+        EmployeeCard.RESET;
+        EmployeeCard.SetRange("No.", no);
+        IF EmployeeCard.FIND('-') THEN begin
+            fullname := '';
+            if EmployeeCard."First Name" <> '' then
+                fullname += EmployeeCard."First Name";
+            if EmployeeCard."Middle Name" <> '' then begin
+                if fullname <> '' then begin
+                    fullname += ' ' + EmployeeCard."Middle Name";
+                end else
+                    fullname += EmployeeCard."Middle Name";
+            end;
+            if EmployeeCard."Last Name" <> '' then
+                fullname += ' ' + EmployeeCard."Last Name";
+        end;
     end;
 
     procedure CreateMasterGroups(Block: Text; StudentNo: Text; numberOfStudents: Integer; MasterRotNo: Text; Department: Text) Message: Text

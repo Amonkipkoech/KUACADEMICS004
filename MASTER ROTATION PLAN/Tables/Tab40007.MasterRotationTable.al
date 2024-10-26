@@ -49,6 +49,7 @@ table 40007 "Master Rotation Table"
         }
 
         // Theoretical Classes
+
         field(9; "Block Name"; Text[50])
         {
             DataClassification = ToBeClassified;
@@ -85,6 +86,30 @@ table 40007 "Master Rotation Table"
             OptionMembers = "Block One","Block Two";
         }
         field(16; "No. Series"; code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(17; "Theory StartDate"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(18; "Theory EndDate"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(19; "Clinical StartDate"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(20; "Clinical EndDate"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(21; "Exams StartDate"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(22; "Exams EndDate"; Date)
         {
             DataClassification = ToBeClassified;
         }
