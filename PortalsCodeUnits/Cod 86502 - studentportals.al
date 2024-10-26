@@ -155,6 +155,7 @@ codeunit 86502 "studentportals"
         settlementtypes: Record "ACA-Settlement Type";
         stdissues: Record studentIssues;
         AttendanceDetails: Record "Class Attendance Details";
+        unitsOnOffer: Record "ACA-Units Offered";
 
 
 
@@ -284,6 +285,46 @@ codeunit 86502 "studentportals"
         if AttendanceDetails.Find('-') then Begin
             Message += 'SUCCESS' + '::' + AttendanceDetails."Unit Code" + '::' + Format(AttendanceDetails."Attendance Date") + '::' + Format(AttendanceDetails."Present Counting") + '::' + Format(AttendanceDetails."Absent Counting") + '::' + Format(AttendanceDetails.Counting) + ':::';
         End;
+    end;
+
+    procedure UnitsToRegister(progCode: Text) Message: Text
+    begin
+        unitsOnOffer.Reset();
+        unitsOnOffer.SetRange(unitsOnOffer.Semester, CurrentSemester());
+        unitsOnOffer.SetRange(unitsOnOffer.Programs, progCode);
+        if unitsOnOffer.Find('-') then begin
+            Message += 'SUCCESS' + '::' + unitsOnOffer."Unit Base Code" + '::' + GetUnitName(unitsOnOffer."Unit Base Code") + '::' + unitsOnOffer.Campus + '::' + GetLectureName(unitsOnOffer.Lecturer) + '::' + unitsOnOffer."Lecture Hall" + '::' + unitsOnOffer.TimeSlot + '[]';
+        end
+    end;
+
+    procedure CurrentSemester() Message: Text
+    begin
+        CurrentSem.RESET;
+        CurrentSem.SETRANGE("Current Semester", TRUE);
+        IF CurrentSem.FIND('-') THEN BEGIN
+            Message := CurrentSem.Code;
+        END;
+    end;
+
+    procedure GetUnitName(unitCode: Text) Name: Text
+    begin
+        UnitSubjects.Reset();
+        UnitSubjects.setRange(UnitSubjects.Code, unitCode);
+        if UnitSubjects.FindFirst() then begin
+            Name := UnitSubjects.Desription;
+        end;
+        Exit(Name);
+    end;
+
+
+    procedure GetLectureName(number: Text) Name: Text
+    begin
+        EmployeeCard.Reset();
+        EmployeeCard.SetRange(EmployeeCard."No.", number);
+        if EmployeeCard.FindFirst() then begin
+            Name := EmployeeCard."First Name" + EmployeeCard."Last Name";
+        end;
+        exit(Name);
     end;
 
 
