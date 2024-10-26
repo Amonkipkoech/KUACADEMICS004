@@ -1185,12 +1185,14 @@ page 68861 "ACA-Academics Role Center"
                     RunObject = Page "Full Rotation Schedule";
                     ApplicationArea = All;
                 }
-                action("Master Rotation Plan rl")
+                action("master rotation list")
                 {
                     Image = Allocate;
                     RunObject = Page "master rotation list ";
                     ApplicationArea = All;
                 }
+
+
             }
             group(LectMan)
             {

@@ -20,7 +20,7 @@ table 40010 "Clinical rotation"
         field(3; Group; Code[50])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Rotation Group"."Group ID";
+            //TableRelation = "Rotation Group"."Group ID";
         }
 
         field(4; "Month"; Option)
@@ -60,7 +60,7 @@ table 40010 "Clinical rotation"
 
     keys
     {
-        key(PK; "Plan ID")
+        key(PK; "Plan ID", Department)
         {
             Clustered = true;
         }

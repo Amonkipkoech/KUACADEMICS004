@@ -84,6 +84,10 @@ table 40007 "Master Rotation Table"
         {
             OptionMembers = "Block One","Block Two";
         }
+        field(16; "No. Series"; code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys
@@ -93,5 +97,18 @@ table 40007 "Master Rotation Table"
             Clustered = true;
         }
     }
+    trigger OnInsert()
+    var
+        GeneralSetup: Record "ACA-General Set-Up";
+        NoSerMng: Codeunit NoSeriesManagement;
+    begin
+
+        IF "Plan ID" = '' THEN BEGIN
+            GeneralSetup.Get();
+
+            GeneralSetup.TESTFIELD(GeneralSetup."Clearance Nos");
+            NoSerMng.InitSeries(GeneralSetup."Clearance Nos", xRec."No. Series", 0D, "Plan ID", "No. Series");
+        END;
+    end;
 }
 

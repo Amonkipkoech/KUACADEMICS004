@@ -1121,6 +1121,23 @@ page 68915 "ACA-Exam Man. Role Centre"
                     ApplicationArea = All;
                 }
             }
+            group("Master Rotation")
+            {
+                Caption = 'Master Rotation';
+                Image = ResourcePlanning;
+
+                action("Roation Areas")
+                {
+                    ApplicationArea = all;
+                    RunObject = page "Rotation Areas";
+                }
+                action(" master rotation Request")
+                {
+                    ApplicationArea = all;
+                    RunObject = page "master rotation list ";
+                }
+
+            }
             group("Registration Process")
             {
 

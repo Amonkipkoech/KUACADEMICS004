@@ -28,8 +28,8 @@ page 40009 "Master Rotation Plan Card"
                 field("Start Month"; "Start Month") { ApplicationArea = All; }
                 field("End Date"; "End Date") { ApplicationArea = All; }
                 field("End Month"; "End Month") { ApplicationArea = All; }
-                field("Number of Weeks"; "Number of Weeks") { ApplicationArea = All; }
-                field("Category"; Category) { ApplicationArea = All; }
+                field("Number of Weeks"; rec."Number of Weeks") { ApplicationArea = All; }
+                field("Category"; rec.Category) { ApplicationArea = All; }
             }
 
             group("Clinical Classes")
@@ -38,6 +38,7 @@ page 40009 "Master Rotation Plan Card"
                 part("Clinical Rotation List"; "Clinical Rotation List Part")
                 {
                     ApplicationArea = All;
+                    SubPageLink = "Plan ID" = field("Plan ID");
                 }
             }
         }
