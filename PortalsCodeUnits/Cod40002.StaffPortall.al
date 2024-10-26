@@ -317,35 +317,35 @@ codeunit 40002 StaffPortall
         exit(studentCount);
     end;
 
-    // procedure UnitsToRegister(progCode: Text) Message: Text
-    // begin
-    //     unitsOnOffer.Reset();
-    //     unitsOnOffer.SetRange(unitsOnOffer.Semester, GetCurrentSem());
-    //     unitsOnOffer.SetRange(unitsOnOffer.Programs, progCode);
-    //     if unitsOnOffer.Find('-') then begin
-    //         Message += 'SUCCESS' + '::' + unitsOnOffer."Unit Base Code" + '::' + GetUnitName(unitsOnOffer."Unit Base Code") + '::' + unitsOnOffer.Campus + '::' + GetLectureName(unitsOnOffer.Lecturer) + '::' + unitsOnOffer."Lecture Hall" + '::' + unitsOnOffer.TimeSlot + '[]';
-    //     end
-    // end;
+    procedure UnitsToRegister(progCode: Text) Message: Text
+    begin
+        unitsOnOffer.Reset();
+        unitsOnOffer.SetRange(unitsOnOffer.Semester, GetCurrentSem());
+        unitsOnOffer.SetRange(unitsOnOffer.Programs, progCode);
+        if unitsOnOffer.Find('-') then begin
+            Message += 'SUCCESS' + '::' + unitsOnOffer."Unit Base Code" + '::' + GetUnitName(unitsOnOffer."Unit Base Code") + '::' + unitsOnOffer.Campus + '::' + GetLectureName(unitsOnOffer.Lecturer) + '::' + unitsOnOffer."Lecture Hall" + '::' + unitsOnOffer.TimeSlot + '[]';
+        end
+    end;
 
-    // procedure GetUnitName(unitCode: Text) Name: Text
-    // begin
-    //     UnitSubjects.Reset();
-    //     UnitSubjects.setRange(UnitSubjects.Code, unitCode);
-    //     if UnitSubjects.FindFirst() then begin
-    //         Name := UnitSubjects.Desription;
-    //     end;
-    //     Exit(Name);
-    // end;
+    procedure GetUnitName(unitCode: Text) Name: Text
+    begin
+        UnitSubjects.Reset();
+        UnitSubjects.setRange(UnitSubjects.Code, unitCode);
+        if UnitSubjects.FindFirst() then begin
+            Name := UnitSubjects.Desription;
+        end;
+        Exit(Name);
+    end;
 
-    // procedure GetLectureName(number: Text) Name: Text
-    // begin
-    //     EmployeeCard.Reset();
-    //     EmployeeCard.SetRange(EmployeeCard."No.", number);
-    //     if EmployeeCard.FindFirst() then begin
-    //         Name := EmployeeCard."First Name" + EmployeeCard."Last Name";
-    //     end;
-    //     exit(Name);
-    // end;
+    procedure GetLectureName(number: Text) Name: Text
+    begin
+        EmployeeCard.Reset();
+        EmployeeCard.SetRange(EmployeeCard."No.", number);
+        if EmployeeCard.FindFirst() then begin
+            Name := EmployeeCard."First Name" + EmployeeCard."Last Name";
+        end;
+        exit(Name);
+    end;
 
 
     procedure CheckStaffLoginForUnchangedPass(Username: Code[20]; password: Text[50]) ReturnMsg: Text[200];

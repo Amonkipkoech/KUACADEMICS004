@@ -1167,24 +1167,24 @@ page 68861 "ACA-Academics Role Center"
             {
                 Caption = 'Master Rotation Plan';
                 Image = ResourcePlanning;
-                action("Students on Session")
-                {
-                    Image = Allocate;
-                    RunObject = Page "Student Session Registration";
-                    ApplicationArea = All;
-                }
-                action("Rotation Areas")
-                {
-                    Image = Allocate;
-                    RunObject = Page "Rotation Areas";
-                    ApplicationArea = All;
-                }
-                action("Rotation Schedule")
-                {
-                    Image = Allocate;
-                    RunObject = Page "Full Rotation Schedule";
-                    ApplicationArea = All;
-                }
+                // action("Students on Session")
+                // {
+                //     Image = Allocate;
+                //     RunObject = Page "Student Session Registration";
+                //     ApplicationArea = All;
+                // }
+                // action("Rotation Areas")
+                // {
+                //     Image = Allocate;
+                //     RunObject = Page "Rotation Areas";
+                //     ApplicationArea = All;
+                // }
+                // action("Rotation Schedule")
+                // {
+                //     Image = Allocate;
+                //     RunObject = Page "Full Rotation Schedule";
+                //     ApplicationArea = All;
+                // }
             }
             group(LectMan)
             {
