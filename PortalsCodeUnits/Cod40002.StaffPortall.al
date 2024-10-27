@@ -169,6 +169,7 @@ codeunit 40002 StaffPortall
         group: Record "GroupAssignments";
         unitsOnOffer: Record "ACA-Units Offered";
         masterRotation2: Record "Master Rotation Table";
+        clinicals: Record "Clinical rotation";
 
     // Staff Portal Functions
     procedure CheckStaffLogin(username: Code[20]; userpassword: Text[50]) ReturnMsg: Text[200];
@@ -338,6 +339,36 @@ codeunit 40002 StaffPortall
         end;
 
         exit(Message);
+    end;
+
+    procedure InsertActivity(groupId: Text; block: Text; startDate: Date; endDate: Date; department: Text; Areas: Text; AssessStart: Date; AssessEnd: Date) Message: Text
+    var
+        Id: Text;
+    begin
+        Id := NoSeriesMgt.GetNextNo('ACTVID', 0D, TRUE);
+        clinicals.Reset();
+        clinicals.setRange(clinicals.Group, groupId);
+        clinicals.setRange(clinicals.Areas, Areas);
+        if clinicals.FindFirst() then begin
+            Message := 'The Group Is already assigned to that area';
+        end else begin
+            clinicals."Plan ID" := Id;
+            clinicals.Group := groupId;
+            clinicals.Block := block;
+            clinicals."Starting Date" := startDate;
+            clinicals."Ending Date" := endDate;
+            clinicals.Department := department;
+            clinicals.Areas := Areas;
+            clinicals."Assessment Start Date" := AssessStart;
+            clinicals."Assessment End Date" := AssessEnd;
+            clinicals."No. Series" := 'ACTVID';
+            if clinicals.Insert() then begin
+                Message := 'SUCCESS';
+            end;
+
+        end;
+
+
     end;
 
 
