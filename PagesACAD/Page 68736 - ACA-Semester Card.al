@@ -35,6 +35,10 @@ page 68736 "ACA-Semester Card"
                 {
                     ApplicationArea = All;
                 }
+                field("Semester Fee Percentage"; rec."Semester Fee Percentage")
+                {
+                    ApplicationArea = all;
+                }
                 field("Registration Deadline"; Rec."Registration Deadline")
                 {
                     ApplicationArea = All;
@@ -90,7 +94,7 @@ page 68736 "ACA-Semester Card"
                     Caption = 'Apply For Supp Deadline';
                     ApplicationArea = All;
                 }
-                field("Evaluate Lecture";Rec."Evaluate Lecture")
+                field("Evaluate Lecture"; Rec."Evaluate Lecture")
                 {
                     ApplicationArea = All;
                 }

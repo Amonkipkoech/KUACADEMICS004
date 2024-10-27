@@ -193,11 +193,11 @@ page 68520 "ACA-Applic. Documents Verif."
                     trigger OnValidate()
                     begin
                         /*Display the age of the user*/
-                        Age := Rec.GetAge(Rec."Date Of Birth");
+                        age2 := Rec.GetAge(Rec."Date Of Birth");
 
                     end;
                 }
-                field(Age; Age)
+                field(Age; rec.Age2)
                 {
                     Editable = false;
                     ApplicationArea = All;
@@ -719,7 +719,7 @@ page 68520 "ACA-Applic. Documents Verif."
         FacultyName2: Text[200];
         NationalityName: Text[200];
         CountryOfOriginName: Text[200];
-        Age: Text[200];
+        //Age: Text[200];
         FormerSchoolName: Text[200];
         CustEntry: Record 21;
         Apps: Record "ACA-Applic. Form Header";
@@ -826,7 +826,7 @@ page 68520 "ACA-Applic. Documents Verif."
     trigger OnAfterGetCurrRecord()
     begin
         xRec := Rec;
-        Age := Rec.GetAge(Rec."Date Of Birth");
+        Age2 := Rec.GetAge(Rec."Date Of Birth");
         NationalityName := Rec.GetCountry(Rec.Nationality);
         CountryOfOriginName := Rec.GetCountry(Rec."Country of Origin");
         DegreeName1 := GetDegree1(Rec."First Degree Choice");

@@ -20,7 +20,9 @@ page 40009 "Master Rotation Plan Card"
                 field("Email"; Email) { ApplicationArea = All; }
                 field("Program Code"; "Program Code") { ApplicationArea = All; }
                 field("Program Name"; "Program Name") { ApplicationArea = All; }
+                field(Status; rec.Status) { ApplicationArea = All; }
             }
+
 
             group("Theoretical Classes")
             {
@@ -48,20 +50,24 @@ page 40009 "Master Rotation Plan Card"
     {
         area(Processing)
         {
-            // action("Send For Approval")
-            // {
-            //     trigger OnAction()
-            //     begin
-            //         rec.status := rec.status::"Pending Approval";
-            //     end;
-            // }
-            // action("Approve")
-            // {
-            //     trigger OnAction()
-            //     begin
-            //         rec.status := rec.status::Approved;
-            //     end;
-            // }
+            action("Send For Approval")
+            {
+                Caption = 'Send For Approval';
+                trigger OnAction()
+                begin
+                    rec.status := rec.status::"Pending Approval";
+                    Message('Send For Approval Successfully');
+                end;
+            }
+            action("Approve")
+            {
+                Caption = 'Approve';
+                trigger OnAction()
+                begin
+                    rec.status := rec.status::Approved;
+                    Message('Approved Successfully');
+                end;
+            }
         }
     }
 }

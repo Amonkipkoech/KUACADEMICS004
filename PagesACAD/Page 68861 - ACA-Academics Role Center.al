@@ -951,42 +951,45 @@ page 68861 "ACA-Academics Role Center"
 
                 action(Applications)
                 {
-                    Caption = 'Departmental Admission Board';
+                    Caption = 'Departmental  Approval';
                     RunObject = Page "DAB List";
                     ApplicationArea = All;
                 }
                 action(dabReject)
                 {
-                    Caption = 'DAB Rejected';
+                    Caption = 'HoD Rejected';
                     RunObject = Page "DAB Rejection List";
                     ApplicationArea = All;
                 }
 
                 action("Faculty Admission Board")
                 {
+                    Caption = 'HoS Approval';
                     ApplicationArea = All;
                     RunObject = Page "Applications FAB List";
                 }
                 action("Faculty Applications")
                 {
+
                     ApplicationArea = All;
                     RunObject = Page "ACA-FAB Applications";
                     Visible = false;
                 }
                 action("Faculty Rejections")
                 {
+                    Caption = 'HoS Rejected';
                     ApplicationArea = All;
                     RunObject = Page "FAB Rejection List";
                 }
                 action("UABC Admission Board")
                 {
-                    Caption = 'UAB Admission Board';
+                    Caption = 'Registrar Ratification';
                     ApplicationArea = All;
                     RunObject = Page "Applications UABC List";
                 }
                 action("UAB Reject")
                 {
-                    Caption = 'UAB Reject';
+                    Caption = 'Registrar Ratification';
                     ApplicationArea = All;
                     RunObject = Page "ACA-Rejected Applications List";
                 }
@@ -1004,8 +1007,9 @@ page 68861 "ACA-Academics Role Center"
                     Visible = true;
                     ApplicationArea = All;
                 }
-                action("Registration KUCCPS")
+                action("Registration ")
                 {
+                    Caption = 'Admission';
                     RunObject = Page "ACA-KUCCPS Student Reg";
                     Visible = true;
                     ApplicationArea = All;
@@ -1168,16 +1172,26 @@ page 68861 "ACA-Academics Role Center"
                     RunObject = Page "Rotation Areas";
                     ApplicationArea = All;
                 }
-                action("Rotation Schedule")
+                action("Group Assignmnets ")
                 {
                     Image = Allocate;
-                    RunObject = Page "Full Rotation Schedule";
+                    RunObject = Page "Group Assignmnets ";
+                    ApplicationArea = All;
+                }
+                action("master rotation list@")
+                {
+                    Caption = 'Pending Master Rotation ';
+                    Image = Allocate;
+                    RunObject = Page "master rotation list ";
+                    RunPageLink = Status = filter("Pending Approval");
                     ApplicationArea = All;
                 }
                 action("master rotation list")
                 {
                     Image = Allocate;
+                    Caption = 'Approved Master Rotation';
                     RunObject = Page "master rotation list ";
+                    RunPageLink = Status = filter("Approved");
                     ApplicationArea = All;
                 }
 

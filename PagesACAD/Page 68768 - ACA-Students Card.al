@@ -286,8 +286,9 @@ page 68768 "ACA-Students Card"
                 {
                     ApplicationArea = All;
                 }
-                field("VC Cleared"; Rec."VC Cleared")
+                field("Exempt"; Rec."VC Cleared")
                 {
+                    Caption = 'Exempt';
                     ApplicationArea = All;
                 }
 
