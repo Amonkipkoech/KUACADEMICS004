@@ -15,6 +15,10 @@ report 86521 "ACA-APPLICANTS Report"
             {
 
             }
+            column(Company_Name; CompanyInformation.Name)
+            {
+
+            }
             column(programName; programName)
             {
 

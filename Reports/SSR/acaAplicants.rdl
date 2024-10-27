@@ -1145,7 +1145,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>THE CATHOLIC UNIVERSITY OF EASTERN AFRICA</Value>
+                    <Value>=First(Fields!Company_Name.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Cambria</FontFamily>
                       <FontSize>16pt</FontSize>
@@ -1252,6 +1252,9 @@ End Function
       <Fields>
         <Field Name="Pic">
           <DataField>Pic</DataField>
+        </Field>
+        <Field Name="Company_Name">
+          <DataField>Company_Name</DataField>
         </Field>
         <Field Name="programName">
           <DataField>programName</DataField>

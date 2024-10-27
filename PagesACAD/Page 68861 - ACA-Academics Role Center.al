@@ -292,34 +292,27 @@ page 68861 "ACA-Academics Role Center"
                 {
                     Caption = 'Applications & General setup';
                     Image = Job;
+                    Visible = false;
                     action("Online Enquiries")
                     {
                         Image = NewOrder;
-
-
                         RunObject = Page 68292;
                         ApplicationArea = All;
+                        Visible = false;
                     }
-                    action("Online Applications")
-                    {
-                        Image = NewCustomer;
 
-
-                        //RunObject = Page 50021;
-                        ApplicationArea = All;
-                    }
                     action("Admission Applications")
                     {
                         Image = NewCustomer;
 
 
-                        RunObject = Page 50059;
+                        RunObject = Page "ACA-Applications List";
                         ApplicationArea = All;
                     }
                     action("Approved Applications")
                     {
                         Image = Archive;
-
+                        Visible = false;
                         RunObject = Page 68011;
                         ApplicationArea = All;
                     }
@@ -357,14 +350,14 @@ page 68861 "ACA-Academics Role Center"
                     action("Rejected Applications")
                     {
                         Image = Reject;
-
+                        Caption = 'Admission Board Rejected';
                         RunObject = Page 68012;
                         ApplicationArea = All;
                     }
                     action("Cancelled Applications")
                     {
                         Image = Cancel;
-
+                        Caption = 'Department Rejected';
                         RunObject = Page 68009;
                         ApplicationArea = All;
                     }
@@ -378,9 +371,8 @@ page 68861 "ACA-Academics Role Center"
                     Image = ResourcePlanning;
                     action("Admissions Summary")
                     {
-                        Caption = 'Admissions Summary';
-                        Image = Report;
 
+                        Caption = 'Applicant  Summary Report';
 
                         RunObject = Report 86663;
                         ApplicationArea = All;
@@ -390,8 +382,6 @@ page 68861 "ACA-Academics Role Center"
                     {
                         Caption = 'Admission By Program';
                         Image = Report;
-
-
                         RunObject = Report 69286;
                         ApplicationArea = All;
                         Visible = false;
@@ -403,7 +393,7 @@ page 68861 "ACA-Academics Role Center"
 
 
                         ApplicationArea = All;
-                        //  RunObject = Report 69287;
+                        // RunObject = Report 69287;
                         Visible = false;
                     }
                     action("New Applications")
@@ -449,7 +439,7 @@ page 68861 "ACA-Academics Role Center"
                     action("Direct Applications")
                     {
                         Image = Report;
-
+                        Visible = false;
 
                         RunObject = Report 51379;
                         ApplicationArea = All;
@@ -466,15 +456,14 @@ page 68861 "ACA-Academics Role Center"
                     {
                         Image = Report;
 
-
+                        Visible = false;
                         RunObject = Report 51350;
                         ApplicationArea = All;
                     }
                     action("Applicant Shortlisting (Summary)")
                     {
                         Image = Report;
-
-
+                        Visible = false;
                         RunObject = Report 51365;
                         ApplicationArea = All;
                     }
@@ -482,7 +471,7 @@ page 68861 "ACA-Academics Role Center"
                     {
                         Image = Report;
 
-
+                        Visible = false;
                         RunObject = Report 51364;
                         ApplicationArea = All;
                     }
@@ -490,7 +479,7 @@ page 68861 "ACA-Academics Role Center"
                     {
                         Image = Report;
 
-
+                        Visible = false;
                         RunObject = Report "Class Splits Reports";
                         ApplicationArea = All;
                     }
