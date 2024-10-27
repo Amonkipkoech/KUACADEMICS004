@@ -156,6 +156,8 @@ codeunit 86502 "studentportals"
         stdissues: Record studentIssues;
         AttendanceDetails: Record "Class Attendance Details";
         unitsOnOffer: Record "ACA-Units Offered";
+        clinicals: Record "Clinical rotation";
+        group: Record "GroupAssignments";
 
 
 
@@ -274,6 +276,41 @@ codeunit 86502 "studentportals"
             IF Customer.FINDFIRST THEN BEGIN
                REPORT.SAVEASPDF(51515,filename,Customer);*/
         END;
+
+    end;
+
+    procedure GetClinicalShedule(StudentNo: Text; currentSem: Text) Message: Text
+    begin
+        group.Reset();
+        group.SetRange(group.StudentNo, StudentNo);
+        group.setRange(group.Block, currentSem);
+
+        if group.Find('-') then begin
+            clinicals.Reset();
+            clinicals.SetRange(clinicals.Group, group.GroupId);
+            clinicals.SetRange(clinicals.Block, group.Block);
+            if clinicals.Find('-') then begin
+                repeat
+                    Message += 'SUCCESS' + '::' + clinicals.Group + '::' + Format(clinicals."Starting Date") + '::' + Format(clinicals."Ending Date") + '::' + clinicals.Areas + '::' + Format(clinicals."Assessment Start date") + '::' + Format(clinicals."Assessment End Date") + '[]';
+                until clinicals.Next() = 0;
+
+            end
+        end;
+
+
+    end;
+
+    procedure SeenGroup(StudentNo: Text; currentSem: Text) Message: Boolean
+    begin
+        group.Reset();
+        group.SetRange(group.StudentNo, StudentNo);
+        group.setRange(group.Block, currentSem);
+        group.setRange(group.Viewed, false);
+
+        if group.FindFirst then begin
+            Message := False;
+        end;
+        exit(Message);
 
     end;
 
