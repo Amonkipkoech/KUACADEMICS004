@@ -302,6 +302,7 @@ codeunit 86502 "studentportals"
 
     procedure SeenGroup(StudentNo: Text; currentSem: Text) Message: Boolean
     begin
+        Message := true;
         group.Reset();
         group.SetRange(group.StudentNo, StudentNo);
         group.setRange(group.Block, currentSem);
