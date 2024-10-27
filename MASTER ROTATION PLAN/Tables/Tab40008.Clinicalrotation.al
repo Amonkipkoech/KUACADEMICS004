@@ -85,6 +85,11 @@ table 40010 "Clinical rotation"
             DataClassification = ToBeClassified;
             Description = 'Is Assessment Passed';
         }
+        field(16; "Master Plan No"; Text[20])
+        {
+            DataClassification = ToBeClassified;
+            Description = 'Master Plan Number';
+        }
 
         // Add additional fields as needed
     }

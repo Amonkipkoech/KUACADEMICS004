@@ -341,7 +341,7 @@ codeunit 40002 StaffPortall
         exit(Message);
     end;
 
-    procedure InsertActivity(groupId: Text; block: Text; startDate: Date; endDate: Date; department: Text; Areas: Text; AssessStart: Date; AssessEnd: Date) Message: Text
+    procedure InsertActivity(groupId: Text; block: Text; masterNo: Text; startDate: Date; endDate: Date; department: Text; Areas: Text; AssessStart: Date; AssessEnd: Date) Message: Text
     var
         Id: Text;
     begin
@@ -361,6 +361,7 @@ codeunit 40002 StaffPortall
             clinicals.Areas := Areas;
             clinicals."Assessment Start Date" := AssessStart;
             clinicals."Assessment End Date" := AssessEnd;
+            clinicals."Master Plan No" := masterNo;
             clinicals."No. Series" := 'ACTVID';
             if clinicals.Insert() then begin
                 Message := 'SUCCESS';
