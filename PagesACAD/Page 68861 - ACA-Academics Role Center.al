@@ -1203,7 +1203,7 @@ page 68861 "ACA-Academics Role Center"
                 Image = HumanResources;
                 action(SemBatches)
                 {
-                    Caption = 'Lect. Loading Semester Batches';
+                    Caption = 'Lecturer Block/Session Batches';
                     Image = Register;
                     RunObject = Page 65210;
                     ApplicationArea = All;
@@ -1212,56 +1212,53 @@ page 68861 "ACA-Academics Role Center"
                 {
                     Caption = 'Loading Approvals';
                     Image = Registered;
-
-
-
-                    RunObject = Page 65215;
+                    RunObject = Page 68167;
                     ApplicationArea = All;
                 }
-                action(ApprovedLoad)
-                {
-                    Caption = 'Approved Loading';
-                    RunObject = Page 65227;
-                    ApplicationArea = All;
-                }
-                action(ClaimsGen)
-                {
-                    Caption = 'Lect. Claim Generation';
-                    RunObject = Page 65216;
-                    ApplicationArea = All;
-                }
-                action(LoadPendingDeptApp)
-                {
-                    Caption = 'Loading Pending Dept. Approval';
-                    Image = Registered;
+                // action(ApprovedLoad)
+                // {
+                //     Caption = 'Approved Loading';
+                //     RunObject = Page 65227;
+                //     ApplicationArea = All;
+                // }
+                // action(ClaimsGen)
+                // {
+                //     Caption = 'Lect. Claim Generation';
+                //     RunObject = Page 65216;
+                //     ApplicationArea = All;
+                // }
+                // action(LoadPendingDeptApp)
+                // {
+                //     Caption = 'Loading Pending Dept. Approval';
+                //     Image = Registered;
 
 
 
-                    RunObject = Page 65226;
-                    ApplicationArea = All;
-                }
-                action(PostedSemBatches)
-                {
-                    Caption = 'Posted Load Batches';
-                    RunObject = Page 65217;
-                    ApplicationArea = All;
-                }
-                action(LoadHist)
-                {
-                    Caption = 'Loading History';
-                    RunObject = Page 65225;
-                    ApplicationArea = All;
-                }
-                action(LoadCentralSetup)
-                {
-                    Caption = 'Loading Central Setup';
-                    Image = Registered;
+                //     RunObject = Page 65226;
+                //     ApplicationArea = All;
+                // }
+                // action(PostedSemBatches)
+                // {
+                //     Caption = 'Posted Load Batches';
+                //     RunObject = Page 65217;
+                //     ApplicationArea = All;
+                // }
+                // action(LoadHist)
+                // {
+                //     Caption = 'Loading History';
+                //     RunObject = Page 65225;
+                //     ApplicationArea = All;
+                // }
+                // action(LoadCentralSetup)
+                // {
+                //     Caption = 'Loading Central Setup';
+                //     Image = Registered;
 
 
 
-                    RunObject = Page 65204;
-                    ApplicationArea = All;
-                }
+                //     RunObject = Page 65204;
+                //     ApplicationArea = All;
+                // }
             }
             group("Part-Time Claims")
             {
