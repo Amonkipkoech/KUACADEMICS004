@@ -315,6 +315,22 @@ codeunit 86502 "studentportals"
 
     end;
 
+    procedure IsStudentExempt(StudentNo: Text) Message: Boolean
+    begin
+        Message := false;
+        Customer.Reset();
+        Customer.SetRange(Customer."No.");
+        Customer.SetRange(Customer."Customer Posting Group", 'STUDENT');
+        Customer.SetRange(Customer."Confirmed Ok", true);
+        if Customer.Find('-') then begin
+
+            Message := true;
+        end;
+        exit(Message);
+
+    end;
+
+
     procedure GetClassAttendance(studentNo: text; Sem: Text) Message: Text
     begin
         AttendanceDetails.Reset();

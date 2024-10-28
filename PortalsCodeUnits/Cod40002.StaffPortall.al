@@ -2986,9 +2986,9 @@ codeunit 40002 StaffPortall
             settlementtypes.SetRange(ModeofStudy, fablist."Mode of Study");
             settlementtypes.SetFilter(Description, '<>%1', '');
             if settlementtypes.Find('-') then begin
-                Repeat
-                    msg += settlementtypes.Code + '::' + settlementtypes.Description + ':::';
-                Until settlementtypes.Next = 0;
+                //Repeat
+                msg += settlementtypes.Code + '::' + settlementtypes.Description;
+                //Until settlementtypes.Next = 0;
             end;
         END;
     end;
