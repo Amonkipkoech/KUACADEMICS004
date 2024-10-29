@@ -158,6 +158,7 @@ codeunit 86502 "studentportals"
         unitsOnOffer: Record "ACA-Units Offered";
         clinicals: Record "Clinical rotation";
         group: Record "GroupAssignments";
+    //discontinue: Record defferedStudents;
 
 
 
@@ -353,6 +354,18 @@ codeunit 86502 "studentportals"
         end
     end;
 
+    // procedure GetTmetable(progcode:Text)Message:Text
+    // begin
+    //     unitsOnOffer.Reset();
+    //     unitsOnOffer.SetRange(unitsOnOffer.Semester, CurrentSemester());
+    //     unitsOnOffer.SetRange(unitsOnOffer.Programs, progCode);
+    // end;
+
+    procedure DiscontinueDeferment(StudentNo: Text) Message: Text
+    begin
+
+    end;
+
     procedure CurrentSemester() Message: Text
     begin
         CurrentSem.RESET;
@@ -394,7 +407,7 @@ codeunit 86502 "studentportals"
         CourseRegistration.SETRANGE(CourseRegistration."Student No.", StudentNo);
         CourseRegistration.SETRANGE(CourseRegistration.Semester, Sem);
         IF CourseRegistration.FINDFIRST THEN BEGIN
-            REPORT.SAVEASPDF(report::"Exam Card", filename, CourseRegistration);
+            REPORT.SAVEASPDF(report::"Exam Card Final", filename, CourseRegistration);
             /*
             IF CourseRegistration.FIND('-') THEN BEGIN
               REPORT.SAVEASPDF(51515,filename,CourseRegistration);
