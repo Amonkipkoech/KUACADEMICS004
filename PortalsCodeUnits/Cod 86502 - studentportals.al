@@ -158,7 +158,7 @@ codeunit 86502 "studentportals"
         unitsOnOffer: Record "ACA-Units Offered";
         clinicals: Record "Clinical rotation";
         group: Record "GroupAssignments";
-    //discontinue: Record defferedStudents;
+        discontinue: Record "defferedStudents";
 
 
 
@@ -361,8 +361,41 @@ codeunit 86502 "studentportals"
     //     unitsOnOffer.SetRange(unitsOnOffer.Programs, progCode);
     // end;
 
-    procedure DiscontinueDeferment(StudentNo: Text) Message: Text
+    procedure DiscontinueDeferment(StudentNo: Text; dept: Text; program: Text; stage: text; requestType: Option; startDate: Date; mobileNo: Text; endDate: Date; reason: Option; block: Text; ExtndedReason: Text) Message: Text
+    var
+        No: Text;
     begin
+        No := NoSeriesMgt.GetNextNo('DEF', TODAY, TRUE);
+
+        discontinue.Reset();
+        discontinue.SetRange(discontinue.studentNo, StudentNo);
+        discontinue.SetRange(discontinue.Semeter, block);
+
+        if discontinue.FindFirst() then begin
+            Message := 'You have already initiated a deferment/discontinuation for this block';
+
+        end else begin
+
+            discontinue.Department := dept;
+            discontinue.studentNo := StudentNo;
+            discontinue.studentName := GetStudentFullName(StudentNo);
+            discontinue."No. Series" := 'DEF';
+            discontinue.deffermentReason := ExtndedReason;
+            discontinue."Request No" := No;
+            discontinue."Reason for Calling off" := reason;
+            discontinue."Request Type" := requestType;
+            discontinue.Semeter := block;
+            discontinue."Deferment  Starting Date" := startDate;
+            discontinue."Deferment  End Date" := endDate;
+            discontinue.programme := program;
+            discontinue.stage := stage;
+            discontinue."Mobile No" := mobileNo;
+
+            if discontinue.Insert() then begin
+                Message := 'SUCCESS';
+            end
+
+        end;
 
     end;
 
