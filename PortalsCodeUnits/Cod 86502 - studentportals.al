@@ -322,7 +322,7 @@ codeunit 86502 "studentportals"
         Customer.Reset();
         Customer.SetRange(Customer."No.");
         Customer.SetRange(Customer."Customer Posting Group", 'STUDENT');
-        Customer.SetRange(Customer."Confirmed Ok", true);
+        Customer.SetRange(Customer."Fee Cleared", true);
         if Customer.Find('-') then begin
 
             Message := true;
