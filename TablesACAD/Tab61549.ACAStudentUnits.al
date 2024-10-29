@@ -773,7 +773,7 @@ table 61549 "ACA-Student Units"
         }
         field(20035; Lecturer; Code[30])
         {
-            CalcFormula = Lookup("ACA-Units Offered".Lecturer WHERE(Stream = field(Stream), ModeOfStudy = field(ModeOfStudy), "Unit Base Code" = FIELD(Unit), Semester = FIELD(Semester),Campus = field("Campus Code")));
+            CalcFormula = Lookup("ACA-Units Offered".Lecturer WHERE(Stream = field(Stream), ModeOfStudy = field(ModeOfStudy), "Unit Base Code" = FIELD(Unit), Semester = FIELD(Semester), Campus = field("Campus Code")));
             FieldClass = FlowField;
         }
         field(20036; Grade; Code[50])
@@ -1389,7 +1389,7 @@ table 61549 "ACA-Student Units"
         }
         field(50115; "VC Cleared"; Boolean)
         {
-            CalcFormula = lookup(Customer."VC Cleared" where("No." = field("Student No.")));
+            CalcFormula = lookup(Customer."Fee Cleared" where("No." = field("Student No.")));
             FieldClass = FlowField;
         }
         field(60166; "Balance Due"; Decimal)

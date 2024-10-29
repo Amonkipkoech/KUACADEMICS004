@@ -159,7 +159,7 @@ report 84509 "Exam Attendance Clearance"
                     //  Message('%1',cust.Balance);
 
                     //  if ((Cust."VC Cleared" = true)) or (cust.Balance <= 2000) then;
-                    if ((cust.Balance > 5000) and (cust."VC Cleared" = false)) then
+                    if ((cust.Balance > 5000) and (cust."Fee Cleared" = false)) then
                         CurrReport.Skip();
                     if ((Cust.Status = Cust.Status::Disciplinary)) then
                         CurrReport.Skip();

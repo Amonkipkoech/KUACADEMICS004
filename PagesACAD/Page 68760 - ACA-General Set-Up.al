@@ -32,8 +32,9 @@ page 68760 "ACA-General Set-Up"
                 {
                     ApplicationArea = All;
                 }
-                field("Class Allocation Nos."; Rec."Class Allocation Nos.")
+                field("Gown Issuance"; Rec."Class Allocation Nos.")
                 {
+                    Caption = 'Gown Issuance';
                     ApplicationArea = All;
                 }
                 field("Defered Account"; Rec."Defered Account")
@@ -183,6 +184,11 @@ page 68760 "ACA-General Set-Up"
                     ApplicationArea = All;
                 }
                 field("Deferral Nos."; Rec."Deferral Nos.")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Deferral Nos. field.';
+                }
+                field("Student Clearance Request"; rec."Student Clearance Request")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Deferral Nos. field.';

@@ -188,7 +188,7 @@ report 51774 "Exam Card Final"
                 IF recCustomer.GET("ACA-Course Registration"."Student No.") THEN BEGIN
                     recCustomer.CALCFIELDS(recCustomer.Balance);
                     bal := recCustomer.Balance;
-                    if recCustomer."VC Cleared" = true then
+                    if recCustomer."Fee Cleared" = true then
                         vcCleared := true;
 
 

@@ -67,7 +67,7 @@ page 40013 "fee clearance Card page"
                             cust.Reset();
                             cust.SetRange("No.", vclist.studentNo);
                             if cust.Find('-') then begin
-                                cust."VC Cleared" := true;
+                                cust."Fee Cleared"  := true;
                                 cust.Modify();
                                 vclist.Approved := true;
                                 vclist.Modify();
