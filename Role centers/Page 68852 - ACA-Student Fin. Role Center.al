@@ -492,10 +492,12 @@ page 68852 "ACA-Student Fin. Role Center"
             }
             group("VC Clerance List")
             {
+                Caption = 'Fee Exemption';
 
                 action("Vc Cleared List")
                 {
-                    RunObject = Page "Vc Cleared Batch";
+                    Caption = 'Fee Exemption list';
+                    RunObject = Page "fee clearance  list";
                     ApplicationArea = All;
                 }
             }

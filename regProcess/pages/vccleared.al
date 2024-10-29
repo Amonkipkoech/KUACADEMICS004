@@ -1,4 +1,4 @@
-page 86642 vcClearedList
+page 86642 vcClearedList2
 {
     PageType = ListPart;
     ApplicationArea = All;
@@ -41,5 +41,5 @@ page 86642 vcClearedList
 
     }
 
-    
+
 }

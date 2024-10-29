@@ -9,9 +9,13 @@ report 86521 "ACA-APPLICANTS Report"
     {
         dataitem(applicant; "ACA-Applic. Form Header")
         {
-            RequestFilterFields = "First Degree Choice", "Settlement Type";
+            RequestFilterFields = "First Degree Choice", "Settlement Type", Status;
 
             column(Pic; CompanyInformation.Picture)
+            {
+
+            }
+            column(Company_Name; CompanyInformation.Name)
             {
 
             }
@@ -30,6 +34,22 @@ report 86521 "ACA-APPLICANTS Report"
             }
             column(Gender_applicant; Gender)
             {
+            }
+            column(Academic_Year; "Academic Year")
+            {
+
+            }
+            column(Programme_Department; "Programme Department")
+            {
+
+            }
+            column(Programme_Faculty; "Programme Faculty")
+            {
+
+            }
+            column(Intake_Code; "Intake Code")
+            {
+
             }
             column(DateOfBirth_applicant; "Date Of Birth")
             {
@@ -65,6 +85,15 @@ report 86521 "ACA-APPLICANTS Report"
             {
 
             }
+            column(Age2; Age2)
+            {
+
+            }
+            column(County; County)
+            {
+
+            }
+
         }
     }
 

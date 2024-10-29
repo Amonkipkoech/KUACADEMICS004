@@ -12,7 +12,16 @@ report 51351 "Application List"
             column(FORMAT_TODAY_0_4_; FORMAT(TODAY, 0, 4))
             {
             }
-            column(COMPANYNAME; COMPANYNAME)
+            column(info_picture; info.Picture)
+            {
+            }
+            column(info_name; info.Name)
+            {
+            }
+            column(info_mail; info."E-Mail")
+            {
+            }
+            column(info_tel; info."Phone No.")
             {
             }
 #pragma warning disable AL0667
@@ -126,9 +135,18 @@ report 51351 "Application List"
     labels
     {
     }
+    trigger OnPreReport()
+    var
+        myInt: Integer;
+    begin
+        if info.Get() then begin
+            info.CalcFields(info.Picture);
+        end;
+    end;
 
     var
         LastFieldNo: Integer;
+        info: Record "Company Information";
         FooterPrinted: Boolean;
         DegreeName: Text[100];
         Programme: Record 61511;

@@ -86,6 +86,7 @@ page 40008 "master rotation list "
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Category field.', Comment = '%';
                 }
+
             }
         }
     }

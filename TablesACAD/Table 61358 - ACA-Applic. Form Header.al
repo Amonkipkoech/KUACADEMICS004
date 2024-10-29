@@ -214,6 +214,10 @@ table 61358 "ACA-Applic. Form Header"
         {
             Description = 'Stores the recomendation of the head of department';
         }
+        field(423; "Age2"; Text[200])
+        {
+            Description = 'Stores the recomendation of the head of department';
+        }
         field(44; Status; Option)
         {
             Description = 'Stores the status of the application in the database';
@@ -1193,7 +1197,7 @@ table 61358 "ACA-Applic. Form Header"
         FacultyName2: Text[100];
         NationalityName: Text[100];
         CountryOfOriginName: Text[100];
-        Age: Text[100];
+        //Age: Text[100];
         FormerSchoolName: Text[100];
         CustEntry: Record 21;
         recProgramme: Record 61511;

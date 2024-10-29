@@ -4,12 +4,12 @@ report 86520 "Students Programme Data"
     ApplicationArea = All;
     RDLCLayout = './Reports/SSR/studProgData.rdl';
     PreviewMode = PrintLayout;
-    
+
     dataset
     {
         dataitem(studentDATA; "ACA-Applic. Form Header")
         {
-            
+
             column(ApplicationNo_studentDATA; "Application No.")
             {
             }
@@ -40,33 +40,38 @@ report 86520 "Students Programme Data"
             column(AdmissionStatus_studentDATA; "Admission Status")
             {
             }
-            column(Pic;CompanyInformation.Picture)
+            column(Pic; CompanyInformation.Picture)
             {
 
             }
-            
+            column(Name; CompanyInformation.Name)
+            {
+
+            }
+
         }
     }
-    
+
     requestpage
     {
         layout
         {
-           
+
         }
-    
+
         actions
         {
-           
+
         }
     }
-     trigger OnInitReport()
+    trigger OnInitReport()
     begin
         CompanyInformation.RESET;
         IF CompanyInformation.FIND('-') THEN BEGIN
             CompanyInformation.CALCFIELDS(Picture);
         END;
     end;
+
     var
         myInt: Integer;
         CompanyInformation: Record 79;
