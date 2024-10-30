@@ -240,6 +240,17 @@ codeunit 86502 "studentportals"
         END;
     end;
 
+    procedure GetStudentStatus(StudentNo: Text) Message: Text
+    begin
+        StudentCard.Reset();
+        StudentCard.SetRange(StudentCard."No.", StudentNo);
+        if StudentCard.FINDFIRST then begin
+            Message := 'SUCCESS' + '::' + Format(StudentCard.Status);
+        end;
+        Exit(Message);
+
+    end;
+
     procedure GenerateStudentProformaInvoice2("StudentNo": Code[20]; filenameFromApp: Text)
     var
         filename: Text;
@@ -378,7 +389,7 @@ codeunit 86502 "studentportals"
 
             discontinue.Department := dept;
             discontinue.studentNo := StudentNo;
-            discontinue.studentName := GetStudentFullName(StudentNo);
+            discontinue.studentName := GetStudentName(StudentNo);
             discontinue."No. Series" := 'DEF';
             discontinue.deffermentReason := ExtndedReason;
             discontinue."Request No" := No;
@@ -786,6 +797,18 @@ codeunit 86502 "studentportals"
 
         END
     end;
+
+    procedure GetStudentName(StudentNo: Text) Message: Text
+    var
+        FullDetails: Integer;
+    begin
+        StudentCard.RESET;
+        StudentCard.SETRANGE(StudentCard."No.", StudentNo);
+        IF StudentCard.FIND('-') THEN BEGIN
+            Message := StudentCard.Name;
+        END
+    end;
+
 
 
     procedure IsStudentRegistered(StudentNo: Text; Sem: Text) Message: Text

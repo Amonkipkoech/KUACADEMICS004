@@ -202,6 +202,26 @@ codeunit 40002 StaffPortall
 
     end;
 
+    procedure GetStudentStatus(StudentNo: Text) Message: Text
+    begin
+        TblCustomer.Reset();
+        TblCustomer.SetRange(TblCustomer."No.", StudentNo);
+        if TblCustomer.FindFirst() then begin
+            Message := 'SUCCESS' + '::' + Format(TblCustomer.Status);
+        end;
+    end;
+
+    procedure SetStudentStatus(StudentNo: Text; Status: Option) Message: text
+    begin
+        TblCustomer.Reset();
+        TblCustomer.SetRange(TblCustomer."No.", StudentNo);
+        if TblCustomer.FindFirst() then begin
+            TblCustomer.Status := Status;
+            Message := 'SUCCESS';
+        end;
+        exit(Message);
+    end;
+
     procedure CreateMasterRotationPlan(Block: Text; HOD: Text; department: Text; Campus: Text; StartDate: Date; EndDate: Date; TheoryStart: Date; TheoryEnd: Date; ClinicalStart: Date; ClinicalEnd: Date; ExamStart: Date; ExamEnd: Date) Message: Text
     var
         masterNo: Text;
@@ -3126,6 +3146,8 @@ codeunit 40002 StaffPortall
             Details := true;
         END;
     end;
+
+
 
     procedure RejectDepartmentalApps(appno: code[20]; staffno: code[20]; reason: Text[250]) rejected: Boolean
     begin
