@@ -229,7 +229,7 @@ codeunit 40002 StaffPortall
         if TblCustomer.Find('-') then begin
             repeat
                 Message += 'SUCCESS' + '::' + TblCustomer."First Name" + '::' + TblCustomer."Middle Name" + '::' + TblCustomer."Last Name" + '::' + TblCustomer."No." + '::' + TblCustomer.Citizenship + '::'
-                + TblCustomer."Current Programme" + '::' + TblCustomer."Current Semester" + '::' + TblCustomer."Current Settlement Type" + '::' + Format(TblCustomer.Status) + ':::';
+                + TblCustomer."Current Programme" + '::' + TblCustomer."Current Semester" + '::' + TblCustomer."Current Settlement Type" + '::' + Format(TblCustomer.Status) + '[]';
             until TblCustomer.Next() = 0;
         end;
         exit(Message)

@@ -301,7 +301,7 @@ page 84521 "ACA-Application Form"
                     ApplicationArea = All;
                     Caption = 'Program Name';
                 }
-                field("Programme Faculty"; Rec."Programme Faculty")
+                field("Programme Faculty"; Rec."Programme School")
                 {
                     Caption = 'Programm Faculty Code';
                     ApplicationArea = All;

@@ -303,7 +303,7 @@ page 68467 "ACA-Application Form Header"
                     ApplicationArea = All;
                     Caption = 'Program Name';
                 }
-                field("Programme Faculty"; Rec."Programme Faculty")
+                field("Programme Faculty"; Rec."Programme School")
                 {
                     Caption = 'Programm School Code';
                     ApplicationArea = All;
