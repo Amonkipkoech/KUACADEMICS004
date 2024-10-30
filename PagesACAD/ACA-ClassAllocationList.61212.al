@@ -24,6 +24,7 @@ page 68417 "HRM-Class Allocation List"
                 }
                 field(Semester; Rec.Semester)
                 {
+                    Caption = 'Block/Session';
                     ApplicationArea = All;
                 }
                 field(Campus; Rec.Campus)

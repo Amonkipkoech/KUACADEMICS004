@@ -26,6 +26,7 @@ page 60010 "ELECT-Elections Header List"
                 }
                 field(Semester; Rec.Semester)
                 {
+                    Caption = 'Block/Session';
                     ApplicationArea = All;
                 }
                 field("Election Description"; Rec."Election Description")

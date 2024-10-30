@@ -61,7 +61,7 @@ report 51348 "Process JAB Admissions"
                 Applications."Mode of Study" := 'FULL TIME';
                 Applications."Responsibility Center" := 'MAIN';
                 Applications."First Choice Qualify" := TRUE;
-                Applications."Programme Level" := Applications."Programme Level"::Bachelor;
+                Applications."Programme Level" := Applications."Programme Level"::Diploma;
                 Applications."Admission Comments" := 'Admitted through the KUCCPS';
                 Applications."Knew College Thru" := 'KUCCPS';
                 Applications."First Choice Category" := Applications."First Choice Category"::Undergraduate;

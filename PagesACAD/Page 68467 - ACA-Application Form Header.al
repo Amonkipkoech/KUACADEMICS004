@@ -291,6 +291,7 @@ page 68467 "ACA-Application Form Header"
                             //programName := recProgramme.Description;
                             Rec.School1 := recProgramme."School Code";
                             FacultyName1 := Rec.GetFaculty(Rec."First Degree Choice");
+                            rec."Programme Department" := rec."Programme Department";
 
                         END;
 
@@ -304,7 +305,7 @@ page 68467 "ACA-Application Form Header"
                 }
                 field("Programme Faculty"; Rec."Programme Faculty")
                 {
-                    Caption = 'Programm Faculty Code';
+                    Caption = 'Programm School Code';
                     ApplicationArea = All;
                     Editable = false;
 
@@ -313,6 +314,13 @@ page 68467 "ACA-Application Form Header"
                 field("Faculty Name"; Rec."Faculty Name")
                 {
                     Editable = false;
+                    Caption = 'Program School Name';
+                    ApplicationArea = All;
+                }
+                field("Programme Department"; rec."Programme Department")
+                {
+                    Editable = false;
+                    Caption = 'Program Department Code ';
                     ApplicationArea = All;
                 }
                 field("First Choice Stage"; Rec."First Choice Stage")

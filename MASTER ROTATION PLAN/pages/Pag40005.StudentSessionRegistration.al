@@ -27,6 +27,7 @@ page 40005 "Student Session Registration"
                 }
                 field(Semester; Rec.Semester)
                 {
+                    Caption = 'Block/Session';
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Semester field.', Comment = '%';
                 }

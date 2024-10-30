@@ -337,7 +337,7 @@ page 84521 "ACA-Application Form"
                 field("First Choice Semester"; Rec."First Choice Semester")
                 {
                     ApplicationArea = All;
-                    Caption = 'Preffered Semester to Commence';
+                    Caption = 'Preffered Block to Commence';
 
                     trigger OnValidate()
                     begin

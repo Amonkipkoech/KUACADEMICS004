@@ -32,7 +32,7 @@ table 40003 "Rotation Group"
         }
         field(6; "Semester"; Code[20])
         {
-            Caption = 'Semester';
+            Caption = 'Block/Session';
             DataClassification = ToBeClassified;
         }
     }
