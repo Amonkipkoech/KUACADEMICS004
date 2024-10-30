@@ -222,6 +222,19 @@ codeunit 40002 StaffPortall
         exit(Message);
     end;
 
+    procedure GetStudents(filter: Option) Message: Text
+    begin
+        TblCustomer.Reset();
+        TblCustomer.setRange(TblCustomer.Status, filter);
+        if TblCustomer.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + TblCustomer."First Name" + '::' + TblCustomer."Middle Name" + '::' + TblCustomer."Last Name" + '::' + TblCustomer."No." + '::' + TblCustomer.Citizenship + '::'
+                + TblCustomer."Current Programme" + '::' + TblCustomer."Current Semester" + '::' + TblCustomer."Current Settlement Type" + '::' + Format(TblCustomer.Status) + ':::';
+            until TblCustomer.Next() = 0;
+        end;
+        exit(Message)
+    end;
+
     procedure CreateMasterRotationPlan(Block: Text; HOD: Text; department: Text; Campus: Text; StartDate: Date; EndDate: Date; TheoryStart: Date; TheoryEnd: Date; ClinicalStart: Date; ClinicalEnd: Date; ExamStart: Date; ExamEnd: Date) Message: Text
     var
         masterNo: Text;
@@ -1295,6 +1308,8 @@ codeunit 40002 StaffPortall
                 EXIT(TRUE);
         END;
     end;
+
+
 
     procedure GetApprovalStatus(DocumentNo: Text) Message: Text
     begin
