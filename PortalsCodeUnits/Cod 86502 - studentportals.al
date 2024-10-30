@@ -3892,7 +3892,7 @@ codeunit 86502 "studentportals"
             programs.SETRANGE(programs.Code, KUCCPSRaw.Prog);
             IF programs.FIND('-') THEN BEGIN
                 fablist."First Degree Choice" := programs.Code;
-                fablist."Programme Faculty" := programs.Faculty;
+                //fablist."Programme Faculty" := programs.Faculty;
                 fablist.programName := programs.Description;
                 fablist."Programme Department" := programs."Department Code";
             end;
@@ -4098,7 +4098,7 @@ codeunit 86502 "studentportals"
         programs.RESET;
         programs.SETRANGE(programs.Code, appliedprogram);
         IF programs.FIND('-') THEN BEGIN
-            fablist."Programme Faculty" := programs.Faculty;
+            //fablist."Programme Faculty" := programs.Faculty;
             fablist.programName := programs.Description;
             fablist."Programme Department" := programs."Department Code";
         end;
@@ -4128,7 +4128,7 @@ codeunit 86502 "studentportals"
             programs.RESET;
             programs.SETRANGE(programs.Code, appliedprogram);
             IF programs.FIND('-') THEN begin
-                fablist."Programme Faculty" := programs.Faculty;
+                //fablist."Programme Faculty" := programs.Faculty;
                 fablist.programName := programs.Description;
                 fablist."Programme Department" := programs."Department Code";
             end;
