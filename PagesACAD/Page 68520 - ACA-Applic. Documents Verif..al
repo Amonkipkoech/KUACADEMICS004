@@ -130,7 +130,7 @@ page 68520 "ACA-Applic. Documents Verif."
                     ApplicationArea = All;
                 }
             }
-            group("Program & Semester")
+            group("Program")
             {
                 //Editable = false;
                 field("Programme Level"; Rec."Programme Level")
@@ -175,7 +175,7 @@ page 68520 "ACA-Applic. Documents Verif."
                 }
                 field("First Choice Semester"; Rec."First Choice Semester")
                 {
-                    Caption = 'Semester';
+                    Caption = 'Block/Session';
                     ApplicationArea = All;
 
                     trigger OnValidate()

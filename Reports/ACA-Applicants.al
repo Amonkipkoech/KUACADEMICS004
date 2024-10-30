@@ -2,6 +2,7 @@ report 86521 "ACA-APPLICANTS Report"
 {
     UsageCategory = Administration;
     ApplicationArea = All;
+    Caption = 'Admission Report';
     RDLCLayout = './Reports/SSR/acaAplicants.rdl';
     PreviewMode = PrintLayout;
 
@@ -9,7 +10,7 @@ report 86521 "ACA-APPLICANTS Report"
     {
         dataitem(applicant; "ACA-Applic. Form Header")
         {
-            RequestFilterFields = "First Degree Choice", "Settlement Type", Status;
+            RequestFilterFields = "First Degree Choice", "Settlement Type", Status, "Programme Department", "Programme School";
 
             column(Pic; CompanyInformation.Picture)
             {
@@ -43,7 +44,7 @@ report 86521 "ACA-APPLICANTS Report"
             {
 
             }
-            column(Programme_Faculty; "Programme Faculty")
+            column(Programme_School; "Programme School")
             {
 
             }

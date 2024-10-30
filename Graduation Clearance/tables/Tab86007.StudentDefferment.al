@@ -56,6 +56,7 @@ table 86007 defferedStudents
         }
         field(8; Semeter; Code[20])
         {
+            Caption = 'Block/Session';
             TableRelation = "ACA-Semesters";
             trigger OnValidate()
             begin

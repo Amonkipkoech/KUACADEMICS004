@@ -3877,7 +3877,7 @@ codeunit 86502 "studentportals"
             fablist."Academic Year" := AcademicYr.Code;
         end;*/
         fablist."Academic Year" := '2024/2025';
-        fablist."Programme Level" := fablist."Programme Level"::Bachelor;
+        fablist."Programme Level" := fablist."Programme Level"::Diploma;
         Semesters.Reset;
         Semesters.SetRange(Current, True);
         If semesters.Find('-') then begin

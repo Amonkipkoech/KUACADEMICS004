@@ -88,7 +88,7 @@ page 68861 "ACA-Academics Role Center"
                     {
                         Image = FixedAssetLedger;
 
-
+                        Caption = 'Block/session';
                         RunObject = Page 68744;
                         ApplicationArea = All;
                     }
@@ -628,7 +628,7 @@ page 68861 "ACA-Academics Role Center"
                     {
                         Image = ResourceSkills;
 
-
+                        Caption = 'Block/Session';
                         RunObject = Report "Provisional Transcript2";
                         ApplicationArea = All;
                     }
@@ -854,10 +854,10 @@ page 68861 "ACA-Academics Role Center"
             }
             action("Semester Setup")
             {
-                Caption = 'Semester Setup';
+
                 Image = FixedAssetLedger;
 
-
+                caption = 'Block/Session';
                 RunObject = Page 68744;
                 ApplicationArea = All;
             }

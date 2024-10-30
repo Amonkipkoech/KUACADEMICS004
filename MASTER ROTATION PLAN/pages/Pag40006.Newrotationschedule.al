@@ -38,6 +38,8 @@ page 40006 "Full Rotation Schedule"
                 }
                 field("Semester"; Rec."Semester")
                 {
+
+                    Caption = 'Block/Session';
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Semester field.';
                 }
