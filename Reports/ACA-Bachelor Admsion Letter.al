@@ -19,7 +19,7 @@ report 66679 "Bachelors Admission Letter"
             column(programName; programName)
             {
             }
-            column(Programme_Faculty; "Programme Faculty")
+            column(Programme_School; "Programme School")
             {
             }
             column(Faculty_Name; "Faculty Name")

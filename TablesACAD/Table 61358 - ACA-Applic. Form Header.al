@@ -89,7 +89,7 @@ table 61358 "ACA-Applic. Form Header"
                     progCode.TestField("Department Code");
                     progCode.TestField(Faculty);
                     "Programme Department" := progCode."Department Code";
-                    "Programme Faculty" := progCode.Faculty;
+                    "Programme School" := progCode.Faculty;
                     programName := progCode.Description;
                     "Faculty Name" := progCode."Faculty Name";
                     Rec.Modify();
@@ -694,7 +694,7 @@ table 61358 "ACA-Applic. Form Header"
         {
 
         }
-        field(123; "Programme Faculty"; code[30])
+        field(123; "Programme School"; code[30])
         {
 
         }
