@@ -89,7 +89,7 @@ table 61358 "ACA-Applic. Form Header"
                     progCode.TestField("Department Code");
                     progCode.TestField(Faculty);
                     "Programme Department" := progCode."Department Code";
-                    "Programme Faculty" := progCode.Faculty;
+                    "Programme School" := progCode.Faculty;
                     programName := progCode.Description;
                     "Faculty Name" := progCode."Faculty Name";
                     Rec.Modify();
@@ -211,6 +211,10 @@ table 61358 "ACA-Applic. Form Header"
             Description = 'Stores the time when the HOD makes the recommendation';
         }
         field(43; "Dean Recommendations"; Text[200])
+        {
+            Description = 'Stores the recomendation of the head of department';
+        }
+        field(423; "Age2"; Text[200])
         {
             Description = 'Stores the recomendation of the head of department';
         }
@@ -690,7 +694,7 @@ table 61358 "ACA-Applic. Form Header"
         {
 
         }
-        field(123; "Programme Faculty"; code[30])
+        field(123; "Programme School"; code[30])
         {
 
         }
@@ -711,7 +715,7 @@ table 61358 "ACA-Applic. Form Header"
         }
         field(50001; "Programme Level"; Option)
         {
-            OptionMembers = " ","Proffesional Course",Certificate,Diploma,Bachelor,"Post-Graduate Diploma",Masters,PHD;
+            OptionMembers = " ",Certificate,Diploma;
         }
         field(50002; "Knew Through (Other)"; Text[250])
         {
@@ -1193,7 +1197,7 @@ table 61358 "ACA-Applic. Form Header"
         FacultyName2: Text[100];
         NationalityName: Text[100];
         CountryOfOriginName: Text[100];
-        Age: Text[100];
+        //Age: Text[100];
         FormerSchoolName: Text[100];
         CustEntry: Record 21;
         recProgramme: Record 61511;

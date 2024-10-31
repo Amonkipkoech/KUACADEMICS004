@@ -454,7 +454,7 @@ page 51575 "ACA-FAB Applications"
         usersetup.SetFilter("User ID", UserId);
         // usersetup.Setfilter("Global Dimension 2 Code", Rec."Programme Department");
         if usersetup.Find('-') then begin
-            Rec.SetFilter("Programme Faculty", '=%1', usersetup."Shortcut Dimension 3 Code");
+            Rec.SetFilter("Programme School", '=%1', usersetup."Shortcut Dimension 3 Code");
         end ELSE
             error('Contact your administrator')
 

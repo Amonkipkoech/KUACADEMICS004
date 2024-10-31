@@ -1,4 +1,4 @@
-table 86639 "VcCleraedList"
+table 86639 "VcCleraedList@"
 {
     DataClassification = ToBeClassified;
 

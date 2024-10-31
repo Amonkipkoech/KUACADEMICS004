@@ -1805,7 +1805,7 @@ tableextension 70001 Customers extends Customer
             Caption = 'Student BioData Verifier Staff ID';
             TableRelation = "HRM-Employee (D)";
         }
-        field(62314; "VC Cleared"; Boolean)
+        field(62314; "Fee Cleared"; Boolean)
         {
 
         }

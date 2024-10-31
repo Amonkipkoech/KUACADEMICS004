@@ -168,6 +168,8 @@ codeunit 40002 StaffPortall
         masterRotation: Record "MasterRotationPlanTest";
         group: Record "GroupAssignments";
         unitsOnOffer: Record "ACA-Units Offered";
+        masterRotation2: Record "Master Rotation Table";
+        clinicals: Record "Clinical rotation";
 
     // Staff Portal Functions
     procedure CheckStaffLogin(username: Code[20]; userpassword: Text[50]) ReturnMsg: Text[200];
@@ -200,39 +202,106 @@ codeunit 40002 StaffPortall
 
     end;
 
+    procedure GetStudentStatus(StudentNo: Text) Message: Text
+    begin
+        TblCustomer.Reset();
+        TblCustomer.SetRange(TblCustomer."No.", StudentNo);
+        if TblCustomer.FindFirst() then begin
+            Message := 'SUCCESS' + '::' + Format(TblCustomer.Status);
+        end;
+    end;
+
+    procedure SetStudentStatus(StudentNo: Text[20]; Status: Option): Text[100]
+
+    begin
+
+        TblCustomer.Reset();
+        TblCustomer.SetRange(TblCustomer."No.", StudentNo);
+
+
+        if TblCustomer.FindFirst() then begin
+
+            TblCustomer.Status := Status;
+
+            if TblCustomer.Modify() then begin
+                exit('SUCCESS');
+
+            end;
+
+
+        end else begin
+
+            exit('STUDENT NOT FOUND');
+        end;
+    end;
+
+    procedure GetStudents(filter: Option) Message: Text
+    begin
+        TblCustomer.Reset();
+        TblCustomer.setRange(TblCustomer.Status, filter);
+        if TblCustomer.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + TblCustomer."First Name" + '::' + TblCustomer."Middle Name" + '::' + TblCustomer."Last Name" + '::' + TblCustomer."No." + '::' + TblCustomer.Nationality + '::'
+                + TblCustomer."Current Programme" + '::' + TblCustomer."Current Semester" + '::' + TblCustomer."Current Settlement Type" + '::' + Format(TblCustomer.Status) + '[]';
+            until TblCustomer.Next() = 0;
+        end;
+        exit(Message)
+    end;
+
     procedure CreateMasterRotationPlan(Block: Text; HOD: Text; department: Text; Campus: Text; StartDate: Date; EndDate: Date; TheoryStart: Date; TheoryEnd: Date; ClinicalStart: Date; ClinicalEnd: Date; ExamStart: Date; ExamEnd: Date) Message: Text
     var
         masterNo: Text;
 
     begin
         masterNo := NoSeriesMgt.GetNextNo('MAROT', 0D, TRUE);
-        masterRotation.Reset();
-        masterRotation.SetRange(masterRotation.Block, Block);
-        masterRotation.setRange(masterRotation.Department, department);
-        if masterRotation.FindFirst() then begin
+        masterRotation2.Reset();
+        masterRotation2.SetRange(masterRotation2."Block Name", Block);
+        masterRotation2.setRange(masterRotation2.Department, department);
+        if masterRotation2.FindFirst() then begin
             Message := 'You have already Created a master Rotation plan for this Block!!';
         end else begin
-            masterRotation.No_ := masterNo;
-            masterRotation.Block := Block;
-            masterRotation.Hod := HOD;
-            masterRotation.Department := department;
-            masterRotation.Campus := Campus;
-            masterRotation.StartDate := StartDate;
-            masterRotation.EndDate := EndDate;
-            masterRotation.TheoryStart := TheoryStart;
-            masterRotation.TheoryEnd := TheoryEnd;
-            masterRotation.ClinicalsStart := ClinicalStart;
-            masterRotation.ClinicalsEnd := ClinicalEnd;
-            masterRotation.ExaminationsStart := ExamStart;
-            masterRotation.ExaminationsEnd := ExamEnd;
-            if masterRotation.Insert() then begin
-                Message := 'SUCCESS' + '::' + masterRotation.No_;
+            masterRotation2."Plan ID" := masterNo;
+            masterRotation2."Block Name" := Block;
+            masterRotation2."HoD Name" := GetLecturerNames(HOD);
+            masterRotation2.Department := department;
+            masterRotation2.HOD := HOD;
+            //masterRotation.Campus := Campus;
+            masterRotation2."Start Date" := StartDate;
+            masterRotation2."End Date" := EndDate;
+            masterRotation2."Theory StartDate" := TheoryStart;
+            masterRotation2."Theory EndDate" := TheoryEnd;
+            masterRotation2."Clinical StartDate" := ClinicalStart;
+            masterRotation2."Clinical EndDate" := ClinicalEnd;
+            masterRotation2."Exams StartDate" := ExamStart;
+            masterRotation2."Exams EndDate" := ExamEnd;
+            masterRotation2."No. Series" := 'MAROT';
+            if masterRotation2.Insert() then begin
+                Message := 'SUCCESS' + '::' + masterRotation2."Plan ID";
             end;
             EXIT(Message);
 
         end;
 
 
+    end;
+
+    procedure GetLecturerNames(no: Code[20]) fullname: Text
+    begin
+        EmployeeCard.RESET;
+        EmployeeCard.SetRange("No.", no);
+        IF EmployeeCard.FIND('-') THEN begin
+            fullname := '';
+            if EmployeeCard."First Name" <> '' then
+                fullname += EmployeeCard."First Name";
+            if EmployeeCard."Middle Name" <> '' then begin
+                if fullname <> '' then begin
+                    fullname += ' ' + EmployeeCard."Middle Name";
+                end else
+                    fullname += EmployeeCard."Middle Name";
+            end;
+            if EmployeeCard."Last Name" <> '' then
+                fullname += ' ' + EmployeeCard."Last Name";
+        end;
     end;
 
     procedure CreateMasterGroups(Block: Text; StudentNo: Text; numberOfStudents: Integer; MasterRotNo: Text; Department: Text) Message: Text
@@ -242,7 +311,7 @@ codeunit 40002 StaffPortall
     begin
         // Reset the group and master rotation record sets
         group.Reset();
-        masterRotation.Reset();
+        masterRotation2.Reset();
 
         // Check if the student is already assigned to a group within the given block
         group.SetRange(group.StudentNo, StudentNo);
@@ -252,9 +321,9 @@ codeunit 40002 StaffPortall
             Message := 'Student is already assigned a group' + '::';
         end else begin
             // Find the master rotation details
-            masterRotation.SetRange(masterRotation.No_, MasterRotNo);
+            masterRotation2.SetRange(masterRotation2."Plan ID", MasterRotNo);
 
-            if masterRotation.Find('-') then begin
+            if masterRotation2.Find('-') then begin
                 // Reset the group filter and check for the latest groupId for this block
                 group.Reset();
                 group.SetRange(group.Block, Block);
@@ -281,8 +350,8 @@ codeunit 40002 StaffPortall
                 // Assign the student to the group
                 group.Block := Block;
                 group.Department := Department;
-                group.StartDate := masterRotation.StartDate;
-                group.EndDate := masterRotation.EndDate;
+                group.StartDate := masterRotation2."Start Date";
+                group.EndDate := masterRotation2."End Date";
                 group.MasterRotationNo := MasterRotNo;
                 group.GroupId := groupId;
                 group.StudentNo := StudentNo;
@@ -294,6 +363,74 @@ codeunit 40002 StaffPortall
         end;
         exit(Message);
     end;
+
+    procedure GetDistinctGroups(masterNo: Text; block: Text) Message: Text
+    var
+
+        distinctGroupIds: Dictionary of [Text, Boolean]; // To keep track of distinct GroupIds
+    begin
+        group.Reset();
+        group.SetRange(group.MasterRotationNo, masterNo);
+        group.SetRange(group.Block, block);
+
+
+        if group.FindSet() then begin
+            repeat
+                // Check if the GroupId is already in the dictionary
+                if not distinctGroupIds.ContainsKey(group.GroupId) then begin
+                    distinctGroupIds.Add(group.GroupId, true);
+                    Message += 'SUCCESS' + '::' + group.GroupId + ':::';
+                end;
+            until group.Next() = 0;
+        end;
+
+        exit(Message);
+    end;
+
+    procedure InsertActivity(groupId: Text; block: Text; masterNo: Text; startDate: Date; endDate: Date; department: Text; Areas: Text; AssessStart: Date; AssessEnd: Date) Message: Text
+    var
+        Id: Text;
+    begin
+        Id := NoSeriesMgt.GetNextNo('ACTVID', 0D, TRUE);
+        clinicals.Reset();
+        clinicals.setRange(clinicals.Group, groupId);
+        clinicals.setRange(clinicals.Areas, Areas);
+        if clinicals.FindFirst() then begin
+            Message := 'The Group Is already assigned to that area';
+        end else begin
+            clinicals."Plan ID" := Id;
+            clinicals.Group := groupId;
+            clinicals.Block := block;
+            clinicals."Starting Date" := startDate;
+            clinicals."Ending Date" := endDate;
+            clinicals.Department := department;
+            clinicals.Areas := Areas;
+            clinicals."Assessment Start Date" := AssessStart;
+            clinicals."Assessment End Date" := AssessEnd;
+            clinicals."Master Plan No" := masterNo;
+            clinicals."No. Series" := 'ACTVID';
+            if clinicals.Insert() then begin
+                Message := 'SUCCESS';
+            end;
+
+        end;
+
+
+    end;
+
+
+    // procedure GetDistinctGroups(masterNo:Text;block:Text)Message : Text
+    // begin
+    //     group.Reset();
+    //     group.SetRange(group.MasterRotationNo,masterNo);
+    //     group.SetRange(group.Block,block);
+    //     if group.Find('-') then begin
+    //         repeat
+    //         Message += 'SUCCESS'+'::'+group.GroupId;
+    //         until group.Next() = 0;
+    //     exit(Message);
+    // end;
+    // end;
 
     procedure GetNumberOfStudents(unitCode: Text): Integer //; programme: Text
     var
@@ -1184,6 +1321,8 @@ codeunit 40002 StaffPortall
                 EXIT(TRUE);
         END;
     end;
+
+
 
     procedure GetApprovalStatus(DocumentNo: Text) Message: Text
     begin
@@ -2729,7 +2868,7 @@ codeunit 40002 StaffPortall
         EmployeeCard.SETRANGE(EmployeeCard."No.", username);
         IF EmployeeCard.FIND('-') THEN BEGIN
             fablist.RESET;
-            fablist.SETRANGE(fablist."Programme Faculty", EmployeeCard."Faculty Code");
+            fablist.SETRANGE(fablist."Programme School", EmployeeCard."Faculty Code");
             fablist.SETRANGE(fablist.Status, fablist.Status::"Department Approved");
             IF fablist.FIND('-') THEN BEGIN
                 REPEAT
@@ -2895,9 +3034,9 @@ codeunit 40002 StaffPortall
             settlementtypes.SetRange(ModeofStudy, fablist."Mode of Study");
             settlementtypes.SetFilter(Description, '<>%1', '');
             if settlementtypes.Find('-') then begin
-                Repeat
-                    msg += settlementtypes.Code + '::' + settlementtypes.Description + ':::';
-                Until settlementtypes.Next = 0;
+                //Repeat
+                msg += settlementtypes.Code + '::' + settlementtypes.Description;
+                //Until settlementtypes.Next = 0;
             end;
         END;
     end;
@@ -3035,6 +3174,8 @@ codeunit 40002 StaffPortall
             Details := true;
         END;
     end;
+
+
 
     procedure RejectDepartmentalApps(appno: code[20]; staffno: code[20]; reason: Text[250]) rejected: Boolean
     begin
@@ -3203,7 +3344,7 @@ codeunit 40002 StaffPortall
         EmployeeCard.SETRANGE(EmployeeCard."No.", hod);
         IF EmployeeCard.FIND('-') THEN BEGIN
             fablist.RESET;
-            fablist.SETRANGE(fablist."Programme Faculty", EmployeeCard."Faculty Code");
+            fablist.SETRANGE(fablist."Programme School", EmployeeCard."Faculty Code");
             IF fablist.FIND('-') THEN BEGIN
                 recRef.GetTable(fablist);
                 tmpBlob.CreateOutStream(OutStr);

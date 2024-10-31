@@ -37,7 +37,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>THE CATHOLIC UNIVERSITY OF EAST AFRICA</Value>
+                    <Value>=First(Fields!Name.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Cambria</FontFamily>
                       <FontSize>14pt</FontSize>
@@ -820,7 +820,7 @@
             <DataSetName>DataSet_Result</DataSetName>
             <Top>3.4417cm</Top>
             <Left>0.43603cm</Left>
-            <Height>1.15617cm</Height>
+            <Height>1.15616cm</Height>
             <Width>28.75367cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
@@ -945,6 +945,9 @@ End Function
         </Field>
         <Field Name="Pic">
           <DataField>Pic</DataField>
+        </Field>
+        <Field Name="Name">
+          <DataField>Name</DataField>
         </Field>
       </Fields>
       <Query>

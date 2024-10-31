@@ -16,6 +16,7 @@ table 40007 "Master Rotation Table"
             DataClassification = ToBeClassified;
         }
 
+
         field(3; "Department"; Text[50])
         {
             DataClassification = ToBeClassified;
@@ -49,6 +50,7 @@ table 40007 "Master Rotation Table"
         }
 
         // Theoretical Classes
+
         field(9; "Block Name"; Text[50])
         {
             DataClassification = ToBeClassified;
@@ -84,6 +86,42 @@ table 40007 "Master Rotation Table"
         {
             OptionMembers = "Block One","Block Two";
         }
+        field(16; "No. Series"; code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(17; "Theory StartDate"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(18; "Theory EndDate"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(19; "Clinical StartDate"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(20; "Clinical EndDate"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(21; "Exams StartDate"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(22; "Exams EndDate"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(23; "HOD"; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(24; "Status"; Option)
+        {
+            OptionMembers = " ",Open,"Pending Approval",Approved;
+        }
     }
 
     keys
@@ -93,5 +131,18 @@ table 40007 "Master Rotation Table"
             Clustered = true;
         }
     }
+    trigger OnInsert()
+    var
+        GeneralSetup: Record "ACA-General Set-Up";
+        NoSerMng: Codeunit NoSeriesManagement;
+    begin
+
+        IF "Plan ID" = '' THEN BEGIN
+            GeneralSetup.Get();
+
+            GeneralSetup.TESTFIELD(GeneralSetup."Clearance Nos");
+            NoSerMng.InitSeries(GeneralSetup."Clearance Nos", xRec."No. Series", 0D, "Plan ID", "No. Series");
+        END;
+    end;
 }
 

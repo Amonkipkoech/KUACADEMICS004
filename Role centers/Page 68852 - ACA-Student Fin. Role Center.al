@@ -490,20 +490,64 @@ page 68852 "ACA-Student Fin. Role Center"
                     ApplicationArea = All;
                 }
             }
-            group("VC Clerance List")
+            group("Fee Refund")
             {
-
-                action("Vc Cleared List")
+                action("Payment Voucher")
                 {
-                    RunObject = Page "Vc Cleared Batch";
+                    Caption = 'Fee Voucher Refund';
+                    RunObject = Page "FIN-Payment Vouchers";
+                    ApplicationArea = All;
+                }
+                action("Posted Fee Refund")
+                {
+                    Caption = 'Posted Fee Refund';
+                    RunObject = Page "FIN-Posted Payment Vouch.";
+                    ApplicationArea = All;
+                }
+                action("Fee Refund Types")
+                {
+                    RunObject = Page "ACA-Scholarship Batches";
                     ApplicationArea = All;
                 }
             }
-            group("Bank Intergration")
+            group("Student Finance SetUps")
+            {
+                action("Cash Office User Template UP")
+                {
+                    Caption = 'Cash Office User Template UP';
+                    RunObject = Page "Cash Office User Template UP";
+                    ApplicationArea = All;
+                }
+                action("FIN-Payment Types")
+                {
+                    Caption = 'Refund Payment Types';
+                    RunObject = Page "FIN-Payment Types";
+                    ApplicationArea = All;
+                }
+                action("FIN-Receipts Types")
+                {
+                    Caption = 'Receipts Types';
+                    RunObject = Page "FIN-Receipts Types";
+                    ApplicationArea = All;
+                }
+            }
+            group("VC Clerance List")
+            {
+                Caption = 'Fee Exemption';
+
+                action("Vc Cleared List")
+                {
+                    Caption = 'Fee Exemption list';
+                    RunObject = Page "fee clearance  list";
+                    ApplicationArea = All;
+                }
+            }
+            group("E-Citizen Integration")
             {
                 action("Coop Bank Transactions")
                 {
                     //Caption = 'Settlement Types';
+                    Visible = false;
                     RunObject = Page coopBankIntergration;
                     ApplicationArea = All;
                 }
@@ -511,13 +555,15 @@ page 68852 "ACA-Student Fin. Role Center"
                 {
                     RunObject = page "NCBA Bank Transactions";
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 action("Equity Bank Transactions")
                 {
                     RunObject = page "Bank Intergration Transactions";
                     ApplicationArea = All;
+                    Visible = false;
                 }
-                action("Mpesa Trans")
+                action("Transactions ")
                 {
                     RunObject = Page "Confimed Mpesa Trans";
                     ApplicationArea = All;
@@ -527,6 +573,7 @@ page 68852 "ACA-Student Fin. Role Center"
             {
                 Caption = 'Approvals';
                 Image = Alerts;
+                Visible = false;
                 action("Pending My Approval")
                 {
                     Caption = 'Pending My Approval';

@@ -24,7 +24,7 @@ page 84526 "ACA-Application Fin"
                     ApplicationArea = All;
                     Editable = false;
                 }
-                field("Initiated Contact";Rec."Initiated Contact")
+                field("Initiated Contact"; Rec."Initiated Contact")
                 {
                     ApplicationArea = All;
                     Editable = false;
@@ -506,7 +506,7 @@ page 84526 "ACA-Application Fin"
         Text19076066: Label 'Personal Details';
         Text19060472: Label 'Degree Choices';
         Text19037194: Label 'Academic Background';
-        UserMgt: Codeunit 50114;
+        UserMgt: Codeunit "User Management";
         Doc_Type: Option LPO,Requisition,Imprest,"Payment Voucher";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,Admission;
         ApprovalEntries: Page "Approval Entries";

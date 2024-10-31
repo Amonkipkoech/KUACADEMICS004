@@ -146,8 +146,9 @@ page 68768 "ACA-Students Card"
                     ApplicationArea = All;
                     Caption = 'Personal Email';
                 }
-                field("University Email"; Rec."University Email")
+                field("College Mail"; Rec."University Email")
                 {
+                    Caption = 'College Mail';
                     ApplicationArea = All;
                 }
                 field("Email Password"; Rec."Email Password")
@@ -286,8 +287,9 @@ page 68768 "ACA-Students Card"
                 {
                     ApplicationArea = All;
                 }
-                field("VC Cleared"; Rec."VC Cleared")
+                field("Exempt"; Rec."Fee Cleared")
                 {
+                    Caption = 'Exempt';
                     ApplicationArea = All;
                 }
 

@@ -33,6 +33,10 @@ table 40008 GroupAssignments
         {
             Caption = 'Master Rotation Number';
         }
+        field(8; Viewed; Boolean)
+        {
+            Caption = 'Notification Viewed';
+        }
     }
     keys
     {

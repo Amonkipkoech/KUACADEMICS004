@@ -62,7 +62,7 @@ page 68756 "ACA-Course Registration 3"
                 }
                 field(Semester; Rec.Semester)
                 {
-                    Caption = 'Semester';
+                    Caption = 'Block/Session';
                     ApplicationArea = All;
                 }
                 field("Campus Code"; Rec."Campus Code")

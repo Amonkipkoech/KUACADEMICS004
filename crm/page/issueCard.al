@@ -25,6 +25,7 @@ page 52062 "Issue Card"
                 }
                 field(Semester; Rec.Semester)
                 {
+                    Caption = 'Block/Session';
                     ApplicationArea = All;
                 }
                 field(DateRaised; Rec.DateRaised)

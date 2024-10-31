@@ -32,11 +32,19 @@ table 86641 "VC cleared Batches"
         {
 
         }
+        field(6; "Clearance Batch"; Code[30])
+        {
+        }
+        field(7; "No. Series"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+
     }
 
     keys
     {
-        key(Key1; Semester, "Created By")
+        key(Key1; Semester, "Created By", "Clearance Batch")
         {
             Clustered = true;
         }
@@ -51,8 +59,17 @@ table 86641 "VC cleared Batches"
         myInt: Integer;
 
     trigger OnInsert()
+    var
+        GeneralSetup: Record "ACA-General Set-Up";
+        NoSerMng: Codeunit NoSeriesManagement;
     begin
 
+        IF "Clearance Batch" = '' THEN BEGIN
+            GeneralSetup.Get();
+
+            GeneralSetup.TESTFIELD(GeneralSetup."Fee Exempt Nos");
+            NoSerMng.InitSeries(GeneralSetup."Fee Exempt Nos", xRec."No. Series", 0D, "Clearance Batch", "No. Series");
+        END;
     end;
 
     trigger OnModify()

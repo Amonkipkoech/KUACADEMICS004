@@ -59,7 +59,7 @@ page 85526 "ACA-Admitted Students"
                 field("First Choice Semester"; Rec."First Choice Semester")
                 {
                     ApplicationArea = All;
-                    Caption = 'Semester';
+                    Caption = 'Block/Session';
 
 
                     trigger OnValidate()
@@ -302,14 +302,14 @@ page 85526 "ACA-Admitted Students"
                     RunPageLink = "Application No." = FIELD("Application No.");
                     ApplicationArea = All;
                 }
-                action("Academic Referees")
-                {
-                    Caption = 'Academic Referees';
-                    Image = CustomerContact;
-                    RunObject = Page 68468;
-                    RunPageLink = "Application No." = FIELD("Application No.");
-                    ApplicationArea = All;
-                }
+                // action("Academic Referees")
+                // {
+                //     Caption = 'Academic Referees';
+                //     Image = CustomerContact;
+                //     RunObject = Page 68468;
+                //     RunPageLink = "Application No." = FIELD("Application No.");
+                //     ApplicationArea = All;
+                // }
             }
         }
         area(processing)
@@ -480,51 +480,51 @@ page 85526 "ACA-Admitted Students"
                                 admletter.SetRange("Application No.", Rec."Application No.");
                                 Report.Run(66679, true, true, admletter);
 
-                            end else
-                                if ((Rec."Programme Level" = Rec."Programme Level"::Bachelor)) then begin
+                                // end else
+                                //     if ((Rec."Programme Level" = Rec."Programme Level"::Bachelor)) then begin
 
-                                    admletter.Reset();
-                                    admletter.SetRange("Application No.", Rec."Application No.");
-                                    Report.Run(66679, true, true, admletter);
+                                //         admletter.Reset();
+                                //         admletter.SetRange("Application No.", Rec."Application No.");
+                                //         Report.Run(66679, true, true, admletter);
 
-                                end else
-                                    if Rec."Programme Level" = Rec."Programme Level"::Masters then begin
+                                //     end else
+                                //         if Rec."Programme Level" = Rec."Programme Level"::Masters then begin
 
-                                        admletter.Reset();
-                                        admletter.SetRange("Application No.", Rec."Application No.");
-                                        Report.Run(66679, true, true, admletter);
+                                //             admletter.Reset();
+                                //             admletter.SetRange("Application No.", Rec."Application No.");
+                                //             Report.Run(66679, true, true, admletter);
 
-                                    end else
-                                        if Rec."Programme Level" = Rec."Programme Level"::PHD then begin
+                                //         end else
+                                //             if Rec."Programme Level" = Rec."Programme Level"::PHD then begin
 
-                                            admletter.Reset();
-                                            admletter.SetRange("Application No.", Rec."Application No.");
-                                            Report.Run(66679, true, true, admletter);
+                                //                 admletter.Reset();
+                                //                 admletter.SetRange("Application No.", Rec."Application No.");
+                                //                 Report.Run(66679, true, true, admletter);
 
-                                        end else
-                                            if Rec."Programme Level" = Rec."Programme Level"::"Post-Graduate Diploma" then begin
+                                //             end else
+                                //                 if Rec."Programme Level" = Rec."Programme Level"::"Post-Graduate Diploma" then begin
 
-                                                admletter.Reset();
-                                                admletter.SetRange("Application No.", Rec."Application No.");
-                                                Report.Run(66679, true, true, admletter);
+                                //                     admletter.Reset();
+                                //                     admletter.SetRange("Application No.", Rec."Application No.");
+                                //                     Report.Run(66679, true, true, admletter);
 
-                                            end else
-                                                if Rec."Programme Level" = Rec."Programme Level"::"Proffesional Course" then begin
+                                //                 end else
+                                //                     if Rec."Programme Level" = Rec."Programme Level"::"Proffesional Course" then begin
 
-                                                    admletter.Reset();
-                                                    admletter.SetRange("Application No.", Rec."Application No.");
-                                                    Report.Run(66679, true, true, admletter);
+                                //                         admletter.Reset();
+                                //                         admletter.SetRange("Application No.", Rec."Application No.");
+                                //                         Report.Run(66679, true, true, admletter);
 
-                                                end else
-                                                    if Rec."Settlement Type" = '4YR-HEF' then begin
-                                                        admletter.Reset();
-                                                        admletter.SetRange("Application No.", Rec."Application No.");
-                                                        Report.Run(66680, true, true, admletter);
-                                                    end;
+                                //                     end else
+                                //                         if Rec."Settlement Type" = '4YR-HEF' then begin
+                                //                             admletter.Reset();
+                                //                             admletter.SetRange("Application No.", Rec."Application No.");
+                                //                             Report.Run(66680, true, true, admletter);
+                                //                         end;
 
 
+                            end;
                     end;
-
                 }
             }
         }

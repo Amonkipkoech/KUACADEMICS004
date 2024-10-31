@@ -39,7 +39,7 @@ page 86637 "VC Cleared Card"
             }
             part(units; vcClearedList)
             {
-                SubPageLink = Semester = field(Semester), UserId = field("Created By");
+                SubPageLink = "Clearance batch" = field("Clearance Batch");
                 ApplicationArea = All;
             }
         }
@@ -63,7 +63,7 @@ page 86637 "VC Cleared Card"
                             cust.Reset();
                             cust.SetRange("No.", vclist.studentNo);
                             if cust.Find('-') then begin
-                                cust."VC Cleared" := true;
+                                cust."Fee Cleared" := true;
                                 cust.Modify();
                                 vclist.Approved := true;
                                 vclist.Modify();

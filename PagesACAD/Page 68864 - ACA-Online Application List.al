@@ -267,7 +267,7 @@ page 68864 "ACA-Online Application List"
         applicformHead: Record "ACA-Applic. Form Header";
         //AppSetup: Record 452;
 #pragma warning disable AL0432
-        
+
 #pragma warning restore AL0432
         SenderName: Text[100];
         SenderAddress: Text[100];
@@ -303,7 +303,7 @@ page 68864 "ACA-Online Application List"
         "Mean Grade AcquiredVisible": Boolean;
         [InDataSet]
         "Points AcquiredVisible": Boolean;
-        UserMgt: Codeunit 50114;
+        UserMgt: Codeunit "User Setup Management ACA";
         Doc_Type: Option LPO,Requisition,Imprest,"Payment Voucher";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,Admission;
         ApprovalEntries: Page "Approval Entries";

@@ -156,6 +156,9 @@ codeunit 86502 "studentportals"
         stdissues: Record studentIssues;
         AttendanceDetails: Record "Class Attendance Details";
         unitsOnOffer: Record "ACA-Units Offered";
+        clinicals: Record "Clinical rotation";
+        group: Record "GroupAssignments";
+        discontinue: Record "defferedStudents";
 
 
 
@@ -237,6 +240,17 @@ codeunit 86502 "studentportals"
         END;
     end;
 
+    procedure GetStudentStatus(StudentNo: Text) Message: Text
+    begin
+        StudentCard.Reset();
+        StudentCard.SetRange(StudentCard."No.", StudentNo);
+        if StudentCard.FINDFIRST then begin
+            Message := 'SUCCESS' + '::' + Format(StudentCard.Status);
+        end;
+        Exit(Message);
+
+    end;
+
     procedure GenerateStudentProformaInvoice2("StudentNo": Code[20]; filenameFromApp: Text)
     var
         filename: Text;
@@ -277,6 +291,58 @@ codeunit 86502 "studentportals"
 
     end;
 
+    procedure GetClinicalShedule(StudentNo: Text; currentSem: Text) Message: Text
+    begin
+        group.Reset();
+        group.SetRange(group.StudentNo, StudentNo);
+        group.setRange(group.Block, currentSem);
+
+        if group.Find('-') then begin
+            clinicals.Reset();
+            clinicals.SetRange(clinicals.Group, group.GroupId);
+            clinicals.SetRange(clinicals.Block, group.Block);
+            if clinicals.Find('-') then begin
+                repeat
+                    Message += 'SUCCESS' + '::' + clinicals.Group + '::' + Format(clinicals."Starting Date") + '::' + Format(clinicals."Ending Date") + '::' + clinicals.Areas + '::' + Format(clinicals."Assessment Start date") + '::' + Format(clinicals."Assessment End Date") + '[]';
+                until clinicals.Next() = 0;
+
+            end
+        end;
+
+
+    end;
+
+    procedure SeenGroup(StudentNo: Text; currentSem: Text) Message: Boolean
+    begin
+        Message := true;
+        group.Reset();
+        group.SetRange(group.StudentNo, StudentNo);
+        group.setRange(group.Block, currentSem);
+        group.setRange(group.Viewed, false);
+
+        if group.FindFirst then begin
+            Message := False;
+        end;
+        exit(Message);
+
+    end;
+
+    procedure IsStudentExempt(StudentNo: Text) Message: Boolean
+    begin
+        Message := false;
+        Customer.Reset();
+        Customer.SetRange(Customer."No.");
+        Customer.SetRange(Customer."Customer Posting Group", 'STUDENT');
+        Customer.SetRange(Customer."Fee Cleared", true);
+        if Customer.Find('-') then begin
+
+            Message := true;
+        end;
+        exit(Message);
+
+    end;
+
+
     procedure GetClassAttendance(studentNo: text; Sem: Text) Message: Text
     begin
         AttendanceDetails.Reset();
@@ -294,10 +360,60 @@ codeunit 86502 "studentportals"
         unitsOnOffer.SetRange(unitsOnOffer.Programs, progCode);
         if unitsOnOffer.Find('-') then begin
             repeat
+<<<<<<< HEAD
                 Message += 'SUCCESS' + '::' + unitsOnOffer."Unit Base Code" + '::' + GetUnitName(unitsOnOffer."Unit Base Code") +
                  '::' + unitsOnOffer.Campus + '::' + GetLectureName(unitsOnOffer.Lecturer) + '::' + unitsOnOffer."Lecture Hall" + '::' + unitsOnOffer.TimeSlot + '::' + unitsOnOffer.Day + '[]';
             until unitsOnOffer.Next() = 0;
+=======
+                Message += 'SUCCESS' + '::' + unitsOnOffer."Unit Base Code" + '::' + GetUnitName(unitsOnOffer."Unit Base Code") + '::' + unitsOnOffer.Campus + '::' + GetLectureName(unitsOnOffer.Lecturer) + '::' + unitsOnOffer."Lecture Hall" + '::' + unitsOnOffer.TimeSlot + '::' + unitsOnOffer.Day + '[]';
+            until unitsOnOffer.Next = 0;
+>>>>>>> origin/main
         end
+    end;
+
+    // procedure GetTmetable(progcode:Text)Message:Text
+    // begin
+    //     unitsOnOffer.Reset();
+    //     unitsOnOffer.SetRange(unitsOnOffer.Semester, CurrentSemester());
+    //     unitsOnOffer.SetRange(unitsOnOffer.Programs, progCode);
+    // end;
+
+    procedure DiscontinueDeferment(StudentNo: Text; dept: Text; program: Text; stage: text; requestType: Option; startDate: Date; mobileNo: Text; endDate: Date; reason: Option; block: Text; ExtndedReason: Text) Message: Text
+    var
+        No: Text;
+    begin
+        No := NoSeriesMgt.GetNextNo('DEF', TODAY, TRUE);
+
+        discontinue.Reset();
+        discontinue.SetRange(discontinue.studentNo, StudentNo);
+        discontinue.SetRange(discontinue.Semeter, block);
+
+        if discontinue.FindFirst() then begin
+            Message := 'You have already initiated a deferment/discontinuation for this block';
+
+        end else begin
+
+            discontinue.Department := dept;
+            discontinue.studentNo := StudentNo;
+            discontinue.studentName := GetStudentName(StudentNo);
+            discontinue."No. Series" := 'DEF';
+            discontinue.deffermentReason := ExtndedReason;
+            discontinue."Request No" := No;
+            discontinue."Reason for Calling off" := reason;
+            discontinue."Request Type" := requestType;
+            discontinue.Semeter := block;
+            discontinue."Deferment  Starting Date" := startDate;
+            discontinue."Deferment  End Date" := endDate;
+            discontinue.programme := program;
+            discontinue.stage := stage;
+            discontinue."Mobile No" := mobileNo;
+
+            if discontinue.Insert() then begin
+                Message := 'SUCCESS';
+            end
+
+        end;
+
     end;
 
     procedure CurrentSemester() Message: Text
@@ -341,7 +457,7 @@ codeunit 86502 "studentportals"
         CourseRegistration.SETRANGE(CourseRegistration."Student No.", StudentNo);
         CourseRegistration.SETRANGE(CourseRegistration.Semester, Sem);
         IF CourseRegistration.FINDFIRST THEN BEGIN
-            REPORT.SAVEASPDF(report::"Exam Card", filename, CourseRegistration);
+            REPORT.SAVEASPDF(report::"Exam Card Final", filename, CourseRegistration);
             /*
             IF CourseRegistration.FIND('-') THEN BEGIN
               REPORT.SAVEASPDF(51515,filename,CourseRegistration);
@@ -688,6 +804,18 @@ codeunit 86502 "studentportals"
         END
     end;
 
+    procedure GetStudentName(StudentNo: Text) Message: Text
+    var
+        FullDetails: Integer;
+    begin
+        StudentCard.RESET;
+        StudentCard.SETRANGE(StudentCard."No.", StudentNo);
+        IF StudentCard.FIND('-') THEN BEGIN
+            Message := StudentCard.Name;
+        END
+    end;
+
+
 
     procedure IsStudentRegistered(StudentNo: Text; Sem: Text) Message: Text
     var
@@ -898,7 +1026,7 @@ codeunit 86502 "studentportals"
         StudentUnitBaskets.SETRANGE("Student No.", studentNo);
         StudentUnitBaskets.SETRANGE(Programme, Prog);
         StudentUnitBaskets.SETRANGE(Stage, myStage);
-        StudentUnitBaskets.SETRANGE(Semester, GetCurrentSem(Prog, myStage));
+        //StudentUnitBaskets.SETRANGE(Semester, GetCurrentSem(Prog, myStage));
         IF StudentUnitBaskets.FIND('-') THEN BEGIN
             REPEAT
                 Details := Details + StudentUnitBaskets.Unit + ' ::' + StudentUnitBaskets.Description + ' :::';
@@ -3755,7 +3883,7 @@ codeunit 86502 "studentportals"
             fablist."Academic Year" := AcademicYr.Code;
         end;*/
         fablist."Academic Year" := '2024/2025';
-        fablist."Programme Level" := fablist."Programme Level"::Bachelor;
+        fablist."Programme Level" := fablist."Programme Level"::Diploma;
         Semesters.Reset;
         Semesters.SetRange(Current, True);
         If semesters.Find('-') then begin
@@ -3770,7 +3898,12 @@ codeunit 86502 "studentportals"
             programs.SETRANGE(programs.Code, KUCCPSRaw.Prog);
             IF programs.FIND('-') THEN BEGIN
                 fablist."First Degree Choice" := programs.Code;
-                fablist."Programme Faculty" := programs.Faculty;
+
+                fablist."Programme School" := programs.Faculty;
+
+
+                // fablist."Programme School" := programs.Faculty;
+
                 fablist.programName := programs.Description;
                 fablist."Programme Department" := programs."Department Code";
             end;
@@ -3976,11 +4109,14 @@ codeunit 86502 "studentportals"
         programs.RESET;
         programs.SETRANGE(programs.Code, appliedprogram);
         IF programs.FIND('-') THEN BEGIN
-            fablist."Programme Faculty" := programs.Faculty;
+
+            fablist."Programme School" := programs.Faculty;
+
             fablist.programName := programs.Description;
+
             fablist."Programme Department" := programs."Department Code";
+
         end;
-        fablist.Status := fablist.Status::Open;
         fabList.Insert;
         Message := appno;//'Application submitted successfully.';
     end;
@@ -4006,13 +4142,10 @@ codeunit 86502 "studentportals"
             programs.RESET;
             programs.SETRANGE(programs.Code, appliedprogram);
             IF programs.FIND('-') THEN begin
-                fablist."Programme Faculty" := programs.Faculty;
+                fablist."Programme School" := programs.Faculty;
                 fablist.programName := programs.Description;
                 fablist."Programme Department" := programs."Department Code";
             end;
-            fablist.returned := false;
-            fabList.Modify;
-            Message := 'Your Application has been edited successfully!!';
         end;
     end;
 

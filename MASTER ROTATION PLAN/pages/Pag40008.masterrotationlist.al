@@ -2,6 +2,7 @@ page 40008 "master rotation list "
 {
     Caption = 'master rotation list ';
     PageType = List;
+    CardPageId = "Master Rotation Plan Card";
     SourceTable = "Master Rotation Table";
 
     layout
@@ -85,6 +86,7 @@ page 40008 "master rotation list "
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Category field.', Comment = '%';
                 }
+
             }
         }
     }

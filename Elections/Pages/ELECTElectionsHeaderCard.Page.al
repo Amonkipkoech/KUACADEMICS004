@@ -19,6 +19,7 @@ page 60000 "ELECT-Elections Header Card"
                 }
                 field(Semester; Rec.Semester)
                 {
+                    Caption = 'Block/Session';
                     ApplicationArea = All;
                 }
                 field("Election Description"; Rec."Election Description")
