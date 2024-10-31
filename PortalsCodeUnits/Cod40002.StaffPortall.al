@@ -211,15 +211,28 @@ codeunit 40002 StaffPortall
         end;
     end;
 
-    procedure SetStudentStatus(StudentNo: Text; Status: Option) Message: text
+    procedure SetStudentStatus(StudentNo: Text[20]; Status: Option): Text[100]
+
     begin
+
         TblCustomer.Reset();
         TblCustomer.SetRange(TblCustomer."No.", StudentNo);
+
+
         if TblCustomer.FindFirst() then begin
+
             TblCustomer.Status := Status;
-            Message := 'SUCCESS';
+
+            if TblCustomer.Modify() then begin
+                exit('SUCCESS');
+
+            end;
+
+
+        end else begin
+
+            exit('STUDENT NOT FOUND');
         end;
-        exit(Message);
     end;
 
     procedure GetStudents(filter: Option) Message: Text
@@ -228,7 +241,7 @@ codeunit 40002 StaffPortall
         TblCustomer.setRange(TblCustomer.Status, filter);
         if TblCustomer.Find('-') then begin
             repeat
-                Message += 'SUCCESS' + '::' + TblCustomer."First Name" + '::' + TblCustomer."Middle Name" + '::' + TblCustomer."Last Name" + '::' + TblCustomer."No." + '::' + TblCustomer.Citizenship + '::'
+                Message += 'SUCCESS' + '::' + TblCustomer."First Name" + '::' + TblCustomer."Middle Name" + '::' + TblCustomer."Last Name" + '::' + TblCustomer."No." + '::' + TblCustomer.Nationality + '::'
                 + TblCustomer."Current Programme" + '::' + TblCustomer."Current Semester" + '::' + TblCustomer."Current Settlement Type" + '::' + Format(TblCustomer.Status) + '[]';
             until TblCustomer.Next() = 0;
         end;
