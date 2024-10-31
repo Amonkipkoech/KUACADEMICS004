@@ -490,6 +490,47 @@ page 68852 "ACA-Student Fin. Role Center"
                     ApplicationArea = All;
                 }
             }
+            group("Fee Refund")
+            {
+                action("Payment Voucher")
+                {
+                    Caption = 'Fee Voucher Refund';
+                    RunObject = Page "FIN-Payment Vouchers";
+                    ApplicationArea = All;
+                }
+                action("Posted Fee Refund")
+                {
+                    Caption = 'Posted Fee Refund';
+                    RunObject = Page "FIN-Posted Payment Vouch.";
+                    ApplicationArea = All;
+                }
+                action("Fee Refund Types")
+                {
+                    RunObject = Page "ACA-Scholarship Batches";
+                    ApplicationArea = All;
+                }
+            }
+            group("Student Finance SetUps")
+            {
+                action("Cash Office User Template UP")
+                {
+                    Caption = 'Cash Office User Template UP';
+                    RunObject = Page "Cash Office User Template UP";
+                    ApplicationArea = All;
+                }
+                action("FIN-Payment Types")
+                {
+                    Caption = 'Refund Payment Types';
+                    RunObject = Page "FIN-Payment Types";
+                    ApplicationArea = All;
+                }
+                action("FIN-Receipts Types")
+                {
+                    Caption = 'Receipts Types';
+                    RunObject = Page "FIN-Receipts Types";
+                    ApplicationArea = All;
+                }
+            }
             group("VC Clerance List")
             {
                 Caption = 'Fee Exemption';

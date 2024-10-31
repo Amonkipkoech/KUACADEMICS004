@@ -303,7 +303,11 @@ page 68467 "ACA-Application Form Header"
                     ApplicationArea = All;
                     Caption = 'Program Name';
                 }
+<<<<<<< HEAD
                 field("Programme Faculty"; Rec."Programme School")
+=======
+                field("Programme School"; Rec."Programme School")
+>>>>>>> 0a53e0b ([add] student fee refund)
                 {
                     Caption = 'Programm School Code';
                     ApplicationArea = All;
