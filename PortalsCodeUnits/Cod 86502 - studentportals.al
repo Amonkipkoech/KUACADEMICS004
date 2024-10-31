@@ -3892,7 +3892,13 @@ codeunit 86502 "studentportals"
             programs.SETRANGE(programs.Code, KUCCPSRaw.Prog);
             IF programs.FIND('-') THEN BEGIN
                 fablist."First Degree Choice" := programs.Code;
+<<<<<<< HEAD
                 fablist."Programme School" := programs.Faculty;
+=======
+
+                fablist."Programme School" := programs.Faculty;
+
+>>>>>>> 29f45e1 ([merging])
                 fablist.programName := programs.Description;
                 fablist."Programme Department" := programs."Department Code";
             end;
@@ -4100,6 +4106,12 @@ codeunit 86502 "studentportals"
         IF programs.FIND('-') THEN BEGIN
 
             fablist."Programme School" := programs.Faculty;
+<<<<<<< HEAD
+=======
+>>>>>>> 0a53e0b([add] student fee refund)
+            fablist.programName := programs.Description;
+            fablist."Programme Department" := programs."Department Code";
+>>>>>>> 29f45e1 ([merging])
         end;
         fabList.Insert;
         Message := appno;//'Application submitted successfully.';
