@@ -542,11 +542,12 @@ page 68852 "ACA-Student Fin. Role Center"
                     ApplicationArea = All;
                 }
             }
-            group("Bank Intergration")
+            group("E-Citizen Integration")
             {
                 action("Coop Bank Transactions")
                 {
                     //Caption = 'Settlement Types';
+                    Visible = false;
                     RunObject = Page coopBankIntergration;
                     ApplicationArea = All;
                 }
@@ -554,13 +555,15 @@ page 68852 "ACA-Student Fin. Role Center"
                 {
                     RunObject = page "NCBA Bank Transactions";
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 action("Equity Bank Transactions")
                 {
                     RunObject = page "Bank Intergration Transactions";
                     ApplicationArea = All;
+                    Visible = false;
                 }
-                action("Mpesa Trans")
+                action("Transactions ")
                 {
                     RunObject = Page "Confimed Mpesa Trans";
                     ApplicationArea = All;
@@ -570,6 +573,7 @@ page 68852 "ACA-Student Fin. Role Center"
             {
                 Caption = 'Approvals';
                 Image = Alerts;
+                Visible = false;
                 action("Pending My Approval")
                 {
                     Caption = 'Pending My Approval';
