@@ -543,8 +543,8 @@ page 84521 "ACA-Application Form"
                 action("Fee Payer Information")
                 {
                     Image = Customer;
-                    RunObject = Page 69304;
-                    RunPageLink = "Application No." = FIELD("Application No.");
+                    //RunObject = Page 69304;
+                    // RunPageLink = "Application No." = FIELD("Application No.");
                     ApplicationArea = All;
                 }
 

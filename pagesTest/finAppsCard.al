@@ -549,13 +549,13 @@ page 84527 "Fin temp App"
                     RunPageLink = "Application No." = FIELD("Application No.");
                     ApplicationArea = All;
                 }
-                action("Fee Payer Information")
-                {
-                    Image = Customer;
-                    RunObject = Page 69304;
-                    RunPageLink = "Application No." = FIELD("Application No.");
-                    ApplicationArea = All;
-                }
+                // action("Fee Payer Information")
+                // {
+                //     Image = Customer;
+                //     RunObject = Page 69304;
+                //     RunPageLink = "Application No." = FIELD("Application No.");
+                //     ApplicationArea = All;
+                // }
                 // action("Upload Attachments")
                 // {
                 //     ApplicationArea = all;

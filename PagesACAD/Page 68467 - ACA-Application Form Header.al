@@ -537,13 +537,13 @@ page 68467 "ACA-Application Form Header"
                     RunPageLink = "Application No." = FIELD("Application No.");
                     ApplicationArea = All;
                 }
-                action("Fee Payer Information")
-                {
-                    Image = Customer;
-                    RunObject = Page 69304;
-                    RunPageLink = "Application No." = FIELD("Application No.");
-                    ApplicationArea = All;
-                }
+                // action("Fee Payer Information")
+                // {
+                //     Image = Customer;
+                //     RunObject = Page 69304;
+                //     RunPageLink = "Application No." = FIELD("Application No.");
+                //     ApplicationArea = All;
+                // }
                 // action("Upload Attachments")
                 // {
                 //     ApplicationArea = all;
