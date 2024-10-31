@@ -2868,11 +2868,7 @@ codeunit 40002 StaffPortall
         EmployeeCard.SETRANGE(EmployeeCard."No.", username);
         IF EmployeeCard.FIND('-') THEN BEGIN
             fablist.RESET;
-<<<<<<< HEAD
-            //fablist.SETRANGE(fablist."Programme Faculty", EmployeeCard."Faculty Code");
-=======
             fablist.SETRANGE(fablist."Programme School", EmployeeCard."Faculty Code");
->>>>>>> 0a53e0b ([add] student fee refund)
             fablist.SETRANGE(fablist.Status, fablist.Status::"Department Approved");
             IF fablist.FIND('-') THEN BEGIN
                 REPEAT
@@ -3348,11 +3344,7 @@ codeunit 40002 StaffPortall
         EmployeeCard.SETRANGE(EmployeeCard."No.", hod);
         IF EmployeeCard.FIND('-') THEN BEGIN
             fablist.RESET;
-<<<<<<< HEAD
-            //fablist.SETRANGE(fablist."Programme Faculty", EmployeeCard."Faculty Code");
-=======
             fablist.SETRANGE(fablist."Programme School", EmployeeCard."Faculty Code");
->>>>>>> 0a53e0b ([add] student fee refund)
             IF fablist.FIND('-') THEN BEGIN
                 recRef.GetTable(fablist);
                 tmpBlob.CreateOutStream(OutStr);

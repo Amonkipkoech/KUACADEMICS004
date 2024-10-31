@@ -675,7 +675,7 @@ page 68872 "Application UABC Card"
         Text19076066: Label 'Personal Details';
         Text19060472: Label 'Degree Choices';
         Text19037194: Label 'Academic Background';
-        UserMgt: Codeunit 50114;
+        UserMgt: Codeunit "User Setup Management ACA";
         Doc_Type: Option LPO,Requisition,Imprest,"Payment Voucher";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,Admission;
 

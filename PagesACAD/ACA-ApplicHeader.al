@@ -532,14 +532,14 @@ page 84521 "ACA-Application Form"
                     ApplicationArea = All;
                 }
 
-                action("Next of Kin")
-                {
+                // action("Next of Kin")
+                // {
 
-                    Image = CustomerContact;
-                    RunObject = Page 68468;
-                    RunPageLink = "Application No." = FIELD("Application No.");
-                    ApplicationArea = All;
-                }
+                //     Image = CustomerContact;
+                //     RunObject = Page 68468;
+                //     RunPageLink = "Application No." = FIELD("Application No.");
+                //     ApplicationArea = All;
+                // }
                 action("Fee Payer Information")
                 {
                     Image = Customer;
