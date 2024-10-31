@@ -181,6 +181,24 @@ codeunit 40003 StudentPortalTest
         END;
     end;
 
+    procedure CheckIsSemPosted(studentNo: Text; Semester: Text): Boolean
+    var
+        posted: Boolean;
+
+    begin
+        posted := false;
+        CourseRegistration.Reset();
+        CourseRegistration.SetRange(CourseRegistration."Student No.", studentNo);
+        CourseRegistration.SetRange(CourseRegistration.Semester, Semester);
+        CourseRegistration.SetRange(CourseRegistration.Posted, true);
+
+        If CourseRegistration.Find('-') then begin
+            posted := true;
+        end;
+        Exit(posted);
+
+    end;
+
     procedure GenerateStudentProformaInvoice("Programme Code": Text; "Stage Code": Text; filenameFromApp: Text)
     var
         filename: Text;
@@ -670,6 +688,37 @@ codeunit 40003 StudentPortalTest
         IF Stages.FIND('-') THEN BEGIN
             Message := Stages.Code;
         END
+    end;
+
+    procedure ApplyForSpecial(StudentNo: Text; AcademicYr: Text; Sem: Text; Stage: Text; prog: Text; unitCode: text; currentSem: Text; currentACyr: text) Message: Text
+    var
+        AcaSpecialExamsDetails: Record "Aca-Special Exams Details";
+    begin
+        AcaSpecialExamsDetails.Reset();
+        AcaSpecialExamsDetails.SetRange(AcaSpecialExamsDetails.Programme, prog);
+        AcaSpecialExamsDetails.SetRange(AcaSpecialExamsDetails."Student No.", StudentNo);
+        AcaSpecialExamsDetails.SetRange(AcaSpecialExamsDetails."Unit Code", unitCode);
+        if AcaSpecialExamsDetails.FindFirst() then begin
+            Message := 'You Have already submitted request for this unit';
+
+        end else begin
+            AcaSpecialExamsDetails."Academic Year" := AcademicYr;
+            AcaSpecialExamsDetails.Semester := Sem;
+            AcaSpecialExamsDetails."Student No." := StudentNo;
+            AcaSpecialExamsDetails."Unit Code" := unitCode;
+            AcaSpecialExamsDetails."Unit Description" := GetUnitName(unitCode);
+            AcaSpecialExamsDetails.Stage := Stage;
+            AcaSpecialExamsDetails."Current Academic Year" := currentACyr;
+            AcaSpecialExamsDetails."Current Semester" := currentSem;
+            AcaSpecialExamsDetails.Programme := prog;
+
+            if AcaSpecialExamsDetails.Insert() then begin
+                Message := 'SUCCESS';
+            end;
+            exit(Message);
+
+        end;
+
     end;
 
     procedure SubmitSpecialAndSupplementary(StudNo: Code[20]; LectNo: Code[20]; Marks: Decimal; AcademicYear: Code[20]; UnitCode: Code[20]) ReturnMessage: Text[250]
