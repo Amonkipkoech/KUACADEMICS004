@@ -49,6 +49,8 @@ codeunit 40003 StudentPortalTest
         centralsetup: Record "ACA-Academics Central Setups";
         campus: Record "Dimension Value";
         religions: Record "ACA-Religions";
+        xyForm: Record "ACA-XY-FORM";
+        AcaSpecialExamsDetails: Record "Aca-Special Exams Details";
 
         FILESPATH: Label 'C:\inetpub\wwwroot\KUPORTALS\StudentPortal\Downloads\';
         FILESPATH_A: Label 'C:\inetpub\wwwroot\KUPORTALS\StaffPortal\Downloads';//'C:\inetpub\wwwroot\StaffPortal\Downloads\';
@@ -679,6 +681,14 @@ codeunit 40003 StudentPortalTest
         END
     end;
 
+    procedure GetCurrentAcademicYear() Message: Text
+    begin
+        AcademicYr.RESET;
+        AcademicYr.SETRANGE(Current, TRUE);
+        IF AcademicYr.FIND('-') THEN BEGIN
+            Message := AcademicYr.Code;
+        END;
+    end;
 
     procedure GetNextSTage(orderd: Integer; Progz: Text) Message: Text
     begin
@@ -692,7 +702,7 @@ codeunit 40003 StudentPortalTest
 
     procedure ApplyForSpecial(StudentNo: Text; AcademicYr: Text; Sem: Text; Stage: Text; prog: Text; unitCode: text; currentSem: Text; currentACyr: text) Message: Text
     var
-        AcaSpecialExamsDetails: Record "Aca-Special Exams Details";
+
     begin
         AcaSpecialExamsDetails.Reset();
         AcaSpecialExamsDetails.SetRange(AcaSpecialExamsDetails.Programme, prog);
@@ -720,6 +730,70 @@ codeunit 40003 StudentPortalTest
         end;
 
     end;
+
+    procedure GetSpecialExams(StudentNo: Text; currentSem: Text; currentAcyr: Text) Message: Text
+    begin
+        AcaSpecialExamsDetails.SetRange(AcaSpecialExamsDetails."Student No.", StudentNo);
+        AcaSpecialExamsDetails.Reset();
+        AcaSpecialExamsDetails.SetRange(AcaSpecialExamsDetails."Current Academic Year", currentAcyr);
+        AcaSpecialExamsDetails.SetRange(AcaSpecialExamsDetails."Current Semester", currentSem);
+
+        if AcaSpecialExamsDetails.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + AcaSpecialExamsDetails."Unit Code" + '::' + AcaSpecialExamsDetails."Unit Description" + '::' + Format(AcaSpecialExamsDetails.Status) + '[]';
+            until AcaSpecialExamsDetails.Next() = 0;
+
+        end else begin
+            Message := 'ERROR';
+        end;
+        exit(Message);
+
+    end;
+
+    procedure FillXYForm(studentNo: Text; AcademicYr: Text; Program: Text; UnitCode: Text; date: Date; Time: Text; Duration: text; Coverage: Text) Message: Text
+    var
+        formId: Text;
+    begin
+        formId := NoSeriesMgt.GetNextNo('XYFORM', TODAY, TRUE);
+        xyForm.Reset();
+        xyForm.SetRange(xyForm.UnitCode, UnitCode);
+        xyForm.SetRange(xyForm.StudentNo, studentNo);
+        if xyForm.FindFirst() then begin
+            Message := 'You have already filled in the form!';
+        end else begin
+            xyForm.StudentNo := studentNo;
+            xyForm."Student Name" := GetStudentName(studentNo);
+            xyForm.Date := date;
+            xyForm.Duration := Duration;
+            xyForm.Coverage := Coverage;
+            xyForm.AcademicYr := AcademicYr;
+            xyForm.Program := Program;
+            xyForm.UnitCode := UnitCode;
+            xyForm."Unit Description" := GetUnitName(UnitCode);
+            xyForm."Form Id" := formId;
+
+
+            if xyForm.Insert() then begin
+                Message := 'SUCCESS';
+            end else begin
+                Message := 'Error';
+            end;
+            exit(Message);
+
+        end;
+        ;
+
+    end;
+    // procedure GetStudentName(StudentNo: Text) Message: Text
+    // var
+    //     FullDetails: Integer;
+    // begin
+    //     Customer.RESET;
+    //     Customer.SETRANGE(Customer."No.", StudentNo);
+    //     IF Customer.FIND('-') THEN BEGIN
+    //         Message := Customer.Name;
+    //     END
+    // end;
 
     procedure SubmitSpecialAndSupplementary(StudNo: Code[20]; LectNo: Code[20]; Marks: Decimal; AcademicYear: Code[20]; UnitCode: Code[20]) ReturnMessage: Text[250]
     var
