@@ -22,7 +22,7 @@ report 51345 "Provisional Admission Letter"
             {
 
             }
-            column(Programme_Faculty; "Programme Faculty")
+            column(Programme_School; "Programme School")
             {
 
             }

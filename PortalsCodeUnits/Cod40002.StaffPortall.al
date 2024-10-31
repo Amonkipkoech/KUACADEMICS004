@@ -202,6 +202,52 @@ codeunit 40002 StaffPortall
 
     end;
 
+    procedure GetStudentStatus(StudentNo: Text) Message: Text
+    begin
+        TblCustomer.Reset();
+        TblCustomer.SetRange(TblCustomer."No.", StudentNo);
+        if TblCustomer.FindFirst() then begin
+            Message := 'SUCCESS' + '::' + Format(TblCustomer.Status);
+        end;
+    end;
+
+    procedure SetStudentStatus(StudentNo: Text[20]; Status: Option): Text[100]
+
+    begin
+
+        TblCustomer.Reset();
+        TblCustomer.SetRange(TblCustomer."No.", StudentNo);
+
+
+        if TblCustomer.FindFirst() then begin
+
+            TblCustomer.Status := Status;
+
+            if TblCustomer.Modify() then begin
+                exit('SUCCESS');
+
+            end;
+
+
+        end else begin
+
+            exit('STUDENT NOT FOUND');
+        end;
+    end;
+
+    procedure GetStudents(filter: Option) Message: Text
+    begin
+        TblCustomer.Reset();
+        TblCustomer.setRange(TblCustomer.Status, filter);
+        if TblCustomer.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + TblCustomer."First Name" + '::' + TblCustomer."Middle Name" + '::' + TblCustomer."Last Name" + '::' + TblCustomer."No." + '::' + TblCustomer.Nationality + '::'
+                + TblCustomer."Current Programme" + '::' + TblCustomer."Current Semester" + '::' + TblCustomer."Current Settlement Type" + '::' + Format(TblCustomer.Status) + '[]';
+            until TblCustomer.Next() = 0;
+        end;
+        exit(Message)
+    end;
+
     procedure CreateMasterRotationPlan(Block: Text; HOD: Text; department: Text; Campus: Text; StartDate: Date; EndDate: Date; TheoryStart: Date; TheoryEnd: Date; ClinicalStart: Date; ClinicalEnd: Date; ExamStart: Date; ExamEnd: Date) Message: Text
     var
         masterNo: Text;
@@ -1275,6 +1321,8 @@ codeunit 40002 StaffPortall
                 EXIT(TRUE);
         END;
     end;
+
+
 
     procedure GetApprovalStatus(DocumentNo: Text) Message: Text
     begin
@@ -2820,7 +2868,11 @@ codeunit 40002 StaffPortall
         EmployeeCard.SETRANGE(EmployeeCard."No.", username);
         IF EmployeeCard.FIND('-') THEN BEGIN
             fablist.RESET;
-            fablist.SETRANGE(fablist."Programme Faculty", EmployeeCard."Faculty Code");
+<<<<<<< HEAD
+            //fablist.SETRANGE(fablist."Programme Faculty", EmployeeCard."Faculty Code");
+=======
+            fablist.SETRANGE(fablist."Programme School", EmployeeCard."Faculty Code");
+>>>>>>> 0a53e0b ([add] student fee refund)
             fablist.SETRANGE(fablist.Status, fablist.Status::"Department Approved");
             IF fablist.FIND('-') THEN BEGIN
                 REPEAT
@@ -3127,6 +3179,8 @@ codeunit 40002 StaffPortall
         END;
     end;
 
+
+
     procedure RejectDepartmentalApps(appno: code[20]; staffno: code[20]; reason: Text[250]) rejected: Boolean
     begin
         fablist.RESET;
@@ -3294,7 +3348,11 @@ codeunit 40002 StaffPortall
         EmployeeCard.SETRANGE(EmployeeCard."No.", hod);
         IF EmployeeCard.FIND('-') THEN BEGIN
             fablist.RESET;
-            fablist.SETRANGE(fablist."Programme Faculty", EmployeeCard."Faculty Code");
+<<<<<<< HEAD
+            //fablist.SETRANGE(fablist."Programme Faculty", EmployeeCard."Faculty Code");
+=======
+            fablist.SETRANGE(fablist."Programme School", EmployeeCard."Faculty Code");
+>>>>>>> 0a53e0b ([add] student fee refund)
             IF fablist.FIND('-') THEN BEGIN
                 recRef.GetTable(fablist);
                 tmpBlob.CreateOutStream(OutStr);

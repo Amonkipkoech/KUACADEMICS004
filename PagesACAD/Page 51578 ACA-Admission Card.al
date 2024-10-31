@@ -136,12 +136,12 @@ page 51578 "ACA-Admission Letter Card"
 
                     end;
                 }
-                field("Reporting date";Rec."Reporting date")
+                field("Reporting date"; Rec."Reporting date")
                 {
                     ApplicationArea = All;
 
                 }
-                field("Fee payable";Rec."Fee payable")
+                field("Fee payable"; Rec."Fee payable")
                 {
                     ApplicationArea = All;
                 }
@@ -180,17 +180,17 @@ page 51578 "ACA-Admission Letter Card"
 
                     end;
                 }
-                field(DegreeName1;DegreeName1)
+                field(DegreeName1; DegreeName1)
                 {
                     ApplicationArea = All;
                     Caption = 'Program Title';
                 }
-                field(DepartmentName;DepartmentName)
+                field(DepartmentName; DepartmentName)
                 {
                     ApplicationArea = All;
                     Caption = 'Department Name';
                 }
-                field(FacultyName1;FacultyName1)
+                field(FacultyName1; FacultyName1)
                 {
                     ApplicationArea = All;
                     Caption = 'Faculty Name';
@@ -579,28 +579,28 @@ page 51578 "ACA-Admission Letter Card"
                             admletter.SetRange("Application No.", Rec."Application No.");
                             Report.Run(66681, true, true, admletter);
 
-                        end else
-                            if ((Rec."Programme Level" = Rec."Programme Level"::Bachelor)) then begin
+                            // end else
+                            //     if ((Rec."Programme Level" = Rec."Programme Level"::Bachelor)) then begin
 
-                                admletter.Reset();
-                                admletter.SetRange("Application No.", Rec."Application No.");
-                                Report.Run(66679, true, true, admletter);
+                            //         admletter.Reset();
+                            //         admletter.SetRange("Application No.", Rec."Application No.");
+                            //         Report.Run(66679, true, true, admletter);
 
-                            end else
-                                if Rec."Programme Level" = Rec."Programme Level"::Masters then begin
+                            //     end else
+                            //         if Rec."Programme Level" = Rec."Programme Level"::Masters then begin
 
-                                    admletter.Reset();
-                                    admletter.SetRange("Application No.", Rec."Application No.");
-                                    Report.Run(66682, true, true, admletter);
+                            //             admletter.Reset();
+                            //             admletter.SetRange("Application No.", Rec."Application No.");
+                            //             Report.Run(66682, true, true, admletter);
 
-                                end else
-                                    if Rec."Programme Level" = Rec."Programme Level"::PHD then begin
+                            //         end else
+                            //             if Rec."Programme Level" = Rec."Programme Level"::PHD then begin
 
-                                        admletter.Reset();
-                                        admletter.SetRange("Application No.", Rec."Application No.");
-                                        Report.Run(66683, true, true, admletter);
+                            //                 admletter.Reset();
+                            //                 admletter.SetRange("Application No.", Rec."Application No.");
+                            //                 Report.Run(66683, true, true, admletter);
 
-                                    end
+                        end
                 end;
 
             }

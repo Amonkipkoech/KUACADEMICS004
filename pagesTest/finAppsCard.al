@@ -311,7 +311,7 @@ page 84527 "Fin temp App"
                     ApplicationArea = All;
                     Caption = 'Program Name';
                 }
-                field("Programme Faculty"; Rec."Programme Faculty")
+                field("Programme Faculty"; Rec."Programme School")
                 {
                     Caption = 'Programm Faculty Code';
                     ApplicationArea = All;

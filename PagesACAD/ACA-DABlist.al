@@ -59,7 +59,7 @@ page 85523 "DAB List"
                 field("First Choice Semester"; Rec."First Choice Semester")
                 {
                     ApplicationArea = All;
-                    Caption = 'Semester';
+                    Caption = 'Block';
 
 
                     trigger OnValidate()

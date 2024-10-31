@@ -8,6 +8,7 @@ table 60000 "ELECT-Elections Header"
         }
         field(2; Semester; Code[20])
         {
+            Caption = 'Block/Session';
             DataClassification = ToBeClassified;
             TableRelation = "ACA-Semesters".Code;
         }

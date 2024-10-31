@@ -19,7 +19,7 @@ report 86663 "Applicant Summary"
             {
 
             }
-            column(Application_No_;"Application No.")
+            column(Application_No_; "Application No.")
             {
 
             }
@@ -105,7 +105,7 @@ report 86663 "Applicant Summary"
             {
 
             }
-            column(Programme_Faculty; "Programme Faculty")
+            column(Programme_School; "Programme School")
             {
 
             }
@@ -121,47 +121,47 @@ report 86663 "Applicant Summary"
             {
 
             }
-            column(Index_Number;"Index Number")
+            column(Index_Number; "Index Number")
             {
 
             }
-            column(formerSchool;formerSchool)
+            column(formerSchool; formerSchool)
             {
 
             }
-            column(Date_of_Admission;"Date of Admission")
+            column(Date_of_Admission; "Date of Admission")
             {
 
             }
-            column(Date_of_Completion;"Date of Completion")
+            column(Date_of_Completion; "Date of Completion")
             {
 
             }
-            column(Year_of_Examination;"Year of Examination")
+            column(Year_of_Examination; "Year of Examination")
             {
 
             }
-            column(Examination_Body;"Examination Body")
+            column(Examination_Body; "Examination Body")
             {
 
             }
-            column(Examination;Examination)
+            column(Examination; Examination)
             {
 
             }
-            column(Mean_Grade_Acquired;"Mean Grade Acquired")
+            column(Mean_Grade_Acquired; "Mean Grade Acquired")
             {
 
             }
-            column(College_UNV_attended;"College/UNV attended")
+            column(College_UNV_attended; "College/UNV attended")
             {
 
             }
-            column(College_Unv_attend_start_date;"College/Unv attend start date")
+            column(College_Unv_attend_start_date; "College/Unv attend start date")
             {
 
             }
-            column(College_Unv_attend_final_date;"College/Unv attend final date")
+            column(College_Unv_attend_final_date; "College/Unv attend final date")
             {
 
             }
