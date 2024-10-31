@@ -302,14 +302,14 @@ page 85526 "ACA-Admitted Students"
                     RunPageLink = "Application No." = FIELD("Application No.");
                     ApplicationArea = All;
                 }
-                action("Academic Referees")
-                {
-                    Caption = 'Academic Referees';
-                    Image = CustomerContact;
-                    RunObject = Page 68468;
-                    RunPageLink = "Application No." = FIELD("Application No.");
-                    ApplicationArea = All;
-                }
+                // action("Academic Referees")
+                // {
+                //     Caption = 'Academic Referees';
+                //     Image = CustomerContact;
+                //     RunObject = Page 68468;
+                //     RunPageLink = "Application No." = FIELD("Application No.");
+                //     ApplicationArea = All;
+                // }
             }
         }
         area(processing)
