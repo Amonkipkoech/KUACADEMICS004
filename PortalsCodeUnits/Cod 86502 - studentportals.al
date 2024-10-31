@@ -1020,7 +1020,7 @@ codeunit 86502 "studentportals"
         StudentUnitBaskets.SETRANGE("Student No.", studentNo);
         StudentUnitBaskets.SETRANGE(Programme, Prog);
         StudentUnitBaskets.SETRANGE(Stage, myStage);
-        StudentUnitBaskets.SETRANGE(Semester, GetCurrentSem(Prog, myStage));
+        //StudentUnitBaskets.SETRANGE(Semester, GetCurrentSem(Prog, myStage));
         IF StudentUnitBaskets.FIND('-') THEN BEGIN
             REPEAT
                 Details := Details + StudentUnitBaskets.Unit + ' ::' + StudentUnitBaskets.Description + ' :::';
@@ -3892,11 +3892,7 @@ codeunit 86502 "studentportals"
             programs.SETRANGE(programs.Code, KUCCPSRaw.Prog);
             IF programs.FIND('-') THEN BEGIN
                 fablist."First Degree Choice" := programs.Code;
-<<<<<<< HEAD
-                //fablist."Programme Faculty" := programs.Faculty;
-=======
                 fablist."Programme School" := programs.Faculty;
->>>>>>> 0a53e0b ([add] student fee refund)
                 fablist.programName := programs.Description;
                 fablist."Programme Department" := programs."Department Code";
             end;
@@ -4102,15 +4098,9 @@ codeunit 86502 "studentportals"
         programs.RESET;
         programs.SETRANGE(programs.Code, appliedprogram);
         IF programs.FIND('-') THEN BEGIN
-<<<<<<< HEAD
-            //fablist."Programme Faculty" := programs.Faculty;
-=======
+
             fablist."Programme School" := programs.Faculty;
->>>>>>> 0a53e0b ([add] student fee refund)
-            fablist.programName := programs.Description;
-            fablist."Programme Department" := programs."Department Code";
         end;
-        fablist.Status := fablist.Status::Open;
         fabList.Insert;
         Message := appno;//'Application submitted successfully.';
     end;
@@ -4136,17 +4126,10 @@ codeunit 86502 "studentportals"
             programs.RESET;
             programs.SETRANGE(programs.Code, appliedprogram);
             IF programs.FIND('-') THEN begin
-<<<<<<< HEAD
-                //fablist."Programme Faculty" := programs.Faculty;
-=======
                 fablist."Programme School" := programs.Faculty;
->>>>>>> 0a53e0b ([add] student fee refund)
                 fablist.programName := programs.Description;
                 fablist."Programme Department" := programs."Department Code";
             end;
-            fablist.returned := false;
-            fabList.Modify;
-            Message := 'Your Application has been edited successfully!!';
         end;
     end;
 
