@@ -2352,6 +2352,21 @@ codeunit 40002 StaffPortall
         END
     end;
 
+    procedure GetLecturerUnits(lectNo: Text; semester: Text) Message: Text
+    begin
+        lecunits.Reset();
+        lecunits.SetRange(lecunits.Semester, semester);
+        lecunits.setRange(lecunits.Lecturer, lectNo);
+
+        if lecunits.FindSet() then begin
+            repeat
+                Message += lecunits.Unit + '::' + lecunits.Description + '[]';
+            until lecunits.Next() = 0;
+        end;
+
+        exit(Message);
+    end;
+
     procedure GetLecStage(lecno: Text; sem: Text; prog: Text; units: Text) Stage: Text
     begin
         lecunits.RESET;
@@ -2580,6 +2595,20 @@ codeunit 40002 StaffPortall
         IF Programme.FIND('-') THEN BEGIN
             FactName := Programme."Faculty Name";
         END
+    end;
+
+    procedure GetProgramme(unitCode: Text; lectNo: Text) Message: Text
+    begin
+        lecunits.Reset();
+        //lecunits.SetRange(lecunits.Semester, semester);
+        lecunits.SetRange(lecunits.Lecturer, lectNo);
+        lecunits.SetRange(lecunits.Unit, unitCode);
+
+        if lecunits.FindFirst() then Begin
+            Message := lecunits.Programme;
+
+        End;
+        exit(Message);
     end;
 
     procedure GetSemData(sem: Code[20]) Message: Text
@@ -4026,6 +4055,20 @@ codeunit 40002 StaffPortall
             until lecturers.Next = 0;
         end;
     end;
+
+    procedure GetLecUnits(lecno: Code[20]) msg: Text
+    begin
+        lecturers.Reset;
+        lecturers.SetRange(Lecturer, lecno);
+        lecturers.SetRange(Semester, GetCurrentSemester());
+        if lecturers.Find('-') then begin
+            repeat
+                msg += lecturers.Unit + ' ::' + GetUnitDescription(Lecturers.Unit) + ' ::' + lecturers.ModeOfStudy + ' ::' + lecturers.Stream + ' ::' + lecturers.Day + ' ::' + lecturers.TimeSlot + ' ::' + GetAllocatedLectureHall(lecturers.Lecturer, lecturers.Unit, lecturers.stream, lecturers."Campus Code", lecturers.ModeOfStudy) + ' :::';
+            until lecturers.Next = 0;
+        end;
+    end;
+
+
 
     procedure GetLecturerSemUnits(lecno: Code[20]; sem: Code[20]) msg: Text
     begin
