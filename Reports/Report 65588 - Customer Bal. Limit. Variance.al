@@ -51,6 +51,9 @@ report 65588 "Customer Bal. Limit. Variance"
             column(CompPhonenO; info."Phone No.")
             {
             }
+            column(info_name; info.Name)
+            {
+            }
             column(CompPhoneNo2; info."Phone No. 2")
             {
             }
@@ -118,9 +121,9 @@ report 65588 "Customer Bal. Limit. Variance"
 
     trigger OnInitReport()
     begin
-        // IF info.GET() THEN BEGIN
-        //  info.CALCFIELDS(Picture);
-        //  END;
+        IF info.GET() THEN BEGIN
+            info.CALCFIELDS(Picture);
+        END;
 
         CLEAR(seq);
     end;

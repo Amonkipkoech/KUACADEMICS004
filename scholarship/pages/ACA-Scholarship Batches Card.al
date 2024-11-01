@@ -35,7 +35,7 @@ page 78033 "ACA-Scholarship Batches Card"
                     ToolTip = 'Specifies the value of the Batch No. field.';
                     ApplicationArea = All;
                 }
-                field(Status;Rec.Status)
+                field(Status; Rec.Status)
                 {
                     ToolTip = 'Scholarship Status';
                     ApplicationArea = All;
@@ -81,6 +81,7 @@ page 78033 "ACA-Scholarship Batches Card"
                 {
                     ToolTip = 'Specifies the value of the Receipt Amount field.';
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field("Allocated Amount"; Rec."Allocated Amount")
                 {
@@ -92,7 +93,7 @@ page 78033 "ACA-Scholarship Batches Card"
                     ToolTip = 'Specifies the value of the No. of Students  field.';
                     ApplicationArea = All;
                 }
-                field("Receipt No";Rec."Receipt No")
+                field("Receipt No"; Rec."Receipt No")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies Receipt No';
