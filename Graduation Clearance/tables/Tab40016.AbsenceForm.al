@@ -20,17 +20,27 @@ table 40016 "Student Absence Request"
         {
             DataClassification = ToBeClassified;
             Caption = 'Admission Number';
+            TableRelation = Customer."No.";
+            trigger OnValidate()
+            var
+                CMS: Record Customer;
+            begin
+                "Student Name" := CMS.Name;
+                "Program Admitted" := CMS."Current Programme";
+
+
+            end;
         }
         field(4; "Program Admitted"; Text[100])
         {
             DataClassification = ToBeClassified;
             Caption = 'Program Admitted To';
         }
-        field(5; "Year of Study"; Integer)
-        {
-            DataClassification = ToBeClassified;
-            Caption = 'Year of Study';
-        }
+        // field(5; "Year of Study"; Integer)
+        // {
+        //     DataClassification = ToBeClassified;
+        //     Caption = 'Year of Study';
+        // }
         field(6; "Date From"; Date)
         {
             DataClassification = ToBeClassified;
@@ -99,6 +109,10 @@ table 40016 "Student Absence Request"
             DataClassification = ToBeClassified;
             Caption = 'Institute Signature Date';
         }
+        field(19; "No. Series"; Code[30])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys
@@ -108,4 +122,16 @@ table 40016 "Student Absence Request"
             Clustered = true;
         }
     }
+    trigger OnInsert()
+    var
+        GeneralSetup: Record "ACA-General Set-Up";
+        NoSerMng: Codeunit NoSeriesManagement;
+    begin
+
+        IF "Request No." = '' THEN BEGIN
+            GeneralSetup.Get();
+            GeneralSetup.TESTFIELD(GeneralSetup."Clinical request");
+            NoSerMng.InitSeries(GeneralSetup."Clinical request", xRec."No. Series", 0D, "Request No.", "No. Series");
+        END;
+    end;
 }

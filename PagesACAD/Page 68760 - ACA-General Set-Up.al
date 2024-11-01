@@ -37,6 +37,11 @@ page 68760 "ACA-General Set-Up"
                     Caption = 'Gown Issuance';
                     ApplicationArea = All;
                 }
+                field("Clinical request"; rec."Clinical request")
+                {
+                    Caption = 'Clinical request';
+                    ApplicationArea = All;
+                }
                 field("Defered Account"; Rec."Defered Account")
                 {
                     ApplicationArea = All;

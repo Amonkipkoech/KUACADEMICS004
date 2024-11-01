@@ -11,7 +11,7 @@ page 40016 "Student Absence Request Card"
         {
             group("Section 1 - To be completed by the student")
             {
-                field("Student Name"; "Student Name")
+                field("Student Name"; rec."Student Name")
                 {
                     ApplicationArea = All;
                 }
@@ -23,10 +23,10 @@ page 40016 "Student Absence Request Card"
                 {
                     ApplicationArea = All;
                 }
-                field("Year of Study"; "Year of Study")
-                {
-                    ApplicationArea = All;
-                }
+                // field("Year of Study"; "Year of Study")
+                // {
+                //     ApplicationArea = All;
+                // }
                 field("Date From"; "Date From")
                 {
                     ApplicationArea = All;

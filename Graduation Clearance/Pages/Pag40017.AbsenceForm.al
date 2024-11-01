@@ -32,11 +32,11 @@ page 40017 "Student Absence Request List"
                     ApplicationArea = All;
                     ToolTip = 'Displays the program the student is admitted to.';
                 }
-                field("Year of Study"; "Year of Study")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Displays the year of study of the student.';
-                }
+                // field("Year of Study"; "Year of Study")
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Displays the year of study of the student.';
+                // }
                 field("Date From"; "Date From")
                 {
                     ApplicationArea = All;
