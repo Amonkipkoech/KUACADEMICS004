@@ -282,7 +282,7 @@ codeunit 40003 StudentPortalTest
     begin
         Message := false;
         Customer.Reset();
-        Customer.SetRange(Customer."No.");
+        Customer.SetRange(Customer."No.", StudentNo);
         Customer.SetRange(Customer."Customer Posting Group", 'STUDENT');
         Customer.SetRange(Customer."Fee Cleared", true);
         if Customer.Find('-') then begin
@@ -292,6 +292,17 @@ codeunit 40003 StudentPortalTest
         exit(Message);
 
     end;
+
+    procedure GetFeePercentage() Message: Text
+    begin
+        CurrentSem.Reset();
+        CurrentSem.SetRange(CurrentSem."Current Semester", true);
+        if CurrentSem.FindFirst() then begin
+            Message := Format(CurrentSem."Semester Fee Percentage");
+        end;
+
+    end;
+
 
 
     procedure GetClassAttendance(studentNo: text; Sem: Text) Message: Text

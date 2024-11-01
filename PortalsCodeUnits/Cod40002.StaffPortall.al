@@ -202,6 +202,35 @@ codeunit 40002 StaffPortall
 
     end;
 
+    procedure GetStudentName(StudentNo: Text) Message: Text
+    var
+        FullDetails: Integer;
+    begin
+        TblCustomer.RESET;
+        TblCustomer.SETRANGE(TblCustomer."No.", StudentNo);
+        IF TblCustomer.FIND('-') THEN BEGIN
+            Message := TblCustomer.Name;
+        END
+    end;
+
+    procedure GetExamAttendance(unitCode: Text; lectNo: Text; semester: Text) Message: Text
+    var
+        examAttendance: Record "ACA-Exam Attendance Register";
+    begin
+        examAttendance.Reset();
+        examAttendance.SetRange(examAttendance."Lecturer No.", lectNo);
+        examAttendance.SetRange(examAttendance."Semester Code", semester);
+        examAttendance.SetRange(examAttendance."Unit Code", unitCode);
+
+        if examAttendance.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + examAttendance."Student No." + '::' + GetStudentName(examAttendance."Student No.") + '::' + Format(examAttendance."Exam Date") + '::' + examAttendance."Exam Hall ID" + '[]';
+            until examAttendance.Next() = 0;
+        end;
+        exit(Message);
+
+    end;
+
     procedure GetStudentStatus(StudentNo: Text) Message: Text
     begin
         TblCustomer.Reset();
@@ -2610,6 +2639,7 @@ codeunit 40002 StaffPortall
         End;
         exit(Message);
     end;
+
 
     procedure GetSemData(sem: Code[20]) Message: Text
     begin
