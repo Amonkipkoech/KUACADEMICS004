@@ -217,6 +217,7 @@ page 68852 "ACA-Student Fin. Role Center"
                     Image = Balance;
                     RunObject = Report "ACA-Fee Structure";
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 action("Scholarship Summary")
                 {
@@ -283,7 +284,15 @@ page 68852 "ACA-Student Fin. Role Center"
                 {
                     Caption = 'Student Statements';
                     Image = Journals;
-                    RunObject = Report 51072;
+                    RunObject = Report 51072;//"Student Fee Statement"
+                    ApplicationArea = All;
+                    Visible = false;
+                }
+                action("Final Student Statements ")
+                {
+                    Caption = 'Student Statements';
+                    Image = Journals;
+                    RunObject = Report "Student Fee Statement";
                     ApplicationArea = All;
                 }
                 action("Student Receipts")

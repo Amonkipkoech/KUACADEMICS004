@@ -1,39 +1,39 @@
-page 69304 "Fee Payer Details"
+page 40015 "Fee Payer Details"
 {
     PageType = ListPart;
     SourceTable = 69306;
-    
+
     layout
     {
         area(Content)
         {
-             repeater(___)
-             {
-                field("Fee Payer Names";Rec."Fee Payer Names")
+            repeater(___)
+            {
+                field("Fee Payer Names"; Rec."Fee Payer Names")
                 {
                     ApplicationArea = All;
-        
+
                 }
-                field("Fee Payer Mobile No";Rec."Fee Payer Mobile No")
-                {
-                    ApplicationArea = All;
-                }
-                field("Fee Payer E-mail";Rec."Fee Payer E-mail")
+                field("Fee Payer Mobile No"; Rec."Fee Payer Mobile No")
                 {
                     ApplicationArea = All;
                 }
-                field("Fee Payer R/Ship";"Fee Payer R/Ship")
+                field("Fee Payer E-mail"; Rec."Fee Payer E-mail")
                 {
-                    ApplicationArea =  All;
+                    ApplicationArea = All;
                 }
-             }
+                field("Fee Payer R/Ship"; "Fee Payer R/Ship")
+                {
+                    ApplicationArea = All;
+                }
+            }
         }
     }
-    
+
     actions
     {
-       
+
     }
-    
+
 
 }

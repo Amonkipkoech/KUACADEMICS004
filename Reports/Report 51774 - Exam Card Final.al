@@ -76,6 +76,7 @@ report 51774 "Exam Card Final"
             column(Course_Registration_Unit; Unit)
             {
             }
+
             column(Course_Registration_Student_Type; "Student Type")
             {
             }

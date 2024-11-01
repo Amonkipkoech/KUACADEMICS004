@@ -10,8 +10,8 @@ report 86612 "Student Proforma Invoice2"
         dataitem(DataItemName; "ACA-Course Registration")
 
         {
-            DataItemTableView = where(Semester = const('JAN-APR24'));
-            RequestFilterFields = "Student No.";
+
+            RequestFilterFields = "Student No.", Semester;
             CalcFields = ProgramName;
             column(Student_No_; "Student No.")
             {
@@ -47,6 +47,18 @@ report 86612 "Student Proforma Invoice2"
 
             }
             column(CompName; CompanyInformation.Name)
+            {
+
+            }
+            column(CompanyInformation; CompanyInformation.Address)
+            {
+
+            }
+            column(CompanyInformation_phone; CompanyInformation."Phone No.")
+            {
+
+            }
+            column(CompanyInformation_Fax; CompanyInformation."Fax No.")
             {
 
             }

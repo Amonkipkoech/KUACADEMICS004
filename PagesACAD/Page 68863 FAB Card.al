@@ -496,15 +496,15 @@ page 68863 "Admission FAB Card"
                     RunPageLink = "Application No." = FIELD("Application No.");
                     ApplicationArea = All;
                 }
-                action("Fee Payer Information")
-                {
-                    Image = Customer;
-                    RunObject = Page 69304;
-                    RunPageLink = "Application No." = FIELD("Application No.");
-                    ApplicationArea = All;
+                // action("Fee Payer Information")
+                // {
+                //     Image = Customer;
+                //     RunObject = Page 69304;
+                //     RunPageLink = "Application No." = FIELD("Application No.");
+                //     ApplicationArea = All;
 
 
-                }
+                // }
             }
         }
         area(processing)
