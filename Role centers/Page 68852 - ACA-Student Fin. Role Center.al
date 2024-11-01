@@ -217,6 +217,7 @@ page 68852 "ACA-Student Fin. Role Center"
                     Image = Balance;
                     RunObject = Report "ACA-Fee Structure";
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 action("Scholarship Summary")
                 {
