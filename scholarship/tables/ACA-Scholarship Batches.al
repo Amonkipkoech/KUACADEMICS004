@@ -123,6 +123,10 @@ table 78031 "ACA-Scholarship Batches"
         {
             OptionMembers = " ",Active,Inactive;
         }
+        field(18; "UnAllocated Amount"; Integer)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

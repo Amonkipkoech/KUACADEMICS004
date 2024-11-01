@@ -11,6 +11,7 @@ codeunit 40000 "Post Stud Receipt Buffer"
     var
         StudPay: Record 61536;
         Cust: Record 18;
+
         GenJnl: Record 81;
         GenSetup: Record 61534;
         GLPosting: Codeunit 12;
@@ -29,6 +30,7 @@ codeunit 40000 "Post Stud Receipt Buffer"
     var
         totalAllocated: Decimal;
         studentsAllocated: Integer;
+        totalunallocated: Decimal;
     begin
         scholarshipHeader.Find();
         scholarshipHeader.TestField("Batch No.");
@@ -44,6 +46,7 @@ codeunit 40000 "Post Stud Receipt Buffer"
         // Initialize counters
         totalAllocated := 0;
         studentsAllocated := 0;
+        totalunallocated := 0;
 
         // **Count Previous Allocations**
         receiptsBuffer.Reset();
@@ -53,7 +56,8 @@ codeunit 40000 "Post Stud Receipt Buffer"
 
         if receiptsBuffer.FindSet then
             repeat
-                totalAllocated += receiptsBuffer.Amount; // Sum previously allocated amounts
+                totalAllocated += receiptsBuffer.Amount;
+                // Sum previously allocated amounts
                 studentsAllocated += 1; // Count previously allocated students
             until receiptsBuffer.Next() = 0;
 
@@ -104,6 +108,7 @@ codeunit 40000 "Post Stud Receipt Buffer"
 
         // Update scholarship batch record with total allocation summary
         scholarshipHeader."Allocated Amount" := totalAllocated;
+        scholarshipHeader."UnAllocated Amount" := scholarshipHeader."Receipt Amount" - totalAllocated;
         scholarshipHeader."No. of Students " := studentsAllocated;
         scholarshipHeader.MODIFY;
 
