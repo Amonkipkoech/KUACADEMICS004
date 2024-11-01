@@ -105,6 +105,11 @@ page 86022 "Student Request"
             }
             group("Gown Issuance Register")
             {
+                action("Gown list")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = Page "Gown Issuance Register";
+                }
                 action("Gown Issuance")
                 {
                     ApplicationArea = Basic, Suite;
@@ -114,6 +119,15 @@ page 86022 "Student Request"
                 {
                     ApplicationArea = Basic, Suite;
                     RunObject = Page "Gown Issuance Ledger";
+                }
+            }
+            group("Clinical Absence ")
+            {
+                action("Clinical Absence Request")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = Page "Student Absence Request List";
+
                 }
             }
 

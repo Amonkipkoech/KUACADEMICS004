@@ -100,6 +100,8 @@ page 86007 "Gown Issuance Register"
             }
         }
     }
+
     var
         postgown: Codeunit "Graduation Journals";
+
 }
