@@ -5,7 +5,7 @@ page 78032 "ACA-Scholarship Allocation"
     Editable = true;
     PageType = ListPart;
     SourceTable = "ACA-Imp. Receipts Buffer";
-   // SourceTableView = WHERE(Posted = filter(false));
+    // SourceTableView = WHERE(Posted = filter(false));
 
     layout
     {
@@ -27,7 +27,7 @@ page 78032 "ACA-Scholarship Allocation"
                         cust: Record Customer;
                     begin
                         cust.Get(Rec."Student No.");
-                        Name := cust.Name;
+                        rec.Name := cust.Name;
                     end;
                 }
                 field(Date; Rec.Date)
@@ -49,7 +49,7 @@ page 78032 "ACA-Scholarship Allocation"
                 field(Posted; Rec.Posted)
                 {
                     ApplicationArea = All;
-            
+
                 }
                 field("Receipt No"; Rec."Receipt No")
                 {
@@ -87,8 +87,8 @@ page 78032 "ACA-Scholarship Allocation"
                 {
                     Caption = 'Import Receipts';
                     Image = ImportExcel;
-                    
-                    
+
+
                     ApplicationArea = All;
 
                     trigger OnAction()
@@ -116,8 +116,8 @@ page 78032 "ACA-Scholarship Allocation"
                 {
                     Caption = 'Post Receipts';
                     Image = PostBatch;
-                    
-                    
+
+
                     RunObject = Report 51526;
                     ApplicationArea = All;
                 }

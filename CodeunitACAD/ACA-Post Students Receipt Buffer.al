@@ -26,65 +26,96 @@ codeunit 40000 "Post Stud Receipt Buffer"
         receiptsBuffer: Record "ACA-Imp. Receipts Buffer";
 
     procedure PostReceiptBuffer(var scholarshipHeader: Record "ACA-Scholarship Batches")
+    var
+        totalAllocated: Decimal;
+        studentsAllocated: Integer;
     begin
-
         scholarshipHeader.Find();
         scholarshipHeader.TestField("Batch No.");
 
         GenSetup.GET();
 
-        //delete exisiting gen journal lines before re inserting
+        // Reset any existing General Journal Lines
         GenJnl.RESET;
         GenJnl.SETRANGE("Journal Template Name", 'SALES');
         GenJnl.SETRANGE("Journal Batch Name", 'STUD PAY');
         if not GenJnl.IsEmpty then GenJnl.DeleteAll();
 
-        //find receipts buffer lines
+        // Initialize counters
+        totalAllocated := 0;
+        studentsAllocated := 0;
+
+        // **Count Previous Allocations**
+        receiptsBuffer.Reset();
+        receiptsBuffer.SetRange("Transaction Code", scholarshipHeader."No.");
+        receiptsBuffer.SetRange("Batch No.", scholarshipHeader."Batch No.");
+        receiptsBuffer.SetRange(Posted, true); // Count previously posted records
+
+        if receiptsBuffer.FindSet then
+            repeat
+                totalAllocated += receiptsBuffer.Amount; // Sum previously allocated amounts
+                studentsAllocated += 1; // Count previously allocated students
+            until receiptsBuffer.Next() = 0;
+
+        // Find new receipt buffer lines to allocate
         receiptsBuffer.Reset();
         receiptsBuffer.SetRange("Transaction Code", scholarshipHeader."No.");
         receiptsBuffer.SetRange("Batch No.", scholarshipHeader."Batch No.");
         receiptsBuffer.SetRange(Posted, false);
         receiptsBuffer.SetFilter(Amount, '>%1', 0);
+
         if receiptsBuffer.Find('-') then
-                repeat
+            repeat
+                // Validate available amount
+                if (totalAllocated + receiptsBuffer.Amount) > scholarshipHeader."Receipt Amount" then
+                    Error('Insufficient funds in Receipt Amount to allocate to this student.');
 
-                    GenJnl.INIT;
-                    GenJnl."Line No." := GenJnl."Line No." + 110000;
-                    GenJnl."Posting Date" := receiptsBuffer.Date;
-                    GenJnl."Document No." := receiptsBuffer."Batch No.";
-                    GenJnl.VALIDATE(GenJnl."Document No.");
-                    GenJnl."Journal Template Name" := 'SALES';
-                    GenJnl."Journal Batch Name" := 'STUD PAY';
-                    GenJnl."Document Type" := GenJnl."Document Type"::Payment;
-                    GenJnl."Account Type" := GenJnl."Account Type"::Customer;
-                    GenJnl."External Document No." := receiptsBuffer."Receipt No";
-                    GenJnl."Account No." := receiptsBuffer."Student No.";
-                    GenJnl.Amount := receiptsBuffer.Amount * -1;
-                    GenJnl.VALIDATE(GenJnl."Account No.");
-                    GenJnl.VALIDATE(GenJnl.Amount);
-                    scholarshipHeader.TestField("G/L Account");
-                    GenJnl."Bal. Account No." := scholarshipHeader."G/L Account";
-                    GenJnl.Description := receiptsBuffer.Description + '-' + scholarshipHeader."Batch No.";
+                // Process Allocation
+                GenJnl.INIT;
+                GenJnl."Line No." := GenJnl."Line No." + 110000;
+                GenJnl."Posting Date" := receiptsBuffer.Date;
+                GenJnl."Document No." := receiptsBuffer."Batch No.";
+                GenJnl.VALIDATE(GenJnl."Document No.");
+                GenJnl."Journal Template Name" := 'SALES';
+                GenJnl."Journal Batch Name" := 'STUD PAY';
+                GenJnl."Document Type" := GenJnl."Document Type"::Payment;
+                GenJnl."Account Type" := GenJnl."Account Type"::Customer;
+                GenJnl."External Document No." := receiptsBuffer."Receipt No";
+                GenJnl."Account No." := receiptsBuffer."Student No.";
+                GenJnl.Amount := receiptsBuffer.Amount * -1;
+                GenJnl.VALIDATE(GenJnl."Account No.");
+                GenJnl.VALIDATE(GenJnl.Amount);
+                scholarshipHeader.TestField("G/L Account");
+                GenJnl."Bal. Account No." := scholarshipHeader."G/L Account";
+                GenJnl.Description := receiptsBuffer.Description + '-' + scholarshipHeader."Batch No.";
+                GenJnl.VALIDATE(GenJnl."Bal. Account No.");
+                GenJnl.INSERT;
 
-                    GenJnl.VALIDATE(GenJnl."Bal. Account No.");
+                // Update counters with new allocation
+                totalAllocated += receiptsBuffer.Amount;
+                studentsAllocated += 1;
 
-                    GenJnl.INSERT;
+                // Update receipt buffer status
+                receiptsBuffer.Unallocated := TRUE;
+                receiptsBuffer.Posted := TRUE;
+                receiptsBuffer.MODIFY;
 
-                    receiptsBuffer.Unallocated := TRUE;
-                    receiptsBuffer.Posted := TRUE;
-                    receiptsBuffer.MODIFY;
+            until receiptsBuffer.Next() = 0;
 
-                until receiptsBuffer.Next() = 0;
+        // Update scholarship batch record with total allocation summary
+        scholarshipHeader."Allocated Amount" := totalAllocated;
+        scholarshipHeader."No. of Students " := studentsAllocated;
+        scholarshipHeader.MODIFY;
 
+        // Post the journal entries if any were created
         GenJnl.Reset();
         GenJnl.SETRANGE("Journal Template Name", 'SALES');
         GenJnl.SETRANGE("Journal Batch Name", 'STUD PAY');
         IF GenJnl.FIND('-') THEN BEGIN
             CODEUNIT.RUN(CODEUNIT::"Gen. Jnl.-Post", GenJnl);
-
-        end;
-
-
+        END;
     end;
+
+
 
 }
