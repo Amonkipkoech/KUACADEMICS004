@@ -11,6 +11,106 @@
       <rd:DataSourceID>1239f23b-d76a-4874-9ef7-5e856ad3ba7e</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="Progs">
+          <DataField>Progs</DataField>
+        </Field>
+        <Field Name="Stages">
+          <DataField>Stages</DataField>
+        </Field>
+        <Field Name="StudUnitCode">
+          <DataField>StudUnitCode</DataField>
+        </Field>
+        <Field Name="SemesterFilter">
+          <DataField>SemesterFilter</DataField>
+        </Field>
+        <Field Name="Semz">
+          <DataField>Semz</DataField>
+        </Field>
+        <Field Name="StudNo">
+          <DataField>StudNo</DataField>
+        </Field>
+        <Field Name="AcadYear">
+          <DataField>AcadYear</DataField>
+        </Field>
+        <Field Name="UnitName">
+          <DataField>UnitName</DataField>
+        </Field>
+        <Field Name="ProgName">
+          <DataField>ProgName</DataField>
+        </Field>
+        <Field Name="RCount">
+          <DataField>RCount</DataField>
+        </Field>
+        <Field Name="Names">
+          <DataField>Names</DataField>
+        </Field>
+        <Field Name="Name1">
+          <DataField>Name1</DataField>
+        </Field>
+        <Field Name="Name2">
+          <DataField>Name2</DataField>
+        </Field>
+        <Field Name="Address">
+          <DataField>Address</DataField>
+        </Field>
+        <Field Name="Address2">
+          <DataField>Address2</DataField>
+        </Field>
+        <Field Name="City">
+          <DataField>City</DataField>
+        </Field>
+        <Field Name="Phone">
+          <DataField>Phone</DataField>
+        </Field>
+        <Field Name="Phone2">
+          <DataField>Phone2</DataField>
+        </Field>
+        <Field Name="Emails">
+          <DataField>Emails</DataField>
+        </Field>
+        <Field Name="homep">
+          <DataField>homep</DataField>
+        </Field>
+        <Field Name="logo">
+          <DataField>logo</DataField>
+        </Field>
+        <Field Name="UName">
+          <DataField>UName</DataField>
+        </Field>
+        <Field Name="RegNo">
+          <DataField>RegNo</DataField>
+        </Field>
+        <Field Name="LecEmploee">
+          <DataField>LecEmploee</DataField>
+        </Field>
+        <Field Name="Stream">
+          <DataField>Stream</DataField>
+        </Field>
+        <Field Name="Unit_Code">
+          <DataField>Unit_Code</DataField>
+        </Field>
+        <Field Name="Unit_Description">
+          <DataField>Unit_Description</DataField>
+        </Field>
+        <Field Name="Student_No_">
+          <DataField>Student_No_</DataField>
+        </Field>
+        <Field Name="Catogory">
+          <DataField>Catogory</DataField>
+        </Field>
+        <Field Name="studentName">
+          <DataField>studentName</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -2566,7 +2666,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>SEMESTER</Value>
+                      <Value>BLOCK</Value>
                       <Style>
                         <FontFamily>Cambria</FontFamily>
                         <FontSize>12pt</FontSize>
@@ -2755,6 +2855,12 @@
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -2794,104 +2900,4 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>0e346b6a-a016-45f4-b59b-e0c67018dd7d</rd:ReportID>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="Progs">
-          <DataField>Progs</DataField>
-        </Field>
-        <Field Name="Stages">
-          <DataField>Stages</DataField>
-        </Field>
-        <Field Name="StudUnitCode">
-          <DataField>StudUnitCode</DataField>
-        </Field>
-        <Field Name="SemesterFilter">
-          <DataField>SemesterFilter</DataField>
-        </Field>
-        <Field Name="Semz">
-          <DataField>Semz</DataField>
-        </Field>
-        <Field Name="StudNo">
-          <DataField>StudNo</DataField>
-        </Field>
-        <Field Name="AcadYear">
-          <DataField>AcadYear</DataField>
-        </Field>
-        <Field Name="UnitName">
-          <DataField>UnitName</DataField>
-        </Field>
-        <Field Name="ProgName">
-          <DataField>ProgName</DataField>
-        </Field>
-        <Field Name="RCount">
-          <DataField>RCount</DataField>
-        </Field>
-        <Field Name="Names">
-          <DataField>Names</DataField>
-        </Field>
-        <Field Name="Name1">
-          <DataField>Name1</DataField>
-        </Field>
-        <Field Name="Name2">
-          <DataField>Name2</DataField>
-        </Field>
-        <Field Name="Address">
-          <DataField>Address</DataField>
-        </Field>
-        <Field Name="Address2">
-          <DataField>Address2</DataField>
-        </Field>
-        <Field Name="City">
-          <DataField>City</DataField>
-        </Field>
-        <Field Name="Phone">
-          <DataField>Phone</DataField>
-        </Field>
-        <Field Name="Phone2">
-          <DataField>Phone2</DataField>
-        </Field>
-        <Field Name="Emails">
-          <DataField>Emails</DataField>
-        </Field>
-        <Field Name="homep">
-          <DataField>homep</DataField>
-        </Field>
-        <Field Name="logo">
-          <DataField>logo</DataField>
-        </Field>
-        <Field Name="UName">
-          <DataField>UName</DataField>
-        </Field>
-        <Field Name="RegNo">
-          <DataField>RegNo</DataField>
-        </Field>
-        <Field Name="LecEmploee">
-          <DataField>LecEmploee</DataField>
-        </Field>
-        <Field Name="Stream">
-          <DataField>Stream</DataField>
-        </Field>
-        <Field Name="Unit_Code">
-          <DataField>Unit_Code</DataField>
-        </Field>
-        <Field Name="Unit_Description">
-          <DataField>Unit_Description</DataField>
-        </Field>
-        <Field Name="Student_No_">
-          <DataField>Student_No_</DataField>
-        </Field>
-        <Field Name="Catogory">
-          <DataField>Catogory</DataField>
-        </Field>
-        <Field Name="studentName">
-          <DataField>studentName</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-    </DataSet>
-  </DataSets>
 </Report>
