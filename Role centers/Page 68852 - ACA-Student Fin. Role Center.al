@@ -286,6 +286,7 @@ page 68852 "ACA-Student Fin. Role Center"
                     Image = Journals;
                     RunObject = Report 51072;//"Student Fee Statement"
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 action("Final Student Statements ")
                 {

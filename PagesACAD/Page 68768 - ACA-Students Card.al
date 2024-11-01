@@ -353,6 +353,23 @@ page 68768 "ACA-Students Card"
                     RunPageLink = "Student No." = FIELD("No.");
                     ApplicationArea = All;
                 }
+                action("Proforma Invoice")
+                {
+                    Caption = 'Proforma Invoice';
+                    Image = CustomerLedger;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    Visible = true;
+                    ApplicationArea = All;
+
+                    trigger OnAction()
+                    begin
+                        Cust.RESET;
+                        Cust.SETFILTER(Cust."No.", Rec."No.");
+                        IF Cust.FIND('-') THEN
+                            REPORT.RUN(86612, TRUE, TRUE, Cust);
+                    end;
+                }
                 action("Print Statement")
                 {
                     Caption = 'Print Statement';
@@ -367,7 +384,7 @@ page 68768 "ACA-Students Card"
                         Cust.RESET;
                         Cust.SETFILTER(Cust."No.", Rec."No.");
                         IF Cust.FIND('-') THEN
-                            REPORT.RUN(51072, TRUE, TRUE, Cust);
+                            REPORT.RUN(77122, TRUE, TRUE, Cust);
                     end;
                 }
                 action(Picture)
