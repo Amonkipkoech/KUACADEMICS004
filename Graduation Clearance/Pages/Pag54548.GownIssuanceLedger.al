@@ -5,7 +5,7 @@ page 86006 "Gown Issuance Ledger"
     PageType = List;
     SourceTable = "Gown Issuance Ledger";
     UsageCategory = Lists;
-    Editable = false;
+    Editable = true;
 
     layout
     {

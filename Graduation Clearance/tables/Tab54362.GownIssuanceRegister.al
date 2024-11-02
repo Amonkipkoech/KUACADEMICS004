@@ -68,6 +68,16 @@ table 86002 "Gown Issuance Register"
             CalcFormula = sum("Gown Issuance Ledger".Quantity);
             FieldClass = FlowField;
         }
+        field(14; DaysPassed; Integer)
+        {
+            Caption = 'Days Passed';
+            DataClassification = ToBeClassified;
+        }
+        field(15; Fine; Decimal)
+        {
+            Caption = 'Fine';
+            DataClassification = ToBeClassified;
+        }
     }
     keys
     {

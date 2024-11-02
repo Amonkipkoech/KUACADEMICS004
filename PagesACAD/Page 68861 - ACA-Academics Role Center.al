@@ -1539,6 +1539,7 @@ page 68861 "ACA-Academics Role Center"
                         Caption = 'PRogram Study Plan';
                         Image = Report;
                         RunObject = Report 51203;
+                        Visible = false;
                         ApplicationArea = All;
                     }
                     action(unitsOff)
@@ -1546,6 +1547,7 @@ page 68861 "ACA-Academics Role Center"
                         Caption = 'Units On Offer';
                         Image = Report;
                         RunObject = Report 86522;
+                        Visible = false;
                         ApplicationArea = All;
                     }
                     action("Student Applications Report")
@@ -1553,6 +1555,7 @@ page 68861 "ACA-Academics Role Center"
                         Caption = 'Student Applications Report';
                         Image = Report;
                         RunObject = Report 51862;
+                        Visible = false;
                         ApplicationArea = All;
                     }
                     action("Norminal Roll")

@@ -65,6 +65,18 @@ report 51765 "Norminal Roll (Cont. Students)"
             column(pic; CompanyInfo.Picture)
             {
             }
+            column(CompanyInfo_name; CompanyInfo.Name)
+            {
+            }
+            column(CompanyInfo_email; CompanyInfo."E-Mail")
+            {
+            }
+            column(CompanyInfo_address; CompanyInfo.Address)
+            {
+            }
+            column(CompanyInfo_phone; CompanyInfo."Phone No.")
+            {
+            }
             column(regStatus; regStatus)
             {
             }
@@ -236,6 +248,7 @@ report 51765 "Norminal Roll (Cont. Students)"
         customers1: Record 18;
         regStatus: Code[50];
         TotalMale: Integer;
+        info2: Record "Company Information";
         TotalFEMale: Integer;
         campCode: Code[10];
         Genders: Option "BOTH GENDER",Male,Female;

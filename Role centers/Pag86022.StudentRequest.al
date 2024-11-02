@@ -111,15 +111,25 @@ page 86022 "Student Request"
             }
             group("Gown Issuance Register")
             {
-                action("Gown list")
-                {
-                    ApplicationArea = Basic, Suite;
-                    RunObject = Page "Gown Issuance Register";
-                }
+
                 action("Gown Issuance")
                 {
                     ApplicationArea = Basic, Suite;
                     RunObject = Page "Gown Issuance Card";
+                    RunPageLink = status = const("Gown Issued");
+                }
+                action("Returned Gown")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = Page "Gown Issuance Card";
+                    RunPageLink = status = const("Gown Returned");
+                }
+                action("Returned Late")
+                {
+                    Caption = 'Returned Late with fine amount';
+                    ApplicationArea = Basic, Suite;
+                    RunObject = Page "Gown Issuance Card";
+                    RunPageLink = status = const("Returned Late");
                 }
                 action("Gown Journal")
                 {

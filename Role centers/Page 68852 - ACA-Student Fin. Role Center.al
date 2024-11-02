@@ -555,6 +555,19 @@ page 68852 "ACA-Student Fin. Role Center"
                     ApplicationArea = All;
                 }
             }
+            group(" Gowns Billing")
+            {
+                Caption = 'Gowns Billing';
+
+                action("Returned Late")
+                {
+                    Caption = 'Returned Late with fine amount';
+                    ApplicationArea = Basic, Suite;
+                    RunObject = Page "Gown Issuance Card";
+                    RunPageLink = status = const("Returned Late");
+                }
+
+            }
             group("E-Citizen Integration")
             {
                 action("Coop Bank Transactions")

@@ -15,6 +15,7 @@ page 65800 "Class Attendance Card"
                 }
                 field(Semester; Semester)
                 {
+                    Caption = 'Block';
                     ApplicationArea = All;
                 }
                 field("Class Rep. Reg. No"; "Class Rep. Reg. No")

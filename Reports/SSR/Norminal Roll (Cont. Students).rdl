@@ -2038,7 +2038,7 @@
             <Top>0.15in</Top>
             <Left>0.03in</Left>
             <Height>0.75in</Height>
-            <Width>18.10316in</Width>
+            <Width>18.10315in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2056,20 +2056,6 @@
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
-            <Image Name="Image3">
-              <Source>Embedded</Source>
-              <Value>CUEALogoEmblem1</Value>
-              <Sizing>FitProportional</Sizing>
-              <Top>0.03in</Top>
-              <Left>0.03in</Left>
-              <Height>0.97in</Height>
-              <Width>1.24167in</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-              </Style>
-            </Image>
             <Textbox Name="Textbox50">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
@@ -2077,7 +2063,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>THE CATHOLIC UNIVERSITY OF EASTERN AFRICA</Value>
+                      <Value>=First(Fields!CompanyInfo_name.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontFamily>Cambria</FontFamily>
                         <FontSize>14pt</FontSize>
@@ -2095,7 +2081,6 @@
               <Left>2.13in</Left>
               <Height>0.26667in</Height>
               <Width>5.73333in</Width>
-              <ZIndex>1</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -2132,7 +2117,7 @@
               <Left>2.61333in</Left>
               <Height>0.25in</Height>
               <Width>4.58333in</Width>
-              <ZIndex>2</ZIndex>
+              <ZIndex>1</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -2143,6 +2128,22 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
+            <Image Name="Image1">
+              <Source>Database</Source>
+              <Value>=First(Fields!pic.Value, "DataSet_Result")</Value>
+              <MIMEType>image/png</MIMEType>
+              <Sizing>FitProportional</Sizing>
+              <Top>0.20849cm</Top>
+              <Left>0.23495cm</Left>
+              <Height>1.93146cm</Height>
+              <Width>4.15396cm</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Image>
           </ReportItems>
           <Style>
             <Border>
@@ -2412,6 +2413,18 @@ OyhnBkEUMEZHphtSnsk8fFZ3C3XtOxh9nb+v2JdoZySau8d1HyLzKUSOV5F1Qg+2o+XJ7ApehZ3L3Oq2
         </Field>
         <Field Name="pic">
           <DataField>pic</DataField>
+        </Field>
+        <Field Name="CompanyInfo_name">
+          <DataField>CompanyInfo_name</DataField>
+        </Field>
+        <Field Name="CompanyInfo_email">
+          <DataField>CompanyInfo_email</DataField>
+        </Field>
+        <Field Name="CompanyInfo_address">
+          <DataField>CompanyInfo_address</DataField>
+        </Field>
+        <Field Name="CompanyInfo_phone">
+          <DataField>CompanyInfo_phone</DataField>
         </Field>
         <Field Name="regStatus">
           <DataField>regStatus</DataField>

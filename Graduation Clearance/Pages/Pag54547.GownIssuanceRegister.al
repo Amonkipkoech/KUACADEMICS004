@@ -62,6 +62,11 @@ page 86007 "Gown Issuance Register"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Actual Return Date field.', Comment = '%';
+
+                    trigger OnValidate()
+                    begin
+                        CalcLateReturnDetails();
+                    end;
                 }
                 field(Returned; Rec.Returned)
                 {
@@ -72,6 +77,22 @@ page 86007 "Gown Issuance Register"
                 {
                     ApplicationArea = All;
                 }
+                field(DaysPassed; rec.DaysPassed)
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                    ToolTip = 'Displays the number of days passed since the expected return date.';
+                }
+                field(Fine; CalcFine())
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                    ToolTip = 'Displays the fine for late return of the gown.';
+                }
+
+
+
+
             }
         }
     }
@@ -89,13 +110,13 @@ page 86007 "Gown Issuance Register"
                 begin
                     Rec.CalcFields("Number of Gowns Left");
                     if Rec."Number of Gowns Left" <= 0 then
-                        Error('No Gowns Left to Issue') else begin
+                        Error('No Gowns Left to Issue')
+                    else begin
                         postgown.postGowns(Rec."No.", Rec."Student No.", Rec."Date Issued");
                         Rec.Issued := true;
                         Rec.Modify();
                         Message('Gown Issued Successfully!');
                     end;
-
                 end;
             }
         }
@@ -103,5 +124,35 @@ page 86007 "Gown Issuance Register"
 
     var
         postgown: Codeunit "Graduation Journals";
+        FineRatePerDay: Decimal; // Declare fine rate without initialization
+        DaysPassed: Integer;
 
+    local procedure CalcLateReturnDetails()
+    var
+        DaysLate: Integer;
+    begin
+        if Rec."Actual Return Date" > Rec."Expected Return Date" then begin
+            DaysLate := Rec."Actual Return Date" - Rec."Expected Return Date";
+            Rec.DaysPassed := DaysLate;
+            Rec.Fine := DaysLate * FineRatePerDay;
+            Rec.Status := Rec.Status::"Returned Late"; // Use the option member directly
+        end else begin
+            Rec.DaysPassed := 0;
+            Rec.Fine := 0;
+            Rec.Status := Rec.Status::"Gown Returned"; // Use the option member directly
+        end;
+
+        Rec.Modify(); // Save changes to the table
+    end;
+
+
+    local procedure CalcFine(): Decimal
+    begin
+        FineRatePerDay := 500.0; // Initialize the fine rate here
+
+        if Rec."Actual Return Date" > Rec."Expected Return Date" then
+            exit(DaysPassed * FineRatePerDay) // Calculates the fine based on days passed
+        else
+            exit(0); // No fine if returned on or before the expected date
+    end;
 }
