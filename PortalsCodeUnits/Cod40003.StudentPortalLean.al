@@ -1208,7 +1208,7 @@ codeunit 40003 StudentPortalTest
         CourseReg1.SETRANGE(CourseReg1."Academic Year", AcademicYear);
 
         IF CourseReg1.FIND('-') THEN BEGIN
-            REPORT.SAVEASPDF(report::"Provisional College Transcrip3", filename, CourseReg1);
+            REPORT.SAVEASPDF(report::"Provisional College Transcript", filename, CourseReg1);
         END;
     end;
 
@@ -1337,6 +1337,27 @@ codeunit 40003 StudentPortalTest
             END;
         END;
     end;
+
+    procedure ApplyClinicalAbscence(StudentNo: Text; DateFro: Date; DateTo: Date; Reason: Option; DetailedReason: Text; Prog: Text) Message: Text
+    var
+        clinicalAbs: Record "Student Absence Request";
+    begin
+        clinicalAbs.Reset();
+        clinicalAbs."Admission Number" := StudentNo;
+        clinicalAbs."Date From" := DateFro;
+        clinicalAbs."Date To" := DateTo;
+        clinicalAbs."Reason for Absence" := Reason;
+        clinicalAbs."Other Reason (Specify)" := DetailedReason;
+        clinicalAbs."Student Name" := GetStudentName(StudentNo);
+
+        if clinicalAbs.Insert() then begin
+            Message := 'SUCCESS';
+
+        end;
+        exit(Message);
+
+    end;
+
 
     procedure GetUniversityMailPass(username: Text) Message: Text
     begin
