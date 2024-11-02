@@ -52,6 +52,7 @@ codeunit 40003 StudentPortalTest
         xyForm: Record "ACA-XY-FORM";
         AcaSpecialExamsDetails: Record "Aca-Special Exams Details";
 
+
         FILESPATH: Label 'C:\inetpub\wwwroot\KUPORTALS\StudentPortal\Downloads\';
         FILESPATH_A: Label 'C:\inetpub\wwwroot\KUPORTALS\StaffPortal\Downloads';//'C:\inetpub\wwwroot\StaffPortal\Downloads\';
         FILESPATH_SSP: Label 'C:\inetpub\wwwroot\KUPORTALS\StaffPortal\Downloads';//'C:\inetpub\wwwroot\StaffPortal\Downloads\';
@@ -315,6 +316,20 @@ codeunit 40003 StudentPortalTest
         End;
     end;
 
+    procedure GetStudentUnits(program: Text) Message: Text
+    begin
+        UnitSubjects.Reset();
+        UnitSubjects.SetRange(UnitSubjects."Programme Code", program);
+
+        if UnitSubjects.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + UnitSubjects.Code + '::' + UnitSubjects.Desription + '[]';
+            until UnitSubjects.Next() = 0;
+        end;
+        exit(Message);
+
+    end;
+
     procedure UnitsToRegister(progCode: Text) Message: Text
     begin
         unitsOnOffer.Reset();
@@ -381,6 +396,17 @@ codeunit 40003 StudentPortalTest
 
         end;
 
+    end;
+
+    procedure GetDeferments(studentNo: Text) Message: Text
+    begin
+        discontinue.Reset();
+        discontinue.SetRange(discontinue.studentNo);
+        if discontinue.Find('-') then begin
+            repeat
+                Message += 'Success' + '::' + Format(discontinue."Deferment  Starting Date") + '::' + Format(discontinue."Deferment  End Date") + '::' + Format(discontinue.status) + '[]';
+            until discontinue.Next() = 0;
+        end;
     end;
 
     procedure GetStudentName(StudentNo: Text) Message: Text
