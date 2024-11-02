@@ -513,6 +513,27 @@ codeunit 40002 StaffPortall
     //     exit(Name);
     // end;
 
+    procedure GenerateExamAttendanceList(lectNo: Text; Sem: text; hall: Text; unitCode: Text; filenameFromApp: Text) Message: Text
+    var
+        filename: Text;
+        reportResult: Boolean;
+    begin
+        filename := FILESPATH_S + filenameFromApp;
+
+        IF EXISTS(filename) THEN
+            ERASE(filename);
+
+        StudentUnits.Reset();
+        StudentUnits.setRange(studentUnits.Semester, Sem);
+        StudentUnits.SetRange(studentUnits.Unit, unitCode);
+        if studentUnits.Find('-') then begin
+            REPORT.SAVEASPDF(report::"Exam Attendance.", filename, StudentUnits);
+            Message := 'Exam card generated successfully after adding registered courses.';
+
+
+        end
+
+    end;
 
     procedure CheckStaffLoginForUnchangedPass(Username: Code[20]; password: Text[50]) ReturnMsg: Text[200];
     begin

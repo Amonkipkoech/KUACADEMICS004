@@ -14,7 +14,6 @@ page 68915 "ACA-Exam Man. Role Centre"
             {
 #pragma warning disable AL0269
                 part("Programmes List"; "ACA-Programmes List")
-#pragma warning restore AL0269
                 {
                     Caption = 'Programmes List';
                     ApplicationArea = All;
@@ -42,7 +41,6 @@ page 68915 "ACA-Exam Man. Role Centre"
                 {
                     Caption = 'Senate Report Preview';
                     Image = PreviewChecks;
-
                     RunObject = Page 66650;
                     ApplicationArea = All;
                 }
@@ -72,7 +70,6 @@ page 68915 "ACA-Exam Man. Role Centre"
                 {
                     Caption = 'Student List';
                     Image = CalculateConsumption;
-
                     RunObject = Page 99996;
                     ApplicationArea = All;
                 }
@@ -80,7 +77,6 @@ page 68915 "ACA-Exam Man. Role Centre"
                 {
                     Caption = 'Examination Module Guide';
                     Image = GLRegisters;
-
                     RunObject = Report 99930;
                     ApplicationArea = All;
                 }
@@ -88,7 +84,6 @@ page 68915 "ACA-Exam Man. Role Centre"
                 {
                     Caption = 'Import Results';
                     Image = UserSetup;
-
                     RunObject = Page 69023;
                     ApplicationArea = All;
                 }
@@ -96,7 +91,6 @@ page 68915 "ACA-Exam Man. Role Centre"
                 {
                     //Caption = 'Import Results';
                     Image = UserSetup;
-
                     //RunObject = Page importMarksBuffer;
                     ApplicationArea = All;
                 }
