@@ -792,13 +792,14 @@ codeunit 40003 StudentPortalTest
     var
         formId: Text;
     begin
-        formId := NoSeriesMgt.GetNextNo('XYFORM', TODAY, TRUE);
+
         xyForm.Reset();
         xyForm.SetRange(xyForm.UnitCode, UnitCode);
         xyForm.SetRange(xyForm.StudentNo, studentNo);
         if xyForm.FindFirst() then begin
             Message := 'You have already filled in the form!';
         end else begin
+            formId := NoSeriesMgt.GetNextNo('XYFORM', TODAY, TRUE);
             xyForm.StudentNo := studentNo;
             xyForm."Student Name" := GetStudentName(studentNo);
             xyForm.Date := date;
@@ -820,6 +821,23 @@ codeunit 40003 StudentPortalTest
 
         end;
         ;
+
+    end;
+
+    //To Be completed
+    procedure FillXYformLines(stdNo: Text; formId: Text)
+    var
+        form: Record "ACA-XYForm Lines";
+    begin
+        xyForm.Reset();
+        xyForm.SetRange(xyform."Form Id", formId);
+        if xyForm.FindFirst() then begin
+            form.Reset();
+
+
+
+        end;
+
 
     end;
     // procedure GetStudentName(StudentNo: Text) Message: Text
