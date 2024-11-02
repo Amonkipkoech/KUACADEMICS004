@@ -692,11 +692,11 @@ table 61358 "ACA-Applic. Form Header"
 
         field(122; "Programme Department"; code[30])
         {
-
+            TableRelation = "Dimension Value".Code WHERE("Dimension Code" = const('DEPARTMENT'));
         }
         field(123; "Programme School"; code[30])
         {
-
+            TableRelation = "Dimension Value".Code WHERE("Dimension Code" = const('SCHOOL'));
         }
         field(124; formerSchool; code[200])
         {

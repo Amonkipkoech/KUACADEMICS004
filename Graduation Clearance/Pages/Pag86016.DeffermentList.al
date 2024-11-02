@@ -78,6 +78,19 @@ page 86016 "Deffered Students"
                     Rec.Modify();
                 end;
             }
+            action(Readmission)
+            {
+                ApplicationArea = All;
+                Visible = rec.status = rec.status::Approved;
+
+                trigger OnAction();
+                begin
+                    if Rec.Get() then
+                        if Confirm('Do you want to readmit the Student?', true) = false then exit;
+                    Rec.status := Rec.status::Cancelled;
+                    Rec.Modify();
+                end;
+            }
         }
     }
 }

@@ -44,6 +44,12 @@ page 86022 "Student Request"
                     RunObject = Page "Deffered Students";
                     RunPageLink = Status = const(Approved);
                 }
+                action("Readmision Requests")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = Page "Deffered Students";
+                    RunPageLink = Status = const(ReAdmission);
+                }
                 action("Rejected Requests")
                 {
                     ApplicationArea = Basic, Suite;

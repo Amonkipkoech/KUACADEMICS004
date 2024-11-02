@@ -82,6 +82,10 @@ report 86521 "ACA-APPLICANTS Report"
             column(ModeofStudy_applicant; "Mode of Study")
             {
             }
+            column(seq; seq)
+            {
+
+            }
             column(Status; Status)
             {
 
@@ -94,6 +98,12 @@ report 86521 "ACA-APPLICANTS Report"
             {
 
             }
+            trigger OnAfterGetRecord()
+            var
+                myInt: Integer;
+            begin
+                seq := seq + 1;
+            end;
 
         }
     }
@@ -121,5 +131,6 @@ report 86521 "ACA-APPLICANTS Report"
 
     var
         myInt: Integer;
+        seq: Integer;
         CompanyInformation: Record 79;
 }

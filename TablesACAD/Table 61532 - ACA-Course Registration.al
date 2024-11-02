@@ -1914,8 +1914,8 @@ table 61532 "ACA-Course Registration"
         {
             CalcFormula = Lookup(Customer.Status WHERE("No." = FIELD("Student No.")));
             FieldClass = FlowField;
-            OptionCaption = 'Registration,Current,Alluminae,Dropped Out,Differed,Suspended,Expulsion,Discontinued,Deferred,Deceased,Transferred';
-            OptionMembers = Registration,Current,Alluminae,"Dropped Out",Differed,Suspended,Expulsion,Discontinued,Deferred,Deceased,Transferred;
+            OptionCaption = 'Registration,Current,Alluminae,Dropped Out,Differed,Suspended,Expulsion,Discontinued,Deferred,Deceased,Transferred,Disciplinary,Graduated,Completed,Alumnae,Demoted, Other';
+            OptionMembers = Registration,Current,Alluminae,"Dropped Out",Differed,Suspended,Expulsion,Discontinued,Deferred,Deceased,Transferred,Disciplinary,Graduated,Completed,Alumnae,Demoted,Other;
         }
         field(83; "Account Count"; Integer)
         {
