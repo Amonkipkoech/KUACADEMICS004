@@ -389,6 +389,7 @@ codeunit 40003 StudentPortalTest
             discontinue.programme := program;
             discontinue.stage := stage;
             discontinue."Mobile No" := mobileNo;
+            //discontinue."School Code" := GetSchool(program);
 
             if discontinue.Insert() then begin
                 Message := 'SUCCESS';
@@ -401,7 +402,7 @@ codeunit 40003 StudentPortalTest
     procedure GetDeferments(studentNo: Text) Message: Text
     begin
         discontinue.Reset();
-        discontinue.SetRange(discontinue.studentNo);
+        discontinue.SetRange(discontinue.studentNo, studentNo);
         if discontinue.Find('-') then begin
             repeat
                 Message += 'Success' + '::' + Format(discontinue."Deferment  Starting Date") + '::' + Format(discontinue."Deferment  End Date") + '::' + Format(discontinue.status) + '[]';
@@ -1208,7 +1209,7 @@ codeunit 40003 StudentPortalTest
         CourseReg1.SETRANGE(CourseReg1."Academic Year", AcademicYear);
 
         IF CourseReg1.FIND('-') THEN BEGIN
-            REPORT.SAVEASPDF(report::"Provisional College Transcript", filename, CourseReg1);
+            REPORT.SAVEASPDF(report::"Provisional College Transcrip3", filename, CourseReg1);
         END;
     end;
 

@@ -556,6 +556,58 @@ codeunit 40002 StaffPortall
 
     end;
 
+    procedure GetStudentRequests(department: Text) Message: Text
+    var
+        deferredStudents: Record "defferedStudents";
+
+    begin
+        deferredStudents.Reset();
+        deferredStudents.SetRange(deferredStudents.Department, department);
+        deferredStudents.SetRange(deferredStudents.status, 0);
+        deferredStudents.SetRange(deferredStudents."Hod cleared", False);
+
+        if deferredStudents.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + deferredStudents."Request No" + '::' + deferredStudents.studentNo + '::' + deferredStudents.StudentName + '::' + deferredStudents.deffermentReason + '::' + Format(deferredStudents."Deferment  Starting Date") + '::' + Format(deferredStudents."Deferment  End Date") + '[]';
+            until deferredStudents.Next() = 0;
+
+        end else begin
+            Message := 'No matching records';
+        end;
+        exit(Message);
+    end;
+
+    procedure AcceptRejectDefer(RequestNo: Text; dept: Text; accept: Boolean) Message: Text
+    var
+        deferredStudents: Record "defferedStudents";
+    begin
+        deferredStudents.Reset();
+        //deferredStudents.SetRange(deferredStudents.Department, dept);
+        deferredStudents.SetRange(deferredStudents.status, 0);
+        deferredStudents.SetRange(deferredStudents."Request No", RequestNo);
+
+        if deferredStudents.FindFirst() then begin
+
+            if accept then begin
+                deferredStudents."Hod cleared" := accept;
+                deferredStudents."Hod Date" := Today;
+                deferredStudents.status := 1;
+            end else begin
+                deferredStudents."Hod cleared" := accept;
+                deferredStudents."Hod Date" := Today;
+                deferredStudents.status := 4;
+            end;
+
+            if deferredStudents.Modify() then begin
+                Message := 'SUCCESS';
+            end else begin
+                Message := 'FAILED';
+            end;
+            exit(Message);
+        end;
+
+    end;
+
     procedure PortalOTP(Username: Code[20]; otpCode: Code[20]) ReturnMsg: Boolean;
     begin
         EmployeeCard.Reset();

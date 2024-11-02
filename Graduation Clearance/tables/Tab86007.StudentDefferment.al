@@ -48,7 +48,7 @@ table 86007 defferedStudents
         }
         field(5; status; Option)
         {
-            OptionMembers = Open,Pending,Approved,Cancelled,Posted;
+            OptionMembers = Open,Pending,Approved,Cancelled,Rejected,Posted;
         }
         field(7; deffermentReason; Text[300])
         {
