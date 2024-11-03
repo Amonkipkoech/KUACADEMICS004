@@ -1,4 +1,4 @@
-table 40017 "ACA-XYForm Lines"
+table 40019 "ACA-XYForm Lines"
 {
     Caption = 'ACA-XYForm Lines';
     DataClassification = ToBeClassified;

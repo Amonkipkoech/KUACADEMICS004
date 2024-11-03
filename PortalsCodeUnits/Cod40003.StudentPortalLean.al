@@ -788,7 +788,7 @@ codeunit 40003 StudentPortalTest
 
     end;
 
-    procedure FillXYForm(studentNo: Text; AcademicYr: Text; Program: Text; UnitCode: Text; date: Date; Time: Text; Duration: text; Coverage: Text) Message: Text
+    procedure FillXYForm(studentNo: Text; AcademicYr: Text; uniCode: Text; Program: Text; groupId: Text; UnitCode: Text; date: Date; Time: Text; Duration: text; Coverage: Text) Message: Text
     var
         formId: Text;
     begin
@@ -799,7 +799,8 @@ codeunit 40003 StudentPortalTest
         if xyForm.FindFirst() then begin
             Message := 'You have already filled in the form!';
         end else begin
-            formId := NoSeriesMgt.GetNextNo('XYFORM', TODAY, TRUE);
+            GenSetup.Get();
+            formId := NoSeriesMgt.GetNextNo(GenSetup."Attachment Nos", TODAY, TRUE);
             xyForm.StudentNo := studentNo;
             xyForm."Student Name" := GetStudentName(studentNo);
             xyForm.Date := date;
@@ -810,7 +811,9 @@ codeunit 40003 StudentPortalTest
             xyForm.UnitCode := UnitCode;
             xyForm."Unit Description" := GetUnitName(UnitCode);
             xyForm."Form Id" := formId;
-
+            xyForm.LecturerNo := GetXYFormLecturer(groupId);
+            xyForm."Lecturer Name" := GetLectureName(xyForm.LecturerNo);
+            xyForm."Unit Description" := GetUnitName(uniCode);
 
             if xyForm.Insert() then begin
                 Message := 'SUCCESS';
@@ -824,6 +827,16 @@ codeunit 40003 StudentPortalTest
 
     end;
 
+    procedure GetXYFormLecturer(groupId: Text) Message: Text
+    begin
+        group.Reset();
+        group.SetRange(group.GroupId, groupId);
+        if group.FindFirst() then begin
+            Message := group.LecturerNo;
+
+        end;
+        exit(Message);
+    end;
     //To Be completed
     procedure FillXYformLines(stdNo: Text; formId: Text)
     var
@@ -1881,6 +1894,15 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         end else
             Error('File not uploaded. No table filter found');
 
+    end;
+
+    procedure getStudentGroup(stdNo: Text) Message: Text
+    begin
+        group.Reset();
+        group.SetRange(group.StudentNo, stdNo);
+        if group.FindFirst() then begin
+            Message := 'SUCCESS' + '::' + group.GroupId;
+        end;
     end;
 
     procedure EditSSApplication(appno: code[50]; appliedprogram: Code[20]; highschcertatt: Boolean; rsltslipatt: Boolean; undegradcertatt: Boolean; mststrascrptsatt: Boolean; transfercaseatt: Boolean; transferletteratt: Boolean; highschcertpath: Text; rsltslippath: Text; undegradcertpath: Text; mststrascrptspath: Text) Message: Text

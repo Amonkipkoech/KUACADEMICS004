@@ -333,20 +333,61 @@ codeunit 40002 StaffPortall
         end;
     end;
 
+    procedure GetXYForms(lectNo: Text) Message: Text
+    begin
+        group.Reset();
+        group.SetRange(group.LecturerNo, lectNo);
+
+        if group.Find('-') then begin
+            repeat
+                Message := 'SUCCESS' + '::';
+            until group.Next() = 0;
+        end
+    end;
+
     procedure AssignGroupLect(groupId: Text; lectNo: Text) Message: Text
     begin
         group.Reset();
         group.SetRange(group.GroupId, groupId);
 
-        if group.FindFirst() then begin
-            group.LecturerNo := lectNo;
-            group.LecturerName := GetFullNames(lectNo);
+        if group.Find('-') then begin
+            repeat
 
-            if group.Modify() then begin
-                Message := 'SUCCESS';
-            end
+                group.LecturerNo := lectNo;
+                group.LecturerName := GetFullNames(lectNo);
+                if group.Modify() then begin
+                    Message := 'SUCCESS';
+                end
+            until group.Next() = 0;
         end;
+
         Exit(Message);
+    end;
+
+    procedure GetAssignedGroups(lecturerNo: Text) Message: Text
+    begin
+        group.Reset();
+        group.SetRange(group.LecturerNo, lecturerNo);
+
+        if group.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + group.GroupId + '[]';
+            until group.Next() = 0;
+        end;
+
+    end;
+
+    procedure GetAssignedStudents(lecturerNo: Text) Message: Text
+    begin
+        group.Reset();
+        group.SetRange(group.LecturerNo, lecturerNo);
+
+        if group.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + group.StudentNo + '::' + GetStudentName(group.StudentNo) + '[]';
+            until group.Next() = 0;
+        end;
+
     end;
 
     procedure CreateMasterGroups(Block: Text; StudentNo: Text; numberOfStudents: Integer; MasterRotNo: Text; Department: Text) Message: Text
