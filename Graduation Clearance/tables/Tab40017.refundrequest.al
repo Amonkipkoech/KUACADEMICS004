@@ -1,4 +1,4 @@
-table 40017 "Refund Request"
+table 40018 "Refund Request"
 
 {
     DataClassification = ToBeClassified;
