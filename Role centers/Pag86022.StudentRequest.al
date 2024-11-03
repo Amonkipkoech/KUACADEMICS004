@@ -152,7 +152,18 @@ page 86022 "Student Request"
                 {
                     ApplicationArea = Basic, Suite;
                     RunObject = Page "XY form";
-
+                }
+                action("Pending XY Form")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = Page "XY form";
+                    RunPageLink = Status = const(Pending);
+                }
+                action("Approved XY Form")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = Page "XY form";
+                    RunPageLink = Status = const(Approved);
                 }
             }
 

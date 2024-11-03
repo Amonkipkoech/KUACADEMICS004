@@ -3,7 +3,7 @@ page 40021 "XY form Card"
     Caption = 'XY form Card';
     PageType = Card;
     SourceTable = "ACA-XY-FORM";
-    
+
     layout
     {
         area(Content)
@@ -11,7 +11,7 @@ page 40021 "XY form Card"
             group(General)
             {
                 Caption = 'General';
-                
+
                 field("Form Id"; Rec."Form Id")
                 {
                     ApplicationArea = All;
@@ -27,6 +27,12 @@ page 40021 "XY form Card"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the UnitCode field.', Comment = '%';
                 }
+                field("Group Name"; rec."Group Name")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the UnitCode field.', Comment = '%';
+                }
+
                 field("Unit Description"; Rec."Unit Description")
                 {
                     ApplicationArea = All;
@@ -42,21 +48,8 @@ page 40021 "XY form Card"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Lecturer Name field.', Comment = '%';
                 }
-                field("Date"; Rec."Date")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Date field.', Comment = '%';
-                }
-                field("Duration"; Rec."Duration")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Duration field.', Comment = '%';
-                }
-                field(ClassRep; Rec.ClassRep)
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the ClassRep field.', Comment = '%';
-                }
+
+
                 field(HoD; Rec.HoD)
                 {
                     ApplicationArea = All;
@@ -72,21 +65,49 @@ page 40021 "XY form Card"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Student Name field.', Comment = '%';
                 }
-                field(Coverage; Rec.Coverage)
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Coverage field.', Comment = '%';
-                }
+
                 field(AcademicYr; Rec.AcademicYr)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Academic year field.', Comment = '%';
                 }
-                field("Program"; Rec."Program")
+
+                field(Status; rec.Status)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Programme field.', Comment = '%';
                 }
+            }
+            group("Content Coverage@")
+            {
+                Caption = 'Content Coverage';
+                part("Content Coverage"; xylist)
+                {
+                    ApplicationArea = All;
+                    SubPageLink = "Form Id" = field("Form Id");
+                }
+            }
+        }
+    }
+    actions
+    {
+        area(Processing)
+        {
+            action(Approved)
+            {
+                Visible = rec.Status = rec.Status::Pending;
+                trigger OnAction()
+                begin
+                    rec.Status := rec.Status::Approved;
+                end;
+            }
+            action(Reject)
+            {
+
+                trigger OnAction()
+                begin
+                    rec.Status := rec.Status::Rejected;
+                end;
             }
         }
     }

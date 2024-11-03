@@ -9,13 +9,27 @@ table 40015 "ACA-XY-FORM"
         {
             Caption = 'Form Id';
         }
-        field(2; StudentNo; Text[20])
+        field(2; StudentNo; Code[20])
         {
             Caption = 'StudentNo';
+            TableRelation = Customer."No.";
+            trigger OnValidate()
+            var
+                cust: Record Customer;
+            begin
+                rec."Student Name" := cust.Name;
+            end;
         }
         field(3; UnitCode; Text[20])
         {
             Caption = 'UnitCode';
+            TableRelation = "ACA-Units/Subjects".Code;
+            trigger OnValidate()
+            var
+                unit: Record "ACA-Units/Subjects";
+            begin
+                rec."Unit Description" := unit.Desription;
+            end;
         }
         field(4; "Unit Description"; Text[30])
         {
@@ -60,6 +74,7 @@ table 40015 "ACA-XY-FORM"
         field(14; AcademicYr; Text[10])
         {
             Caption = 'Academic year';
+            TableRelation = "ACA-Academic Year".Code;
         }
         field(15; Program; Text[10])
         {
@@ -68,6 +83,41 @@ table 40015 "ACA-XY-FORM"
         field(16; "No. Series"; code[20])
         {
             DataClassification = ToBeClassified;
+        }
+        field(17; StudentName; Code[20])
+        {
+            Caption = 'StudentName';
+
+        }
+        field(18; UnitName; Code[20])
+        {
+            Caption = 'Unit Name';
+
+        }
+        field(19; Group; Code[20])
+        {
+            Caption = 'Group Number';
+            TableRelation = GroupAssignments.GroupId;
+            trigger OnValidate()
+            var
+                GpA: Record GroupAssignments;
+            begin
+                rec.LecturerNo := GpA.LecturerNo;
+            end;
+        }
+        field(20; "Group Name"; Code[20])
+        {
+            Caption = 'Group Name';
+            TableRelation = GroupAssignments.GroupId;
+        }
+        field(21; "Rotation Arears"; Code[20])
+        {
+            Caption = 'Rotation Arears';
+            TableRelation = Lab."Area cODE";
+        }
+        field(22; "Status"; Option)
+        {
+            OptionMembers = " ",Open,Pending,Approved,Rejected;
         }
     }
     keys

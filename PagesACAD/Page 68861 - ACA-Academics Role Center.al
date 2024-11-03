@@ -1208,12 +1208,21 @@ page 68861 "ACA-Academics Role Center"
                     RunObject = Page 65210;
                     ApplicationArea = All;
                 }
-                action(LoadApp)
+                action("Active Lecturers")
                 {
-                    Caption = 'Loading Approvals';
+                    Caption = 'Active Lecturers';
                     Image = Registered;
                     RunObject = Page 68167;
                     ApplicationArea = All;
+                    RunPageLink = Status = const(Active);
+                }
+                action("InActive Lecturers")
+                {
+                    Caption = 'InActive Lecturers';
+                    Image = Registered;
+                    RunObject = Page 68167;
+                    ApplicationArea = All;
+                    RunPageLink = Status = const(Inactive);
                 }
                 // action(ApprovedLoad)
                 // {
