@@ -2,7 +2,7 @@ table 40017 "ACA-XYForm Lines"
 {
     Caption = 'ACA-XYForm Lines';
     DataClassification = ToBeClassified;
-    
+
     fields
     {
         field(1; "XY-FormID"; Text[10])
@@ -48,7 +48,7 @@ table 40017 "ACA-XYForm Lines"
     }
     keys
     {
-        key(PK; "XY-FormID","Student No_","Instructor Id")
+        key(PK; "XY-FormID", "Student No_", "Instructor Id")
         {
             Clustered = true;
         }
