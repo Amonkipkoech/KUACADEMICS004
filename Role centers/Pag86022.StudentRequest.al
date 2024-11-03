@@ -146,6 +146,15 @@ page 86022 "Student Request"
 
                 }
             }
+            group("XY Form ")
+            {
+                action("XY Form")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = Page "XY form";
+
+                }
+            }
 
             group("Certificate Issuance")
             {
