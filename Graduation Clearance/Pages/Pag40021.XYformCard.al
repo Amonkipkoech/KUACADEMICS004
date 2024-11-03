@@ -77,6 +77,7 @@ page 40021 "XY form Card"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Programme field.', Comment = '%';
                 }
+
             }
             group("Content Coverage@")
             {

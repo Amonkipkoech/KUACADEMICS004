@@ -615,7 +615,7 @@ page 68861 "ACA-Academics Role Center"
                     action("Transcript")
                     {
                         Image = Register;
-                        RunObject = Report "Final Graduation Transcript";
+                        RunObject = Report "Provisional College Transcrip3";
                         ApplicationArea = All;
                     }
                     action("Graduation Tracker")
@@ -636,7 +636,7 @@ page 68861 "ACA-Academics Role Center"
                     {
                         Caption = 'Exam Attendance';
                         Image = Report;
-                        RunObject = Report 84509;
+                        RunObject = Report "Exam Attendance Clearance";
                         ApplicationArea = All;
 
                     }

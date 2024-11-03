@@ -5,10 +5,18 @@ table 40010 "Clinical rotation"
 
     fields
     {
+        field(111; "No."; Integer)
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'No';
+            AutoIncrement = true;
+            Editable = false; // Set to false as it will be auto-generated
+        }
         field(1; "Plan ID"; Code[20])
         {
             DataClassification = ToBeClassified;
             Caption = 'Plan ID';
+            TableRelation = "Master Rotation Table"."Plan ID";
             Editable = false; // Set to false as it will be auto-generated
         }
 
@@ -96,7 +104,7 @@ table 40010 "Clinical rotation"
 
     keys
     {
-        key(PK; "Plan ID")
+        key(PK; "No.", "Plan ID")
         {
             Clustered = true;
         }

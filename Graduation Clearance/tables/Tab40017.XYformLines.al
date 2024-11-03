@@ -23,6 +23,11 @@ table 40017 "XY form Lines"
             Caption = 'Rotation Area';
             TableRelation = Lab."Area cODE";
         }
+        field(8; "Student No"; Code[20])
+        {
+            Caption = 'Student No';
+            TableRelation = Customer."No.";
+        }
         field(5; "Unit   Coverage"; Code[50])
         {
             Caption = 'Unit Description Covered';
@@ -41,7 +46,7 @@ table 40017 "XY form Lines"
     }
     keys
     {
-        key(PK; XyId, "Form Id")
+        key(PK; XyId, "Form Id", "Student No")
         {
             Clustered = true;
         }
