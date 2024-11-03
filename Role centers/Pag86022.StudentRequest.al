@@ -44,6 +44,12 @@ page 86022 "Student Request"
                     RunObject = Page "Deffered Students";
                     RunPageLink = Status = const(Approved);
                 }
+                action("Readmision Requests")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = Page "Deffered Students";
+                    RunPageLink = Status = const(ReAdmission);
+                }
                 action("Rejected Requests")
                 {
                     ApplicationArea = Basic, Suite;
@@ -105,15 +111,48 @@ page 86022 "Student Request"
             }
             group("Gown Issuance Register")
             {
+
                 action("Gown Issuance")
                 {
                     ApplicationArea = Basic, Suite;
                     RunObject = Page "Gown Issuance Card";
+                    RunPageLink = status = const("Gown Issued");
+                }
+                action("Returned Gown")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = Page "Gown Issuance Card";
+                    RunPageLink = status = const("Gown Returned");
+                }
+                action("Returned Late")
+                {
+                    Caption = 'Returned Late with fine amount';
+                    ApplicationArea = Basic, Suite;
+                    RunObject = Page "Gown Issuance Card";
+                    RunPageLink = status = const("Returned Late");
                 }
                 action("Gown Journal")
                 {
                     ApplicationArea = Basic, Suite;
                     RunObject = Page "Gown Issuance Ledger";
+                }
+            }
+            group("Clinical Absence ")
+            {
+                action("Clinical Absence Request")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = Page "Student Absence Request List";
+
+                }
+            }
+            group("XY Form ")
+            {
+                action("XY Form")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = Page "XY form";
+
                 }
             }
 

@@ -96,7 +96,7 @@ table 40010 "Clinical rotation"
 
     keys
     {
-        key(PK; "Plan ID", Department)
+        key(PK; "Plan ID")
         {
             Clustered = true;
         }

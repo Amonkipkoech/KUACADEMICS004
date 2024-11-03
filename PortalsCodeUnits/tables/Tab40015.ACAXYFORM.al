@@ -5,7 +5,7 @@ table 40015 "ACA-XY-FORM"
 
     fields
     {
-        field(1; "Form Id"; Text[100])
+        field(1; "Form Id"; Code[20])
         {
             Caption = 'Form Id';
         }
@@ -65,6 +65,10 @@ table 40015 "ACA-XY-FORM"
         {
             Caption = 'Programme';
         }
+        field(16; "No. Series"; code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
     keys
     {
@@ -73,4 +77,16 @@ table 40015 "ACA-XY-FORM"
             Clustered = true;
         }
     }
+    trigger OnInsert()
+    var
+        GeneralSetup: Record "ACA-General Set-Up";
+        NoSerMng: Codeunit NoSeriesManagement;
+    begin
+
+        IF "Form Id" = '' THEN BEGIN
+            GeneralSetup.Get();
+            GeneralSetup.TESTFIELD(GeneralSetup."Attachment Nos");
+            NoSerMng.InitSeries(GeneralSetup."Attachment Nos", xRec."No. Series", 0D, "Form Id", "No. Series");
+        END;
+    end;
 }

@@ -361,14 +361,9 @@ page 68768 "ACA-Students Card"
                     PromotedCategory = Process;
                     Visible = true;
                     ApplicationArea = All;
+                    RunObject = report "Student Proforma Invoice2";
 
-                    trigger OnAction()
-                    begin
-                        Cust.RESET;
-                        Cust.SETFILTER(Cust."No.", Rec."No.");
-                        IF Cust.FIND('-') THEN
-                            REPORT.RUN(86612, TRUE, TRUE, Cust);
-                    end;
+
                 }
                 action("Print Statement")
                 {

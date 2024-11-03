@@ -820,8 +820,8 @@ tableextension 70001 Customers extends Customer
         field(63020; Status; Option)
         {
             DataClassification = ToBeClassified;
-            OptionCaption = 'Registration,Current,Alluminae,Dropped Out,Deffered,Suspended,Expulsion,Discontinued,Deferred,Deceased,Transferred,Disciplinary,Unknown,Completed not graduated,Graduated no Certificates,Graduated with Certificate,Did Not Report,Absconded,Resit,Halt';
-            OptionMembers = Registration,Current,Alluminae,"Dropped Out",Deffered,Suspended,Expulsion,Discontinued,Deferred,Deceased,Transferred,Disciplinary,Unknown,Graduand,"Graduated no Certificates","Graduated with Certificate","Did Not Report",Absconded,Resit,Halt;
+            OptionCaption = 'Registration,Current,Alluminae,Dropped Out,Alumnae,Demoted,Other,Deffered,Suspended,Expulsion,Discontinued,Deferred,Deceased,Transferred,Disciplinary,Unknown,Completed not graduated,Graduated no Certificates,Graduated with Certificate,Did Not Report,Absconded,Resit,Halt';
+            OptionMembers = Registration,Current,Alluminae,"Dropped Out",Alumnae,Demoted,Other,Deffered,Suspended,Expulsion,Discontinued,Deferred,Deceased,Transferred,Disciplinary,Unknown,Graduand,"Graduated no Certificates","Graduated with Certificate","Did Not Report",Absconded,Resit,Halt;
 
 
             trigger OnValidate()

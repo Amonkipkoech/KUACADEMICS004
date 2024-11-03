@@ -12,7 +12,7 @@ table 86002 "Gown Issuance Register"
         field(2; "Student No."; Code[20])
         {
             Caption = 'Student No.';
-            TableRelation = "Student Clerance"."Student No" where(Status = filter('Pending'));
+            TableRelation = "Student Clerance"."Student No" where(Status = filter('Approved'));
             trigger OnValidate()
             begin
                 awardList.Reset();
@@ -67,6 +67,16 @@ table 86002 "Gown Issuance Register"
         {
             CalcFormula = sum("Gown Issuance Ledger".Quantity);
             FieldClass = FlowField;
+        }
+        field(14; DaysPassed; Integer)
+        {
+            Caption = 'Days Passed';
+            DataClassification = ToBeClassified;
+        }
+        field(15; Fine; Decimal)
+        {
+            Caption = 'Fine';
+            DataClassification = ToBeClassified;
         }
     }
     keys

@@ -98,6 +98,9 @@ report 51542 "Student Billings"
             column(Cust_Name; Cust.Name)
             {
             }
+            column(Student_Name; "Student Name")
+            {
+            }
             column(Course_Registration__Fees_Billed_; "Fees Billed")
             {
             }

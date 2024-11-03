@@ -13,7 +13,24 @@ report 70092 "ACA-Student Balances"
             column(USERID; USERID)
             {
             }
-            column(info; info.Picture)
+
+            column(info_name; info.Name)
+            {
+
+            }
+            column(info_address; info.Address)
+            {
+
+            }
+            column(info_mail; info."E-Mail")
+            {
+
+            }
+            column(info_tel; info."Phone No.")
+            {
+
+            }
+            column(info_pic2; info.Picture)
             {
 
             }
