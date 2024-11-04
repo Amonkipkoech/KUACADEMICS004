@@ -37,9 +37,13 @@ table 40008 GroupAssignments
         {
             Caption = 'Notification Viewed';
         }
-        field(9; LecturerNo; Code[20])
+        field(9; LecturerNo; Code[100])
         {
-            Caption = 'Notification Viewed';
+            Caption = 'Lecturer Number';
+        }
+        field(10; LecturerName; Code[100])
+        {
+            Caption = 'Lecturer Name';
         }
     }
     keys

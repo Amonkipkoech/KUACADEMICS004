@@ -290,4 +290,3 @@ table 61534 "ACA-General Set-Up"
     {
     }
 }
-

@@ -16,22 +16,17 @@ report 40002 "master Rotation Table"
             column(Category; Category)
             {
             }
-
             column(info_pic; info.Picture)
             {
-
             }
             column(info_name; info.Name)
             {
-
             }
             column(info_phone; info."Phone No.")
             {
-
             }
             column(info_mail; info."E-Mail")
             {
-
             }
 
 

@@ -99,6 +99,16 @@ table 40010 "Clinical rotation"
             DataClassification = ToBeClassified;
             Description = 'Master Plan Number';
         }
+        field(17; "Lecturer No"; Text[20])
+        {
+            DataClassification = ToBeClassified;
+            Description = 'Lecturer Number';
+        }
+        field(18; "Lecturer Name"; Text[20])
+        {
+            DataClassification = ToBeClassified;
+            Description = 'Lecturer Name';
+        }
 
 
         // Add additional fields as needed

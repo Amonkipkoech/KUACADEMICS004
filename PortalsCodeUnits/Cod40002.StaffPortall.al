@@ -333,50 +333,107 @@ codeunit 40002 StaffPortall
         end;
     end;
 
+    procedure GetXYForms(lectNo: Text) Message: Text
+    begin
+        group.Reset();
+        group.SetRange(group.LecturerNo, lectNo);
+
+        if group.Find('-') then begin
+            repeat
+                Message := 'SUCCESS' + '::';
+            until group.Next() = 0;
+        end
+    end;
+
+    procedure AssignGroupLect(groupId: Text; lectNo: Text) Message: Text
+    begin
+        group.Reset();
+        group.SetRange(group.GroupId, groupId);
+
+        if group.Find('-') then begin
+            repeat
+
+                group.LecturerNo := lectNo;
+                group.LecturerName := GetFullNames(lectNo);
+                if group.Modify() then begin
+                    Message := 'SUCCESS';
+                end
+            until group.Next() = 0;
+        end;
+
+        Exit(Message);
+    end;
+
+    procedure GetAssignedGroups(lecturerNo: Text) Message: Text
+    begin
+        group.Reset();
+        group.SetRange(group.LecturerNo, lecturerNo);
+
+        if group.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + group.GroupId + '[]';
+            until group.Next() = 0;
+        end;
+
+    end;
+
+    procedure GetAssignedStudents(lecturerNo: Text) Message: Text
+    begin
+        group.Reset();
+        group.SetRange(group.LecturerNo, lecturerNo);
+
+        if group.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + group.StudentNo + '::' + GetStudentName(group.StudentNo) + '[]';
+            until group.Next() = 0;
+        end;
+
+    end;
+
     procedure CreateMasterGroups(Block: Text; StudentNo: Text; numberOfStudents: Integer; MasterRotNo: Text; Department: Text) Message: Text
     var
         groupId: Text;
         studentsAssigned: Integer;
     begin
-        // Reset the group and master rotation record sets
+
         group.Reset();
         masterRotation2.Reset();
 
-        // Check if the student is already assigned to a group within the given block
+
         group.SetRange(group.StudentNo, StudentNo);
         group.SetRange(group.Block, Block);
 
         if group.FINDFIRST then begin
             Message := 'Student is already assigned a group' + '::';
         end else begin
-            // Find the master rotation details
+
             masterRotation2.SetRange(masterRotation2."Plan ID", MasterRotNo);
 
             if masterRotation2.Find('-') then begin
-                // Reset the group filter and check for the latest groupId for this block
+
                 group.Reset();
                 group.SetRange(group.Block, Block);
                 group.SetRange(group.MasterRotationNo, MasterRotNo);
 
-                // Get the last assigned groupId or initialize a new one if none exists
+
                 if group.FindLast then begin
-                    groupId := group.GroupId; // Get the last assigned groupId for this block
-                    group.Reset(); // Reset filters to avoid incorrect counting
+                    groupId := group.GroupId;
+                    group.Reset();
                     group.SetRange(group.GroupId, groupId);
                     studentsAssigned := group.Count;
                 end else begin
-                    // No group exists yet for this block and rotation, initialize the first groupId
+
                     groupId := NoSeriesMgt.GetNextNo('GRPNO', 0D, TRUE);
                     studentsAssigned := 0;
                 end;
 
-                // If the current group has reached seven students, get the next group number
+
                 if studentsAssigned >= numberOfStudents then begin
                     groupId := NoSeriesMgt.GetNextNo('GRPNO', 0D, TRUE);
-                    studentsAssigned := 0; // Reset the counter for the new group
+                    studentsAssigned := 0;
                 end;
 
-                // Assign the student to the group
+
                 group.Block := Block;
                 group.Department := Department;
                 group.StartDate := masterRotation2."Start Date";
@@ -396,7 +453,7 @@ codeunit 40002 StaffPortall
     procedure GetDistinctGroups(masterNo: Text; block: Text) Message: Text
     var
 
-        distinctGroupIds: Dictionary of [Text, Boolean]; // To keep track of distinct GroupIds
+        distinctGroupIds: Dictionary of [Text, Boolean];
     begin
         group.Reset();
         group.SetRange(group.MasterRotationNo, masterNo);
@@ -405,7 +462,7 @@ codeunit 40002 StaffPortall
 
         if group.FindSet() then begin
             repeat
-                // Check if the GroupId is already in the dictionary
+
                 if not distinctGroupIds.ContainsKey(group.GroupId) then begin
                     distinctGroupIds.Add(group.GroupId, true);
                     Message += 'SUCCESS' + '::' + group.GroupId + ':::';
@@ -553,6 +610,58 @@ codeunit 40002 StaffPortall
         else begin
             ReturnMsg := 'Invalid Password' + '::';
         end
+
+    end;
+
+    procedure GetStudentRequests(department: Text) Message: Text
+    var
+        deferredStudents: Record "defferedStudents";
+
+    begin
+        deferredStudents.Reset();
+        deferredStudents.SetRange(deferredStudents.Department, department);
+        deferredStudents.SetRange(deferredStudents.status, 0);
+        deferredStudents.SetRange(deferredStudents."Hod cleared", False);
+
+        if deferredStudents.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + deferredStudents."Request No" + '::' + deferredStudents.studentNo + '::' + deferredStudents.StudentName + '::' + deferredStudents.deffermentReason + '::' + Format(deferredStudents."Deferment  Starting Date") + '::' + Format(deferredStudents."Deferment  End Date") + '[]';
+            until deferredStudents.Next() = 0;
+
+        end else begin
+            Message := 'No matching records';
+        end;
+        exit(Message);
+    end;
+
+    procedure AcceptRejectDefer(RequestNo: Text; dept: Text; accept: Boolean) Message: Text
+    var
+        deferredStudents: Record "defferedStudents";
+    begin
+        deferredStudents.Reset();
+        //deferredStudents.SetRange(deferredStudents.Department, dept);
+        deferredStudents.SetRange(deferredStudents.status, 0);
+        deferredStudents.SetRange(deferredStudents."Request No", RequestNo);
+
+        if deferredStudents.FindFirst() then begin
+
+            if accept then begin
+                deferredStudents."Hod cleared" := accept;
+                deferredStudents."Hod Date" := Today;
+                deferredStudents.status := 1;
+            end else begin
+                deferredStudents."Hod cleared" := accept;
+                deferredStudents."Hod Date" := Today;
+                deferredStudents.status := 4;
+            end;
+
+            if deferredStudents.Modify() then begin
+                Message := 'SUCCESS';
+            end else begin
+                Message := 'FAILED';
+            end;
+            exit(Message);
+        end;
 
     end;
 
@@ -3777,6 +3886,25 @@ codeunit 40002 StaffPortall
             until lecturehalls.Next = 0;
         END
     end;
+
+    procedure GetDepartmentLecturers(department: Text) Message: Text
+    begin
+        HRMEmployeeD.Reset();
+        HRMEmployeeD.SetRange(Lecturer, true);
+        HRMEmployeeD.SetRange(Status, HRMEmployeeD.Status::Active);
+        HRMEmployeeD.SetRange("Department Code", department);
+
+        if HRMEmployeeD.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + HRMEmployeeD."No." + '::' + GetFullNames(HRMEmployeeD."No.") + '[]';
+            until HRMEmployeeD.Next() = 0;
+
+        end;
+        exit(Message);
+
+    end;
+
+
 
     procedure GetLecturers(hodno: Code[20]; day: Code[20]; timeslot: Code[20]) Message: Text
     var

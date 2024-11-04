@@ -389,6 +389,7 @@ codeunit 40003 StudentPortalTest
             discontinue.programme := program;
             discontinue.stage := stage;
             discontinue."Mobile No" := mobileNo;
+            //discontinue."School Code" := GetSchool(program);
 
             if discontinue.Insert() then begin
                 Message := 'SUCCESS';
@@ -401,7 +402,7 @@ codeunit 40003 StudentPortalTest
     procedure GetDeferments(studentNo: Text) Message: Text
     begin
         discontinue.Reset();
-        discontinue.SetRange(discontinue.studentNo);
+        discontinue.SetRange(discontinue.studentNo, studentNo);
         if discontinue.Find('-') then begin
             repeat
                 Message += 'Success' + '::' + Format(discontinue."Deferment  Starting Date") + '::' + Format(discontinue."Deferment  End Date") + '::' + Format(discontinue.status) + '[]';
@@ -787,17 +788,19 @@ codeunit 40003 StudentPortalTest
 
     end;
 
-    procedure FillXYForm(studentNo: Text; AcademicYr: Text; Program: Text; UnitCode: Text; date: Date; Time: Text; Duration: text; Coverage: Text) Message: Text
+    procedure FillXYForm(studentNo: Text; AcademicYr: Text; uniCode: Text; Program: Text; groupId: Text; UnitCode: Text; date: Date; Time: Text; Duration: text; Coverage: Text) Message: Text
     var
         formId: Text;
     begin
-        formId := NoSeriesMgt.GetNextNo('XYFORM', TODAY, TRUE);
+
         xyForm.Reset();
         xyForm.SetRange(xyForm.UnitCode, UnitCode);
         xyForm.SetRange(xyForm.StudentNo, studentNo);
         if xyForm.FindFirst() then begin
             Message := 'You have already filled in the form!';
         end else begin
+            GenSetup.Get();
+            formId := NoSeriesMgt.GetNextNo(GenSetup."Attachment Nos", TODAY, TRUE);
             xyForm.StudentNo := studentNo;
             xyForm."Student Name" := GetStudentName(studentNo);
             xyForm.Date := date;
@@ -808,7 +811,9 @@ codeunit 40003 StudentPortalTest
             xyForm.UnitCode := UnitCode;
             xyForm."Unit Description" := GetUnitName(UnitCode);
             xyForm."Form Id" := formId;
-
+            xyForm.LecturerNo := GetXYFormLecturer(groupId);
+            xyForm."Lecturer Name" := GetLectureName(xyForm.LecturerNo);
+            xyForm."Unit Description" := GetUnitName(uniCode);
 
             if xyForm.Insert() then begin
                 Message := 'SUCCESS';
@@ -819,6 +824,33 @@ codeunit 40003 StudentPortalTest
 
         end;
         ;
+
+    end;
+
+    procedure GetXYFormLecturer(groupId: Text) Message: Text
+    begin
+        group.Reset();
+        group.SetRange(group.GroupId, groupId);
+        if group.FindFirst() then begin
+            Message := group.LecturerNo;
+
+        end;
+        exit(Message);
+    end;
+    //To Be completed
+    procedure FillXYformLines(stdNo: Text; formId: Text)
+    var
+        form: Record "ACA-XYForm Lines";
+    begin
+        xyForm.Reset();
+        xyForm.SetRange(xyform."Form Id", formId);
+        if xyForm.FindFirst() then begin
+            form.Reset();
+
+
+
+        end;
+
 
     end;
     // procedure GetStudentName(StudentNo: Text) Message: Text
@@ -1338,6 +1370,27 @@ codeunit 40003 StudentPortalTest
         END;
     end;
 
+    procedure ApplyClinicalAbscence(StudentNo: Text; DateFro: Date; DateTo: Date; Reason: Option; DetailedReason: Text; Prog: Text) Message: Text
+    var
+        clinicalAbs: Record "Student Absence Request";
+    begin
+        clinicalAbs.Reset();
+        clinicalAbs."Admission Number" := StudentNo;
+        clinicalAbs."Date From" := DateFro;
+        clinicalAbs."Date To" := DateTo;
+        clinicalAbs."Reason for Absence" := Reason;
+        clinicalAbs."Other Reason (Specify)" := DetailedReason;
+        clinicalAbs."Student Name" := GetStudentName(StudentNo);
+
+        if clinicalAbs.Insert() then begin
+            Message := 'SUCCESS';
+
+        end;
+        exit(Message);
+
+    end;
+
+
     procedure GetUniversityMailPass(username: Text) Message: Text
     begin
         Customer.RESET;
@@ -1841,6 +1894,15 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         end else
             Error('File not uploaded. No table filter found');
 
+    end;
+
+    procedure getStudentGroup(stdNo: Text) Message: Text
+    begin
+        group.Reset();
+        group.SetRange(group.StudentNo, stdNo);
+        if group.FindFirst() then begin
+            Message := 'SUCCESS' + '::' + group.GroupId;
+        end;
     end;
 
     procedure EditSSApplication(appno: code[50]; appliedprogram: Code[20]; highschcertatt: Boolean; rsltslipatt: Boolean; undegradcertatt: Boolean; mststrascrptsatt: Boolean; transfercaseatt: Boolean; transferletteratt: Boolean; highschcertpath: Text; rsltslippath: Text; undegradcertpath: Text; mststrascrptspath: Text) Message: Text

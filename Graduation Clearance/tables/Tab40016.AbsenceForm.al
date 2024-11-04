@@ -31,6 +31,7 @@ table 40016 "Student Absence Request"
 
             end;
         }
+
         field(4; "Program Admitted"; Text[100])
         {
             DataClassification = ToBeClassified;
