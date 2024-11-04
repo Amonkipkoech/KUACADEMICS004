@@ -618,6 +618,24 @@ page 68861 "ACA-Academics Role Center"
                         RunObject = Report "Provisional College Transcrip3";
                         ApplicationArea = All;
                     }
+                    action("Assessment Card")
+                    {
+                        Image = Register;
+                        RunObject = Report "Assesment Form";//"master Rotation Table"
+                        ApplicationArea = All;
+                    }
+                    action("Master Rotation ")
+                    {
+                        Image = Register;
+                        RunObject = Report "master Rotation Table";//"master Rotation Table"
+                        ApplicationArea = All;
+                    }
+                    // action("Master Rotation ")
+                    // {
+                    //     Image = Register;
+                    //     RunObject = Report "master Rotation Table";//"master Rotation Table"
+                    //     ApplicationArea = All;
+                    // }
                     action("Graduation Tracker")
                     {
                         Image = Register;

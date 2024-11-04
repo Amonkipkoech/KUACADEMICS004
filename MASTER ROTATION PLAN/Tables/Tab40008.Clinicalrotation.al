@@ -66,6 +66,7 @@ table 40010 "Clinical rotation"
         field(10; Block; Text[100])
         {
             DataClassification = ToBeClassified;
+            TableRelation = "Master Rotation Table".Category;
             Description = 'Block Name';
         }
         field(11; "Assessment Start Date"; Date)
@@ -98,6 +99,7 @@ table 40010 "Clinical rotation"
             DataClassification = ToBeClassified;
             Description = 'Master Plan Number';
         }
+
 
         // Add additional fields as needed
     }

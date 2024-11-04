@@ -1,6 +1,7 @@
 report 40001 "Assesment Form"
 {
     DefaultLayout = RDLC;
+    Caption = 'Assessment Card ';
     RDLCLayout = './Reports/SSR/AssessmentCard.rdl';
 
     dataset
@@ -59,12 +60,13 @@ report 40001 "Assesment Form"
                 {
 
                 }
+                trigger OnAfterGetRecord()
+                begin
+                    seq := seq + 1;
+                end;
             }
 
-            trigger OnAfterGetRecord()
-            begin
-                seq := seq + 1;
-            end;
+
         }
     }
 
@@ -87,11 +89,18 @@ report 40001 "Assesment Form"
             }
         }
     }
+    trigger OnInitReport()
+    begin
+        info.RESET;
+        IF info.FIND('-') THEN BEGIN
+            info.CALCFIELDS(Picture);
+        END;
+    end;
 
 
 
     var
         myInt: Integer;
         seq: Integer;
-        info: Record "Company Information";
+        info: Record 79;
 }
