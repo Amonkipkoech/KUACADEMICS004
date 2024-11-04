@@ -333,17 +333,54 @@ codeunit 40002 StaffPortall
         end;
     end;
 
-    procedure GetXYForms(lectNo: Text) Message: Text
+    procedure GetXYFormLines(studentNo: Text) Message: Text
+    var
+        xyFromLines: Record "ACA-XYForm Lines";
     begin
-        group.Reset();
-        group.SetRange(group.LecturerNo, lectNo);
-
-        if group.Find('-') then begin
+        xyFromLines.Reset();
+        xyFromLines.setRange(xyFromLines."Student No_", studentNo);
+        if xyFromLines.Find('-') then begin
             repeat
-                Message := 'SUCCESS' + '::';
-            until group.Next() = 0;
-        end
+                Message += 'SUCCESS' + '::' + xyFromLines."Area" + '::' + xyFromLines.Duration + '::' + xyFromLines.Time + '::' + xyFromLines.Coverage + '::' + Format(xyFromLines.Date) + '[]';
+            until xyFromLines.Next() = 0;
+        end;
+
     end;
+
+    procedure GetXYForms(lectNo: Text; studentNo: Text) Message: Text
+    var
+        xyform: Record "ACA-XY-FORM";
+    begin
+        xyform.Reset();
+        xyform.SetRange(xyform.LecturerNo, lectNo);
+        xyform.SetRange(xyform.StudentNo, studentNo);
+        if xyform.Find('-') then begin
+
+            Message := 'SUCCESS' + '::' + xyform.StudentNo + '::' + xyform."Student Name" + '::' + xyform."Form Id";
+
+        end;
+        exit(Message);
+
+    end;
+
+    procedure ApproveRejectXyform(lectNo: Text; StudentNo: Text; status: Option) Message: Text
+    var
+        xyform: Record "ACA-XY-FORM";
+    begin
+        xyform.Reset();
+        xyform.SetRange(xyform.LecturerNo, lectNo);
+        xyform.SetRange(xyform.StudentNo, studentNo);
+        if xyform.FindFirst() then begin
+            xyform.Status := status;
+            if xyform.Modify() then begin
+                Message := 'Success';
+            end;
+        end;
+        exit(Message);
+
+    end;
+
+
 
     procedure AssignGroupLect(groupId: Text; lectNo: Text) Message: Text
     begin
@@ -364,29 +401,52 @@ codeunit 40002 StaffPortall
         Exit(Message);
     end;
 
-    procedure GetAssignedGroups(lecturerNo: Text) Message: Text
+    procedure GetAssignedGroups(lecturerNo: Text): Text
+    var
+        Message: Text;
+        LastGroupId: Code[20];
     begin
+
         group.Reset();
         group.SetRange(group.LecturerNo, lecturerNo);
 
-        if group.Find('-') then begin
+        group.SetCurrentKey("GroupId");
+
+        if group.FindSet() then begin
             repeat
-                Message += 'SUCCESS' + '::' + group.GroupId + '[]';
+
+                if group.GroupId <> LastGroupId then begin
+                    Message += 'SUCCESS' + '::' + group.GroupId + '[]';
+                    LastGroupId := group.GroupId;
+                end;
             until group.Next() = 0;
         end;
 
+        exit(Message);
     end;
 
+
     procedure GetAssignedStudents(lecturerNo: Text) Message: Text
+    var
+        xyform: Record "ACA-XY-FORM";
+
     begin
         group.Reset();
-        group.SetRange(group.LecturerNo, lecturerNo);
+        xyform.Reset();
+        xyform.setRange(xyform.LecturerNo, lecturerNo);
+        xyform.SetRange(xyform.Status, 1);
+        if xyform.find('-') then begin
+            group.SetRange(group.LecturerNo, xyform.LecturerNo);
 
-        if group.Find('-') then begin
-            repeat
-                Message += 'SUCCESS' + '::' + group.StudentNo + '::' + GetStudentName(group.StudentNo) + '[]';
-            until group.Next() = 0;
+            if group.Find('-') then begin
+                repeat
+                    Message += 'SUCCESS' + '::' + group.StudentNo + '::' + GetStudentName(group.StudentNo) + '[]';
+                until group.Next() = 0;
+            end;
+
         end;
+        exit(Message);
+
 
     end;
 
@@ -569,6 +629,25 @@ codeunit 40002 StaffPortall
     //     end;
     //     exit(Name);
     // end;
+    procedure GenerateExamCard(studentNo: Text; FilenameFromapp: Text)
+    var
+        filename: Text;
+        reportResult: Boolean;
+    begin
+        filename := FILESPATH_S + filenameFromApp;
+
+        IF EXISTS(filename) THEN
+            ERASE(filename);
+
+        CourseRegistration.Reset();
+        CourseRegistration.SetRange(CourseRegistration."Student No.", studentNo);
+        if CourseRegistration.find('-') then begin
+            REPORT.SAVEASPDF(report::"Exam Attendance Clearance", filename, CourseRegistration);
+
+
+        end;
+
+    end;
 
     procedure GenerateExamAttendanceList(lectNo: Text; Sem: text; hall: Text; unitCode: Text; filenameFromApp: Text) Message: Text
     var

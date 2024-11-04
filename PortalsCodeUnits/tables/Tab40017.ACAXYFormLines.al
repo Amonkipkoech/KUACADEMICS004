@@ -5,6 +5,7 @@ table 40019 "ACA-XYForm Lines"
 
     fields
     {
+
         field(1; "XY-FormID"; Text[10])
         {
             Caption = 'XY-FormID';
@@ -21,7 +22,7 @@ table 40019 "ACA-XYForm Lines"
         {
             Caption = 'Area';
         }
-        field(5; "Time"; Time)
+        field(5; "Time"; Text[50])
         {
             Caption = 'Time';
         }
@@ -45,10 +46,18 @@ table 40019 "ACA-XYForm Lines"
         {
             Caption = 'Block';
         }
+        field(11; Coverage; Text[400])
+        {
+            Caption = 'Coverage';
+        }
+        field(12; "Line ID"; Code[20])
+        {
+            Caption = 'Line ID';
+        }
     }
     keys
     {
-        key(PK; "XY-FormID", "Student No_", "Instructor Id")
+        key(PK; "XY-FormID", "Line ID", "Student No_", "Instructor Id")
         {
             Clustered = true;
         }
