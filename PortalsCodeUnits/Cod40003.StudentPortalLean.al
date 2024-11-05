@@ -268,7 +268,7 @@ codeunit 40003 StudentPortalTest
             until formLines.Next() = 0;
         end;
         exit(Message);
-        
+
         ;
 
     end;
@@ -845,7 +845,7 @@ codeunit 40003 StudentPortalTest
 
     end;
 
-    procedure FillXYForm(studentNo: Text; AcademicYr: Text; uniCode: Text; Program: Text; groupId: Text; UnitCode: Text; date: Date; Time: Text; Duration: text; Coverage: Text) Message: Text
+    procedure FillXYForm(studentNo: Text; AcademicYr: Text; Program: Text; groupId: Text; UnitCode: Text; date: Date) Message: Text
     var
         formId: Text;
     begin
@@ -861,8 +861,6 @@ codeunit 40003 StudentPortalTest
             xyForm.StudentNo := studentNo;
             xyForm."Student Name" := GetStudentName(studentNo);
             xyForm.Date := date;
-            xyForm.Duration := Duration;
-            xyForm.Coverage := Coverage;
             xyForm.AcademicYr := AcademicYr;
             xyForm.Program := Program;
             xyForm.UnitCode := UnitCode;
@@ -870,7 +868,7 @@ codeunit 40003 StudentPortalTest
             xyForm."Form Id" := formId;
             xyForm.LecturerNo := GetXYFormLecturer(groupId);
             xyForm."Lecturer Name" := GetLectureName(xyForm.LecturerNo);
-            xyForm."Unit Description" := GetUnitName(uniCode);
+            xyForm."Unit Description" := GetUnitName(unitCode);
             xyForm.Status := 1;
 
             if xyForm.Insert() then begin
@@ -883,6 +881,23 @@ codeunit 40003 StudentPortalTest
         end;
         ;
 
+    end;
+
+    procedure CheckXYFormStatus(studentNo: Text; Block: Text) Message: Boolean
+    begin
+
+        xyForm.Reset();
+        xyForm.SetRange(StudentNo, studentNo);
+        xyForm.SetRange(xyForm.Block, Block);
+        xyForm.SetRange(xyForm.Status, 4);
+
+        if xyForm.Find('-') then begin
+            if xyForm.Find('-') then begin
+                Message := true;
+
+            end;
+        end;
+        Exit(Message);
     end;
 
     procedure GetXYFormLecturer(groupId: Text) Message: Text

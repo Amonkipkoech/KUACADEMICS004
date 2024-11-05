@@ -649,7 +649,7 @@ codeunit 40002 StaffPortall
 
     end;
 
-    procedure GenerateExamAttendanceList(lectNo: Text; Sem: text; hall: Text; unitCode: Text; filenameFromApp: Text) Message: Text
+    procedure GenerateExamAttendanceList(Sem: text; unitCode: Text; filenameFromApp: Text) Message: Text
     var
         filename: Text;
         reportResult: Boolean;
@@ -665,7 +665,6 @@ codeunit 40002 StaffPortall
         if studentUnits.Find('-') then begin
             REPORT.SAVEASPDF(report::"Exam Attendance.", filename, StudentUnits);
             Message := 'Exam card generated successfully after adding registered courses.';
-
 
         end
 

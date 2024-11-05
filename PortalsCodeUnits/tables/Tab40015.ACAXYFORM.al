@@ -119,6 +119,11 @@ table 40015 "ACA-XY-FORM"
         {
             OptionMembers = " ",Open,Pending,Approved,Rejected;
         }
+        field(23; "Block"; Code[20])
+        {
+
+            Caption = 'Semester';
+        }
     }
     keys
     {
