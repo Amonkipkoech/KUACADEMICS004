@@ -229,6 +229,50 @@ codeunit 40003 StudentPortalTest
 
     end;
 
+    procedure FillXYformLines(studentNo: Text; formId: Text; Date: Date; Coverage: Text; Duration: Text; groupId: Text; Block: Text; AssignedArea: Text; time: Text) Message: Text
+    var
+        formLines: Record "ACA-XYForm Lines";
+        No: Text;
+
+    begin
+        No := NoSeriesMgt.GetNextNo('XYLINES', TODAY, TRUE);
+        formLines.Reset();
+        formLines."XY-FormID" := formId;
+        formLines."Area" := AssignedArea;
+        formLines.Block := Block;
+        formLines.Date := Date;
+        formLines.Coverage := Coverage;
+        formLines."Instructor Id" := GetXYFormLecturer(groupId);
+        formLines."Student No_" := studentNo;
+        formLines."Instructor name" := GetLectureName(GetXYFormLecturer(groupId));
+        formLines.Time := time;
+        formLines.Duration := Duration;
+        formLines."Line ID" := No;
+
+        if formLines.Insert() then begin
+            Message := 'SUCCESS';
+        end;
+        exit(Message);
+
+    end;
+
+    procedure GetXyFormLines(formId: Text) Message: Text
+    var
+        formLines: Record "ACA-XYForm Lines";
+    begin
+        formLines.Reset();
+        formLines.SetRange(formLines."XY-FormID", formId);
+        if formLines.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + formLines."Area" + '::' + formLines."Instructor name" + '::' + formLines.Coverage + '::' + Format(formLines.Date) + '[]';
+            until formLines.Next() = 0;
+        end;
+        exit(Message);
+
+        ;
+
+    end;
+
     procedure GenerateStudentProformaInvoice2("StudentNo": Code[20]; filenameFromApp: Text)
     var
         filename: Text;
@@ -260,9 +304,22 @@ codeunit 40003 StudentPortalTest
 
             end
         end;
-
+        exit(Message);
 
     end;
+
+    procedure GetXYForms(studentNo: Text; currentSem: Text) Message: Text
+    begin
+        xyForm.Reset();
+        xyForm.SetRange(xyForm.StudentNo, studentNo);
+
+        if xyForm.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + xyForm."Form Id" + '::' + xyForm.Group + '::' + xyForm."Lecturer Name" + '::' + Format(xyForm.Status) + '::' + xyForm.UnitCode + '[]';
+            until xyForm.Next() = 0;
+        end;
+    end;
+
 
     procedure SeenGroup(StudentNo: Text; currentSem: Text) Message: Boolean
     begin
@@ -788,7 +845,7 @@ codeunit 40003 StudentPortalTest
 
     end;
 
-    procedure FillXYForm(studentNo: Text; AcademicYr: Text; uniCode: Text; Program: Text; groupId: Text; UnitCode: Text; date: Date; Time: Text; Duration: text; Coverage: Text) Message: Text
+    procedure FillXYForm(studentNo: Text; AcademicYr: Text; Program: Text; groupId: Text; UnitCode: Text; date: Date) Message: Text
     var
         formId: Text;
     begin
@@ -804,8 +861,6 @@ codeunit 40003 StudentPortalTest
             xyForm.StudentNo := studentNo;
             xyForm."Student Name" := GetStudentName(studentNo);
             xyForm.Date := date;
-            xyForm.Duration := Duration;
-            xyForm.Coverage := Coverage;
             xyForm.AcademicYr := AcademicYr;
             xyForm.Program := Program;
             xyForm.UnitCode := UnitCode;
@@ -813,7 +868,8 @@ codeunit 40003 StudentPortalTest
             xyForm."Form Id" := formId;
             xyForm.LecturerNo := GetXYFormLecturer(groupId);
             xyForm."Lecturer Name" := GetLectureName(xyForm.LecturerNo);
-            xyForm."Unit Description" := GetUnitName(uniCode);
+            xyForm."Unit Description" := GetUnitName(unitCode);
+            xyForm.Status := 1;
 
             if xyForm.Insert() then begin
                 Message := 'SUCCESS';
@@ -825,6 +881,23 @@ codeunit 40003 StudentPortalTest
         end;
         ;
 
+    end;
+
+    procedure CheckXYFormStatus(studentNo: Text; Block: Text) Message: Boolean
+    begin
+
+        xyForm.Reset();
+        xyForm.SetRange(StudentNo, studentNo);
+        xyForm.SetRange(xyForm.Block, Block);
+        xyForm.SetRange(xyForm.Status, 4);
+
+        if xyForm.Find('-') then begin
+            if xyForm.Find('-') then begin
+                Message := true;
+
+            end;
+        end;
+        Exit(Message);
     end;
 
     procedure GetXYFormLecturer(groupId: Text) Message: Text
