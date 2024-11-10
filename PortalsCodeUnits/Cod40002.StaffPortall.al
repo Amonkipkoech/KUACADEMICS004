@@ -231,6 +231,20 @@ codeunit 40002 StaffPortall
 
     end;
 
+    procedure GetMasterRotationPlan(block: text; Department: Text) Message: Text
+    begin
+        masterRotation2.Reset();
+        masterRotation2.SetRange(masterRotation2."Block Name", block);
+        masterRotation2.SetRange(masterRotation2.Department, Department);
+        if masterRotation2.FindFirst() then begin
+            Message := 'SUCCESS' + '::' + masterRotation2."Plan ID" + '::' + masterRotation2."Block Name" + '::' + Format(masterRotation2."Theory StartDate") + '::' + Format(masterRotation2."Theory EndDate") + '::'
+            + Format(masterRotation2."Clinical StartDate") + '::' + Format(masterRotation2."Clinical EndDate") + '::' + Format(masterRotation2."Exams StartDate") + '::' + Format(masterRotation2."Exams EndDate") + '::' + Format(masterRotation2.Status);
+
+        end;
+        Exit(Message);
+
+    end;
+
     procedure GetStudentStatus(StudentNo: Text) Message: Text
     begin
         TblCustomer.Reset();
