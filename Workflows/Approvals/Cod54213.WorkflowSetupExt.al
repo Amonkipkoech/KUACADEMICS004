@@ -50,6 +50,13 @@ codeunit 86007 "Workflow Setup Ext."
         StudentClearanceWorkfowDescTxt: TextConst ENU = 'Student Clearance Request Approval Workflow';
         StudentClearanceTypeCondTxt: TextConst ENU = '<?xml version = "1.0" encoding="utf-8" standalone="yes"?><ReportParameters><DataItems><DataItem name=StudentClearance>%1</DataItem></DataItems></ReportParameters>';
 
+        //XY FORM Request 
+        XyClearance: Record "ACA-XY-FORM";
+        XyClearanceInfoWorkflowCategoryTxt: TextConst ENU = 'XY CLR';
+        XYClearanceWorkflowCategoryDescTxt: TextConst ENU = 'Xy Clearance Request';
+        XyClearanceWorkflowCodeTxt: TextConst ENU = 'XYCLR';
+        XyClearanceWorkfowDescTxt: TextConst ENU = 'Xy Clearance Request Approval Workflow';
+        XyClearanceTypeCondTxt: TextConst ENU = '<?xml version = "1.0" encoding="utf-8" standalone="yes"?><ReportParameters><DataItems><DataItem name=StudentClearance>%1</DataItem></DataItems></ReportParameters>';
 
 
 
@@ -66,6 +73,7 @@ codeunit 86007 "Workflow Setup Ext."
         WorkflowSetup.InsertWorkflowCategory(MaintenanceRequestWorkflowCategoryTxt, MaintenanceRequestWorkflowCategoryDescTxt);
         WorkflowSetup.InsertWorkflowCategory(UtilityBillWorkflowCategoryTxt, UtilityBillWorkflowCategoryDescTxt);
         WorkflowSetup.InsertWorkflowCategory(StudentClearanceInfoWorkflowCategoryTxt, StudentClearanceWorkflowCategoryDescTxt);
+        WorkflowSetup.InsertWorkflowCategory(XyClearanceInfoWorkflowCategoryTxt, XYClearanceWorkflowCategoryDescTxt);
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Workflow Setup", 'OnAfterInsertApprovalsTableRelations', '', true, true)]
@@ -77,7 +85,9 @@ codeunit 86007 "Workflow Setup Ext."
 
 
         WorkflowSetup.InsertTableRelation(Database::"Student Clerance", 0, Database::"Approval Entry", ApprovalEntry.FieldNo("Record ID to Approve"));
+        WorkflowSetup.InsertTableRelation(Database::"ACA-XY-FORM", 0, Database::"Approval Entry", ApprovalEntry.FieldNo("Record ID to Approve"));
     end;
+
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Workflow Setup", 'OnInsertWorkflowTemplates', '', true, true)]
 
@@ -86,6 +96,7 @@ codeunit 86007 "Workflow Setup Ext."
 
 
         InsertMeetingBookingWorkflowTemplate();
+        InsertStudentClearanceWorkflowTemplate();
         InsertStudentClearanceWorkflowTemplate();
     end;
 
@@ -117,7 +128,6 @@ codeunit 86007 "Workflow Setup Ext."
     begin
         WorkflowSetup.InsertWorkflowTemplate(Workflow, StudentClearanceWorkflowCodeTxt, studentClearanceWorkfowDescTxt, StudentClearanceInfoWorkflowCategoryTxt);
 
-
         WorkflowSetup.MarkWorkflowAsTemplate(Workflow);
     end;
 
@@ -142,8 +152,38 @@ codeunit 86007 "Workflow Setup Ext."
         exit(StrSubstNo(StudentClearanceTypeCondTxt, WorkflowSetup.Encode(studentClearance.GetView(false))))
     end;
 
-    /* Utility Bill */
+    /* XY Form  */
 
+    local procedure InsertXyClearanceWorkflowTemplate()
+    var
+        Workflow: Record Workflow;
+    begin
+        WorkflowSetup.InsertWorkflowTemplate(Workflow, XyClearanceWorkflowCodeTxt, XyClearanceWorkfowDescTxt, XyClearanceInfoWorkflowCategoryTxt);
+
+
+        WorkflowSetup.MarkWorkflowAsTemplate(Workflow);
+    end;
+
+    local procedure InsertXyClearanceWorkflowDetails(var Workflow: Record Workflow)
+    begin
+        WorkflowSetup.initWorkflowStepArgument(WorkflowStepArgument, WorkflowStepArgument."Approver Type"::Approver, WorkflowStepArgument."Approver Limit Type"::"Direct Approver", 0, '', BlankDateFormula, true);
+        WorkflowSetup.InsertDocApprovalWorkflowSteps(
+            Workflow,
+            BuildXyClearanceTypeConditions(XyClearance.Status::Open),
+            WorkflowEventHandling.RunWorkflowOnSendXyForApprovalCode,
+            BuildMeetingBookingTypeConditions(XyClearance.Status::Pending),
+            WorkflowEventHandling.RunWorkflowOnCancelStudentClearanceCode,
+            WorkflowStepArgument,
+            true
+        );
+    end;
+
+    local procedure BuildXyClearanceTypeConditions(Status: Integer): Text
+    begin
+        studentClearance.Reset;
+        studentClearance.SetRange(Status, Status);
+        exit(StrSubstNo(StudentClearanceTypeCondTxt, WorkflowSetup.Encode(studentClearance.GetView(false))))
+    end;
 
 
 

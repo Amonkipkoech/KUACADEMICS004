@@ -191,6 +191,7 @@ page 86017 "Deffered Students Card"
             action(Approve)
             {
                 ApplicationArea = All;
+                Visible = rec.status = rec.status::Pending;
 
                 trigger OnAction();
                 begin
@@ -203,12 +204,26 @@ page 86017 "Deffered Students Card"
             action(Reject)
             {
                 ApplicationArea = All;
+                Visible = rec.status = rec.status::Pending;
 
                 trigger OnAction();
                 begin
                     if Rec.Get() then
                         if Confirm('Do you want to Reject the Application?', true) = false then exit;
                     Rec.status := Rec.status::Cancelled;
+                    Rec.Modify();
+                end;
+            }
+            action("Re-admission")
+            {
+                ApplicationArea = All;
+                Visible = rec.status = rec.status::Approved;
+
+                trigger OnAction();
+                begin
+                    if Rec.Get() then
+                        if Confirm('Do you want to be re-admitted ?', true) = false then exit;
+                    Rec.status := Rec.status::ReAdmission;
                     Rec.Modify();
                 end;
             }

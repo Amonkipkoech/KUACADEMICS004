@@ -1212,6 +1212,15 @@ page 68861 "ACA-Academics Role Center"
                     RunPageLink = Status = filter("Approved");
                     ApplicationArea = All;
                 }
+                  action("XY Form ")
+                {
+                    Image = Allocate;
+                    Caption = 'Approved Master Rotation';
+                    RunObject = Page "XY form";
+                    RunPageLink = Status = filter("Approved");
+                    ApplicationArea = All;
+                }
+
 
 
             }

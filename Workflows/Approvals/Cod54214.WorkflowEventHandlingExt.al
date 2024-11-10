@@ -22,6 +22,10 @@ codeunit 86006 "Workflow Event Handling Ext."
         //studentClearance
         studentClearanceForApprovalEventDescTxt: TextConst ENU = 'Approval of Student Clearance is Requested';
         studentclearanceRequestCancelEventDescTxt: TextConst ENU = 'Approval of Student Clearance is Canceled';
+        //XYstudentClearance
+        XyClearanceForApprovalEventDescTxt: TextConst ENU = 'Approval of Xy Clearance is Requested';
+        XyclearanceRequestCancelEventDescTxt: TextConst ENU = 'Approval of Xy Clearance is Canceled';
+
 
 
     /* *************************************************************************************************************************************/
@@ -33,6 +37,10 @@ codeunit 86006 "Workflow Event Handling Ext."
         //StudentClearance
         WorkflowEventHandling.AddEventToLibrary(RunWorkflowOnSendStudentClearanceForApprovalCode, Database::"Student Clerance", studentClearanceForApprovalEventDescTxt, 0, false);
         WorkflowEventHandling.AddEventToLibrary(RunWorkflowOnCancelStudentClearanceCode, Database::"Student Clerance", studentclearanceRequestCancelEventDescTxt, 0, false);
+
+        //XyClearance
+        WorkflowEventHandling.AddEventToLibrary(RunWorkflowOnSendXyForApprovalCode, Database::"ACA-XY-FORM", XyClearanceForApprovalEventDescTxt, 0, false);
+        WorkflowEventHandling.AddEventToLibrary(RunWorkflowOnCancelXyClearanceCode, Database::"ACA-XY-FORM", XyclearanceRequestCancelEventDescTxt, 0, false);
 
 
     end;
@@ -53,6 +61,13 @@ codeunit 86006 "Workflow Event Handling Ext."
             WorkflowEventHandling.RunWorkflowOnApproveApprovalRequestCode:
                 WorkflowEventHandling.AddEventPredecessor(WorkflowEventHandling.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendStudentClearanceForApprovalCode);
         end;
+        //xyclearance
+        case EventFunctionName of
+            RunWorkflowOnCancelXyClearanceCode:
+                WorkflowEventHandling.AddEventPredecessor(RunWorkflowOnCancelxyClearanceCode, RunWorkflowOnSendXyForApprovalCode);
+            WorkflowEventHandling.RunWorkflowOnApproveApprovalRequestCode:
+                WorkflowEventHandling.AddEventPredecessor(WorkflowEventHandling.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendXyForApprovalCode);
+        end;
 
     end;
 
@@ -69,16 +84,33 @@ codeunit 86006 "Workflow Event Handling Ext."
         exit(UpperCase('RunWorkflowOnSendStudentClearanceForApproval'));
     end;
 
+    procedure RunWorkflowOnSendXyForApprovalCode(): Code[128]
+    begin
+        exit(UpperCase('RunWorkflowOnSendXyForApprovalCode'));
+    end;
+
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approval Mgnt. Util.", 'OnSendStudentClearanceForApproval', '', true, true)]
     local procedure RunWorkflowOnSendStudentClearanceForApproval(Var StudentClearance: Record "Student Clerance")
     begin
-
         WorkflowManagement.HandleEvent(RunWorkflowOnSendStudentClearanceForApprovalCode, StudentClearance)
     end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approval Mgnt. Util.", 'OnSendXyClearanceForApproval', '', true, true)]
+    local procedure RunWorkflowOnSendXyClearanceForApproval(var XyRequest: Record "ACA-XY-FORM")
+    begin
+
+        WorkflowManagement.HandleEvent(RunWorkflowOnSendStudentClearanceForApprovalCode, XyRequest)
+    end;
+
 
     procedure RunWorkflowOnCancelStudentClearanceCode(): Code[128]
     begin
         exit(UpperCase('RunWorkflowOnCancelStudentClearance'));
+    end;
+
+    procedure RunWorkflowOnCancelXyClearanceCode(): Code[128]
+    begin
+        exit(UpperCase('RunWorkflowOnCancelXyClearance'));
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approval Mgnt. Util.", 'OnCancelStudentClearanceForApproval', '', true, true)]
@@ -92,6 +124,20 @@ codeunit 86006 "Workflow Event Handling Ext."
             StudentClearance.Modify()
         end;
     end;
+
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approval Mgnt. Util.", 'OnCancelStudentClearanceForApproval', '', true, true)]
+    // local procedure RunWorkflowOnCancelXyClearance(var XyRequest: Record "ACA-XY-FORM")//
+    // begin
+    //     WorkflowManagement.HandleEvent(RunWorkflowOnCancelUtilityBillCode, StudentClearance);
+    //     StudentClearance.Reset();
+    //     StudentClearance.SetRange("Clearance No", StudentClearance."Clearance No");
+    //     if StudentClearance.FindFirst() then begin
+    //         StudentClearance.Status := StudentClearance.Status::Open;
+    //         StudentClearance.Modify()
+    //     end;
+    // end;
+
+
     /* Utility Bill */
     procedure RunWorkflowOnSendUtilityBillForApprovalCode(): Code[128]
     begin
