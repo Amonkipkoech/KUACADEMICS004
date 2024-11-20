@@ -234,11 +234,9 @@ codeunit 40002 StaffPortall
     procedure GetMasterRotationPlan(block: text; Department: Text) Message: Text
     begin
         masterRotation2.Reset();
-        masterRotation2.SetRange(masterRotation2."Block Name", block);
         masterRotation2.SetRange(masterRotation2.Department, Department);
         if masterRotation2.FindFirst() then begin
-            Message := 'SUCCESS' + '::' + masterRotation2."Plan ID" + '::' + masterRotation2."Block Name" + '::' + Format(masterRotation2."Theory StartDate") + '::' + Format(masterRotation2."Theory EndDate") + '::'
-            + Format(masterRotation2."Clinical StartDate") + '::' + Format(masterRotation2."Clinical EndDate") + '::' + Format(masterRotation2."Exams StartDate") + '::' + Format(masterRotation2."Exams EndDate") + '::' + Format(masterRotation2.Status);
+            Message := 'SUCCESS' + '::' + masterRotation2."Plan ID" + '::' + Format(masterRotation2.Yr1sem1Block1StartDate) + '::' + Format(masterRotation2.Yr2sem2clinic2End) + '::' + Format(masterRotation2.Status);
 
         end;
         Exit(Message);
@@ -291,32 +289,78 @@ codeunit 40002 StaffPortall
         exit(Message)
     end;
 
-    procedure CreateMasterRotationPlan(Block: Text; HOD: Text; department: Text; Campus: Text; StartDate: Date; EndDate: Date; TheoryStart: Date; TheoryEnd: Date; ClinicalStart: Date; ClinicalEnd: Date; ExamStart: Date; ExamEnd: Date) Message: Text
+
+    procedure CreateMasterRotationPlan(
+    Yr1sem1Block1StartDate: Date; Yr1sem1Block1EndDate: Date; Yr1sem1clinical1StartDate: Date; Yr1sem1clinical1EndDate: Date;
+    Yr1sem1Block2StartDate: Date; Yr1sem1Block2EndDate: Date; Yr1sem1clinical2StartDate: Date; Yr1sem1clinical2EndDate: Date;
+
+    Yr1sem2Block1StartDate: Date; Yr1sem2Block1EndDate: Date; Yr1sem2clinical1StartDate: Date; Yr1sem2clinical1EndDate: Date;
+    Yr1sem2Block2StartDate: Date; Yr1sem2Block2EndDate: Date; Yr1sem2clinical2StartDate: Date; Yr1sem2clinical2EndDate: Date;
+
+    Yr2sem1Block1StartDate: Date; Yr2sem1Block1EndDate: Date; Yr2sem1clinical1StartDate: Date; Yr2sem1clinical1EndDate: Date;
+    Yr2sem1Block2StartDate: Date; Yr2sem1Block2EndDate: Date; Yr2sem1clinical2StartDate: Date; Yr2sem1clinical2EndDate: Date;
+
+    Yr2sem2Block1StartDate: Date; Yr2sem2Block1EndDate: Date; Yr2sem2clinical1StartDate: Date; Yr2sem2clinical1EndDate: Date;
+    Yr2sem2Block2StartDate: Date; Yr2sem2Block2EndDate: Date; Yr2sem2clinical2StartDate: Date; Yr2sem2clinical2EndDate: Date;
+
+    HOD: Text; department: Text; Campus: Text) Message: Text
     var
         masterNo: Text;
 
     begin
         masterNo := NoSeriesMgt.GetNextNo('MAROT', 0D, TRUE);
         masterRotation2.Reset();
-        masterRotation2.SetRange(masterRotation2."Block Name", Block);
+        //masterRotation2.SetRange(masterRotation2."Block Name", Block);
         masterRotation2.setRange(masterRotation2.Department, department);
         if masterRotation2.FindFirst() then begin
             Message := 'You have already Created a master Rotation plan for this Block!!';
         end else begin
             masterRotation2."Plan ID" := masterNo;
-            masterRotation2."Block Name" := Block;
             masterRotation2."HoD Name" := GetLecturerNames(HOD);
             masterRotation2.Department := department;
             masterRotation2.HOD := HOD;
-            //masterRotation.Campus := Campus;
-            masterRotation2."Start Date" := StartDate;
-            masterRotation2."End Date" := EndDate;
-            masterRotation2."Theory StartDate" := TheoryStart;
-            masterRotation2."Theory EndDate" := TheoryEnd;
-            masterRotation2."Clinical StartDate" := ClinicalStart;
-            masterRotation2."Clinical EndDate" := ClinicalEnd;
-            masterRotation2."Exams StartDate" := ExamStart;
-            masterRotation2."Exams EndDate" := ExamEnd;
+
+            masterRotation2.Yr1sem1Block1StartDate := Yr1sem1Block1StartDate;
+            masterRotation2.Yr1sem1block1EndDate := Yr1sem1Block1EndDate;
+            masterRotation2.Yr1sem1clinicStart := Yr1sem1clinical1StartDate;
+            masterRotation2.Yr1sem1clinicEnd := Yr1sem1clinical1EndDate;
+
+            masterRotation2.Yr1sem1Block2StartDate := Yr1sem2Block1StartDate;
+            masterRotation2.Yr1sem1block2EndDate := Yr1sem2Block1EndDate;
+            masterRotation2.Yr1sem1clinic2Start := Yr1sem1clinical2StartDate;
+            masterRotation2.Yr1sem1clinic2End := Yr1sem1clinical2EndDate;
+
+            masterRotation2.Yr1sem2Block1StartDate := Yr1sem2Block1StartDate;
+            masterRotation2.Yr1sem2block1EndDate := Yr1sem2Block1EndDate;
+            masterRotation2.Yr1sem2clinic1Start := Yr1sem2clinical1StartDate;
+            masterRotation2.Yr1sem2clinic1End := Yr1sem2clinical1EndDate;
+
+            masterRotation2.Yr1sem2Block2StartDate := Yr1sem2Block2StartDate;
+            masterRotation2.Yr1sem2block2EndDate := Yr1sem2Block2EndDate;
+            masterRotation2.Yr1sem2clinic2Start := Yr1sem2clinical2StartDate;
+            masterRotation2.Yr1sem2clinic2End := Yr1sem2clinical2EndDate;
+
+            masterRotation2.Yr2sem1Block1StartDate := Yr2sem1Block1StartDate;
+            masterRotation2.Yr2sem1block1EndDate := Yr2sem1Block1EndDate;
+            masterRotation2.Yr2sem1clinic1Start := Yr2sem1clinical1StartDate;
+            masterRotation2.Yr2sem1clinic1End := Yr2sem1clinical1EndDate;
+
+            masterRotation2.Yr2sem1Block2StartDate := Yr2sem1Block2StartDate;
+            masterRotation2.Yr2sem1block2EndDate := Yr2sem1Block2EndDate;
+            masterRotation2.Yr2sem1clinic2Start := Yr2sem2clinical2StartDate;
+            masterRotation2.Yr2sem1clinic2End := Yr2sem1clinical2EndDate;
+
+            masterRotation2.Yr2sem2Block1StartDate := Yr2sem2Block1StartDate;
+            masterRotation2.Yr2sem2block1EndDate := Yr2sem2Block1EndDate;
+            masterRotation2.Yr2sem2clinic1Start := Yr2sem2clinical1StartDate;
+            masterRotation2.Yr2sem2clinic1End := Yr2sem2clinical1EndDate;
+
+            masterRotation2.Yr2sem2Block2StartDate := Yr2sem2Block1StartDate;
+            masterRotation2.Yr2sem2block2EndDate := Yr2sem2Block2EndDate;
+            masterRotation2.Yr2sem2clinic2Start := Yr2sem2clinical2StartDate;
+            masterRotation2.Yr2sem2clinic2End := Yr2sem2clinical2EndDate;
+            masterRotation2.Status := masterRotation2.Status::Open;
+
             masterRotation2."No. Series" := 'MAROT';
             if masterRotation2.Insert() then begin
                 Message := 'SUCCESS' + '::' + masterRotation2."Plan ID";
@@ -326,6 +370,53 @@ codeunit 40002 StaffPortall
         end;
 
 
+    end;
+
+    procedure GetTotalStudentsInDept(dept: Text) Message: Text
+    var
+        counter: Integer;
+    begin
+        CourseRegistration.Reset();
+        CourseRegistration.setRange(Programmes, dept);
+
+        if CourseRegistration.Find('-') then begin
+            repeat
+                counter := counter + 1;
+            until CourseRegistration.Next() = 0;
+
+            Message := Format(counter);
+
+        end;
+        exit(Message);
+    end;
+
+    procedure GetOpenMasterPlans() Message: Text
+    begin
+        masterRotation2.Reset();
+        masterRotation2.SetRange(masterRotation2.Status, MasterRotation2.Status::Open);
+        if masterRotation2.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + masterRotation2."Plan ID" + '::' + masterRotation2.Department + '::' + masterRotation2."HoD Name" + '::' + masterRotation2."Program Code" + '::' + masterRotation2."Program Name" + '[]';
+            until masterRotation2.Next() = 0;
+        end;
+
+        exit(Message);
+    end;
+
+    procedure ChangeMRPStatus(mrpNo: Text; status: Integer) Message: Text
+    begin
+        masterRotation2.Reset();
+        masterRotation2.SetRange(masterRotation2."Plan ID", mrpNo);
+        if masterRotation2.FindFirst() then begin
+            masterRotation2.Status := status;
+
+            if masterRotation2.Modify() then begin
+
+                Message := 'SUCCESS';
+
+            end;
+        end;
+        exit(Message);
     end;
 
     procedure GetLecturerNames(no: Code[20]) fullname: Text

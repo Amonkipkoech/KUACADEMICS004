@@ -3629,7 +3629,7 @@ codeunit 86502 "studentportals"
         END;
     end;
 
-    procedure GetPrograms(progcode: Option; studymode: code[20]; campus: code[20]; intake: code[20]) Message: Text
+    procedure GetPrograms(progcode: Option; studymode: code[20]; intake: code[20]) Message: Text
     begin
         programs.RESET;
         programs.SETRANGE(programs.Levels, progcode);
@@ -3638,11 +3638,11 @@ codeunit 86502 "studentportals"
             REPEAT
                 programsetups.Reset;
                 programsetups.SetRange(Code, programs.Code);
-                programsetups.SetRange(Campus, campus);
+                //programsetups.SetRange(Campus, campus);
                 programsetups.SetRange(Modeofstudy, studymode);
                 programsetups.SetRange(Semester, intake);
                 if programsetups.Find('-') then begin
-                    Message += programs.Code + ' ::' + programs.Description + ' :::';
+                    Message += programs.Code + ' ::' + programs.Description + '[]';
                 end;
             UNTIL programs.NEXT = 0;
         END;
@@ -3663,7 +3663,7 @@ codeunit 86502 "studentportals"
 
                 repeat
 
-                    Result += programs.Code + ' ::' + programs.Description + ' :::';
+                    Result += programs.Code + ' ::' + programs.Description + ' []';
 
                 until programs.Next = 0;
 
