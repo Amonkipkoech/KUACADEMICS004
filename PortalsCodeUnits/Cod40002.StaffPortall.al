@@ -372,23 +372,23 @@ codeunit 40002 StaffPortall
 
     end;
 
-    procedure GetTotalStudentsInDept(dept: Text) Message: Text
+    procedure GetTotalStudentsInDept(dept: Text): Text
     var
         counter: Integer;
     begin
+        counter := 0;
         CourseRegistration.Reset();
-        CourseRegistration.setRange(Programmes, dept);
+        CourseRegistration.SetRange(Programmes, dept);
 
-        if CourseRegistration.Find('-') then begin
+        if CourseRegistration.FindSet() then begin
             repeat
                 counter := counter + 1;
             until CourseRegistration.Next() = 0;
-
-            Message := Format(counter);
-
         end;
-        exit(Message);
+
+        exit(Format(counter));
     end;
+
 
     procedure GetOpenMasterPlans() Message: Text
     begin
