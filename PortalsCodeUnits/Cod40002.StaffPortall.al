@@ -372,6 +372,47 @@ codeunit 40002 StaffPortall
 
     end;
 
+    procedure GetStudentAndGroups(dept: text) Message: Text
+    begin
+        group.Reset();
+        group.setRange(Department, dept);
+        if group.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + group.GroupId + '::' + group.StudentNo + '::' + GetStudentName(group.StudentNo) + '[]';
+            until group.Next() = 0;
+        end;
+        exit(Message);
+    end;
+
+    procedure ChangeStudentGroup(formerGroup: Text; Newgroup: Text; studentNo: Text) Message: Text
+    var
+        TempGroup: Record GroupAssignments;
+    begin
+        group.Reset();
+        TempGroup.SetRange(StudentNo, studentNo);
+        TempGroup.SetRange(GroupId, formerGroup);
+        if TempGroup.Find('-') then begin
+            //Remove the entry first
+            TempGroup.Delete();
+        end;
+
+        group.SetRange(GroupId, Newgroup);
+        if group.FindFirst() then begin
+
+            TempGroup := group;
+            TempGroup.StudentNo := studentNo;
+
+            if TempGroup.Insert() then
+                Message := 'SUCCESS'
+            else
+                Message := 'FAILED TO INSERT RECORD';
+        end else
+            Message := 'GROUP NOT FOUND';
+
+        exit(Message);
+    end;
+
+
     procedure GetTotalStudentsInDept(dept: Text): Text
     var
         counter: Integer;
