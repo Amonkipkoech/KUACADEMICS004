@@ -1135,6 +1135,40 @@ table 61358 "ACA-Applic. Form Header"
         {
             Editable = false;
         }
+        field(50089; "NCK Certificate"; text[200])
+        {
+
+        }
+        field(50090; "Work Place 1"; Text[200])
+        {
+
+        }
+        field(50100; "Work Place 2"; Text[200])
+        {
+
+        }
+        field(50101; "Work Place 3"; Text[200])
+        {
+
+        }
+        field(50102; "Licensing Yr"; Text[20])
+        {
+
+        }
+        field(50103; "IDBirthcertPath"; Text[200])
+        {
+
+        }
+        field(50104; "Prof Body Cert No"; Text[20])
+        {
+
+        }
+        field(50105; "NCK Cert No"; Text[20])
+        {
+
+        }
+
+
 
 
 

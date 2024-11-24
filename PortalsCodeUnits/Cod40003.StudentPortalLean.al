@@ -51,12 +51,16 @@ codeunit 40003 StudentPortalTest
         religions: Record "ACA-Religions";
         xyForm: Record "ACA-XY-FORM";
         AcaSpecialExamsDetails: Record "Aca-Special Exams Details";
+        clinicalAbsence: Record "Student Absence Request";
+        masterRotation2: Record "Master Rotation Table";
 
 
         FILESPATH: Label 'C:\inetpub\wwwroot\KUPORTALS\StudentPortal\Downloads\';
         FILESPATH_A: Label 'C:\inetpub\wwwroot\KUPORTALS\StaffPortal\Downloads';//'C:\inetpub\wwwroot\StaffPortal\Downloads\';
         FILESPATH_SSP: Label 'C:\inetpub\wwwroot\KUPORTALS\StaffPortal\Downloads';//'C:\inetpub\wwwroot\StaffPortal\Downloads\';
         FILESPATH_APP: Label 'C:\inetpub\wwwroot\KUPORTALS\ApplicationsPortal\Documents\';
+
+
 
 
     procedure GetExamCard(StudentNo: Text; prog: Text; Sem: Code[20]; filenameFromApp: Text) Message: Text
@@ -150,6 +154,73 @@ codeunit 40003 StudentPortalTest
                 nos += 1;
             UNTIL Customer.Next = 0;
         end;
+    end;
+
+    procedure PostClinicalAbsence(studentNo: Text; StartDate: Date; EndDate: Date; Department: Text; reason: Option; otherReason: Text) Message: Text
+    var
+        number: Text;
+    begin
+        number := NoSeriesMgt.GetNextNo(GenSetup."Clinical request", TODAY, TRUE);
+        clinicalAbsence.Reset();
+        clinicalAbsence."No. Series" := 'CLN';
+        clinicalAbsence."Admission Number" := studentNo;
+        clinicalAbsence."Date From" := StartDate;
+        clinicalAbsence."Date To" := EndDate;
+        clinicalAbsence."Program Admitted" := Department;
+        clinicalAbsence."Reason for Absence" := reason;
+        clinicalAbsence."Request No." := number;
+        clinicalAbsence."Other Reason (Specify)" := otherReason;
+
+        if clinicalAbsence.Insert() then begin
+            Message := 'SUCCESS';
+        end;
+        exit(Message);
+    end;
+
+    procedure GetRetakes(studentNo: Text; progCode: Text; semester: Text) Message: Text
+    var
+        results: Record "Final Exam Result2";
+    begin
+        unitsOnOffer.Reset();
+        unitsOnOffer.SetRange(unitsOnOffer.Programs, progCode);
+        unitsOnOffer.SetRange(Semester, semester);
+        if unitsOnOffer.Find('-') then begin
+            repeat
+                UnitSubjects.Reset();
+                UnitSubjects.SetRange("Programme Code", progCode);
+                UnitSubjects.SetRange(Code, offeredunits."Unit Base Code");
+
+                if UnitSubjects.Find('-') then begin
+                    studentUnits.Reset();
+                    studentUnits.SetRange(Unit, offeredunits."Unit Base Code");
+                    if studentUnits.Find('-') then begin
+                        results.Reset();
+                        results.SetRange(StudentID, studentNo);
+                        results.SetRange(UnitCode, offeredunits."Unit Base Code");
+                        results.SetFilter(MeanGrade, '%1|%2|%3', 'F', 'FF', 'Z');
+
+                        if results.Find('-') then begin
+                            Message += 'SUCCESS' + '::' + offeredunits."Unit Base Code" + '::' + GetUnitName(offeredunits."Unit Base Code") + '[]';
+                        end
+
+                    end;
+                end;
+
+            until unitsOnOffer.Next() = 0;
+        end;
+        exit(Message);
+    end;
+
+    procedure GetGroupMembers(groupId: Text) Message: Text
+    begin
+        group.Reset();
+        group.SetRange(GroupId, groupId);
+        if group.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + group.StudentNo + '::' + GetStudentName(group.StudentNo) + '[]';
+            until group.Next() = 0;
+        end;
+        exit(Message);
     end;
 
     procedure GenerateAdmLetter2(AdmNo: Text; filenameFromApp: Text)
@@ -456,15 +527,71 @@ codeunit 40003 StudentPortalTest
 
     end;
 
-    procedure GetDeferments(studentNo: Text) Message: Text
+    // procedure GetDeferments(studentNo: Text; sem: Text): Text
+    // var
+    //     Message: Text;
+    // begin
+    //     discontinue.Reset();
+    //     discontinue.SetRange(discontinue.studentNo, studentNo);
+    //     discontinue.SetRange(Semeter, sem);
+
+
+    //     if discontinue.Find('-') then begin
+    //         repeat
+    //             Message += 'Success' + '::' + Format(discontinue."Deferment  Starting Date") + '::' +
+    //                        Format(discontinue."Deferment  End Date") + '::' +
+    //                        Format(discontinue.status) + '::' +
+    //                        discontinue."Request No" + '[]';
+    //         until discontinue.Next() = 0;
+    //     end;
+    // end;
+    procedure GetDeferments(studentNo: Text; sem: Text) Message: Text
     begin
         discontinue.Reset();
         discontinue.SetRange(discontinue.studentNo, studentNo);
+        discontinue.setRange(Semeter, sem);
         if discontinue.Find('-') then begin
             repeat
-                Message += 'Success' + '::' + Format(discontinue."Deferment  Starting Date") + '::' + Format(discontinue."Deferment  End Date") + '::' + Format(discontinue.status) + '[]';
+                Message += 'Success' + '::' + Format(discontinue."Deferment  Starting Date") + '::' + Format(discontinue."Deferment  End Date") + '::' + Format(discontinue.status) + '::' + discontinue."Request No" + '[]';
             until discontinue.Next() = 0;
         end;
+    end;
+
+
+    procedure ApplyReadmission(studentNo: Text; sem: Text; documentNo: Text) Message: Text
+    begin
+        discontinue.Reset();
+        discontinue.SetRange(discontinue.Semeter, sem);
+        discontinue.SetRange(discontinue."Request No", documentNo);
+        discontinue.SetRange(discontinue.studentNo, studentNo);
+        if discontinue.FindFirst() then begin
+
+            discontinue.status := discontinue.status::ReAdmission;
+
+            if discontinue.Modify() then begin
+                Message := 'SUCCESS';
+            end
+
+        end;
+        exit(Message);
+    end;
+
+    procedure CancelDeferment(studentNo: Text; sem: Text; documentNo: Text) Message: Text
+    begin
+        discontinue.Reset();
+        discontinue.SetRange(discontinue.Semeter, sem);
+        discontinue.SetRange(discontinue.studentNo, studentNo);
+        discontinue.SetRange(discontinue."Request No", documentNo);
+        if discontinue.FindFirst() then begin
+
+            discontinue.status := discontinue.status::Cancelled;
+
+            if discontinue.Modify() then begin
+                Message := 'SUCCESS';
+            end
+
+        end;
+        exit(Message);
     end;
 
     procedure GetStudentName(StudentNo: Text) Message: Text
@@ -1443,7 +1570,7 @@ codeunit 40003 StudentPortalTest
         END;
     end;
 
-    procedure ApplyClinicalAbscence(StudentNo: Text; DateFro: Date; DateTo: Date; Reason: Option; DetailedReason: Text; Prog: Text) Message: Text
+    procedure ApplyClinicalAbscence(StudentNo: Text; DateFro: Date; DateTo: Date; Reason: Option; DetailedReason: Text; Prog: Text; IsRemedial: Boolean) Message: Text
     var
         clinicalAbs: Record "Student Absence Request";
     begin
@@ -1454,6 +1581,7 @@ codeunit 40003 StudentPortalTest
         clinicalAbs."Reason for Absence" := Reason;
         clinicalAbs."Other Reason (Specify)" := DetailedReason;
         clinicalAbs."Student Name" := GetStudentName(StudentNo);
+        clinicalAbs."Apply Remedial" := IsRemedial;
 
         if clinicalAbs.Insert() then begin
             Message := 'SUCCESS';
@@ -1567,7 +1695,7 @@ codeunit 40003 StudentPortalTest
         end;
     END;
 
-    procedure CreateAccount(EmailAddress: Text; PhoneNo: Text; Passwordz: Text; FirstName: Text; MiddleName: Text; LastName: Text; SessionIDz: Text)
+    procedure CreateAccount(EmailAddress: Text; PhoneNo: Text; Passwordz: Text; FirstName: Text; MiddleName: Text; LastName: Text; SessionIDz: Text) Message: Text
     begin
         OnlineUsersz.INIT;
         OnlineUsersz."Email Address" := EmailAddress;
@@ -1578,7 +1706,10 @@ codeunit 40003 StudentPortalTest
         OnlineUsersz."Last Name" := LastName;
         OnlineUsersz.SessionID := SessionIDz;
         OnlineUsersz.Confirmed := false;
-        OnlineUsersz.INSERT(TRUE);
+        if OnlineUsersz.INSERT(TRUE) then begin
+            Message := 'SUCCESS';
+        end;
+        exit(Message);
     end;
 
     procedure ResetPassword(username: Text; resetcode: Text; newpassword: Text) Message: Boolean
@@ -1659,7 +1790,7 @@ codeunit 40003 StudentPortalTest
                 IF Programme.FIND('-') THEN BEGIN
                     progname := Programme.Description;
                 END;
-                apps := apps + AdmissionFormHeader."Application No." + ' ::' + progname + ' ::' + FORMAT(AdmissionFormHeader."Application Date") + ' ::' + FORMAT(AdmissionFormHeader.Status) + ' ::' + FORMAT(AdmissionFormHeader."Finance Cleared") + '::' + AdmissionFormHeader.Nationality + ' :::';
+                apps := apps + AdmissionFormHeader."Application No." + ' ::' + progname + ' ::' + FORMAT(AdmissionFormHeader."Application Date") + ' ::' + FORMAT(AdmissionFormHeader.Status) + ' ::' + FORMAT(AdmissionFormHeader."Finance Cleared") + '::' + AdmissionFormHeader.Nationality + ' []';
             UNTIL AdmissionFormHeader.Next = 0;
         END;
     end;
@@ -1820,6 +1951,15 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         Message := 'Details updated successfully!!!';
     end;
 
+    procedure ValidateEmail(username: Text) Message: Boolean
+    begin
+        OnlineUsersz.RESET;
+        OnlineUsersz.SETRANGE(OnlineUsersz."Email Address", username);
+        IF OnlineUsersz.FIND('-') THEN BEGIN
+            Message := true;
+        END
+    end;
+
     procedure SSApplication(index: code[20]; fname: text; mmname: text; lname: text; gender: option; dob: Date; nationality: text; county: text; idNo: code[20]; passPort: code[20];
             birthCert: code[20]; religion: text; denomination: text; diocese: text; congregation: option; inst: text; protCongregation: Option; maritalStat: Option;
             disability: option; disTyp: Option; knewThru: Text; formerStud: boolean; formerregno: text; prevedlvl: option; phoneNo: Text; altPhoneNo: text; email: Text;
@@ -1920,6 +2060,86 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         AdmissionFormHeader.Status := AdmissionFormHeader.Status::Open;
         AdmissionFormHeader.Insert;
         Message := appno;//'Application submitted successfully.';
+    end;
+
+    procedure SSApplication2(fname: text; mmname: text; lname: text; gender: option; dob: Date;
+        nationality: text; county: text; idNo: code[20]; passPort: code[20];
+        birthCert: code[20]; inst: text; protCongregation: Option; maritalStat: Option;
+        disability: option; disTyp: Option; knewThru: Text; phoneNo: Text; altPhoneNo: text; email: Text;
+        postAddress: Text; town: text; programlevel: option; intakecode: text; appliedprogram: text; campus: code[20]; modeofstudy: text;
+        highSchool: Text; yearCompletedHs: text; CollegeUniAttended: text; CollegeUniGradYr: Text; LicencingYr: Text;
+        profBodycertNo: Text; NckCertNo: Text; workExpInstitution: Text; workExpInstitution2: Text; workExpInstitution3: Text;
+        undegradcertpath: Text; highschcertpath: Text; NCkCertPath: Text; IdPassportPath: Text; NOKName: Text; NOKMoblieNo: Text;
+        NOKEmail: Text; NOKRshp: Text) Message: Text
+    var
+        Programme: Record "ACA-Programme";
+        colfrom: Date;
+        colto: Date;
+        appno: Text;
+    begin
+        CLEAR(appno);
+        appno := NoSeriesMgt.GetNextNo('APP', 0D, TRUE);
+
+        AdmissionFormHeader.Init;
+        AdmissionFormHeader."Application No." := appno;
+        AdmissionFormHeader."First Name" := fname;
+        AdmissionFormHeader."Other Names" := mmname;
+        AdmissionFormHeader.Surname := lname;
+        AdmissionFormHeader.Gender := gender;
+        AdmissionFormHeader."Date Of Birth" := dob;
+        AdmissionFormHeader.Nationality := Nationality;
+        AdmissionFormHeader.County := county;
+        AdmissionFormHeader."ID Number" := idNo;
+        AdmissionFormHeader."Passport Number" := passPort;
+        AdmissionFormHeader."Birth Cert No" := birthCert;
+        AdmissionFormHeader."Order/Instutute" := inst;
+        AdmissionFormHeader."Protestant Congregation" := protCongregation;
+        AdmissionFormHeader."Marital Status" := maritalStat;
+        AdmissionFormHeader.Disability := disability;
+        AdmissionFormHeader."Nature of Disability" := disTyp;
+        AdmissionFormHeader."Knew College Thru" := knewThru;
+        AdmissionFormHeader."Telephone No. 1" := phoneNo;
+        AdmissionFormHeader."Telephone No. 2" := altPhoneNo;
+        AdmissionFormHeader.Email := email;
+        AdmissionFormHeader."Address for Correspondence1" := postAddress;
+        AdmissionFormHeader."Address for Correspondence3" := town;
+        AdmissionFormHeader."Former School Code" := highSchool;
+        //AdmissionFormHeader."Mean Grade Acquired" := meangrade;
+        AdmissionFormHeader."Country of Origin" := nationality;
+        AdmissionFormHeader."Settlement Type" := 'SSS';
+        AdmissionFormHeader.Campus := 'MAIN';
+        AdmissionFormHeader."Application Date" := Today;
+        AdmissionFormHeader."Intake Code" := intakecode;
+        AdmissionFormHeader."College/UNV attended" := CollegeUniAttended;
+        AdmissionFormHeader."College/Unv attend final date" := colto;
+        AdmissionFormHeader."College/Unv attend start date" := colfrom;
+        AdmissionFormHeader."Programme Level" := programlevel;
+        AdmissionFormHeader."Mode of Study" := modeofstudy;
+        AdmissionFormHeader."First Degree Choice" := appliedprogram;
+        AdmissionFormHeader.Campus := campus;
+        AdmissionFormHeader."High Sch. Cert attched" := true;
+        AdmissionFormHeader."Undergrad Cert attached" := true;
+        AdmissionFormHeader."High School Certificate" := highschcertpath;
+        AdmissionFormHeader."Under Graduate Certificate" := undegradcertpath;
+        AdmissionFormHeader."ID/Birth Cert attached" := true;
+        AdmissionFormHeader."Next Of Kin Email" := NOKEmail;
+        AdmissionFormHeader."Next of kin Mobile" := NOKMoblieNo;
+        AdmissionFormHeader."Next of kin Name" := NOKName;
+        AdmissionFormHeader."Next of Kin R/Ship" := NOKRshp;
+        AdmissionFormHeader."ID/Birth Cert attached" := true;
+        AdmissionFormHeader.IDBirthcertPath := IdPassportPath;
+        AdmissionFormHeader."NCK Cert No" := NckCertNo;
+        AdmissionFormHeader."Prof Body Cert No" := profBodycertNo;
+        Programme.RESET;
+        Programme.SETRANGE(Programme.Code, appliedprogram);
+        IF Programme.FIND('-') THEN BEGIN
+
+            AdmissionFormHeader.programName := Programme.Description;
+            AdmissionFormHeader."Programme Department" := Programme."Department Code";
+        end;
+        AdmissionFormHeader.Status := AdmissionFormHeader.Status::Open;
+        AdmissionFormHeader.Insert;
+        Message := appno;
     end;
 
 
@@ -2162,7 +2382,7 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         relationships.RESET;
         IF relationships.FIND('-') THEN BEGIN
             REPEAT
-                Message := Message + relationships.Code + ' ::' + relationships.Description + ' :::';
+                Message := Message + relationships.Code + ' ::' + relationships.Description + '[]';
             UNTIL relationships.NEXT = 0;
         END;
     end;
@@ -2174,7 +2394,7 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         centralsetup.SETRANGE(centralsetup.Category, centralsetup.Category::Nationality);
         IF centralsetup.FIND('-') THEN BEGIN
             REPEAT
-                Message := Message + centralsetup."Title Code" + ' ::' + centralsetup.Description + ' :::';
+                Message := Message + centralsetup."Title Code" + ' ::' + centralsetup.Description + ' []';
             UNTIL centralsetup.NEXT = 0;
         END;
     end;
@@ -2185,7 +2405,7 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         counties.SetCurrentKey(Name);
         IF counties.FIND('-') THEN BEGIN
             REPEAT
-                Message := Message + counties.Code + ' ::' + counties.Name + ' :::';
+                Message := Message + counties.Code + ' ::' + counties.Name + ' []';
             UNTIL counties.NEXT = 0;
         END;
     end;
@@ -2197,7 +2417,7 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         intakes.SetRange(Level, level);
         IF intakes.FIND('-') THEN BEGIN
             REPEAT
-                Message := Message + intakes.Code + ' ::' + intakes.Description + ' :::';
+                Message := Message + intakes.Code + ' ::' + intakes.Description + ' []';
             UNTIL intakes.NEXT = 0;
         END;
     end;
@@ -2216,7 +2436,7 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         studymodes.RESET;
         IF studymodes.FIND('-') THEN BEGIN
             REPEAT
-                Message := Message + studymodes.Code + ' ::' + studymodes.Description + ' :::';
+                Message := Message + studymodes.Code + ' ::' + studymodes.Description + ' []';
             UNTIL studymodes.NEXT = 0;
         END;
     end;
@@ -2227,7 +2447,7 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         ethnicity.SetCurrentKey(Name);
         IF ethnicity.FIND('-') THEN BEGIN
             REPEAT
-                Message := Message + ethnicity.Code + ' ::' + ethnicity.Name + ' :::';
+                Message := Message + ethnicity.Code + ' ::' + ethnicity.Name + ' []';
             UNTIL ethnicity.NEXT = 0;
         END;
     end;
@@ -2240,7 +2460,7 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         campus.SetCurrentKey(Name);
         IF campus.FIND('-') THEN BEGIN
             REPEAT
-                Message := Message + campus.Code + ' ::' + campus.Name + ' :::';
+                Message := Message + campus.Code + ' ::' + campus.Name + ' []';
             UNTIL campus.NEXT = 0;
         END;
     end;
@@ -2262,7 +2482,7 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         marketingstrategies.SetCurrentKey(Description);
         IF marketingstrategies.FIND('-') THEN BEGIN
             REPEAT
-                Message := Message + marketingstrategies.Code + '::' + marketingstrategies.Description + ' :::';
+                Message := Message + marketingstrategies.Code + '::' + marketingstrategies.Description + ' []';
             UNTIL marketingstrategies.NEXT = 0;
         END;
     end;
@@ -2332,6 +2552,52 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
 
         END
     end;
+
+    procedure GetPrograms2(progCode: Option; studyMode: Text; Campus: Text; intake: Text) Result: Text
+    begin
+        Programmeetups.Reset();
+        Programmeetups.SetRange(Programmeetups.semester, intake);
+        Programmeetups.SetRange(Programmeetups.Code, Format(progCode));
+        if Programmeetups.FIND('-') then begin
+            Result := Format(Programmeetups.Code);
+
+            Programme.Reset();
+            Programme.SETRANGE(Programme.Levels, progCode);
+            Programme.SETRANGE(Programme."Program Status", Programme."Program Status"::Active);
+            IF Programme.FIND('-') THEN BEGIN
+
+                repeat
+
+                    Result += Programme.Code + ' ::' + Programme.Description + ' []';
+
+                until Programme.Next = 0;
+
+            end
+
+        END;
+        exit(Result);
+
+    end;
+
+    procedure GetPrograms(progcode: Option; studymode: code[20]; intake: code[20]) Message: Text
+    begin
+        Programme.RESET;
+        Programme.SETRANGE(Programme.Levels, progcode);
+        Programme.SETRANGE(Programme."Program Status", Programme."Program Status"::Active);
+        IF Programme.FIND('-') THEN BEGIN
+            REPEAT
+                Programmeetups.Reset;
+                Programmeetups.SetRange(Code, Programme.Code);
+                //programsetups.SetRange(Campus, campus);
+                Programmeetups.SetRange(Modeofstudy, studymode);
+                Programmeetups.SetRange(Semester, intake);
+                if Programmeetups.Find('-') then begin
+                    Message += Programme.Code + ' ::' + Programme.Description + '[]';
+                end;
+            UNTIL Programme.NEXT = 0;
+        END;
+    end;
+
 
 
 

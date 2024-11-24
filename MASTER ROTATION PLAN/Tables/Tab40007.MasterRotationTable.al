@@ -120,8 +120,147 @@ table 40007 "Master Rotation Table"
         }
         field(24; "Status"; Option)
         {
-            OptionMembers = " ",Open,"Pending Approval",Approved;
+            OptionMembers = " ",Open,"Pending Approval",Approved,"Rejected";
         }
+
+        field(25; Yr1sem1Block1StartDate; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(26; Yr1sem1block1EndDate; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(27; Yr1sem1clinicStart; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(28; Yr1sem1clinicEnd; Date)
+        {
+            DataClassification = ToBeClassified;
+
+        }
+        field(29; Yr1sem1Block2StartDate; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(30; Yr1sem1block2EndDate; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(31; Yr1sem1clinic2Start; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(32; Yr1sem1clinic2End; Date)
+        {
+            DataClassification = ToBeClassified;
+
+        }
+        field(33; Yr1sem2Block1StartDate; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(34; Yr1sem2block1EndDate; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(35; Yr1sem2clinic1Start; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(36; Yr1sem2clinic1End; Date)
+        {
+            DataClassification = ToBeClassified;
+
+        }
+        field(37; Yr1sem2Block2StartDate; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(38; Yr1sem2block2EndDate; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(39; Yr1sem2clinic2Start; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(40; Yr1sem2clinic2End; Date)
+        {
+            DataClassification = ToBeClassified;
+
+        }
+
+
+        field(41; Yr2sem1Block1StartDate; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(42; Yr2sem1block1EndDate; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(43; Yr2sem1clinic1Start; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(44; Yr2sem1clinic1End; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(45; Yr2sem1Block2StartDate; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(46; Yr2sem1block2EndDate; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(47; Yr2sem1clinic2Start; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(48; Yr2sem1clinic2End; Date)
+        {
+            DataClassification = ToBeClassified;
+
+        }
+        field(49; Yr2sem2Block1StartDate; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50; Yr2sem2block1EndDate; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(51; Yr2sem2clinic1Start; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(52; Yr2sem2clinic1End; Date)
+        {
+            DataClassification = ToBeClassified;
+
+        }
+        field(53; Yr2sem2Block2StartDate; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(54; Yr2sem2block2EndDate; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(55; Yr2sem2clinic2Start; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(56; Yr2sem2clinic2End; Date)
+        {
+            DataClassification = ToBeClassified;
+
+        }
+
     }
 
     keys
