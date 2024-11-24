@@ -1570,7 +1570,7 @@ codeunit 40003 StudentPortalTest
         END;
     end;
 
-    procedure ApplyClinicalAbscence(StudentNo: Text; DateFro: Date; DateTo: Date; Reason: Option; DetailedReason: Text; Prog: Text) Message: Text
+    procedure ApplyClinicalAbscence(StudentNo: Text; DateFro: Date; DateTo: Date; Reason: Option; DetailedReason: Text; Prog: Text; IsRemedial: Boolean) Message: Text
     var
         clinicalAbs: Record "Student Absence Request";
     begin
@@ -1581,6 +1581,7 @@ codeunit 40003 StudentPortalTest
         clinicalAbs."Reason for Absence" := Reason;
         clinicalAbs."Other Reason (Specify)" := DetailedReason;
         clinicalAbs."Student Name" := GetStudentName(StudentNo);
+        clinicalAbs."Apply Remedial" := IsRemedial;
 
         if clinicalAbs.Insert() then begin
             Message := 'SUCCESS';
@@ -2059,6 +2060,86 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         AdmissionFormHeader.Status := AdmissionFormHeader.Status::Open;
         AdmissionFormHeader.Insert;
         Message := appno;//'Application submitted successfully.';
+    end;
+
+    procedure SSApplication2(fname: text; mmname: text; lname: text; gender: option; dob: Date;
+        nationality: text; county: text; idNo: code[20]; passPort: code[20];
+        birthCert: code[20]; inst: text; protCongregation: Option; maritalStat: Option;
+        disability: option; disTyp: Option; knewThru: Text; phoneNo: Text; altPhoneNo: text; email: Text;
+        postAddress: Text; town: text; programlevel: option; intakecode: text; appliedprogram: text; campus: code[20]; modeofstudy: text;
+        highSchool: Text; yearCompletedHs: text; CollegeUniAttended: text; CollegeUniGradYr: Text; LicencingYr: Text;
+        profBodycertNo: Text; NckCertNo: Text; workExpInstitution: Text; workExpInstitution2: Text; workExpInstitution3: Text;
+        undegradcertpath: Text; highschcertpath: Text; NCkCertPath: Text; IdPassportPath: Text; NOKName: Text; NOKMoblieNo: Text;
+        NOKEmail: Text; NOKRshp: Text) Message: Text
+    var
+        Programme: Record "ACA-Programme";
+        colfrom: Date;
+        colto: Date;
+        appno: Text;
+    begin
+        CLEAR(appno);
+        appno := NoSeriesMgt.GetNextNo('APP', 0D, TRUE);
+
+        AdmissionFormHeader.Init;
+        AdmissionFormHeader."Application No." := appno;
+        AdmissionFormHeader."First Name" := fname;
+        AdmissionFormHeader."Other Names" := mmname;
+        AdmissionFormHeader.Surname := lname;
+        AdmissionFormHeader.Gender := gender;
+        AdmissionFormHeader."Date Of Birth" := dob;
+        AdmissionFormHeader.Nationality := Nationality;
+        AdmissionFormHeader.County := county;
+        AdmissionFormHeader."ID Number" := idNo;
+        AdmissionFormHeader."Passport Number" := passPort;
+        AdmissionFormHeader."Birth Cert No" := birthCert;
+        AdmissionFormHeader."Order/Instutute" := inst;
+        AdmissionFormHeader."Protestant Congregation" := protCongregation;
+        AdmissionFormHeader."Marital Status" := maritalStat;
+        AdmissionFormHeader.Disability := disability;
+        AdmissionFormHeader."Nature of Disability" := disTyp;
+        AdmissionFormHeader."Knew College Thru" := knewThru;
+        AdmissionFormHeader."Telephone No. 1" := phoneNo;
+        AdmissionFormHeader."Telephone No. 2" := altPhoneNo;
+        AdmissionFormHeader.Email := email;
+        AdmissionFormHeader."Address for Correspondence1" := postAddress;
+        AdmissionFormHeader."Address for Correspondence3" := town;
+        AdmissionFormHeader."Former School Code" := highSchool;
+        //AdmissionFormHeader."Mean Grade Acquired" := meangrade;
+        AdmissionFormHeader."Country of Origin" := nationality;
+        AdmissionFormHeader."Settlement Type" := 'SSS';
+        AdmissionFormHeader.Campus := 'MAIN';
+        AdmissionFormHeader."Application Date" := Today;
+        AdmissionFormHeader."Intake Code" := intakecode;
+        AdmissionFormHeader."College/UNV attended" := CollegeUniAttended;
+        AdmissionFormHeader."College/Unv attend final date" := colto;
+        AdmissionFormHeader."College/Unv attend start date" := colfrom;
+        AdmissionFormHeader."Programme Level" := programlevel;
+        AdmissionFormHeader."Mode of Study" := modeofstudy;
+        AdmissionFormHeader."First Degree Choice" := appliedprogram;
+        AdmissionFormHeader.Campus := campus;
+        AdmissionFormHeader."High Sch. Cert attched" := true;
+        AdmissionFormHeader."Undergrad Cert attached" := true;
+        AdmissionFormHeader."High School Certificate" := highschcertpath;
+        AdmissionFormHeader."Under Graduate Certificate" := undegradcertpath;
+        AdmissionFormHeader."ID/Birth Cert attached" := true;
+        AdmissionFormHeader."Next Of Kin Email" := NOKEmail;
+        AdmissionFormHeader."Next of kin Mobile" := NOKMoblieNo;
+        AdmissionFormHeader."Next of kin Name" := NOKName;
+        AdmissionFormHeader."Next of Kin R/Ship" := NOKRshp;
+        AdmissionFormHeader."ID/Birth Cert attached" := true;
+        AdmissionFormHeader.IDBirthcertPath := IdPassportPath;
+        AdmissionFormHeader."NCK Cert No" := NckCertNo;
+        AdmissionFormHeader."Prof Body Cert No" := profBodycertNo;
+        Programme.RESET;
+        Programme.SETRANGE(Programme.Code, appliedprogram);
+        IF Programme.FIND('-') THEN BEGIN
+
+            AdmissionFormHeader.programName := Programme.Description;
+            AdmissionFormHeader."Programme Department" := Programme."Department Code";
+        end;
+        AdmissionFormHeader.Status := AdmissionFormHeader.Status::Open;
+        AdmissionFormHeader.Insert;
+        Message := appno;
     end;
 
 

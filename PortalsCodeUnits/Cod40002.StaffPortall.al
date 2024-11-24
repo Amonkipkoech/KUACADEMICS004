@@ -170,6 +170,7 @@ codeunit 40002 StaffPortall
         unitsOnOffer: Record "ACA-Units Offered";
         masterRotation2: Record "Master Rotation Table";
         clinicals: Record "Clinical rotation";
+        clinicalAbs: Record "Student Absence Request";
 
     // Staff Portal Functions
     procedure CheckStaffLogin(username: Code[20]; userpassword: Text[50]) ReturnMsg: Text[200];
@@ -274,6 +275,12 @@ codeunit 40002 StaffPortall
 
             exit('STUDENT NOT FOUND');
         end;
+    end;
+
+    procedure GetClinicalAbsence(dept: Text)
+    begin
+        clinicalAbs.Reset();
+        // clinicalAbs.SetRange(depart)
     end;
 
     procedure GetStudents(filter: Option) Message: Text

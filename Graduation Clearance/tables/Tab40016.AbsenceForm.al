@@ -114,6 +114,11 @@ table 40016 "Student Absence Request"
         {
             DataClassification = ToBeClassified;
         }
+        field(20; "Apply Remedial"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Has applied for Remedial';
+        }
     }
 
     keys
