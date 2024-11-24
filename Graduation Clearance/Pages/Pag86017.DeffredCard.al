@@ -227,6 +227,32 @@ page 86017 "Deffered Students Card"
                     Rec.Modify();
                 end;
             }
+            action("Reject Admission")
+            {
+                ApplicationArea = All;
+                Visible = rec.status = rec.status::ReAdmission;
+
+                trigger OnAction();
+                begin
+                    if Rec.Get() then
+                        if Confirm('Do you want to be re-admitted ?', true) = false then exit;
+                    Rec.status := Rec.status::Rejected;
+                    Rec.Modify();
+                end;
+            }
+            action("Admit")
+            {
+                ApplicationArea = All;
+                Visible = rec.status = rec.status::ReAdmission;
+
+                trigger OnAction();
+                begin
+                    if Rec.Get() then
+                        if Confirm('Do you want to be re-admitted ?', true) = false then exit;
+                    Rec.status := Rec.status::readmitted;
+                    Rec.Modify();
+                end;
+            }
         }
     }
 
