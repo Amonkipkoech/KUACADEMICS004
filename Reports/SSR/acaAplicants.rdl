@@ -11,6 +11,94 @@
       <rd:DataSourceID>df55276a-f9db-43ab-a1a1-b671bca85962</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="Pic">
+          <DataField>Pic</DataField>
+        </Field>
+        <Field Name="Company_Name">
+          <DataField>Company_Name</DataField>
+        </Field>
+        <Field Name="programName">
+          <DataField>programName</DataField>
+        </Field>
+        <Field Name="FirstName_applicant">
+          <DataField>FirstName_applicant</DataField>
+        </Field>
+        <Field Name="Surname_applicant">
+          <DataField>Surname_applicant</DataField>
+        </Field>
+        <Field Name="OtherNames_applicant">
+          <DataField>OtherNames_applicant</DataField>
+        </Field>
+        <Field Name="Gender_applicant">
+          <DataField>Gender_applicant</DataField>
+        </Field>
+        <Field Name="Academic_Year">
+          <DataField>Academic_Year</DataField>
+        </Field>
+        <Field Name="Programme_Department">
+          <DataField>Programme_Department</DataField>
+        </Field>
+        <Field Name="Programme_School">
+          <DataField>Programme_School</DataField>
+        </Field>
+        <Field Name="Intake_Code">
+          <DataField>Intake_Code</DataField>
+        </Field>
+        <Field Name="DateOfBirth_applicant">
+          <DataField>DateOfBirth_applicant</DataField>
+        </Field>
+        <Field Name="Nationality_applicant">
+          <DataField>Nationality_applicant</DataField>
+        </Field>
+        <Field Name="Disability_applicant">
+          <DataField>Disability_applicant</DataField>
+        </Field>
+        <Field Name="SettlementType_applicant">
+          <DataField>SettlementType_applicant</DataField>
+        </Field>
+        <Field Name="international_student_">
+          <DataField>international_student_</DataField>
+        </Field>
+        <Field Name="IDNumber_applicant">
+          <DataField>IDNumber_applicant</DataField>
+        </Field>
+        <Field Name="TelephoneNo1_applicant">
+          <DataField>TelephoneNo1_applicant</DataField>
+        </Field>
+        <Field Name="Email_applicant">
+          <DataField>Email_applicant</DataField>
+        </Field>
+        <Field Name="Religion_applicant">
+          <DataField>Religion_applicant</DataField>
+        </Field>
+        <Field Name="Denomination_applicant">
+          <DataField>Denomination_applicant</DataField>
+        </Field>
+        <Field Name="ModeofStudy_applicant">
+          <DataField>ModeofStudy_applicant</DataField>
+        </Field>
+        <Field Name="seq">
+          <DataField>seq</DataField>
+        </Field>
+        <Field Name="Status">
+          <DataField>Status</DataField>
+        </Field>
+        <Field Name="Age2">
+          <DataField>Age2</DataField>
+        </Field>
+        <Field Name="County">
+          <DataField>County</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -31,7 +119,7 @@
                   <Width>1.17639in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.98425in</Width>
+                  <Width>0.67175in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.98425in</Width>
@@ -49,7 +137,7 @@
                   <Width>0.98425in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.7563in</Width>
+                  <Width>0.6938in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.98425in</Width>
@@ -423,7 +511,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Gender applicant</Value>
+                                  <Value>international student </Value>
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
                                     <FontSize>12pt</FontSize>
@@ -989,14 +1077,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Gender_applicant1">
+                        <Textbox Name="international_student_">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Gender_applicant.Value</Value>
+                                  <Value>=Fields!international_student_.Value</Value>
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
                                     <FontSize>12pt</FontSize>
@@ -1006,7 +1094,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Gender_applicant1</rd:DefaultName>
+                          <rd:DefaultName>international_student_</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1257,7 +1345,7 @@
             <Top>1.08in</Top>
             <Left>0.21525in</Left>
             <Height>0.43334in</Height>
-            <Width>15.464in</Width>
+            <Width>15.089in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1350,6 +1438,12 @@
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -1389,89 +1483,4 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="Pic">
-          <DataField>Pic</DataField>
-        </Field>
-        <Field Name="Company_Name">
-          <DataField>Company_Name</DataField>
-        </Field>
-        <Field Name="programName">
-          <DataField>programName</DataField>
-        </Field>
-        <Field Name="FirstName_applicant">
-          <DataField>FirstName_applicant</DataField>
-        </Field>
-        <Field Name="Surname_applicant">
-          <DataField>Surname_applicant</DataField>
-        </Field>
-        <Field Name="OtherNames_applicant">
-          <DataField>OtherNames_applicant</DataField>
-        </Field>
-        <Field Name="Gender_applicant">
-          <DataField>Gender_applicant</DataField>
-        </Field>
-        <Field Name="Academic_Year">
-          <DataField>Academic_Year</DataField>
-        </Field>
-        <Field Name="Programme_Department">
-          <DataField>Programme_Department</DataField>
-        </Field>
-        <Field Name="Programme_School">
-          <DataField>Programme_School</DataField>
-        </Field>
-        <Field Name="Intake_Code">
-          <DataField>Intake_Code</DataField>
-        </Field>
-        <Field Name="DateOfBirth_applicant">
-          <DataField>DateOfBirth_applicant</DataField>
-        </Field>
-        <Field Name="Nationality_applicant">
-          <DataField>Nationality_applicant</DataField>
-        </Field>
-        <Field Name="Disability_applicant">
-          <DataField>Disability_applicant</DataField>
-        </Field>
-        <Field Name="SettlementType_applicant">
-          <DataField>SettlementType_applicant</DataField>
-        </Field>
-        <Field Name="IDNumber_applicant">
-          <DataField>IDNumber_applicant</DataField>
-        </Field>
-        <Field Name="TelephoneNo1_applicant">
-          <DataField>TelephoneNo1_applicant</DataField>
-        </Field>
-        <Field Name="Email_applicant">
-          <DataField>Email_applicant</DataField>
-        </Field>
-        <Field Name="Religion_applicant">
-          <DataField>Religion_applicant</DataField>
-        </Field>
-        <Field Name="Denomination_applicant">
-          <DataField>Denomination_applicant</DataField>
-        </Field>
-        <Field Name="ModeofStudy_applicant">
-          <DataField>ModeofStudy_applicant</DataField>
-        </Field>
-        <Field Name="seq">
-          <DataField>seq</DataField>
-        </Field>
-        <Field Name="Status">
-          <DataField>Status</DataField>
-        </Field>
-        <Field Name="Age2">
-          <DataField>Age2</DataField>
-        </Field>
-        <Field Name="County">
-          <DataField>County</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-    </DataSet>
-  </DataSets>
 </Report>

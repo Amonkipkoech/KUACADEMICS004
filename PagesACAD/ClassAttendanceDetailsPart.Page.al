@@ -43,6 +43,10 @@ page 65802 "Class Attendance Details Part"
                 {
                     ApplicationArea = All;
                 }
+                field(Remarks; rec.Remarks)
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }

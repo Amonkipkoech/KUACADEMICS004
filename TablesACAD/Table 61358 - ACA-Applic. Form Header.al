@@ -1167,6 +1167,10 @@ table 61358 "ACA-Applic. Form Header"
         {
 
         }
+        field(50106; "international student "; Boolean)
+        {
+
+        }
 
 
 

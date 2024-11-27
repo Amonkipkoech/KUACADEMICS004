@@ -60,6 +60,10 @@ table 65801 "Class Attendance Details"
             FieldClass = FlowField;
             CalcFormula = count("Class Attendance Details" where("Student No." = field("Student No."), "Unit Code" = field("Unit Code"), Semester = field(Semester)));
         }
+        field(28; "Remarks"; Code[60])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

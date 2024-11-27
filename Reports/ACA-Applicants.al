@@ -64,6 +64,10 @@ report 86521 "ACA-APPLICANTS Report"
             column(SettlementType_applicant; "Settlement Type")
             {
             }
+            column(international_student_; "international student ")
+            {
+
+            }
             column(IDNumber_applicant; "ID Number")
             {
             }
