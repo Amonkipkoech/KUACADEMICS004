@@ -1058,10 +1058,16 @@ page 68861 "ACA-Academics Role Center"
                     RunObject = Page "Units Offered Batches";
                     ApplicationArea = All;
                 }
+                action("Time Timetable")
+                {
+                    Caption = 'Time Timetable';
+                    RunObject = Page "Time Table";
+                    ApplicationArea = All;
+                }
                 action("Exam Timetable1")
                 {
                     Caption = 'Exam Timetable';
-                    RunObject = Page "ACA-Exam Units";
+                    RunObject = Page "ACA-Exam Units";//"Time Table"
                     ApplicationArea = All;
                 }
                 action("Associate Units")
