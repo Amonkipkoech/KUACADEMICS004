@@ -91,7 +91,7 @@ report 51591 "Mass Update Units"
                     StudentUnits.Semester := Semester;
                     StudentUnits."Register for" := "Register for";
                     StudentUnits."No. Of Units" := Units."No. Units";
-                    StudentUnits."Unit Type" := Units."Unit Type"::Required;
+                    StudentUnits."Unit Type" := Units."Unit Type"::Exam;
                     StudentUnits.Taken := TRUE;
                     StudentUnits."System Created" := TRUE;
                     StudentUnits.INSERT;

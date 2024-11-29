@@ -311,6 +311,10 @@ page 68467 "ACA-Application Form Header"
 
 
                 }
+                field("international student ";rec."international student ")
+                {
+                       ApplicationArea = All;
+                }
                 field("Faculty Name"; Rec."Faculty Name")
                 {
                     Editable = false;

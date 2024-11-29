@@ -118,8 +118,8 @@ table 61517 "ACA-Units/Subjects"
         }
         field(17; "Unit Type"; Option)
         {
-            OptionCaption = 'Core,Elective,Required';
-            OptionMembers = Core,Elective,Required;
+            OptionCaption = 'Theory,Exam';
+            OptionMembers = Theory,Exam;
         }
         field(18; "Class Filter"; Code[20])
         {

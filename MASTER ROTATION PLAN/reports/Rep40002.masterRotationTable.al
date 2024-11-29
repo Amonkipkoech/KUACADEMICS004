@@ -28,14 +28,10 @@ report 40002 "master Rotation Table"
             column(info_mail; info."E-Mail")
             {
             }
-
-
             trigger OnAfterGetRecord()
             begin
                 seq := seq + 1;
             end;
-
-
 
         }
     }

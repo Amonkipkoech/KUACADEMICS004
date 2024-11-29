@@ -1058,10 +1058,16 @@ page 68861 "ACA-Academics Role Center"
                     RunObject = Page "Units Offered Batches";
                     ApplicationArea = All;
                 }
+                action("Time Timetable")
+                {
+                    Caption = 'Time Timetable';
+                    RunObject = Page "Time Table";
+                    ApplicationArea = All;
+                }
                 action("Exam Timetable1")
                 {
                     Caption = 'Exam Timetable';
-                    RunObject = Page "ACA-Exam Units";
+                    RunObject = Page "ACA-Exam Units";//"Time Table"
                     ApplicationArea = All;
                 }
                 action("Associate Units")
@@ -1212,6 +1218,15 @@ page 68861 "ACA-Academics Role Center"
                     RunPageLink = Status = filter("Approved");
                     ApplicationArea = All;
                 }
+                  action("XY Form ")
+                {
+                    Image = Allocate;
+                    Caption = 'Approved Master Rotation';
+                    RunObject = Page "XY form";
+                    RunPageLink = Status = filter("Approved");
+                    ApplicationArea = All;
+                }
+
 
 
             }
