@@ -277,10 +277,16 @@ codeunit 40002 StaffPortall
         end;
     end;
 
-    procedure GetClinicalAbsence(dept: Text)
+    procedure GetClinicalAbsence(dept: Text) Message: Text
     begin
         clinicalAbs.Reset();
-        // clinicalAbs.SetRange(depart)
+        clinicalAbs.SetRange("Program Admitted", dept);
+        if clinicalAbs.Find('-') then begin
+            repeat
+                Message += clinicalAbs."Student Name" + '::' + clinicalAbs."Admission Number" + '::' + Format(clinicalAbs."Date From") + '::' + Format(clinicalAbs."Date To") + '::' + Format(clinicalAbs."Reason for Absence") + '::' + clinicalAbs."Other Reason (Specify)" + '::' + Format(clinicalAbs."Apply Remedial") + '[]';
+            until clinicalAbs.Next() = 0;
+        end;
+        exit(Message);
     end;
 
     procedure GetStudents(filter: Option) Message: Text
@@ -4170,7 +4176,7 @@ codeunit 40002 StaffPortall
                 associatedunits.Reset;
                 associatedunits.SetRange("Associated Unit", UnitSubjects.Code);
                 if not associatedunits.find('-') then begin
-                    Details += UnitSubjects.Code + ' ::' + UnitSubjects.Desription + ' :::';
+                    Details += UnitSubjects.Code + ' ::' + UnitSubjects.Desription + '[]';
                 end;
             until UnitSubjects.Next = 0;
         END;
