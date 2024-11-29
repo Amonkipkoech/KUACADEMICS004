@@ -61,7 +61,7 @@ report 86623 "Process Graduation"
                                 if studUnitsCount >= progs."Graduation Units" then begin
                                     progUnits.Reset();
                                     progUnits.SetRange("Programme Code", progs.Code);
-                                    progUnits.SetRange("Unit Type", progUnits."Unit Type"::Core);
+                                    progUnits.SetRange("Unit Type", progUnits."Unit Type"::Exam);
                                     if progUnits.Find('-') then begin
                                         Clear(passed);
                                         repeat
@@ -207,7 +207,7 @@ report 86623 "Process Graduation"
                         if studUnitsCount >= progs."Graduation Units" then begin
                             progUnits.Reset();
                             progUnits.SetRange("Programme Code", progs.Code);
-                            progUnits.SetRange("Unit Type", progUnits."Unit Type"::Core);
+                            progUnits.SetRange("Unit Type", progUnits."Unit Type"::Exam);
                             if progUnits.Find('-') then begin
                                 Clear(passed);
                                 repeat
