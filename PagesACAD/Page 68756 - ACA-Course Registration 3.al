@@ -126,6 +126,13 @@ page 68756 "ACA-Course Registration 3"
                 field("Units Taken"; Rec."Units Taken")
                 {
                     Editable = true;
+                    Caption = 'Student Exam Units';
+                    ApplicationArea = All;
+                }
+                field("Units theory Taken"; Rec."Units theory Taken")
+                {
+                    Editable = true;
+                    Caption = 'Student Theory Units';
                     ApplicationArea = All;
                 }
 

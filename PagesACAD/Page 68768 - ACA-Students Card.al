@@ -331,14 +331,25 @@ page 68768 "ACA-Students Card"
                     RunPageLink = "Student No." = FIELD("No.");
                     ApplicationArea = All;
                 }
-                action("Student Units")
+                action("Student exam Units")
                 {
-                    Caption = 'Student Units';
+                    Caption = 'Student Exam Units';
                     Image = BOMRegisters;
                     Promoted = true;
                     PromotedCategory = Process;
                     PromotedIsBig = true;
                     RunObject = Page 68778;
+                    RunPageLink = "Student No." = FIELD("No.");
+                    ApplicationArea = All;
+                }
+                action("Student  theory Units")
+                {
+                    Caption = 'Student theory units Units';
+                    Image = BOMRegisters;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedIsBig = true;
+                    RunObject = Page "ACA-Student Theory Units";
                     RunPageLink = "Student No." = FIELD("No.");
                     ApplicationArea = All;
                 }
