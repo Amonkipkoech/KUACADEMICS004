@@ -160,7 +160,7 @@ codeunit 40003 StudentPortalTest
     var
         number: Text;
     begin
-        number := NoSeriesMgt.GetNextNo(GenSetup."Clinical request", TODAY, TRUE);
+        // number := NoSeriesMgt.GetNextNo(GenSetup."Clinical request", TODAY, TRUE);
         clinicalAbsence.Reset();
         clinicalAbsence."No. Series" := 'CLN';
         clinicalAbsence."Admission Number" := studentNo;
@@ -168,10 +168,10 @@ codeunit 40003 StudentPortalTest
         clinicalAbsence."Date To" := EndDate;
         clinicalAbsence."Program Admitted" := Department;
         clinicalAbsence."Reason for Absence" := reason;
-        clinicalAbsence."Request No." := number;
+        //clinicalAbsence."Request No." := number;
         clinicalAbsence."Other Reason (Specify)" := otherReason;
 
-        if clinicalAbsence.Insert() then begin
+        if clinicalAbsence.Insert(true) then begin
             Message := 'SUCCESS';
         end;
         exit(Message);
@@ -1570,7 +1570,7 @@ codeunit 40003 StudentPortalTest
         END;
     end;
 
-    procedure ApplyClinicalAbscence(StudentNo: Text; DateFro: Date; DateTo: Date; Reason: Option; DetailedReason: Text; Prog: Text; IsRemedial: Boolean) Message: Text
+    procedure ApplyClinicalAbscence(StudentNo: Text; DateFro: Date; DateTo: Date; Reason: Option; DetailedReason: Text; Prog: Text; IsRemedial: Boolean; department: Text) Message: Text
     var
         clinicalAbs: Record "Student Absence Request";
     begin
@@ -1578,12 +1578,13 @@ codeunit 40003 StudentPortalTest
         clinicalAbs."Admission Number" := StudentNo;
         clinicalAbs."Date From" := DateFro;
         clinicalAbs."Date To" := DateTo;
+        clinicalAbs."Program Admitted" := department;
         clinicalAbs."Reason for Absence" := Reason;
         clinicalAbs."Other Reason (Specify)" := DetailedReason;
         clinicalAbs."Student Name" := GetStudentName(StudentNo);
         clinicalAbs."Apply Remedial" := IsRemedial;
 
-        if clinicalAbs.Insert() then begin
+        if clinicalAbs.Insert(true) then begin
             Message := 'SUCCESS';
 
         end;

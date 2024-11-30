@@ -277,10 +277,16 @@ codeunit 40002 StaffPortall
         end;
     end;
 
-    procedure GetClinicalAbsence(dept: Text)
+    procedure GetClinicalAbsence(dept: Text) Message: Text
     begin
         clinicalAbs.Reset();
-        // clinicalAbs.SetRange(depart)
+        clinicalAbs.SetRange("Program Admitted", dept);
+        if clinicalAbs.Find('-') then begin
+            repeat
+                Message += clinicalAbs."Student Name" + '::' + clinicalAbs."Admission Number" + '::' + Format(clinicalAbs."Date From") + '::' + Format(clinicalAbs."Date To") + '::' + Format(clinicalAbs."Reason for Absence") + '::' + clinicalAbs."Other Reason (Specify)" + '::' + Format(clinicalAbs."Apply Remedial") + '[]';
+            until clinicalAbs.Next() = 0;
+        end;
+        exit(Message);
     end;
 
     procedure GetStudents(filter: Option) Message: Text
@@ -3009,7 +3015,8 @@ codeunit 40002 StaffPortall
         IF CurrentSem.FIND('-') THEN BEGIN
             Message := CurrentSem.Code + '::' + CurrentSem.Description + '::' + FORMAT(CurrentSem."Registration Deadline") + '::' +
   FORMAT(CurrentSem."Lock CAT Editting") + '::' + FORMAT(CurrentSem."Lock Exam Editting") + '::' + FORMAT(CurrentSem."Ignore Editing Rule")
-  + '::' + FORMAT(CurrentSem."Mark entry Dealine") + '::' + FORMAT(CurrentSem."Lock Lecturer Editing") + '::' + FORMAT(CurrentSem.AllowDeanEditing) + '::' + FORMAT(CurrentSem."Unit Registration Deadline");
+  + '::' + Format(CurrentSem."Mark entry Dealine", 0, '<Day,2>/<Month,2>/<Year4>')
++ '::' + FORMAT(CurrentSem."Lock Lecturer Editing") + '::' + FORMAT(CurrentSem.AllowDeanEditing) + '::' + FORMAT(CurrentSem."Unit Registration Deadline");
         END
     end;
 
@@ -4170,7 +4177,7 @@ codeunit 40002 StaffPortall
                 associatedunits.Reset;
                 associatedunits.SetRange("Associated Unit", UnitSubjects.Code);
                 if not associatedunits.find('-') then begin
-                    Details += UnitSubjects.Code + ' ::' + UnitSubjects.Desription + ' :::';
+                    Details += UnitSubjects.Code + ' ::' + UnitSubjects.Desription + '[]';
                 end;
             until UnitSubjects.Next = 0;
         END;
