@@ -458,15 +458,16 @@ codeunit 40003 StudentPortalTest
 
     end;
 
-    procedure UnitsToRegister(progCode: Text) Message: Text
+    procedure UnitsToRegister(progCode: Text; stage: Text) Message: Text
+
     begin
-        unitsOnOffer.Reset();
-        unitsOnOffer.SetRange(unitsOnOffer.Semester, CurrentSemester());
-        unitsOnOffer.SetRange(unitsOnOffer.Programs, progCode);
-        if unitsOnOffer.Find('-') then begin
+        UnitSubjects.Reset();
+        UnitSubjects.SetRange(UnitSubjects."Programme Code", progCode);
+        UnitSubjects.SetRange(UnitSubjects."Stage Code", stage);
+        if UnitSubjects.Find('-') then begin
             repeat
-                Message += 'SUCCESS' + '::' + unitsOnOffer."Unit Base Code" + '::' + GetUnitName(unitsOnOffer."Unit Base Code") + '::' + unitsOnOffer.Campus + '::' + GetLectureName(unitsOnOffer.Lecturer) + '::' + unitsOnOffer."Lecture Hall" + '::' + unitsOnOffer.TimeSlot + '::' + unitsOnOffer.Day + '[]';
-            until unitsOnOffer.Next = 0;
+                Message += 'SUCCESS' + '::' + UnitSubjects.Code + '::' + GetUnitName(UnitSubjects.Code) + '::' + UnitSubjects.Desription + '::' + GetLectureName(unitsOnOffer.Lecturer) + '[]';
+            until UnitSubjects.Next = 0;
         end
     end;
 
@@ -1277,9 +1278,10 @@ codeunit 40003 StudentPortalTest
         CurrentSem.RESET;
         CurrentSem.SETRANGE(CurrentSem."Current Semester", TRUE);
         IF CurrentSem.FIND('-') THEN BEGIN
-            Message := CurrentSem.Code + '::' + CurrentSem.Description + '::' + FORMAT(CurrentSem."Registration Deadline") + '::' +
+            Message := CurrentSem.Code + '::' + CurrentSem.Description + '::' + Format(CurrentSem."Registration Deadline", 0, '<Month,2>/<Day,2>/<Year4>') + '::' +
   FORMAT(CurrentSem."Lock CAT Editting") + '::' + FORMAT(CurrentSem."Lock Exam Editting") + '::' + FORMAT(CurrentSem."Ignore Editing Rule")
-  + '::' + FORMAT(CurrentSem."Mark entry Dealine") + '::' + FORMAT(CurrentSem."Lock Lecturer Editing") + '::' + FORMAT(CurrentSem.AllowDeanEditing) + '::' + FORMAT(CurrentSem."Unit Registration Deadline") + '::' + FORMAT(CurrentSem."Apply For Supp");
+  + '::' + Format(CurrentSem."Mark entry Dealine", 0, '<Month,2>/<Day,2>/<Year4>') + '::' + FORMAT(CurrentSem."Lock Lecturer Editing") + '::' + FORMAT(CurrentSem.AllowDeanEditing) + '::' +
+   Format(CurrentSem."Unit Registration Deadline", 0, '<Month,2>/<Day,2>/<Year4>') + '::' + FORMAT(CurrentSem."Apply For Supp");
         END
     end;
 
@@ -1573,7 +1575,9 @@ codeunit 40003 StudentPortalTest
     procedure ApplyClinicalAbscence(StudentNo: Text; DateFro: Date; DateTo: Date; Reason: Option; DetailedReason: Text; Prog: Text; IsRemedial: Boolean; department: Text) Message: Text
     var
         clinicalAbs: Record "Student Absence Request";
+        number: Text;
     begin
+        number := NoSeriesMgt.GetNextNo('CLN', TODAY, TRUE);
         clinicalAbs.Reset();
         clinicalAbs."Admission Number" := StudentNo;
         clinicalAbs."Date From" := DateFro;
@@ -1583,13 +1587,31 @@ codeunit 40003 StudentPortalTest
         clinicalAbs."Other Reason (Specify)" := DetailedReason;
         clinicalAbs."Student Name" := GetStudentName(StudentNo);
         clinicalAbs."Apply Remedial" := IsRemedial;
+        clinicalAbs."Request No." := number;
+        clinicalAbs."HOD Objection" := clinicalAbs."HOD Objection"::Open;
+        clinicalAbs."Institute Approval" := clinicalAbs."Institute Approval"::Open;
 
-        if clinicalAbs.Insert(true) then begin
+        if clinicalAbs.Insert() then begin
             Message := 'SUCCESS';
 
         end;
+
         exit(Message);
 
+    end;
+
+    procedure GetClinicalAbsApplications(studentNo: Text) Message: Text
+    var
+        clinicalAbs: Record "Student Absence Request";
+    begin
+        clinicalAbs.Reset();
+        clinicalAbs.SetRange("Admission Number", studentNo);
+        if clinicalAbs.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + clinicalAbs."Request No." + '::' + Format(clinicalAbs."Date From", 0, '<Day,2>/<Month,2>/<Year4>') + '::' + Format(clinicalAbs."Date To", 0, '<Day,2>/<Month,2>/<Year4>') +
+                 '::' + Format(clinicalAbs."HOD Objection") + '::' + Format(clinicalAbs."Institute Approval") + '::' + Format(clinicalAbs."Institute Signature Date", 0, '<Day,2>/<Month,2>/<Year4>') + '[]';
+            until clinicalAbs.Next() = 0;
+        end;
     end;
 
 

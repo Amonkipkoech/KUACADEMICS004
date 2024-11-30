@@ -281,13 +281,48 @@ codeunit 40002 StaffPortall
     begin
         clinicalAbs.Reset();
         clinicalAbs.SetRange("Program Admitted", dept);
+        clinicalAbs.SetRange("HOD Objection", clinicalAbs."HOD Objection"::Open);
+        // clinicalAbs.SetRange()
         if clinicalAbs.Find('-') then begin
             repeat
-                Message += clinicalAbs."Student Name" + '::' + clinicalAbs."Admission Number" + '::' + Format(clinicalAbs."Date From") + '::' + Format(clinicalAbs."Date To") + '::' + Format(clinicalAbs."Reason for Absence") + '::' + clinicalAbs."Other Reason (Specify)" + '::' + Format(clinicalAbs."Apply Remedial") + '[]';
+                Message += 'SUCCESS' + '::' + clinicalAbs."Student Name" + '::' + clinicalAbs."Request No." + '::' + Format(clinicalAbs."Date From") + '::' + Format(clinicalAbs."Date To") + '::' + Format(clinicalAbs."Reason for Absence") + '::' + clinicalAbs."Other Reason (Specify)" + '::' + Format(clinicalAbs."Apply Remedial") + '[]';
             until clinicalAbs.Next() = 0;
         end;
         exit(Message);
     end;
+
+    procedure AcceptClinicalAbscence(ClinicalNo: Text) message: Text
+    begin
+        clinicalAbs.Reset();
+        clinicalAbs.SetRange("Request No.", ClinicalNo);
+        if clinicalAbs.FindFirst() then begin
+            clinicalAbs."HOD Objection" := clinicalAbs."HOD Objection"::"I Do Not Object";
+            clinicalAbs."Institute Approval" := clinicalAbs."Institute Approval"::Approved;
+            clinicalAbs."Institute Signature Date" := Today;
+            if clinicalAbs.Modify() then begin
+                Message := 'SUCCESS';
+            end;
+
+        end;
+        exit(Message);
+    end;
+
+    procedure DeclineClinicalAbscence(ClinicalNo: Text) message: Text
+    begin
+        clinicalAbs.Reset();
+        clinicalAbs.SetRange("Request No.", ClinicalNo);
+        if clinicalAbs.FindFirst() then begin
+            clinicalAbs."HOD Objection" := clinicalAbs."HOD Objection"::"I Object";
+            clinicalAbs."Institute Approval" := clinicalAbs."Institute Approval"::"Not Approved";
+            if clinicalAbs.Modify() then begin
+                Message := 'SUCCESS';
+            end;
+
+        end;
+
+        exit(Message);
+    end;
+
 
     procedure GetStudents(filter: Option) Message: Text
     begin
@@ -4495,6 +4530,19 @@ codeunit 40002 StaffPortall
         if lecturers.Find('-') then begin
             repeat
                 msg += lecturers.Unit + ' ::' + GetUnitDescription(Lecturers.Unit) + ' ::' + lecturers.ModeOfStudy + ' ::' + lecturers.Stream + ' :::';
+            until lecturers.Next = 0;
+        end;
+    end;
+
+    procedure GetResearchUnits(lecNo: Code[20]; sem: Code[20]) Message: Text
+    begin
+        lecturers.Reset;
+        lecturers.SetRange(Lecturer, lecno);
+        lecturers.SetRange(Semester, sem);
+        //lecturers.SetRange(Description,'Research');
+        if lecturers.Find('-') then begin
+            repeat
+                Message += lecturers.Unit + ' ::' + GetUnitDescription(Lecturers.Unit) + ' ::' + lecturers.ModeOfStudy + ' ::' + lecturers.Stream + ' :::';
             until lecturers.Next = 0;
         end;
     end;
