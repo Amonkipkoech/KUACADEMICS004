@@ -272,12 +272,28 @@ page 68756 "ACA-Course Registration 3"
                 Image = LotInfo;
                 action("Student Units")
                 {
-                    Caption = 'Student Units';
+                    Caption = 'Student Exam Units';
                     Image = BOMRegisters;
                     Promoted = true;
                     PromotedCategory = Process;
                     PromotedIsBig = true;
                     RunObject = Page "ACA-Student Units";
+                    RunPageLink = "Student No." = FIELD("Student No."),
+                                  Semester = FIELD(Semester),
+                                  Programme = FIELD(Programmes),
+                                  Reversed = FILTER(false),
+                                  Stage = FIELD(Stage),
+                                  "Academic Year" = FIELD("Academic Year");
+                    ApplicationArea = All;
+                }
+                action("Student theory Units")
+                {
+                    Caption = 'Student  theory Units';
+                    Image = BOMRegisters;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedIsBig = true;
+                    RunObject = Page "ACA-Student Theory Units";
                     RunPageLink = "Student No." = FIELD("Student No."),
                                   Semester = FIELD(Semester),
                                   Programme = FIELD(Programmes),

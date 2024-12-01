@@ -32,7 +32,7 @@ report 66665 "Provisional College Transcrip3"
             column(infoPhone; info."Phone No.")
             {
             }
-   
+
             column(ProgClassInt; ProgClassInt)
             {
             }
@@ -264,6 +264,23 @@ report 66665 "Provisional College Transcrip3"
                     {
                     }
                 }
+                dataitem(StudUnitsss2; "ACA-Student Theory Units ")
+                {
+                    DataItemLink = "Student No." = FIELD("Student No."),
+                               Programme = FIELD(Programme),
+                               "Year of Study" = FIELD("Year of Study");
+                    column(Unit2; StudUnitsss."Unit Code")
+                    {
+                    }
+                    column(Desc2; StudUnitsss."Unit Description")
+                    {
+                    }
+                    column(CreditHours2; StudUnitsss."Credit Hours")
+                    {
+                    }
+
+                }
+
 
                 trigger OnAfterGetRecord()
                 var
