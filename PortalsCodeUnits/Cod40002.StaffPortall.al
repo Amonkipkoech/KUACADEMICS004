@@ -214,6 +214,57 @@ codeunit 40002 StaffPortall
         END
     end;
 
+    procedure GroupSubjects(paper: Option; unitCode: Text; currentsem: Text; AcademicYr: Text): Text
+    var
+        theoryUnits: Record "ACA-Student Theory Units ";
+        modifiedCount: Integer;
+    begin
+
+        theoryUnits.SetRange(Unit, unitCode);
+        theoryUnits.SetRange(Semester, currentsem);
+        theoryUnits.SetRange("Academic Year", AcademicYr);
+        modifiedCount := 0;
+
+
+        if theoryUnits.FindSet() then begin
+            repeat
+                theoryUnits.Paper := paper;
+                if theoryUnits.Modify() then
+                    modifiedCount += 1;
+            until theoryUnits.Next() = 0;
+        end;
+
+        if modifiedCount > 0 then
+            exit(Format('%1 record(s) updated successfully.', modifiedCount))
+        else
+            exit('No records found matching the criteria.');
+    end;
+
+    procedure GetGroupedPapers(dept: Text; currentSem: Text; AcademicYr: Text): Text
+    var
+        theoryUnits: Record "ACA-Student Theory Units ";
+        Message: Text;
+    begin
+        theoryUnits.Reset();
+        theoryUnits.SetRange(Programme, dept);
+        theoryUnits.SetRange(Semester, currentSem);
+        theoryUnits.SetRange("Academic Year", AcademicYr);
+
+
+
+        if theoryUnits.FindSet() then begin
+            repeat
+
+                Message += 'SUCCESS' + '::' + theoryUnits.Unit + '::' + GetUnitDescription(theoryUnits.Unit) + '::' + Format(theoryUnits.Paper) + '[]';
+
+            until theoryUnits.Next() = 0;
+        end;
+
+        exit(Message);
+    end;
+
+
+
     procedure GetExamAttendance(unitCode: Text; lectNo: Text; semester: Text) Message: Text
     var
         examAttendance: Record "ACA-Exam Attendance Register";
@@ -3452,6 +3503,7 @@ codeunit 40002 StaffPortall
             Message := CurrentSem.Code;
         END;
     end;
+
 
     procedure GetCurrentAcademicYear() Message: Text
     begin

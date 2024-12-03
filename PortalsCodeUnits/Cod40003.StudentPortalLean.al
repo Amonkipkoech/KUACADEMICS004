@@ -471,6 +471,26 @@ codeunit 40003 StudentPortalTest
         end
     end;
 
+    procedure GetLecturerName(unitCode: Code[10]) Message: Text
+    begin
+
+    end;
+
+    procedure UnitsToRegister2(progCode: Code[10]; stage: Code[10]) Message: Text
+    var
+        units: Record "ACA-Units/Subjects";
+    begin
+        units.Reset();
+        units.SetRange("Programme Code", progCode);
+        units.SetRange("Stage Code", stage);
+        if units.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + units.Code + '::' + GetUnitName(units.Code) + '::' + units.Desription + '::' + Format(units."Unit Type") + '[]';
+            until units.Next() = 0;
+        end;
+        exit(Message);
+    end;
+
     // procedure GetTmetable(progcode:Text)Message:Text
     // begin
     //     unitsOnOffer.Reset();
@@ -1390,9 +1410,10 @@ codeunit 40003 StudentPortalTest
         END
     end;
 
-    procedure SubmitUnits(studentNo: Text; Unit: Text; Prog: Text; myStage: Text; sem: Text; RegTransID: Text; UnitDescription: Text; AcademicYear: Text) ReturnMessage: Text[150]
+    procedure SubmitUnits(studentNo: Text; Unit: Text; Prog: Text; myStage: Text; sem: Text; RegTransID: Text; UnitDescription: Text; AcademicYear: Text; unitType: Option) ReturnMessage: Text[150]
     var
         Customer: Record "Customer";
+
     begin
         /*IF Customer.GET(studentNo) THEN BEGIN
             Customer.CALCFIELDS(Balance);
@@ -1401,7 +1422,11 @@ codeunit 40003 StudentPortalTest
             END;
         END;
         IF NOT (Customer.Balance > 0) THEN BEGIN*/
+
+
+
         StudentUnits.INIT;
+
         StudentUnits."Student No." := studentNo;
         StudentUnits.Unit := Unit;
         StudentUnits."Unit Name" := UnitDescription;
@@ -1424,6 +1449,41 @@ codeunit 40003 StudentPortalTest
         StudentUnitBaskets.SETRANGE("Academic Year", AcademicYear);
         IF StudentUnitBaskets.FIND('-') THEN begin
             StudentUnitBaskets.Delete();
+        END;
+    end;
+
+    procedure RegisterTheoryUnits(studentNo: Text; Unit: Text; Prog: Text; myStage: Text; sem: Text; RegTransID: Text; AcademicYear: Text; unitType: Option) Message: Text
+    var
+        theoryUnits: Record "ACA-Student Theory Units ";
+    begin
+        theoryUnits.Reset();
+        theoryUnits.Init();
+        theoryUnits."Student Name" := GetStudentName(studentNo);
+        theoryUnits."Student No." := studentNo;
+        theoryUnits.Unit := Unit;
+        theoryUnits."Unit Description" := GetUnitName(Unit);
+        theoryUnits.Stage := myStage;
+        theoryUnits.Programme := Prog;
+        theoryUnits."Reg. Transacton ID" := RegTransID;
+        theoryUnits."Academic Year" := AcademicYear;
+        theoryUnits."Unit Type" := unitType;
+        theoryUnits.Semester := sem;
+
+        if theoryUnits.Insert(true) then begin
+            Message := 'SUCCESS';
+        end;
+        exit(Message);
+
+    end;
+
+
+    procedure GetCurrentSemester() Message: Text
+    
+    begin
+        CurrentSem.RESET;
+        CurrentSem.SETRANGE("Current Semester", TRUE);
+        IF CurrentSem.FIND('-') THEN BEGIN
+            Message := CurrentSem.Code;
         END;
     end;
 

@@ -2,11 +2,11 @@ table 40020 "ACA-Student Theory Units "
 {
     Caption = 'ACA-Student Theory Units ';
     DataClassification = ToBeClassified;
-    
+
     /// <summary>
-/// Table ACA-Student Units (ID 61549).
-/// </summary>
- 
+    /// Table ACA-Student Units (ID 61549).
+    /// </summary>
+
 
     fields
     {
@@ -1608,6 +1608,11 @@ table 40020 "ACA-Student Theory Units "
                                                               // Cancelled = CONST(false),
                                                               Semester = FIELD(Semester)));
             FieldClass = FlowField;
+        }
+        field(60205; "Paper"; Option)
+        {
+            OptionCaption = 'P1,P2,P3,P4';
+            OptionMembers = P1,P2,P3,P4;
         }
 
 
