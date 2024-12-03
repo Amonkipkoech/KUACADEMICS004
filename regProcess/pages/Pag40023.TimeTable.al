@@ -89,4 +89,23 @@ page 40023 "Time Table"
             }
         }
     }
+    actions
+    {
+        area(Processing)
+        {
+            action("Import Marks")
+            {
+                ApplicationArea = All;
+                image = ImportCodes;
+                RunObject = xmlport "xmlimportTimeTable";
+                // trigger OnAction()
+                // begin
+                //     if ((UserId <> 'APPKINGS') or (UserId <> 'Frankie') or (UserId <> 'GKIMATHI') or (UserId <> 'EKIOKO')) then
+                //         ERROR('You are not allowed to Access This!!');
+                // end;
+
+            }
+        }
+
+    }
 }

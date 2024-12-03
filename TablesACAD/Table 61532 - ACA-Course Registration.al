@@ -1480,13 +1480,14 @@ table 61532 "ACA-Course Registration"
         }
         field(211; "Units theory Taken"; Integer)
         {
-            FieldClass = FlowField;
+
             CalcFormula = Count("ACA-Student Theory Units " WHERE("Student No." = FIELD("Student No."),
                                                            Programme = FIELD(Programmes),
                                                            Stage = field(Stage),
                                                            Reversed = FILTER(false),
                                                            Semester = FIELD(Semester)));
             Editable = false;
+            FieldClass = FlowField;
 
         }
         field(22; "User ID"; Code[50])
