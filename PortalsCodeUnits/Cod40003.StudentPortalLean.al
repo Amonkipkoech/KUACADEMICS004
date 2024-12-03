@@ -466,7 +466,7 @@ codeunit 40003 StudentPortalTest
         UnitSubjects.SetRange(UnitSubjects."Stage Code", stage);
         if UnitSubjects.Find('-') then begin
             repeat
-                Message += 'SUCCESS' + '::' + UnitSubjects.Code + '::' + GetUnitName(UnitSubjects.Code) + '::' + UnitSubjects.Desription + '::' + GetLectureName(unitsOnOffer.Lecturer) + '[]';
+                Message += 'SUCCESS' + '::' + UnitSubjects.Code + '::' + GetUnitName(UnitSubjects.Code) + '::' + UnitSubjects.Desription + '::' + '[]';
             until UnitSubjects.Next = 0;
         end
     end;

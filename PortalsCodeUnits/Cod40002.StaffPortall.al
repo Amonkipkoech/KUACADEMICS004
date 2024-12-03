@@ -307,6 +307,24 @@ codeunit 40002 StaffPortall
         exit(Message);
     end;
 
+    procedure GetRemedialStudents(dept: Text) Message: Text
+    var
+        clinicalAbs: Record "Student Absence Request";
+    begin
+        clinicalAbs.Reset();
+        clinicalAbs.SetRange("Program Admitted", dept);
+        clinicalAbs.SetRange("Institute Approval", clinicalAbs."Institute Approval"::Approved);
+        clinicalAbs.SetRange("Apply Remedial", true);
+
+        if clinicalAbs.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + clinicalAbs."Student Name" + '::' + clinicalAbs."Admission Number" + '::' + Format(clinicalAbs."Date To") + '::' + Format(clinicalAbs."Apply Remedial") + '[]';
+            until clinicalAbs.Next() = 0;
+        end;
+        exit(Message);
+
+    end;
+
     procedure DeclineClinicalAbscence(ClinicalNo: Text) message: Text
     begin
         clinicalAbs.Reset();
@@ -4534,12 +4552,26 @@ codeunit 40002 StaffPortall
         end;
     end;
 
+    procedure GetClinicalUnits(lecno: Code[20]; sem: Code[20]) Response: Text
+    begin
+        lecturers.Reset();
+        lecturers.SetRange(Lecturer, lecno);
+        lecturers.SetRange(Semester, sem);
+        lecturers.SetRange(lecturers."Unit Type", lecturers."Unit Type"::Clinical);
+
+        if lecturers.Find('-') then begin
+            repeat
+                Response += lecturers.Unit + ' ::' + GetUnitDescription(Lecturers.Unit) + ' ::' + lecturers.ModeOfStudy + ' ::' + lecturers.Stream + ' :::';
+            until lecturers.Next = 0;
+        end;
+    end;
+
     procedure GetResearchUnits(lecNo: Code[20]; sem: Code[20]) Message: Text
     begin
         lecturers.Reset;
         lecturers.SetRange(Lecturer, lecno);
         lecturers.SetRange(Semester, sem);
-        //lecturers.SetRange(Description,'Research');
+        lecturers.SetRange(lecturers."Unit Type", lecturers."Unit Type"::Research);
         if lecturers.Find('-') then begin
             repeat
                 Message += lecturers.Unit + ' ::' + GetUnitDescription(Lecturers.Unit) + ' ::' + lecturers.ModeOfStudy + ' ::' + lecturers.Stream + ' :::';
