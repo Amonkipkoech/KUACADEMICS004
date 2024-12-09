@@ -240,7 +240,7 @@ codeunit 40002 StaffPortall
             exit('No records found matching the criteria.');
     end;
 
-    procedure GetGroupedPapers(dept: Text; currentSem: Text; AcademicYr: Text): Text
+    procedure GetGroupedPapers(dept: Text; currentSem: Text; AcademicYr: Text; stage: Text): Text
     var
         theoryUnits: Record "ACA-Student Theory Units ";
         Message: Text;
@@ -249,8 +249,7 @@ codeunit 40002 StaffPortall
         theoryUnits.SetRange(Programme, dept);
         theoryUnits.SetRange(Semester, currentSem);
         theoryUnits.SetRange("Academic Year", AcademicYr);
-
-
+        theoryUnits.SetRange(Stage, stage);
 
         if theoryUnits.FindSet() then begin
             repeat
@@ -375,6 +374,21 @@ codeunit 40002 StaffPortall
         exit(Message);
 
     end;
+
+    procedure GetDistinctCohort(dept: Text; AcademicYr: Text; semester: Text) Message: Text
+    var
+        units: Record "ACA-Programme Stages";
+    begin
+        units.Reset();
+        units.SetRange("Programme Code", dept);
+        if units.Find('-') then begin
+            repeat
+                Message += units.Code + '[]';
+            until units.Next() = 0;
+        end;
+        exit(Message);
+    end;
+
 
     procedure DeclineClinicalAbscence(ClinicalNo: Text) message: Text
     begin
@@ -4272,11 +4286,12 @@ codeunit 40002 StaffPortall
         END
     end;
 
-    procedure GetUnitsToOffer(progcode: code[20]) Details: Text
+    procedure GetUnitsToOffer(progcode: code[20]; stage: Text) Details: Text
     begin
         UnitSubjects.RESET;
         UnitSubjects.SETRANGE(UnitSubjects."Programme Code", progcode);
         UnitSubjects.SETRANGE(UnitSubjects."Time Table", true);
+        UnitSubjects.SetRange("Stage Code", stage);
         IF UnitSubjects.FIND('-') THEN BEGIN
             repeat
                 associatedunits.Reset;
