@@ -93,10 +93,11 @@ page 40023 "Time Table"
     {
         area(Processing)
         {
-            action("Import Marks")
+            action("Import TimeTbale")
             {
                 ApplicationArea = All;
                 image = ImportCodes;
+                Caption = ' Import TimeTable';
                 RunObject = xmlport "xmlimportTimeTable";
                 // trigger OnAction()
                 // begin
