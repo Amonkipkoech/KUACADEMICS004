@@ -130,6 +130,24 @@ codeunit 40003 StudentPortalTest
         EXIT(Message);
     end;
 
+    procedure GetExamsPapers(sem: Text; academicYr: Text; studentNo: Text) Response: Text
+    var
+        theoryUnits: Record "ACA-Student Theory Units ";
+    begin
+        theoryUnits.Reset();
+        theoryUnits.SetRange(Semester, sem);
+        theoryUnits.SetRange("Academic Year", academicYr);
+        theoryUnits.SetRange("Student No.", studentNo);
+
+        if theoryUnits.Find('-') then begin
+            repeat
+                Response += 'SUCCESS' + '::' + theoryUnits.Unit + '::' + GetUnitName(theoryUnits.Unit) + '::' + Format(theoryUnits.Paper) + '[]';
+            until theoryUnits.Next() = 0;
+        end;
+        exit(Response);
+    end;
+
+
     procedure GenerateFullNames() nos: integer
     var
         fullname: Text;
@@ -1142,14 +1160,16 @@ codeunit 40003 StudentPortalTest
             message := false;
         exit(message);
     end;
-     procedure IsUnitRegistered2(unitCode: Text; studentNo: Text; semester: Text) message: Boolean
-     var theoryUnits : Record "ACA-Student Theory Units ";
+
+    procedure IsUnitRegistered2(unitCode: Text; studentNo: Text; semester: Text) message: Boolean
+    var
+        theoryUnits: Record "ACA-Student Theory Units ";
     begin
 
         theoryUnits.Reset();
         theoryUnits.SetRange("Student No.", studentNo);
         theoryUnits.SetRange(Unit, unitcode);
-        theoryUnits.SetRange(Semester,semester);
+        theoryUnits.SetRange(Semester, semester);
         if theoryUnits.FIND('-') then begin
             message := true;
         end else
@@ -1423,6 +1443,15 @@ codeunit 40003 StudentPortalTest
             Message := AcademicYr.Code + '::' + AcademicYr.Description;
         END
     end;
+     procedure GetAcademicYr2() Message: Text
+    begin
+        AcademicYr.RESET;
+        AcademicYr.SETRANGE(AcademicYr.Current, TRUE);
+        IF AcademicYr.FIND('-') THEN BEGIN
+            Message := AcademicYr.Code;
+        END;
+        exit(Message);
+    end;
 
     procedure SubmitUnits(studentNo: Text; Unit: Text; Prog: Text; myStage: Text; sem: Text; RegTransID: Text; UnitDescription: Text; AcademicYear: Text; unitType: Option) ReturnMessage: Text[150]
     var
@@ -1493,7 +1522,7 @@ codeunit 40003 StudentPortalTest
 
 
     procedure GetCurrentSemester() Message: Text
-    
+
     begin
         CurrentSem.RESET;
         CurrentSem.SETRANGE("Current Semester", TRUE);
@@ -1551,7 +1580,8 @@ codeunit 40003 StudentPortalTest
     end;
 
     procedure GetRegisteredUnits(studentNo: Text; stage: Text; semester: Text; Programme: Text) Message: Text
-    var theoryUnits : Record "ACA-Student Theory Units ";
+    var
+        theoryUnits: Record "ACA-Student Theory Units ";
     begin
         theoryUnits.Reset();
         theoryUnits.SetRange("Student No.", studentNo);
