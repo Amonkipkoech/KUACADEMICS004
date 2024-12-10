@@ -266,6 +266,7 @@ codeunit 40002 StaffPortall
     procedure AssignLecturerPapers(unitCode: Text; prog: Text; stage: Text; sem: Text; AcdYr: Text; lect: Text): Text
     var
         modifiedCount: Integer;
+        Message: Text;
     begin
         modifiedCount := 0;
         StudentUnits.Reset();
@@ -275,21 +276,24 @@ codeunit 40002 StaffPortall
         StudentUnits.SetRange("Academic Year", AcdYr);
         StudentUnits.SetRange(Unit, unitCode);
 
-
         if StudentUnits.Find('-') then begin
             repeat
                 StudentUnits.Supervisor := lect;
                 if StudentUnits.Modify() then
                     modifiedCount += 1;
-
             until StudentUnits.Next() = 0;
+
             if modifiedCount > 0 then
-                exit(Format('%1 record(s) updated successfully.', modifiedCount))
+                Message := Format('%1 record(s) updated successfully.', modifiedCount)
             else
-                exit('No records found matching the criteria.');
+                Message := 'No records found matching the criteria.';
+        end else begin
+            Message := 'No records found matching the criteria.';
         end;
 
+        exit(Message);
     end;
+
 
 
 
@@ -3142,13 +3146,13 @@ codeunit 40002 StaffPortall
 
     procedure GetProgramme(unitCode: Text; lectNo: Text) Message: Text
     begin
-        lecunits.Reset();
+        StudentUnits.Reset();
         //lecunits.SetRange(lecunits.Semester, semester);
-        lecunits.SetRange(lecunits.Lecturer, lectNo);
-        lecunits.SetRange(lecunits.Unit, unitCode);
+        StudentUnits.SetRange(Supervisor, lectNo);
+        StudentUnits.SetRange(Unit, unitCode);
 
-        if lecunits.FindFirst() then Begin
-            Message := lecunits.Programme;
+        if StudentUnits.FindFirst() then Begin
+            Message := StudentUnits.Programme;
 
         End;
         exit(Message);
@@ -4634,6 +4638,23 @@ codeunit 40002 StaffPortall
         end;
     end;
 
+    procedure GetExamUnits(lecNo: Code[20]; sem: Code[20]; AcademicYr: Code[20]): Text
+    var
+        message: Text;
+    begin
+        StudentUnits.Reset();
+        Studentunits.SetRange(Supervisor, lecNo);
+        Studentunits.SetRange(Semester, sem);
+        Studentunits.SetRange("Academic Year", AcademicYr);
+
+        if Studentunits.Find('-') then begin
+            repeat
+                message += Studentunits.Unit + '::' + StudentUnits."Unit Name" + '[]';
+            until Studentunits.next() = 0;
+
+        end;
+        exit(message);
+    end;
 
 
     procedure GetLecturerSemUnits(lecno: Code[20]; sem: Code[20]) msg: Text
