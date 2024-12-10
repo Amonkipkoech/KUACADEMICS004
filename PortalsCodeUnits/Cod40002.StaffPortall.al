@@ -214,7 +214,7 @@ codeunit 40002 StaffPortall
         END
     end;
 
-    procedure GroupSubjects(paper: Option; unitCode: Text; currentsem: Text; AcademicYr: Text): Text
+    procedure GroupSubjects(paper: Option; unitCode: Text; currentsem: Text; AcademicYr: Text; stage: Text): Text
     var
         theoryUnits: Record "ACA-Student Theory Units ";
         modifiedCount: Integer;
@@ -223,6 +223,7 @@ codeunit 40002 StaffPortall
         theoryUnits.SetRange(Unit, unitCode);
         theoryUnits.SetRange(Semester, currentsem);
         theoryUnits.SetRange("Academic Year", AcademicYr);
+        theoryUnits.SetRange(Stage, stage);
         modifiedCount := 0;
 
 
@@ -260,6 +261,34 @@ codeunit 40002 StaffPortall
         end;
 
         exit(Message);
+    end;
+
+    procedure AssignLecturerPapers(unitCode: Text; prog: Text; stage: Text; sem: Text; AcdYr: Text; lect: Text): Text
+    var
+        modifiedCount: Integer;
+    begin
+        modifiedCount := 0;
+        StudentUnits.Reset();
+        StudentUnits.SetRange(Programme, prog);
+        StudentUnits.SetRange(Stage, stage);
+        StudentUnits.SetRange(Semester, sem);
+        StudentUnits.SetRange("Academic Year", AcdYr);
+        StudentUnits.SetRange(Unit, unitCode);
+
+
+        if StudentUnits.Find('-') then begin
+            repeat
+                StudentUnits.Supervisor := lect;
+                if StudentUnits.Modify() then
+                    modifiedCount += 1;
+
+            until StudentUnits.Next() = 0;
+            if modifiedCount > 0 then
+                exit(Format('%1 record(s) updated successfully.', modifiedCount))
+            else
+                exit('No records found matching the criteria.');
+        end;
+
     end;
 
 
