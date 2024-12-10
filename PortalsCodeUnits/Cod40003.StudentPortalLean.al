@@ -1142,6 +1142,20 @@ codeunit 40003 StudentPortalTest
             message := false;
         exit(message);
     end;
+     procedure IsUnitRegistered2(unitCode: Text; studentNo: Text; semester: Text) message: Boolean
+     var theoryUnits : Record "ACA-Student Theory Units ";
+    begin
+
+        theoryUnits.Reset();
+        theoryUnits.SetRange("Student No.", studentNo);
+        theoryUnits.SetRange(Unit, unitcode);
+        theoryUnits.SetRange(Semester,semester);
+        if theoryUnits.FIND('-') then begin
+            message := true;
+        end else
+            message := false;
+        exit(message);
+    end;
 
     procedure DeleteUnit(unitCode: Text; stage: Text; studentNo: Text; programme: Text) Message: Text
 
@@ -1468,6 +1482,7 @@ codeunit 40003 StudentPortalTest
         theoryUnits."Academic Year" := AcademicYear;
         theoryUnits."Unit Type" := unitType;
         theoryUnits.Semester := sem;
+        theoryUnits."Unit Name" := GetUnitName(unit);
 
         if theoryUnits.Insert(true) then begin
             Message := 'SUCCESS';
@@ -1536,18 +1551,19 @@ codeunit 40003 StudentPortalTest
     end;
 
     procedure GetRegisteredUnits(studentNo: Text; stage: Text; semester: Text; Programme: Text) Message: Text
+    var theoryUnits : Record "ACA-Student Theory Units ";
     begin
-        StudentUnits.Reset();
-        StudentUnits.SetRange(StudentUnits."Student No.", studentNo);
-        StudentUnits.SetRange(StudentUnits.stage, stage);
-        StudentUnits.SetRange(StudentUnits.Semester, semester);
-        StudentUnits.SetRange(StudentUnits.Programme, Programme);
-        if StudentUnits.FIND('-') THEN BEGIN
+        theoryUnits.Reset();
+        theoryUnits.SetRange("Student No.", studentNo);
+        theoryUnits.SetRange(Stage, stage);
+        theoryUnits.SetRange(Semester, semester);
+        theoryUnits.SetRange(Programme, Programme);
+        if theoryUnits.FIND('-') THEN BEGIN
             repeat
 
-                Message += StudentUnits.Unit + '::' + StudentUnits."Unit Description" + '[]';
+                Message += theoryUnits.Unit + '::' + theoryUnits."Unit Description" + '[]';
 
-            until StudentUnits.NEXT = 0;
+            until theoryUnits.NEXT = 0;
 
         END;
         exit(Message);
