@@ -130,6 +130,24 @@ codeunit 40003 StudentPortalTest
         EXIT(Message);
     end;
 
+    procedure GetExamsPapers(sem: Text; academicYr: Text; studentNo: Text) Response: Text
+    var
+        theoryUnits: Record "ACA-Student Theory Units ";
+    begin
+        theoryUnits.Reset();
+        theoryUnits.SetRange(Semester, sem);
+        theoryUnits.SetRange("Academic Year", academicYr);
+        theoryUnits.SetRange("Student No.", studentNo);
+
+        if theoryUnits.Find('-') then begin
+            repeat
+                Response += 'SUCCESS' + '::' + theoryUnits.Unit + '::' + GetUnitName(theoryUnits.Unit) + '::' + Format(theoryUnits.Paper) + '[]';
+            until theoryUnits.Next() = 0;
+        end;
+        exit(Response);
+    end;
+
+
     procedure GenerateFullNames() nos: integer
     var
         fullname: Text;
@@ -458,16 +476,37 @@ codeunit 40003 StudentPortalTest
 
     end;
 
-    procedure UnitsToRegister(progCode: Text) Message: Text
+    procedure UnitsToRegister(progCode: Text; stage: Text) Message: Text
+
     begin
-        unitsOnOffer.Reset();
-        unitsOnOffer.SetRange(unitsOnOffer.Semester, CurrentSemester());
-        unitsOnOffer.SetRange(unitsOnOffer.Programs, progCode);
-        if unitsOnOffer.Find('-') then begin
+        UnitSubjects.Reset();
+        UnitSubjects.SetRange(UnitSubjects."Programme Code", progCode);
+        UnitSubjects.SetRange(UnitSubjects."Stage Code", stage);
+        if UnitSubjects.Find('-') then begin
             repeat
-                Message += 'SUCCESS' + '::' + unitsOnOffer."Unit Base Code" + '::' + GetUnitName(unitsOnOffer."Unit Base Code") + '::' + unitsOnOffer.Campus + '::' + GetLectureName(unitsOnOffer.Lecturer) + '::' + unitsOnOffer."Lecture Hall" + '::' + unitsOnOffer.TimeSlot + '::' + unitsOnOffer.Day + '[]';
-            until unitsOnOffer.Next = 0;
+                Message += 'SUCCESS' + '::' + UnitSubjects.Code + '::' + GetUnitName(UnitSubjects.Code) + '::' + UnitSubjects.Desription + '::' + Format(UnitSubjects."Unit Type") + '[]';
+            until UnitSubjects.Next = 0;
         end
+    end;
+
+    procedure GetLecturerName(unitCode: Code[10]) Message: Text
+    begin
+
+    end;
+
+    procedure UnitsToRegister2(progCode: Code[10]; stage: Code[10]) Message: Text
+    var
+        units: Record "ACA-Units/Subjects";
+    begin
+        units.Reset();
+        units.SetRange("Programme Code", progCode);
+        units.SetRange("Stage Code", stage);
+        if units.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + units.Code + '::' + GetUnitName(units.Code) + '::' + units.Desription + '::' + Format(units."Unit Type") + '[]';
+            until units.Next() = 0;
+        end;
+        exit(Message);
     end;
 
     // procedure GetTmetable(progcode:Text)Message:Text
@@ -1122,6 +1161,22 @@ codeunit 40003 StudentPortalTest
         exit(message);
     end;
 
+    procedure IsUnitRegistered2(unitCode: Text; studentNo: Text; semester: Text) message: Boolean
+    var
+        theoryUnits: Record "ACA-Student Theory Units ";
+    begin
+
+        theoryUnits.Reset();
+        theoryUnits.SetRange("Student No.", studentNo);
+        theoryUnits.SetRange(Unit, unitcode);
+        theoryUnits.SetRange(Semester, semester);
+        if theoryUnits.FIND('-') then begin
+            message := true;
+        end else
+            message := false;
+        exit(message);
+    end;
+
     procedure DeleteUnit(unitCode: Text; stage: Text; studentNo: Text; programme: Text) Message: Text
 
     begin
@@ -1277,9 +1332,10 @@ codeunit 40003 StudentPortalTest
         CurrentSem.RESET;
         CurrentSem.SETRANGE(CurrentSem."Current Semester", TRUE);
         IF CurrentSem.FIND('-') THEN BEGIN
-            Message := CurrentSem.Code + '::' + CurrentSem.Description + '::' + FORMAT(CurrentSem."Registration Deadline") + '::' +
+            Message := CurrentSem.Code + '::' + CurrentSem.Description + '::' + Format(CurrentSem."Registration Deadline", 0, '<Month,2>/<Day,2>/<Year4>') + '::' +
   FORMAT(CurrentSem."Lock CAT Editting") + '::' + FORMAT(CurrentSem."Lock Exam Editting") + '::' + FORMAT(CurrentSem."Ignore Editing Rule")
-  + '::' + FORMAT(CurrentSem."Mark entry Dealine") + '::' + FORMAT(CurrentSem."Lock Lecturer Editing") + '::' + FORMAT(CurrentSem.AllowDeanEditing) + '::' + FORMAT(CurrentSem."Unit Registration Deadline") + '::' + FORMAT(CurrentSem."Apply For Supp");
+  + '::' + Format(CurrentSem."Mark entry Dealine", 0, '<Month,2>/<Day,2>/<Year4>') + '::' + FORMAT(CurrentSem."Lock Lecturer Editing") + '::' + FORMAT(CurrentSem.AllowDeanEditing) + '::' +
+   Format(CurrentSem."Unit Registration Deadline", 0, '<Month,2>/<Day,2>/<Year4>') + '::' + FORMAT(CurrentSem."Apply For Supp");
         END
     end;
 
@@ -1387,10 +1443,20 @@ codeunit 40003 StudentPortalTest
             Message := AcademicYr.Code + '::' + AcademicYr.Description;
         END
     end;
+     procedure GetAcademicYr2() Message: Text
+    begin
+        AcademicYr.RESET;
+        AcademicYr.SETRANGE(AcademicYr.Current, TRUE);
+        IF AcademicYr.FIND('-') THEN BEGIN
+            Message := AcademicYr.Code;
+        END;
+        exit(Message);
+    end;
 
-    procedure SubmitUnits(studentNo: Text; Unit: Text; Prog: Text; myStage: Text; sem: Text; RegTransID: Text; UnitDescription: Text; AcademicYear: Text) ReturnMessage: Text[150]
+    procedure SubmitUnits(studentNo: Text; Unit: Text; Prog: Text; myStage: Text; sem: Text; RegTransID: Text; UnitDescription: Text; AcademicYear: Text; unitType: Option) ReturnMessage: Text[150]
     var
         Customer: Record "Customer";
+
     begin
         /*IF Customer.GET(studentNo) THEN BEGIN
             Customer.CALCFIELDS(Balance);
@@ -1399,7 +1465,11 @@ codeunit 40003 StudentPortalTest
             END;
         END;
         IF NOT (Customer.Balance > 0) THEN BEGIN*/
+
+
+
         StudentUnits.INIT;
+
         StudentUnits."Student No." := studentNo;
         StudentUnits.Unit := Unit;
         StudentUnits."Unit Name" := UnitDescription;
@@ -1422,6 +1492,42 @@ codeunit 40003 StudentPortalTest
         StudentUnitBaskets.SETRANGE("Academic Year", AcademicYear);
         IF StudentUnitBaskets.FIND('-') THEN begin
             StudentUnitBaskets.Delete();
+        END;
+    end;
+
+    procedure RegisterTheoryUnits(studentNo: Text; Unit: Text; Prog: Text; myStage: Text; sem: Text; RegTransID: Text; AcademicYear: Text; unitType: Option) Message: Text
+    var
+        theoryUnits: Record "ACA-Student Theory Units ";
+    begin
+        theoryUnits.Reset();
+        theoryUnits.Init();
+        theoryUnits."Student Name" := GetStudentName(studentNo);
+        theoryUnits."Student No." := studentNo;
+        theoryUnits.Unit := Unit;
+        theoryUnits."Unit Description" := GetUnitName(Unit);
+        theoryUnits.Stage := myStage;
+        theoryUnits.Programme := Prog;
+        theoryUnits."Reg. Transacton ID" := RegTransID;
+        theoryUnits."Academic Year" := AcademicYear;
+        theoryUnits."Unit Type" := unitType;
+        theoryUnits.Semester := sem;
+        theoryUnits."Unit Name" := GetUnitName(unit);
+
+        if theoryUnits.Insert(true) then begin
+            Message := 'SUCCESS';
+        end;
+        exit(Message);
+
+    end;
+
+
+    procedure GetCurrentSemester() Message: Text
+
+    begin
+        CurrentSem.RESET;
+        CurrentSem.SETRANGE("Current Semester", TRUE);
+        IF CurrentSem.FIND('-') THEN BEGIN
+            Message := CurrentSem.Code;
         END;
     end;
 
@@ -1474,18 +1580,20 @@ codeunit 40003 StudentPortalTest
     end;
 
     procedure GetRegisteredUnits(studentNo: Text; stage: Text; semester: Text; Programme: Text) Message: Text
+    var
+        theoryUnits: Record "ACA-Student Theory Units ";
     begin
-        StudentUnits.Reset();
-        StudentUnits.SetRange(StudentUnits."Student No.", studentNo);
-        StudentUnits.SetRange(StudentUnits.stage, stage);
-        StudentUnits.SetRange(StudentUnits.Semester, semester);
-        StudentUnits.SetRange(StudentUnits.Programme, Programme);
-        if StudentUnits.FIND('-') THEN BEGIN
+        theoryUnits.Reset();
+        theoryUnits.SetRange("Student No.", studentNo);
+        theoryUnits.SetRange(Stage, stage);
+        theoryUnits.SetRange(Semester, semester);
+        theoryUnits.SetRange(Programme, Programme);
+        if theoryUnits.FIND('-') THEN BEGIN
             repeat
 
-                Message += StudentUnits.Unit + '::' + StudentUnits."Unit Description" + '[]';
+                Message += theoryUnits.Unit + '::' + theoryUnits."Unit Description" + '[]';
 
-            until StudentUnits.NEXT = 0;
+            until theoryUnits.NEXT = 0;
 
         END;
         exit(Message);
@@ -1573,7 +1681,9 @@ codeunit 40003 StudentPortalTest
     procedure ApplyClinicalAbscence(StudentNo: Text; DateFro: Date; DateTo: Date; Reason: Option; DetailedReason: Text; Prog: Text; IsRemedial: Boolean; department: Text) Message: Text
     var
         clinicalAbs: Record "Student Absence Request";
+        number: Text;
     begin
+        number := NoSeriesMgt.GetNextNo('CLN', TODAY, TRUE);
         clinicalAbs.Reset();
         clinicalAbs."Admission Number" := StudentNo;
         clinicalAbs."Date From" := DateFro;
@@ -1583,13 +1693,31 @@ codeunit 40003 StudentPortalTest
         clinicalAbs."Other Reason (Specify)" := DetailedReason;
         clinicalAbs."Student Name" := GetStudentName(StudentNo);
         clinicalAbs."Apply Remedial" := IsRemedial;
+        clinicalAbs."Request No." := number;
+        clinicalAbs."HOD Objection" := clinicalAbs."HOD Objection"::Open;
+        clinicalAbs."Institute Approval" := clinicalAbs."Institute Approval"::Open;
 
-        if clinicalAbs.Insert(true) then begin
+        if clinicalAbs.Insert() then begin
             Message := 'SUCCESS';
 
         end;
+
         exit(Message);
 
+    end;
+
+    procedure GetClinicalAbsApplications(studentNo: Text) Message: Text
+    var
+        clinicalAbs: Record "Student Absence Request";
+    begin
+        clinicalAbs.Reset();
+        clinicalAbs.SetRange("Admission Number", studentNo);
+        if clinicalAbs.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + clinicalAbs."Request No." + '::' + Format(clinicalAbs."Date From", 0, '<Day,2>/<Month,2>/<Year4>') + '::' + Format(clinicalAbs."Date To", 0, '<Day,2>/<Month,2>/<Year4>') +
+                 '::' + Format(clinicalAbs."HOD Objection") + '::' + Format(clinicalAbs."Institute Approval") + '::' + Format(clinicalAbs."Institute Signature Date", 0, '<Day,2>/<Month,2>/<Year4>') + '[]';
+            until clinicalAbs.Next() = 0;
+        end;
     end;
 
 

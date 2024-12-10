@@ -80,7 +80,7 @@ table 40016 "Student Absence Request"
         }
         field(13; "HOD Objection"; Option)
         {
-            OptionMembers = "I Object","I Do Not Object";
+            OptionMembers = "Open","I Object","I Do Not Object";
             DataClassification = ToBeClassified;
             Caption = 'HOD Objection';
         }
@@ -96,7 +96,7 @@ table 40016 "Student Absence Request"
         }
         field(16; "Institute Approval"; Option)
         {
-            OptionMembers = "Approved","Not Approved";
+            OptionMembers = "Open","Approved","Not Approved";
             DataClassification = ToBeClassified;
             Caption = 'Institute Approval';
         }
