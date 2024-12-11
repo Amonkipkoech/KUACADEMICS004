@@ -4325,7 +4325,7 @@ codeunit 40002 StaffPortall
         UnitSubjects.SETRANGE(UnitSubjects."Programme Code", progcode);
         UnitSubjects.SETRANGE(UnitSubjects."Time Table", true);
         UnitSubjects.SetRange("Stage Code", stage);
-        UnitSubjects.SetRange("Unit Type"::Theory);
+        UnitSubjects.SetRange(UnitSubjects."Unit Type", UnitSubjects."Unit Type"::Theory);
         IF UnitSubjects.FIND('-') THEN BEGIN
             repeat
                 associatedunits.Reset;
