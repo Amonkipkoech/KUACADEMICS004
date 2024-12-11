@@ -2,13 +2,8 @@ table 40020 "ACA-Student Theory Units "
 {
     Caption = 'ACA-Student Theory Units ';
     DataClassification = ToBeClassified;
-<<<<<<< HEAD
-DrillDownPageId = "ACA-Student Theory Units";
-    LookupPageId =  "ACA-Student Theory Units";
-=======
     DrillDownPageId = "ACA-Student Theory Units";
     LookupPageId = "ACA-Student Theory Units";
->>>>>>> dev-amon
     /// <summary>
     /// Table ACA-Student Units (ID 61549).
     /// </summary>
