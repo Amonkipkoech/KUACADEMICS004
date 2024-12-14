@@ -1612,8 +1612,8 @@ table 40020 "ACA-Student Theory Units "
         }
         field(60205; "Paper"; Option)
         {
-            OptionCaption = 'P1,P2,P3,P4';
-            OptionMembers = P1,P2,P3,P4;
+            OptionCaption = 'NA,P1,P2,P3,P4';
+            OptionMembers = "NA",P1,P2,P3,P4;
         }
 
 

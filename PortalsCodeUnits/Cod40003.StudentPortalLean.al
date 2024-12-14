@@ -1481,6 +1481,7 @@ codeunit 40003 StudentPortalTest
         StudentUnits."Reg. Transacton ID" := RegTransID;
         StudentUnits."Unit Description" := UnitDescription;
         StudentUnits."Academic Year" := AcademicYear;
+        StudentUnits."Unit Category" := unitType;
         StudentUnits.INSERT(TRUE);
         ReturnMessage := 'Units registered Successfully!';
         StudentUnitBaskets.RESET;
@@ -1520,6 +1521,7 @@ codeunit 40003 StudentPortalTest
         exit(Message);
 
     end;
+
 
 
     procedure GetCurrentSemester() Message: Text

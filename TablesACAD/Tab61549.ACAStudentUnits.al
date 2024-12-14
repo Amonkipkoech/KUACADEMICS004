@@ -1609,10 +1609,12 @@ table 61549 "ACA-Student Units"
         }
 
 
-        // field(60200; faculty; code[20])
-        // {
+        field(60205; "Unit Category"; Option)
+        {
+            OptionCaption = ' ,Theory,Clinical,Research,Case Study,Exam';
+            OptionMembers = " ","Theory","Clinical","Research","Case Study","Exam";
 
-        // }
+        }
         // field(60199; UnitsExist; Boolean)
         // {
         //     CalcFormula = exist("Final Exam Result2" where (StudentID = field("Student No."),UnitCode = field(Unit)));

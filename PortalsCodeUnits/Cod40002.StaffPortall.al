@@ -294,6 +294,67 @@ codeunit 40002 StaffPortall
         exit(Message);
     end;
 
+    // procedure GetAssignedPaperUnits(sem:Text;AcademicYr:Text;Stage:Text;Prog:Text)Message:Text
+    // begin
+    //     StudentUnits.Reset();
+    //     StudentUnits.SetRange(Semester,sem);
+    //     StudentUnits.SetRange("Academic Year",AcademicYr);
+    //     StudentUnits.SetRange(Stage,Stage);
+    //     StudentUnits.SetRange(Programme,Prog);
+
+    //     if StudentUnits.Find('-') then begin
+    //         repeat
+    //         Message += 'SUCCESS'+'::'+StudentUnits.Supervisor+'::'+StudentUnits.Unit+'::'+GetLecturerNames(StudentUnits.Supervisor)+'[]';
+    //         until StudentUnits.Next() = 0;
+    //     end;
+    //     exit(Message);
+
+    // end;
+    procedure GetAssignedPaperUnits(sem: Text; AcademicYr: Text; Stage: Text; Prog: Text): Text
+    var
+        TempUniqueUnits: Record "ACA-Student Units" temporary;
+        Message: Text;
+        Keyy: Text;
+    begin
+        StudentUnits.Reset();
+        StudentUnits.SetRange(Semester, sem);
+        StudentUnits.SetRange("Academic Year", AcademicYr);
+        StudentUnits.SetRange(Stage, Stage);
+        StudentUnits.SetRange(Programme, Prog);
+        StudentUnits.SetRange(StudentUnits."Unit Category", StudentUnits."Unit Category"::Exam);
+
+        if StudentUnits.Find('-') then begin
+            repeat
+                Keyy := StudentUnits.Supervisor + '::' + StudentUnits.Unit;
+
+                TempUniqueUnits.SetRange(Supervisor, StudentUnits.Supervisor);
+                TempUniqueUnits.SetRange(Unit, StudentUnits.Unit);
+                TempUniqueUnits.SetRange("Unit Category", TempUniqueUnits."Unit Category"::Exam);
+
+                if TempUniqueUnits.IsEmpty() then begin
+                    TempUniqueUnits.Init();
+                    TempUniqueUnits.Supervisor := StudentUnits.Supervisor;
+                    TempUniqueUnits.Unit := StudentUnits.Unit;
+                    TempUniqueUnits.Insert();
+
+                    Message += 'SUCCESS' + '::' + GetLecturerNames(StudentUnits.Supervisor) + '::' + StudentUnits.Supervisor + '::' + StudentUnits.Unit + '::' + GetLecturerDept(StudentUnits.Supervisor) + '::' + StudentUnits.Semester + '[]';
+                end;
+            until StudentUnits.Next() = 0;
+        end;
+
+        exit(Message);
+    end;
+
+    procedure GetLecturerDept(lecNo: Text) Message: Text
+    begin
+        HRMEmployeeD.Reset();
+        HRMEmployeeD.SetRange(HRMEmployeeD."No.", lecNo);
+        if HRMEmployeeD.FindFirst() then begin
+            Message := HRMEmployeeD."Department Code";
+        end;
+        exit(Message);
+
+    end;
 
 
 
@@ -4319,21 +4380,32 @@ codeunit 40002 StaffPortall
         END
     end;
 
-    procedure GetUnitsToOffer(progcode: code[20]; stage: Text) Details: Text
+    procedure GetUnitsToOffer(progcode: Code[20]; stage: Text) Details: Text
+    var
+        theoryUnits: Record "ACA-Student Theory Units ";
     begin
         UnitSubjects.RESET;
+        StudentUnits.RESET;
+
         UnitSubjects.SETRANGE(UnitSubjects."Programme Code", progcode);
         UnitSubjects.SETRANGE(UnitSubjects."Time Table", true);
-        UnitSubjects.SetRange("Stage Code", stage);
-        UnitSubjects.SetRange(UnitSubjects."Unit Type", UnitSubjects."Unit Type"::Theory);
+        UnitSubjects.SETRANGE(UnitSubjects."Stage Code", stage);
+        UnitSubjects.SETRANGE(UnitSubjects."Unit Type", UnitSubjects."Unit Type"::Theory);
+
+
         IF UnitSubjects.FIND('-') THEN BEGIN
-            repeat
-                associatedunits.Reset;
-                associatedunits.SetRange("Associated Unit", UnitSubjects.Code);
-                if not associatedunits.find('-') then begin
-                    Details += UnitSubjects.Code + ' ::' + UnitSubjects.Desription + '[]';
-                end;
-            until UnitSubjects.Next = 0;
+            REPEAT
+
+                theoryUnits.RESET;
+                theoryUnits.SETRANGE(theoryUnits.Unit, UnitSubjects.Code);
+                theoryUnits.SetRange(theoryUnits.Paper, theoryUnits.Paper::NA);
+                theoryUnits.SetRange(Stage, stage);
+
+                IF theoryUnits.FIND('-') THEN BEGIN
+
+                    Details += UnitSubjects.Code + ' :: ' + UnitSubjects.Desription + ' []';
+                END;
+            UNTIL UnitSubjects.NEXT = 0;
         END;
     end;
 
@@ -4671,29 +4743,31 @@ codeunit 40002 StaffPortall
     end;
 
     procedure GetClinicalUnits(lecno: Code[20]; sem: Code[20]) Response: Text
+    var
+        units: Record "ACA-Units/Subjects";
     begin
-        lecturers.Reset();
-        lecturers.SetRange(Lecturer, lecno);
-        lecturers.SetRange(Semester, sem);
-        lecturers.SetRange(lecturers."Unit Type", lecturers."Unit Type"::Clinical);
+        StudentUnits.Reset();
+        StudentUnits.SetRange(Lecturer, lecno);
+        StudentUnits.SetRange(Semester, sem);
+        StudentUnits.SetRange(StudentUnits."Unit Type", units."Unit type"::Clinical);
 
-        if lecturers.Find('-') then begin
+        if StudentUnits.Find('-') then begin
             repeat
-                Response += lecturers.Unit + ' ::' + GetUnitDescription(Lecturers.Unit) + ' ::' + lecturers.ModeOfStudy + ' ::' + lecturers.Stream + ' :::';
-            until lecturers.Next = 0;
+                Response += StudentUnits.Unit + ' ::' + GetUnitDescription(StudentUnits.Unit) + ' ::' + 'FULL-TIME' + '[]';
+            until StudentUnits.Next = 0;
         end;
     end;
 
     procedure GetResearchUnits(lecNo: Code[20]; sem: Code[20]) Message: Text
     begin
-        lecturers.Reset;
-        lecturers.SetRange(Lecturer, lecno);
-        lecturers.SetRange(Semester, sem);
-        lecturers.SetRange(lecturers."Unit Type", lecturers."Unit Type"::Research);
-        if lecturers.Find('-') then begin
+        StudentUnits.Reset;
+        StudentUnits.SetRange(Lecturer, lecno);
+        StudentUnits.SetRange(Semester, sem);
+        StudentUnits.SetRange(StudentUnits."Unit Type", StudentUnits."Unit Category"::Research);
+        if StudentUnits.Find('-') then begin
             repeat
-                Message += lecturers.Unit + ' ::' + GetUnitDescription(Lecturers.Unit) + ' ::' + lecturers.ModeOfStudy + ' ::' + lecturers.Stream + ' :::';
-            until lecturers.Next = 0;
+                Message += StudentUnits.Unit + ' ::' + GetUnitDescription(StudentUnits.Unit) + ' ::' + 'FULL-TIME' + '[]';
+            until StudentUnits.Next = 0;
         end;
     end;
 
