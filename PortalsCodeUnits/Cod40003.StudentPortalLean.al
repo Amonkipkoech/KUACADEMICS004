@@ -2730,6 +2730,18 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         END;
     end;
 
+    procedure GetFeeStatement(username:Text) Message:Text
+    var record : Record "Detailed Cust. Ledg. Entry";
+    begin
+        record.Reset();
+        record.SetRange("Customer No.",username);
+        if record.FindFirst() then begin
+            Message += Format(record."Credit Amount")+'::'+Format(record."Debit Amount")+'::'+Format(record."Posting Date")+'::'+ Format(record."Entry No.")+'[]';
+        end;
+        exit(Message);
+
+    end;
+
 
 
 

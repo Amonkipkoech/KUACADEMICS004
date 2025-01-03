@@ -38,8 +38,8 @@ table 61567 "ACA-Exams Setup"
         }
         field(10; Type; Option)
         {
-            OptionCaption = 'Assignment,CAT,Final Exam,Supplementary,Special';
-            OptionMembers = Assignment,CAT,"Final Exam",Supplementary,Special;
+            OptionCaption = 'Assignment,CAT,Final Exam,Supplementary,Special,Research';
+            OptionMembers = Assignment,CAT,"Final Exam",Supplementary,Special,Research;
         }
     }
 
