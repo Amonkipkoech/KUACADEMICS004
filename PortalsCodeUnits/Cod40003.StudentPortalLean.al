@@ -937,7 +937,7 @@ codeunit 40003 StudentPortalTest
         Stages.RESET;
         Stages.SETRANGE(Stages.Code, stage);
         Stages.SETRANGE(Stages."Programme Code", "Program");
-        IF Stages.FIND('-') THEN BEGIN
+        IF Stages.FINDFirst() THEN BEGIN
             Message := FORMAT(Stages.Order);
         END
     end;
@@ -956,7 +956,7 @@ codeunit 40003 StudentPortalTest
         Stages.RESET;
         Stages.SETRANGE(Stages.Order, orderd);
         Stages.SETRANGE(Stages."Programme Code", Progz);
-        IF Stages.FIND('-') THEN BEGIN
+        IF Stages.FindFirst() THEN BEGIN
             Message := Stages.Code;
         END
     end;
@@ -1443,7 +1443,8 @@ codeunit 40003 StudentPortalTest
             Message := AcademicYr.Code + '::' + AcademicYr.Description;
         END
     end;
-     procedure GetAcademicYr2() Message: Text
+
+    procedure GetAcademicYr2() Message: Text
     begin
         AcademicYr.RESET;
         AcademicYr.SETRANGE(AcademicYr.Current, TRUE);
@@ -1480,6 +1481,7 @@ codeunit 40003 StudentPortalTest
         StudentUnits."Reg. Transacton ID" := RegTransID;
         StudentUnits."Unit Description" := UnitDescription;
         StudentUnits."Academic Year" := AcademicYear;
+        StudentUnits."Unit Category" := unitType;
         StudentUnits.INSERT(TRUE);
         ReturnMessage := 'Units registered Successfully!';
         StudentUnitBaskets.RESET;
@@ -1519,6 +1521,7 @@ codeunit 40003 StudentPortalTest
         exit(Message);
 
     end;
+
 
 
     procedure GetCurrentSemester() Message: Text
@@ -2725,6 +2728,18 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
                 end;
             UNTIL Programme.NEXT = 0;
         END;
+    end;
+
+    procedure GetFeeStatement(username:Text) Message:Text
+    var record : Record "Detailed Cust. Ledg. Entry";
+    begin
+        record.Reset();
+        record.SetRange("Customer No.",username);
+        if record.FindFirst() then begin
+            Message += Format(record."Credit Amount")+'::'+Format(record."Debit Amount")+'::'+Format(record."Posting Date")+'::'+ Format(record."Entry No.")+'[]';
+        end;
+        exit(Message);
+
     end;
 
 

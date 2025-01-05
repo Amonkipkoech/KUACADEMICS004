@@ -284,4 +284,3 @@ table 40007 "Master Rotation Table"
         END;
     end;
 }
-
