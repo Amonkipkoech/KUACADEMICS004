@@ -22,6 +22,18 @@ page 40025 "ACA-Student Theory Units"
                         CurrPage.UPDATE;
                     end;
                 }
+                field(Paper; Rec.Paper)
+                {
+                    ApplicationArea = All;
+
+
+                }
+                field(Paper2; rec.Paper2)
+                {
+                    ApplicationArea = All;
+
+
+                }
                 field("Student No."; Rec."Student No.")
                 {
                     ApplicationArea = All;

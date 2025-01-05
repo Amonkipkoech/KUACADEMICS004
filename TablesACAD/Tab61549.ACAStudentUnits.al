@@ -1110,6 +1110,15 @@ table 61549 "ACA-Student Units"
                                                                                   Reversed = FILTER(false)));
             FieldClass = FlowField;
         }
+        field(50677; "Theory Units"; Integer)
+        {
+            CalcFormula = count("ACA-Student Theory Units " WHERE("Student No." = FIELD("Student No."),
+                                                                                  Semester = FIELD(Semester),
+                                                                                  Paper2 = field(Unit),
+                                                                                  Reversed = FILTER(false)));
+            FieldClass = FlowField;
+        }
+
         field(50078; "Consolidated Mark Identifier"; Code[2])
         {
         }

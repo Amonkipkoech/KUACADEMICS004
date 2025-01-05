@@ -506,6 +506,34 @@ page 84524 "REG temp App"
 
 
             }
+            group(EmploymentDetails)
+            {
+                 field("Employer Name ";rec."Employer Name ")
+                 {
+                    ApplicationArea = All;
+                 }
+                  field("Job Title";rec."Job Title")
+                 {
+                    ApplicationArea = All;
+                 }
+                  field("Department/Unit";rec."Department/Unit")
+                 {
+                    ApplicationArea = All;
+                 }
+                  field("Employment Start Date";rec."Employment Start Date")
+                 {
+                    ApplicationArea = All;
+                 }
+                  field("Employment End Date";rec."Employment End Date")
+                 {
+                    ApplicationArea = All;
+                 }
+                  field("Workplace Address";rec."Workplace Address")
+                 {
+                    ApplicationArea = All;
+                 }
+                
+            }
         }
     }
 

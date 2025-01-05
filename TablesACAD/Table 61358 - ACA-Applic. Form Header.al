@@ -1171,6 +1171,30 @@ table 61358 "ACA-Applic. Form Header"
         {
 
         }
+        field(50107; "Employer Name "; code[60])
+        {
+
+        }
+        field(50108; "Job Title"; code[60])
+        {
+
+        }
+        field(50111; "Department/Unit"; Code[50])
+        {
+
+        }//
+        field(50109; "Employment Start Date"; date)
+        {
+
+        }
+        field(50110; "Employment End Date"; date)
+        {
+
+        }//Workplace Address
+         field(50112; "Workplace Address"; Code[60])
+        {
+
+        }//
 
 
 

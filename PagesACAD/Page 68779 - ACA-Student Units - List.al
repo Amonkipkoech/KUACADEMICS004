@@ -37,14 +37,18 @@ page 68779 "ACA-Student Units - List"
                 {
                     ApplicationArea = All;
                 }
+                field("Theory Units"; rec."Theory Units")
+                {
+                    ApplicationArea = All;
+                }
                 field("Unit Type"; Rec."Unit Type")
                 {
                     ApplicationArea = All;
                 }
-                field("Register for";Rec."Register for")
+                field("Register for"; Rec."Register for")
                 {
                     ApplicationArea = All;
-                    
+
                 }
                 field(Taken; Rec.Taken)
                 {
@@ -90,7 +94,7 @@ page 68779 "ACA-Student Units - List"
                 {
                     ApplicationArea = All;
                 }
-                field(Stream;Rec.Stream)
+                field(Stream; Rec.Stream)
                 {
                     ApplicationArea = All;
                 }
