@@ -376,6 +376,20 @@ codeunit 40003 StudentPortalTest
         END;
     end;
 
+    procedure GenerateStudentProformaInvoiceForMob("StudentNo": Code[20]; filenameFromApp: Text)
+    var
+        filename: Text;
+    begin
+        filename := 'C:\inetpub\wwwroot\KUMobile\Downloads\' + filenameFromApp;
+        IF EXISTS(filename) THEN
+            ERASE(filename);
+        CourseRegistration.RESET;
+        CourseRegistration.SETRANGE(CourseRegistration."Student No.", StudentNo);
+        IF CourseRegistration.FIND('-') THEN BEGIN
+            REPORT.SAVEASPDF(Report::"Student Proforma Invoice2", filename, CourseRegistration);
+        END;
+    end;
+
     procedure GetClinicalShedule(StudentNo: Text; currentSem: Text) Message: Text
     begin
         group.Reset();
@@ -1243,6 +1257,54 @@ codeunit 40003 StudentPortalTest
         EXIT(filename);
     end;
 
+    procedure GenerateFeeStructureMob(Programz: Code[20]; SettlementType: Code[20]; filenameFromApp: Text) filename: Text
+    begin
+        filename := 'C:\inetpub\wwwroot\KUMobile\Downloads\' + filenameFromApp;
+        IF EXISTS(filename) THEN
+            ERASE(filename);
+        //MESSAGE('OK');
+        Programme.RESET;
+        Programme.SETRANGE(Programme.Code, Programz);
+        Programme.SETFILTER(Programme."Settlement Type Filter", '%1', SettlementType);
+
+        IF Programme.FIND('-') THEN BEGIN
+            REPORT.SAVEASPDF(report::"Fee Structure Summary Report", filename, Programme);   //52017726
+        END;
+        EXIT(filename);
+    end;
+
+    procedure GenerateStudentStatementMob("Student No": Text; filenameFromApp: Text)
+    var
+        filename: Text;
+    begin
+        filename := 'C:\inetpub\wwwroot\KUMobile\Downloads\' + filenameFromApp;
+        IF EXISTS(filename) THEN
+            ERASE(filename);
+        Customer.RESET;
+        Customer.SETRANGE(Customer."No.", "Student No");
+
+        IF Customer.FIND('-') THEN BEGIN
+            REPORT.SAVEASPDF(report::"Student Fee Statement 2", filename, Customer);
+        END;
+    end;
+
+    procedure GenerateReceiptMob(ReceiptNo: Code[20]; filenameFromApp: Text) filename: Text
+    begin
+        filename := FILESPATH + filenameFromApp;
+        IF EXISTS(filename) THEN
+            ERASE(filename);
+        //MESSAGE('OK');
+        Receiptz.RESET;
+        Receiptz.SETRANGE(Receiptz."Receipt No.", ReceiptNo);
+
+        IF Receiptz.FIND('-') THEN BEGIN
+            REPORT.SAVEASPDF(report::"Student Fee Receipts", filename, Receiptz);   //52017726
+        END;
+        EXIT(filename);
+    end;
+
+
+
     procedure GenerateAppFeeStructure(Programz: Code[20]; SettlementType: Code[20]; filenameFromApp: Text) filename: Text
     begin
         filename := FILESPATH_APP + filenameFromApp;
@@ -1339,6 +1401,17 @@ codeunit 40003 StudentPortalTest
         END
     end;
 
+    procedure GetCurrentSem() Message: Text
+    begin
+        CurrentSem.Reset();
+        CurrentSem.SetRange("Current Semester", true);
+        if CurrentSem.FindFirst() then begin
+            Message := CurrentSem.Code;
+        end;
+        exit(Message);
+    end;
+
+
     procedure HasFinances(StudentNo: Text) Message: Text
     var
         TXTNotRegistered: Label 'No';
@@ -1373,6 +1446,44 @@ codeunit 40003 StudentPortalTest
 
         END
     end;
+
+    procedure GetStudentProgram(studentNo: Text) Message: Text
+    begin
+        CourseRegistration.Reset();
+        CourseRegistration.SetRange("Student No.", studentNo);
+        CourseRegistration.SetRange(Reversed, false);
+        if CourseRegistration.FindFirst() then begin
+            Message := GetProgram(CourseRegistration.Programmes)
+
+        end;
+        exit(Message);
+    end;
+
+    procedure GetSettlementType(studentNo: Text) Message: Text
+    begin
+        CourseRegistration.Reset();
+        CourseRegistration.SetRange("Student No.", studentNo);
+        CourseRegistration.SetRange(Reversed, false);
+        if CourseRegistration.FindFirst() then begin
+            Message := CourseRegistration."Settlement Type";
+
+        end;
+        exit(Message);
+
+    end;
+    procedure GetStudentStage(studentNo:Text;sem:Text) Message : Text
+    begin
+        CourseRegistration.Reset();
+        CourseRegistration.Ascending(true);
+        CourseRegistration.SETRANGE(CourseRegistration."Student No.", StudentNo);
+        CourseRegistration.SETRANGE(CourseRegistration.Reversed, FALSE);
+        if CourseRegistration.FindFirst() then begin
+            Message := CourseRegistration.Stage ;
+        end;
+        exit(Message);
+
+    end;
+
 
     procedure GetStudentCourseData(StudentNo: Text; Sem: Text) Message: Text
     begin
@@ -1601,6 +1712,34 @@ codeunit 40003 StudentPortalTest
         END;
         exit(Message);
     end;
+    procedure GetTranscriptYears(CompanyName: Text[100]; StudentNos: Text[50])Message: Text
+    var
+        CourseRegistrationRec: Record "ACA-Course Registration";
+        AcademicYearRec: Record "ACA-Academic Year";
+        
+    begin
+        // Set the company-specific tables
+        CourseRegistrationRec.SetCurrentKey("Student No.", "Academic Year");
+        CourseRegistrationRec.SetFilter("Student No.", StudentNos);
+        CourseRegistrationRec.SetFilter("Academic Year", '<>%1', ''); // Filter non-empty years
+
+        AcademicYearRec.SetFilter(Code, '<>%1', ''); // Ensure valid academic years
+        AcademicYearRec.SetFilter("Allow View of Transcripts", 'Yes');
+
+        // Create the query logic
+        if CourseRegistrationRec.FindSet() then begin
+            repeat
+                AcademicYearRec.SetRange(Code, CourseRegistrationRec."Academic Year");
+                if not AcademicYearRec.IsEmpty() then
+                    // TranscriptYears.Add(AcademicYearRec.Code);
+                    Message += AcademicYearRec.Code + '::';
+            until CourseRegistrationRec.Next() = 0;
+        end;
+
+        // Return the distinct years
+        exit(Message);
+    end;
+
 
     procedure GetStudentPersonaldata(username: Text) Message: Text
     begin
@@ -2730,16 +2869,30 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         END;
     end;
 
-    procedure GetFeeStatement(username:Text) Message:Text
-    var record : Record "Detailed Cust. Ledg. Entry";
+    procedure GetFeeStatement(username: Text) Message: Text
+    var
+        record: Record "Detailed Cust. Ledg. Entry";
     begin
         record.Reset();
-        record.SetRange("Customer No.",username);
+        record.SetRange("Customer No.", username);
         if record.FindFirst() then begin
-            Message += Format(record."Credit Amount")+'::'+Format(record."Debit Amount")+'::'+Format(record."Posting Date")+'::'+ Format(record."Entry No.")+'[]';
+            Message += Format(record."Credit Amount") + '::' + Format(record."Debit Amount") + '::' + Format(record."Posting Date") + '::' + Format(record."Entry No.") + '[]';
         end;
         exit(Message);
 
+    end;
+
+    procedure GetReceipts(username: Text) Message: Text
+    var
+        receipt: Record "ACA-Receipt";
+    begin
+        receipt.Reset();
+        receipt.SetRange("Student No.", username);
+        if receipt.Find('-') then begin
+            Message += receipt."Receipt No." + '::' + Format(receipt.Date) + '::' + Format(receipt."Payment Mode") + '::' + Format(receipt.Amount) + '::' + Format(receipt."Bank Slip/Cheque No") + '[]';
+
+        end;
+        exit(Message);
     end;
 
 
