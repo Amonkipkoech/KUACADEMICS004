@@ -749,7 +749,7 @@ page 68467 "ACA-Application Form Header"
 
             action(SendTestEmail)
             {
-                Caption = 'Send Test Email';
+                Caption = 'Send Test apllication Email';
                 ApplicationArea = All;
                 trigger OnAction()
                 var
