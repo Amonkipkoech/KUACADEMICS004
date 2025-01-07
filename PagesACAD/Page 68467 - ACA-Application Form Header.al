@@ -311,9 +311,9 @@ page 68467 "ACA-Application Form Header"
 
 
                 }
-                field("international student ";rec."international student ")
+                field("international student "; rec."international student ")
                 {
-                       ApplicationArea = All;
+                    ApplicationArea = All;
                 }
                 field("Faculty Name"; Rec."Faculty Name")
                 {
@@ -746,6 +746,20 @@ page 68467 "ACA-Application Form Header"
 
                 end;
             }
+
+            action(SendTestEmail)
+            {
+                Caption = 'Send Test Email';
+                ApplicationArea = All;
+                trigger OnAction()
+                var
+                    NotifyAction: Codeunit "Admissions Notification Action";
+                begin
+                    NotifyAction.NotifyAdmissionsRequestStatus(rec."Application No.");
+                    Message('Email notification process triggered for Application ID: %1', rec."Application No.");
+                end;
+            }
+
         }
 
     }

@@ -1191,7 +1191,7 @@ table 61358 "ACA-Applic. Form Header"
         {
 
         }//Workplace Address
-         field(50112; "Workplace Address"; Code[60])
+        field(50112; "Workplace Address"; Code[60])
         {
 
         }//
@@ -1473,18 +1473,19 @@ table 61358 "ACA-Applic. Form Header"
         END ELSE
             ERROR('Current Academic Year not Specified!');
     end;
+
     trigger OnModify()
-var
-    NotifyAction: Codeunit "Admissions Notification Action";
-    RecBefore: Record "ACA-Applic. Form Header";
-begin
-    // Load the previous state of the record
-    if RecBefore.Get("Application No." ) then begin
-        // Check if the Status field has changed to "Pending Approval"
-        if (RecBefore.Status <> Status) and (Status = Status::"Pending Approval") then
-            NotifyAction.NotifyAdmissionsRequestStatus("Application No." );
+    var
+        NotifyAction: Codeunit "Admissions Notification Action";
+        RecBefore: Record "ACA-Applic. Form Header";
+    begin
+        // Load the previous state of the record
+        if RecBefore.Get("Application No.") then begin
+            // Check if the Status field has changed to "Pending Approval"
+            if (RecBefore.Status <> Status) and (Status = Status::"Pending Approval") then
+                NotifyAction.NotifyAdmissionsRequestStatus("Application No.");
+        end;
     end;
-end;
 
 
 }

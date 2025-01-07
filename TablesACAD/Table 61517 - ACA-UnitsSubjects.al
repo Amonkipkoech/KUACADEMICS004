@@ -118,14 +118,11 @@ table 61517 "ACA-Units/Subjects"
         }
         field(17; "Unit Type"; Option)
         {
-<<<<<<< HEAD
-            OptionCaption = 'Theory,Exam,Clinical,Research';
-            OptionMembers = Theory,Exam,Clinical,Research;
-=======
+
             OptionCaption = ' ,Theory,Clinical,Research,Case Study,Exam';
             OptionMembers = " ","Theory","Clinical","Research","Case Study","Exam";
 
->>>>>>> origin/dev-felix
+
         }
         field(18; "Class Filter"; Code[20])
         {
