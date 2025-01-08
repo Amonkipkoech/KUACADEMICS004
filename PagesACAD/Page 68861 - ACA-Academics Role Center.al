@@ -386,6 +386,14 @@ page 68861 "ACA-Academics Role Center"
                         ApplicationArea = All;
                         Visible = false;
                     }
+                    action("NCK Indexing Report")
+                    {
+                        Caption = 'NCK Indexing Report';
+                        Image = Report;
+                        RunObject = Report "NCK Report ";
+                        ApplicationArea = All;
+                        Visible = true;
+                    }
                     action("Admission Summary 2")
                     {
                         Caption = 'Admission Summary 2';

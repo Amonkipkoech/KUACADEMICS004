@@ -56,7 +56,7 @@ page 68520 "ACA-Applic. Documents Verif."
                     ToolTip = 'Specifies the value of the Shortlisted By(Staff Name) field.';
                     ApplicationArea = All;
                 }
-                field(Email2;rec.Email)
+                field(Email2; rec.Email)
                 {
                     ToolTip = 'Specifies the value of the Shortlisted By(Staff Name) field.';
                     ApplicationArea = All;
@@ -572,8 +572,7 @@ page 68520 "ACA-Applic. Documents Verif."
                         CLEAR(NewAdminCode);
                         BEGIN
                             NewAdminCode := NoSeriesMgt.GetNextNo(AdminSetup."No. Series", TODAY, TRUE);
-                            //Rec."Admission No" := AdminSetup."Programme Prefix" + '/' + settlementPrefix + '/' + NewAdminCode + settlementPrefix + '/' + AdminSetup.Year;
-                            Rec."Admission No" := NewAdminCode;
+                            Rec."Admission No" := AdminSetup."Programme Prefix" + '/' + NewAdminCode + '/' + settlementPrefix + '/' + AdminSetup.Year;
                             Rec.MODIFY;
                         END;
                     END ELSE BEGIN
