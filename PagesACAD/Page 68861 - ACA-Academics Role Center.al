@@ -955,8 +955,20 @@ page 68861 "ACA-Academics Role Center"
 
                 action(allApps)
                 {
-                    Caption = 'SRO';
+                    Caption = 'All Applications';
                     RunObject = Page "ACA-Application Form H. list";
+                    ApplicationArea = All;
+                }
+                action(International)
+                {
+                    Caption = 'International Students';
+                    RunObject = Page "International Applicants";
+                    ApplicationArea = All;
+                }
+                action(Domestic)
+                {
+                    Caption = 'Domestic  Students';
+                    RunObject = Page "Applicants Domestic";
                     ApplicationArea = All;
                 }
                 action(process)
@@ -1218,7 +1230,7 @@ page 68861 "ACA-Academics Role Center"
                     RunPageLink = Status = filter("Approved");
                     ApplicationArea = All;
                 }
-                  action("XY Form ")
+                action("XY Form ")
                 {
                     Image = Allocate;
                     Caption = 'Approved Master Rotation';
@@ -1256,6 +1268,13 @@ page 68861 "ACA-Academics Role Center"
                     RunObject = Page 68167;
                     ApplicationArea = All;
                     RunPageLink = Status = const(Inactive);
+                }
+                action(ProgrammLeaders)
+                {
+                    Caption = 'Program Leaders';
+                    RunObject = page "Programme Leaders Card";
+                    ApplicationArea = all;
+
                 }
                 // action(ApprovedLoad)
                 // {

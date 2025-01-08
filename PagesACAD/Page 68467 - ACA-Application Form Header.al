@@ -522,6 +522,34 @@ page 68467 "ACA-Application Form Header"
 
 
             }
+            group("Employement Details")
+            {
+                field("Employer Name "; rec."Employer Name ")
+                {
+                    ApplicationArea = All;
+                }
+                field("Job Title"; rec."Job Title")
+                {
+                    ApplicationArea = All;
+                }
+                field("Department/Unit"; rec."Department/Unit")
+                {
+                    ApplicationArea = All;
+                }
+                field("Employment Start Date"; rec."Employment Start Date")
+                {
+                    ApplicationArea = All;
+                }
+                field("Employment End Date"; rec."Employment End Date")
+                {
+                    ApplicationArea = All;
+                }
+                field("Workplace Address"; rec."Workplace Address")
+                {
+                    ApplicationArea = All;
+                }
+
+            }
         }
     }
 
@@ -619,68 +647,65 @@ page 68467 "ACA-Application Form Header"
                 trigger OnAction()
                 var
                     ApprovalMgt: Codeunit "Export F/O Consolidation";
-                    showmessage: Boolean;
-                    ManualCancel: Boolean;
-                    State: Option Open,"Pending Approval",Cancelled,Approved;
-                    DocType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,ImprestSurrender,Interbank,TransportRequest,Maintenance,Fuel,ImporterExporter,"Import Permit","Export Permit",TR,"Safari Notice","Student Applications","Water Research","Consultancy Requests","Consultancy Proposals","Meals Bookings","General Journal","Student Admissions","Staff Claim",KitchenStoreRequisition,"Leave Application","Staff Advance","Staff Advance Accounting";
-                    tableNo: Integer;
+                    NotifyAction: Codeunit "Admissions Notification Action";
                 begin
-                    //Release the Application for Approval
+                    // Test for required fields
                     Rec.TESTFIELD("First Name");
                     Rec.TESTFIELD(Surname);
-                    //Rec.TESTFIELD("First Degree Choice");
                     Rec.TESTFIELD("Settlement Type");
                     Rec.TESTFIELD("Intake Code");
                     Rec.TESTFIELD(Campus);
-                    // Rec.TESTFIELD("Next of kin Name");
-                    // Rec.TESTFIELD("Next of kin Mobile");
-                    // Rec.TESTFIELD("Next of Kin R/Ship");
-                    // Rec.TESTFIELD("Fee payer Names");
-                    // Rec.TESTFIELD("Fee payer mobile");
-                    // Rec.TESTFIELD("Fee payer R/Ship");
-                    // Rec.TESTFIELD("Fee payer Email");
                     Rec.TESTFIELD("Telephone No. 1");
                     Rec.TESTFIELD(Email);
-                    //Rec.TESTFIELD("First Degree Choice");
                     Rec.TESTFIELD("Programme Level");
-                    //Rec.TESTFIELD("First Choice Stage");
                     Rec.TESTFIELD("Mode of Study");
-                    //Rec.TESTFIELD("First Choice Semester");
 
-                    //TESTFIELD("Application Form Receipt No.");
-                    //TESTFIELD("Address for Correspondence1");
-                    //TESTFIELD("Date Of Birth");
+                    // Optional additional checks for other fields if required
+                    // Rec.TESTFIELD("Next of kin Name");
+                    // Rec.TESTFIELD("Fee payer Names");
+
+                    // Validate application settings
                     IF AppSetup.GET() THEN
-                        //IF (TODAY-"Date Of Birth")<(AppSetup."Minimum Age"*365) THEN ERROR('The Minimum Required Age for Admission is '+FORMAT(AppSetup."Minimum Age")+' years');
+                        // Example: Minimum age validation (if needed)
+                        // IF (TODAY - "Date Of Birth") < (AppSetup."Minimum Age" * 365) THEN
+                        //     ERROR('The Minimum Required Age for Admission is ' + FORMAT(AppSetup."Minimum Age") + ' years.');
 
-                        IF CONFIRM('Do You Want to Send This Application to Your List?', TRUE) = FALSE THEN EXIT;
+                        // Ask for confirmation before proceeding
+                        IF CONFIRM('Do You Want to Send This Application to Your List?', TRUE) = FALSE THEN
+                            EXIT;
 
+                    // Ensure application number is specified
                     IF Rec."Application No." = '' THEN
                         ERROR('There are no Applicants Specified.');
 
+                    // Check if application date is provided
+                    IF Rec."Application Date" = 0D THEN
+                        ERROR('Provide the Application Date First!');
+
+                    // Reset and set range on the Apps record
                     Apps.RESET;
                     Apps.SETRANGE(Apps."Application No.", Rec."Application No.");
 
-                    IF Rec."Application Date" = 0D THEN
-                        ERROR('Provide the Application Date First!');
-                    // if Rec."Receipt Slip No." = '' then
-                    //     error('Provide a valid receip no.');
+                    // Optionally update other fields if required
+                    // Rec."User ID" := USERID;
+                    // Rec."Date of Receipt" := TODAY;
+                    // Rec.Status := Rec.Status::"Provisional Admission";  // Example update
 
-                    /* Rec."User ID" := USERID;
-                    Rec."Date of Receipt" := TODAY;
-                    Rec."Documents Verified" := Rec."Documents Verified"::Yes;
-                    Rec.Status := Rec.Status::"Provisional Admission";
-                    Rec.MODIFY; */
-
+                    // Mark the application for processing
                     Rec."User ID" := USERID;
                     Rec."Process Application" := true;
-                    //Rec."Date of Receipt" := TODAY;
-                    //Rec."Finance Cleared" := True;
-                    //Rec."Submission Status" := Rec."Submission Status"::"FAB Submission";
-                    //Rec.Status := Rec.Status::"Provisional Admission";
+
+                    // Send notification to list (assuming NotifyAdmissionsRequestmylist sends email)
+                    NotifyAction.NotifyAdmissionsRequestmylist(rec."Application No.");
+
+                    // Notify the user
+                    Message('Email notification process triggered for Application ID: %1', rec."Application No.");
+
+                    // Modify record after sending email notification
                     Rec.Modify();
                 end;
             }
+
             action(cancellsApproval)
             {
                 Caption = 'Cancel Approval Re&quest';
@@ -751,13 +776,10 @@ page 68467 "ACA-Application Form Header"
             {
                 Caption = 'Send Test apllication Email';
                 ApplicationArea = All;
-                trigger OnAction()
-                var
-                    NotifyAction: Codeunit "Admissions Notification Action";
-                begin
-                    NotifyAction.NotifyAdmissionsRequestStatus(rec."Application No.");
-                    Message('Email notification process triggered for Application ID: %1', rec."Application No.");
-                end;
+                Promoted = true;
+                PromotedCategory = process;
+                PromotedIsBig = true;
+
             }
 
         }

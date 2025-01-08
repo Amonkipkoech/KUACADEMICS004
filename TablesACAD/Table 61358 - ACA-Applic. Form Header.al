@@ -1228,6 +1228,8 @@ table 61358 "ACA-Applic. Form Header"
     }
 
     trigger OnInsert()
+    var
+        NotifyAction: Codeunit "Admissions Notification Action";
     begin
 
         IF "Application No." = '' THEN BEGIN
@@ -1244,6 +1246,10 @@ table 61358 "ACA-Applic. Form Header"
         "First Choice Stage" := GeneralSetup."Default Year";
         "First Choice Semester" := GeneralSetup."Default Semester";
         "Intake Code" := GeneralSetup."Default Intake";
+
+        // Send a notification email upon inserting a new record (successful submission)
+        NotifyAction.NotifyApplicantSuccessfulSubmission("Application No.");
+
     end;
 
     var
@@ -1481,11 +1487,18 @@ table 61358 "ACA-Applic. Form Header"
     begin
         // Load the previous state of the record
         if RecBefore.Get("Application No.") then begin
-            // Check if the Status field has changed to "Pending Approval"
-            if (RecBefore.Status <> Status) and (Status = Status::"Pending Approval") then
-                NotifyAction.NotifyAdmissionsRequestStatus("Application No.");
+            Message('Current Status: %1, Previous Status: %2', Status, RecBefore.Status);
+            if (RecBefore.Status <> Status) and (Status = Status::"Pending Approval") then begin
+                Message('Status changed, sending email...');
+                NotifyAction.NotifyAdmissionsRequestStatus(rec."Application No.");
+            end;
         end;
+
+
+
     end;
+
+
 
 
 }
