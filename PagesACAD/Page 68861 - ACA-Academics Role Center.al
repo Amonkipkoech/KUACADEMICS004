@@ -1200,6 +1200,16 @@ page 68861 "ACA-Academics Role Center"
                     ApplicationArea = All;
                 }
             }
+            group("Supplementary Applications")
+            {  
+                action("Open Applications")
+                {
+                      ApplicationArea= all;
+                      Caption = 'Open Supplimentary Applications';
+                      RunObject= page "Supp Exam Registration List";
+                }
+                
+            }
             group("Master Rotation Plan")
             {
                 Caption = 'Master Rotation Plan';

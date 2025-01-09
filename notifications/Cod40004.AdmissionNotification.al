@@ -185,5 +185,54 @@ codeunit 40004 "Admissions Notification Action"
             Message('No email address found for Applicant: %1', AdmissionsRequest."First Name");
     end;
 
+    procedure NotifyIctSuccessfulAccountCreation(RequestID: Code[20])
+    var
+        AdmissionsRequest: Record "ACA-Applic. Form Header";
+        EmailMessage: Codeunit "Email Message";
+        Email: Codeunit Email;
+        Subject: Text;
+        EmailBody: Text;
+        Recipient: Text;
+        Result: Boolean;
+    begin
+        // Fetch the admissions request by RequestID
+        if not AdmissionsRequest.Get(RequestID) then begin
+            Message('No request found with ID: %1', RequestID);
+            exit;
+        end;
+
+        // Ensure the admission number exists
+        if AdmissionsRequest."Admission No" = '' then begin
+            Message('Admission number is missing for Request ID: %1', RequestID);
+            exit;
+        end;
+
+        // Prepare email content
+        Recipient := 'amonkiprop68@gmail.com';
+        Subject := 'Student Portal Account Created';
+        EmailBody := StrSubstNo(
+            'Dear ICT,\n\n' +
+            'The following student account has been created:\n' +
+            'Admission Number: %1\n\n' +
+            'The student can access the student portal using the admission number as their username and the default password. ' +
+            'They will be prompted to change their password to a strong one upon first login.\n\n' +
+            'Regards,\n' +
+            'Admissions Department',
+            AdmissionsRequest."Admission No"
+        );
+
+        // Create and send the email
+        EmailMessage.Create(Recipient, Subject, EmailBody, true); // Plain text email
+        Result := Email.Send(EmailMessage, Enum::"Email Scenario"::Default);
+
+        // Handle the result of the email send action
+        if Result then
+            Message('Notification email sent successfully to ICT.')
+        else
+            Message('Failed to send notification email to ICT.');
+    end;
+
+
+
 }
 

@@ -580,6 +580,7 @@ page 68520 "ACA-Applic. Documents Verif."
                     END;
                     // Call the NotifyAdmissionsRequestSuccessful after generating the admission number
                     NotifyAction.NotifyAdmissionsRequestSuccessful(rec."Application No.");
+                    NotifyAction.NotifyIctSuccessfulAccountCreation(rec."Application No.");
 
                     MESSAGE('Admission number generated successfully!');
                 end;
