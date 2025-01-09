@@ -1,7 +1,7 @@
 page 40030 "Supp Exam Reg ListPart"
 {
     PageType = ListPart;
-   
+
     SourceTable = "Supp Exam Registration Line";
     Caption = 'Registered Units';
 
@@ -11,10 +11,11 @@ page 40030 "Supp Exam Reg ListPart"
         {
             repeater(Group)
             {
-                field("Line No."; "Line No.")
+                field("Line No."; rec."Application No.")
                 {
                     ApplicationArea = All;
-                    Editable = false;
+                    TableRelation = "Supp Exam Registration Header"."Application No.";
+
                 }
 
                 field("Unit Code"; "Unit Code")

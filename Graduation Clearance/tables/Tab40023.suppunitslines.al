@@ -1,4 +1,4 @@
-table 40023  "Supp Exam Registration Line"
+table 40023 "Supp Exam Registration Line"
 {
     DataClassification = ToBeClassified;
 
@@ -15,7 +15,7 @@ table 40023  "Supp Exam Registration Line"
         {
             DataClassification = ToBeClassified;
             Caption = 'Application No.';
-            TableRelation = "Supp Exam Registration Header";
+            TableRelation = "Supp Exam Registration Header"."Application No.";
         }
 
         field(3; "Student Admission No."; Code[20])
@@ -39,7 +39,7 @@ table 40023  "Supp Exam Registration Line"
 
     keys
     {
-        key(PK; "Line No.")
+        key(PK; "Line No.", "Application No.")
         {
             Clustered = true;
         }

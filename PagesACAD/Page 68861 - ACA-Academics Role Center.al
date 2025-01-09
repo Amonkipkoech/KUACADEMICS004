@@ -1201,15 +1201,37 @@ page 68861 "ACA-Academics Role Center"
                 }
             }
             group("Supplementary Applications")
-            {  
+            {
                 action("Open Applications")
                 {
-                      ApplicationArea= all;
-                      Caption = 'Open Supplimentary Applications';
-                      RunObject= page "Supp Exam Registration List";
+                    ApplicationArea = all;
+                    Caption = 'Open Supp Applications';
+                    RunObject = page "Supp Exam Registration List";
+                    RunPageView = where(Status = const(Open));
                 }
-                
+                action("Pending Applications")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Pending Approval Supp Appl';
+                    RunObject = page "Supp Exam Registration List";
+                    RunPageView = where(Status = const("Pending Approval"));
+                }
+                action("Approved  Supp Applications")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Approved Supp Applications';
+                    RunObject = page "Supp Exam Registration List";
+                    RunPageView = where(Status = const(Approved));
+                }
+                action("Rejected  Supp Applications")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Rejected Supp Applications';
+                    RunObject = page "Supp Exam Registration List";
+                    RunPageView = where(Status = const(Rejected));
+                }
             }
+
             group("Master Rotation Plan")
             {
                 Caption = 'Master Rotation Plan';
@@ -1232,12 +1254,22 @@ page 68861 "ACA-Academics Role Center"
                     RunObject = Page "Group Assignmnets ";
                     ApplicationArea = All;
                 }
+                action("Open master rotation list@")
+                {
+                    Caption = 'Open Master Rotation ';
+                    Image = Allocate;
+                    RunObject = Page "master rotation list ";
+                    RunPageView = where(status = const(open));
+
+                    ApplicationArea = All;
+                }
                 action("master rotation list@")
                 {
                     Caption = 'Pending Master Rotation ';
                     Image = Allocate;
                     RunObject = Page "master rotation list ";
-                    RunPageLink = Status = filter("Pending Approval");
+                    RunPageView = where(status = const("pending Approval"));
+
                     ApplicationArea = All;
                 }
                 action("master rotation list")
@@ -1245,7 +1277,7 @@ page 68861 "ACA-Academics Role Center"
                     Image = Allocate;
                     Caption = 'Approved Master Rotation';
                     RunObject = Page "master rotation list ";
-                    RunPageLink = Status = filter("Approved");
+                    RunPageView = where(Status = const("Approved"));
                     ApplicationArea = All;
                 }
                 action("XY Form ")
