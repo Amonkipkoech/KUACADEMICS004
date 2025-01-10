@@ -58,15 +58,7 @@ page 40009 "Master Rotation Plan Card"
                 field("B2 Number of Weeks"; rec."B2 Number of Weeks") { ApplicationArea = All; }
 
             }
-            group(" Clinical Leave ")
-            {
-                Caption = 'Clinical Leave';
-                field("leave Category"; rec."leave Category") { ApplicationArea = All; }
-                field("Leave Start Date  "; rec."Leave Start Date  ") { ApplicationArea = All; }
-                field("Leave end Date  "; rec."Leave end Date  ") { ApplicationArea = All; }
-                field("Leave Period  "; rec."Leave Period  ") { ApplicationArea = All; }
 
-            }
             group("Clinical Classes2")
             {
                 Caption = 'End Of Block Two Clinical Rotation';
@@ -76,6 +68,25 @@ page 40009 "Master Rotation Plan Card"
                     SubPageLink = "Plan ID" = field("Plan ID");
                 }
             }
+            group(" Clinical Leave ")
+            {
+                Caption = 'Clinical Leave';
+                field("leave Category"; rec."leave Category") { ApplicationArea = All; }
+                field("Leave Start Date  "; rec."Leave Start Date  ") { ApplicationArea = All; }
+                field("Leave end Date  "; rec."Leave end Date  ") { ApplicationArea = All; }
+                field("Leave Period  "; rec."Leave Period  ") { ApplicationArea = All; }
+
+            }
+            group("Clinical Classes 3")
+            {
+                Caption = 'End Of Leave Clinical Rotation';
+                part("Clinical Rotation List 3"; "Mrp  end Of Leave rotation")
+                {
+                    ApplicationArea = All;
+                    SubPageLink = "Plan ID" = field("Plan ID");
+                }
+            }
+
 
 
         }
