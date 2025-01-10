@@ -30,9 +30,10 @@ page 40010 "Clinical Rotation List Part"
 
 
                 }
-                field("Week No"; rec."Week No")
+                field("Week No"; rec."No Of Students")
                 {
                     ApplicationArea = all;
+                    DrillDownPageID = "Group Assignmnets ";
 
                 }
                 field(Month; rec.Month)

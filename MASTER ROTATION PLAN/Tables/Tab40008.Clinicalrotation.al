@@ -21,9 +21,13 @@ table 40010 "Clinical rotation"
         }
 
 
-        field(2; "Week No"; Integer)
+        field(2; "No Of Students"; Integer)
         {
-            DataClassification = ToBeClassified;
+            
+            FieldClass =FlowField;
+            CalcFormula = count(GroupAssignments  where ("Groupid" = field("Group")));
+             
+            
         }
 
         field(3; Group; Code[50])

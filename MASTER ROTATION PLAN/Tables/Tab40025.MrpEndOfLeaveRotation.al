@@ -20,9 +20,11 @@ table 40025 "Mrp End Of Leave Rotation "
         }
 
 
-        field(2; "Week No"; Integer)
+        field(2; "No Std"; Integer)
         {
-            DataClassification = ToBeClassified;
+            
+            FieldClass =FlowField;
+            CalcFormula = count(GroupAssignments  where ("Groupid" = field("Group")));
         }
 
         field(3; Group; Code[50])
