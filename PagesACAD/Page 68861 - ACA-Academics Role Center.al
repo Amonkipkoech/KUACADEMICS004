@@ -1303,7 +1303,7 @@ page 68861 "ACA-Academics Role Center"
                 {
                     Image = Allocate;
 
-                    RunObject = Page "master rotation list ";
+                    RunObject = Page "MRP List";
 
                     ApplicationArea = All;
                 }
