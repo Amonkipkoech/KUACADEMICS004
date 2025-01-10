@@ -1,6 +1,6 @@
 table 40015 "ACA-XY-FORM"
 {
-    Caption = 'ACA-XY-FORM';
+    Caption = 'MRP';
     DataClassification = ToBeClassified;
 
     fields

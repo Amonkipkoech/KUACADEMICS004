@@ -1232,9 +1232,9 @@ page 68861 "ACA-Academics Role Center"
                 }
             }
 
-            group("Master Rotation Plan")
+            group("XY Form")
             {
-                Caption = 'Master Rotation Plan';
+                Caption = 'XY Form';
                 Image = ResourcePlanning;
                 action("Students on Session")
                 {
@@ -1256,34 +1256,34 @@ page 68861 "ACA-Academics Role Center"
                 }
                 action("Open master rotation list@")
                 {
-                    Caption = 'Open Master Rotation ';
+                    Caption = 'Created XY Form ';
                     Image = Allocate;
-                    RunObject = Page "master rotation list ";
+                    RunObject = Page "XY form";
                     RunPageView = where(status = const(open));
 
                     ApplicationArea = All;
                 }
                 action("master rotation list@")
                 {
-                    Caption = 'Pending Master Rotation ';
+                    Caption = 'Pending XY Form ';
                     Image = Allocate;
-                    RunObject = Page "master rotation list ";
-                    RunPageView = where(status = const("pending Approval"));
+                    RunObject = Page "XY form";
+                    RunPageView = where(status = const("pending"));
 
                     ApplicationArea = All;
                 }
                 action("master rotation list")
                 {
                     Image = Allocate;
-                    Caption = 'Approved Master Rotation';
-                    RunObject = Page "master rotation list ";
+                    Caption = 'Approved XY Form';
+                    RunObject = Page "XY form";
                     RunPageView = where(Status = const("Approved"));
                     ApplicationArea = All;
                 }
                 action("XY Form ")
                 {
                     Image = Allocate;
-                    Caption = 'Approved Master Rotation';
+                    Caption = 'Approved XY Form';
                     RunObject = Page "XY form";
                     RunPageLink = Status = filter("Approved");
                     ApplicationArea = All;
