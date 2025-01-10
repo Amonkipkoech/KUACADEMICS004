@@ -1236,24 +1236,7 @@ page 68861 "ACA-Academics Role Center"
             {
                 Caption = 'XY Form';
                 Image = ResourcePlanning;
-                action("Students on Session")
-                {
-                    Image = Allocate;
-                    RunObject = Page "Student Session Registration";
-                    ApplicationArea = All;
-                }
-                action("Rotation Areas")
-                {
-                    Image = Allocate;
-                    RunObject = Page "Rotation Areas";
-                    ApplicationArea = All;
-                }
-                action("Group Assignmnets ")
-                {
-                    Image = Allocate;
-                    RunObject = Page "Group Assignmnets ";
-                    ApplicationArea = All;
-                }
+
                 action("Open master rotation list@")
                 {
                     Caption = 'Created XY Form ';
@@ -1291,6 +1274,47 @@ page 68861 "ACA-Academics Role Center"
 
 
 
+            }
+            group(GroupName)
+            {
+
+                Caption = 'Master Rotation';
+                Image = ResourcePlanning;
+                action("Students on Session")
+                {
+                    Image = Allocate;
+                    RunObject = Page "Student Session Registration";
+                    ApplicationArea = All;
+                    Visible = false;
+                }
+                action("Rotation Areas")
+                {
+                    Image = Allocate;
+                    RunObject = Page "Rotation Areas";
+                    ApplicationArea = All;
+                }
+                action("Group Assignmnets ")
+                {
+                    Image = Allocate;
+                    RunObject = Page "Group Assignmnets ";
+                    ApplicationArea = All;
+                }
+                action("MRP ")
+                {
+                    Image = Allocate;
+
+                    RunObject = Page "master rotation list ";
+
+                    ApplicationArea = All;
+                }
+                action("MRP 2 ")
+                {
+                    Image = Allocate;
+                    Caption = 'MRP 2';
+                    RunObject = Page "Master Rotation Plan Card";
+
+                    ApplicationArea = All;
+                }
             }
             group(LectMan)
             {
