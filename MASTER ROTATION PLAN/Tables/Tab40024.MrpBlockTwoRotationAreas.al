@@ -2,8 +2,8 @@ table 40024 "Mrp Block Two Rotation Areas"
 {
     Caption = 'Mrp Block Two Rotation Areas';
     DataClassification = ToBeClassified;
-    
-   
+
+
 
     fields
     {
@@ -18,7 +18,7 @@ table 40024 "Mrp Block Two Rotation Areas"
         {
             DataClassification = ToBeClassified;
             Caption = 'Plan ID';
-            TableRelation = "Master Rotation Table"."Plan ID";
+            TableRelation = "Master Rotation Plan2"."Plan ID";
             Editable = false; // Set to false as it will be auto-generated
         }
 

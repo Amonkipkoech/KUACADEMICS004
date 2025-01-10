@@ -16,7 +16,7 @@ table 40010 "Clinical rotation"
         {
             DataClassification = ToBeClassified;
             Caption = 'Plan ID';
-            TableRelation = "Master Rotation Table"."Plan ID";
+            TableRelation = "Master Rotation Plan2"."Plan ID";
             Editable = false; // Set to false as it will be auto-generated
         }
 
@@ -66,7 +66,7 @@ table 40010 "Clinical rotation"
         field(10; Block7; enum "Block Category Enum")
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Master Rotation Table"."Block Name";
+            TableRelation = "Master Rotation Plan2".Block;
             Description = 'Block Name';
         }
         field(11; "Assessment Start Date"; Date)
