@@ -63,10 +63,10 @@ table 40010 "Clinical rotation"
             DataClassification = ToBeClassified;
             Description = 'Stores the number series in the database';
         }
-        field(10; Block; Text[100])
+        field(10; Block7; enum "Block Category Enum")
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Master Rotation Table".Category;
+            TableRelation = "Master Rotation Table"."Block Name";
             Description = 'Block Name';
         }
         field(11; "Assessment Start Date"; Date)
@@ -105,6 +105,22 @@ table 40010 "Clinical rotation"
             Description = 'Lecturer Number';
         }
         field(18; "Lecturer Name"; Text[20])
+        {
+            DataClassification = ToBeClassified;
+            Description = 'Lecturer Name';
+        }
+        field(19; "Block 1"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "Master Rotation Table"."Block Name";
+            Description = 'Lecturer Name';
+        }
+        field(20; "Block 2"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            Description = 'Lecturer Name';
+        }
+        field(21; "Block 3"; Code[50])
         {
             DataClassification = ToBeClassified;
             Description = 'Lecturer Name';

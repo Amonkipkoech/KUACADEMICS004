@@ -12,20 +12,24 @@ page 40009 "Master Rotation Plan Card"
         {
             group("HoD Information")
             {
+                Caption = 'General Information';
                 field("Plan ID"; rec."Plan ID") { ApplicationArea = All; }
+                field(Session; rec.Session) { ApplicationArea = All; }
+                field("Academic Year"; rec.Year) { ApplicationArea = all; }
+                field("Program Code"; rec."Program Code") { ApplicationArea = All; }
+                field("Program Name"; rec."Program Name") { ApplicationArea = All; }
                 field("HoD Name"; rec."HoD Name") { ApplicationArea = All; }
                 field("Department"; rec.Department) { ApplicationArea = All; }
                 field("Phone Number"; rec."Phone Number") { ApplicationArea = All; }
                 field("Email"; rec.Email) { ApplicationArea = All; }
-                field("Program Code"; rec."Program Code") { ApplicationArea = All; }
-                field("Program Name"; rec."Program Name") { ApplicationArea = All; }
                 field(Status; rec.Status) { ApplicationArea = All; }
             }
 
 
             group("Theoretical Classes")
             {
-                field("Block "; rec."Block Name") { ApplicationArea = All; }
+                Caption = 'Block One Theory Period';
+                field("Block "; rec.Block) { ApplicationArea = All; }
                 field("Start Date"; rec."Start Date") { ApplicationArea = All; }
                 field("Start Month"; rec."Start Month") { ApplicationArea = All; }
                 field("End Date"; rec."End Date") { ApplicationArea = All; }
@@ -36,13 +40,44 @@ page 40009 "Master Rotation Plan Card"
 
             group("Clinical Classes")
             {
-
+                Caption = 'End Of Block One Clinical Rotation';
                 part("Clinical Rotation List"; "Clinical Rotation List Part")
                 {
                     ApplicationArea = All;
                     SubPageLink = "Plan ID" = field("Plan ID");
                 }
             }
+            group("Theoretical Classes 2")
+            {
+                Caption = 'Block Two Theory Period';
+                field("Block 2"; rec.Category) { ApplicationArea = All; }
+                field("B2 Start Date"; rec."b2 Start Date") { ApplicationArea = All; }
+                field("B2 Start Month"; rec."B2 Start Month") { ApplicationArea = All; }
+                field("B2 End Date"; rec." B2 End Date") { ApplicationArea = All; }
+                field("B2 End Month"; rec."b2 End Month") { ApplicationArea = All; }
+                field("B2 Number of Weeks"; rec."B2 Number of Weeks") { ApplicationArea = All; }
+
+            }
+            group(" Clinical Leave ")
+            {
+                Caption = 'Clinical Leave';
+                field("leave Category"; rec."leave Category") { ApplicationArea = All; }
+                field("Leave Start Date  "; rec."Leave Start Date  ") { ApplicationArea = All; }
+                field("Leave end Date  "; rec."Leave end Date  ") { ApplicationArea = All; }
+                field("Leave Period  "; rec."Leave Period  ") { ApplicationArea = All; }
+
+            }
+            group("Clinical Classes2")
+            {
+                Caption = 'End Of Block Two Clinical Rotation';
+                part("Clinical Rotation List 2"; "Mrp block 2 rotation ")
+                {
+                    ApplicationArea = All;
+                    SubPageLink = "Plan ID" = field("Plan ID");
+                }
+            }
+
+
         }
     }
     actions

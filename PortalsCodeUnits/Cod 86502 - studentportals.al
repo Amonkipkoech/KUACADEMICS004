@@ -300,7 +300,7 @@ codeunit 86502 "studentportals"
         if group.Find('-') then begin
             clinicals.Reset();
             clinicals.SetRange(clinicals.Group, group.GroupId);
-            clinicals.SetRange(clinicals.Block, group.Block);
+            clinicals.SetRange(clinicals."Block 1", group.Block);
             if clinicals.Find('-') then begin
                 repeat
                     Message += 'SUCCESS' + '::' + clinicals.Group + '::' + Format(clinicals."Starting Date") + '::' + Format(clinicals."Ending Date") + '::' + clinicals.Areas + '::' + Format(clinicals."Assessment Start date") + '::' + Format(clinicals."Assessment End Date") + '[]';
