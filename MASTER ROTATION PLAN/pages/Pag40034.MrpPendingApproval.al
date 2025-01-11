@@ -1,12 +1,9 @@
-page 40031 "MRP List"
+page 40034 "Mrp Pending Approval"
 {
-    Caption = 'MRP List';
+    Caption = 'Mrp Pending Approval';
     PageType = List;
-
-
-
     SourceTable = "Master Rotation Plan2";
-    SourceTableView  = where (Status=filter(Open));
+    SourceTableView  = where (Status=filter("Pending Approval"));
      
 
     CardPageId = "Master Rotation Plan Card";
@@ -44,4 +41,5 @@ page 40031 "MRP List"
         }
     }
 }
+
 

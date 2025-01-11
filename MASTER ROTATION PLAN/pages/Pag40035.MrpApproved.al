@@ -1,5 +1,6 @@
-page 40031 "MRP List"
+page 40035 "Mrp Approved "
 {
+    
     Caption = 'MRP List';
     PageType = List;
 

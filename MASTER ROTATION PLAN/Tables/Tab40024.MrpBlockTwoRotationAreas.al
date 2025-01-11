@@ -156,7 +156,13 @@ table 40024 "Mrp Block Two Rotation Areas"
             Editable = false; // Set to false as it will be auto-generated
         }
 
-
+      field(94; Status; Enum "Mrp Status Approval")
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Status ';
+            TableRelation = "Master Rotation Plan2".Status;
+            Editable = false; // Set to false as it will be auto-generated
+        }
 
         // Add additional fields as needed
     }

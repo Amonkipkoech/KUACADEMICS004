@@ -29,7 +29,7 @@ page 40009 "Master Rotation Plan Card"
             group("Theoretical Classes")
             {
                 Caption = 'Block One Theory Period';
-                field("Block "; rec.Block) { ApplicationArea = All; }
+                field("Block "; rec.Block) { Caption = 'Level'; ApplicationArea = All; }
                 field("Start Date"; rec."Start Date") { ApplicationArea = All; }
                 field("Start Month"; rec."Start Month") { ApplicationArea = All; }
                 field("End Date"; rec."End Date") { ApplicationArea = All; }
@@ -50,7 +50,7 @@ page 40009 "Master Rotation Plan Card"
             group("Theoretical Classes 2")
             {
                 Caption = 'Block Two Theory Period';
-                field("Block 2"; rec.Category) { ApplicationArea = All; }
+                field("Block 2"; rec.Category) { Caption = 'Level'; ApplicationArea = All; }
                 field("B2 Start Date"; rec."b2 Start Date") { ApplicationArea = All; }
                 field("B2 Start Month"; rec."B2 Start Month") { ApplicationArea = All; }
                 field("B2 End Date"; rec." B2 End Date") { ApplicationArea = All; }
@@ -65,13 +65,13 @@ page 40009 "Master Rotation Plan Card"
                 part("Clinical Rotation List 2"; "Mrp block 2 rotation ")
                 {
                     ApplicationArea = All;
-                    SubPageLink = "Plan ID" = field("Plan ID");
+                    SubPageLink = "Plan ID" = field("Plan ID"), Year = field("Year"), Session = field("Session"), Department = field("Department"), Status = field("Status");
                 }
             }
             group(" Clinical Leave ")
             {
                 Caption = 'Clinical Leave';
-                field("leave Category"; rec."leave Category") { ApplicationArea = All; }
+                field("leave Category"; rec."leave Category") { Caption = 'Level'; ApplicationArea = All; }
                 field("Leave Start Date  "; rec."Leave Start Date  ") { ApplicationArea = All; }
                 field("Leave end Date  "; rec."Leave end Date  ") { ApplicationArea = All; }
                 field("Leave Period  "; rec."Leave Period  ") { ApplicationArea = All; }
@@ -83,7 +83,7 @@ page 40009 "Master Rotation Plan Card"
                 part("Clinical Rotation List 3"; "Mrp  end Of Leave rotation")
                 {
                     ApplicationArea = All;
-                    SubPageLink = "Plan ID" = field("Plan ID");
+                    SubPageLink = "Plan ID" = field("Plan ID"), Year = field("Year"), Session = field("Session"), Department = field("Department"), Status = field("Status");
                 }
             }
 

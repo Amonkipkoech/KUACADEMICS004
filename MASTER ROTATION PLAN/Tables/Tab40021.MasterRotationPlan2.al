@@ -133,9 +133,10 @@ table 40021 "Master Rotation Plan2"
         {
             DataClassification = ToBeClassified;
         }
-        field(20; "Status"; enum "Mrp Status Approval")
+        field(20; "Status"; Option)
         {
             DataClassification = ToBeClassified;
+            OptionMembers = " ",Open,"Pending Approval",Approved;
         }
         field(21; "Block1 Start Date"; Date)
         {
@@ -240,10 +241,7 @@ table 40021 "Master Rotation Plan2"
         {
 
         }
-        key(Key5; "Category")
-        {
 
-        }
     }
     trigger OnInsert()
     var

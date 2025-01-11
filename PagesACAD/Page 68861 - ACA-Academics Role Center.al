@@ -1263,14 +1263,7 @@ page 68861 "ACA-Academics Role Center"
                     RunPageView = where(Status = const("Approved"));
                     ApplicationArea = All;
                 }
-                action("XY Form ")
-                {
-                    Image = Allocate;
-                    Caption = 'Approved XY Form';
-                    RunObject = Page "XY form";
-                    RunPageLink = Status = filter("Approved");
-                    ApplicationArea = All;
-                }
+
 
 
 
@@ -1299,20 +1292,28 @@ page 68861 "ACA-Academics Role Center"
                     RunObject = Page "Group Assignmnets ";
                     ApplicationArea = All;
                 }
-                action("MRP ")
+
+                action("Open Department MRP")
                 {
                     Image = Allocate;
-
+                    Caption = 'Open Department MRP';
                     RunObject = Page "MRP List";
 
                     ApplicationArea = All;
                 }
-                action("MRP 2 ")
+                action("Pending Approval Dep MRP")
                 {
                     Image = Allocate;
-                    Caption = 'MRP 2';
-                    RunObject = Page "Master Rotation Plan Card";
+                    Caption = 'Pending Approval Dep MRP';
+                    RunObject = Page "Mrp Pending Approval";
 
+                    ApplicationArea = All;
+                }
+                action("Approved Dep MRP ")
+                {
+                    Image = Allocate;
+                    Caption = ' Approved Dep MRP';
+                    RunObject = Page "Mrp Approved ";
                     ApplicationArea = All;
                 }
             }
