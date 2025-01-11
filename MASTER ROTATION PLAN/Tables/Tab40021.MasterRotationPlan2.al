@@ -70,7 +70,7 @@ table 40021 "Master Rotation Plan2"
         field(9; "Block"; enum "Block Category Enum")
         {
             DataClassification = ToBeClassified;
-           
+
 
         }
 
@@ -102,7 +102,7 @@ table 40021 "Master Rotation Plan2"
 
         field(15; "Category"; Enum "Block Category Enum")
         {
-             DataClassification = ToBeClassified;
+            DataClassification = ToBeClassified;
         }
         field(16; "No. Series"; code[20])
         {
@@ -116,13 +116,15 @@ table 40021 "Master Rotation Plan2"
         field(89; Session; Code[60])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "ACA-Semester".Code;
+            TableRelation = "ACA-Semesters".Code;
             trigger OnValidate()
             var
-                SEM: Record "ACA-Semester";
+                SEM: Record "ACA-Semesters";
             begin
                 IF SEM.Get(Session) then begin
-                    Year := sem."Academic Year";
+                    Year := SEM."Academic Year";
+                end else begin
+                    Year := '';
                 end;
             end;
         }
