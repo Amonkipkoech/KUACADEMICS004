@@ -133,9 +133,9 @@ table 40021 "Master Rotation Plan2"
         {
             DataClassification = ToBeClassified;
         }
-        field(20; "Status"; Option)
+        field(20; "Status"; enum "Mrp Status Approval")
         {
-            OptionMembers = Open,"Pending Approval",Approved,"Rejected";
+            DataClassification = ToBeClassified;
         }
         field(21; "Block1 Start Date"; Date)
         {

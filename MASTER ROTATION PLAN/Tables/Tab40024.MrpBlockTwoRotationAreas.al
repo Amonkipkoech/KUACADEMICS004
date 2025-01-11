@@ -163,7 +163,7 @@ table 40024 "Mrp Block Two Rotation Areas"
 
     keys
     {
-        key(PK; "No.", "Plan ID")
+        key(PK; "No.", "Plan ID", Year, Session, Department, program)
         {
             Clustered = true;
         }

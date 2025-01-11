@@ -48,6 +48,13 @@ table 40010 "Clinical rotation"
             TableRelation = "Master Rotation Plan2"."Program Code";
             Editable = false; // Set to false as it will be auto-generated
         }
+        field(94; Status; Enum "Mrp Status Approval")
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Status ';
+            TableRelation = "Master Rotation Plan2".Status;
+            Editable = false; // Set to false as it will be auto-generated
+        }
         field(2; "No Of Students"; Integer)
         {
 
@@ -160,7 +167,7 @@ table 40010 "Clinical rotation"
 
     keys
     {
-        key(PK; "No.", "Plan ID", Year, Session)
+        key(PK; "No.", "Plan ID", Year, Session, Department, program, Status)
         {
             Clustered = true;
         }

@@ -44,7 +44,7 @@ page 40009 "Master Rotation Plan Card"
                 part("Clinical Rotation List"; "Clinical Rotation List Part")
                 {
                     ApplicationArea = All;
-                    SubPageLink = "Plan ID" = field("Plan ID"), Year = field("Year"), Session = field("Session");
+                    SubPageLink = "Plan ID" = field("Plan ID"), Year = field("Year"), Session = field("Session"), Department = field("Department"), Status = field("Status");
                 }
             }
             group("Theoretical Classes 2")

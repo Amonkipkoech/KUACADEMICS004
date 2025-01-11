@@ -68,7 +68,10 @@ page 40010 "Clinical Rotation List Part"
                     ApplicationArea = all;
 
                 }
-
+                field(Status; rec.Status)
+                {
+                    ApplicationArea = all;
+                }
 
                 // Continue with fields up to Site Week 52...
             }
