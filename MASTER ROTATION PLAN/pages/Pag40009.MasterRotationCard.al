@@ -113,6 +113,25 @@ page 40009 "Master Rotation Plan Card"
                     Message('Approved Successfully');
                 end;
             }
+            action(Attachments1)
+            {
+                ApplicationArea = All;
+                Caption = 'MRP Attachments';
+                Image = Attachments;
+                Promoted = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                var
+                    RecRef: RecordRef;
+                    DocumentAttachment: Page "MRP Attachments";
+                begin
+                    Clear(DocumentAttachment);
+                    RecRef.GETTABLE(Rec);
+                    DocumentAttachment.OpenForRecReference(RecRef);
+                    DocumentAttachment.RUNMODAL;
+                end;
+            }
         }
     }
 }
