@@ -4,7 +4,7 @@ page 40009 "Master Rotation Plan Card"
     PageType = Card;
     SourceTable = "Master Rotation Plan2";
 
-    Caption = 'Master Rotation Plan';
+    Caption = 'Departmental MRP';
 
     layout
     {
@@ -44,7 +44,7 @@ page 40009 "Master Rotation Plan Card"
                 part("Clinical Rotation List"; "Clinical Rotation List Part")
                 {
                     ApplicationArea = All;
-                    SubPageLink = "Plan ID" = field("Plan ID");
+                    SubPageLink = "Plan ID" = field("Plan ID"), Year = field("Year"), Session = field("Session");
                 }
             }
             group("Theoretical Classes 2")

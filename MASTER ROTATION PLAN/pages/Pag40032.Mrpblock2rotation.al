@@ -1,11 +1,11 @@
 page 40032 "Mrp block 2 rotation "
 {
-    
+
     PageType = ListPart;
 
     SourceTable = "Mrp Block Two Rotation Areas"; // This should be a separate table for managing weekly rotations
 
-     Caption = 'Mrp block 2 rotation ';
+    Caption = 'Mrp block 2 rotation ';
 
     layout
     {

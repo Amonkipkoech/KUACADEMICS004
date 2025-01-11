@@ -25,9 +25,9 @@ table 40024 "Mrp Block Two Rotation Areas"
 
         field(2; "No Std"; Integer)
         {
-            
-            FieldClass =FlowField;
-            CalcFormula = count(GroupAssignments  where ("Groupid" = field("Group")));
+
+            FieldClass = FlowField;
+            CalcFormula = count(GroupAssignments where("Groupid" = field("Group")));
         }
 
         field(3; Group; Code[50])
@@ -51,10 +51,7 @@ table 40024 "Mrp Block Two Rotation Areas"
             DataClassification = ToBeClassified;
         }
 
-        field(7; Department; Code[50])
-        {
-            DataClassification = ToBeClassified;
-        }
+
 
         field(8; Areas; Code[50])
         {
@@ -129,6 +126,36 @@ table 40024 "Mrp Block Two Rotation Areas"
             DataClassification = ToBeClassified;
             Description = 'Lecturer Name';
         }
+        field(90; "Year"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Academic Year';
+            TableRelation = "Master Rotation Plan2".Year;
+            Editable = false; // Set to false as it will be auto-generated
+        }
+        field(91; "Session"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Session';
+            TableRelation = "Master Rotation Plan2".Session;
+            Editable = false; // Set to false as it will be auto-generated
+        }
+
+        field(92; Department; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Department';
+            TableRelation = "Master Rotation Plan2".Department;
+            Editable = false; // Set to false as it will be auto-generated
+        }
+        field(93; program; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'program ';
+            TableRelation = "Master Rotation Plan2"."Program Code";
+            Editable = false; // Set to false as it will be auto-generated
+        }
+
 
 
         // Add additional fields as needed

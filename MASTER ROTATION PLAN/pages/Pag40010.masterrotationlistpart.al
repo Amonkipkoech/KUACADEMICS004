@@ -17,6 +17,23 @@ page 40010 "Clinical Rotation List Part"
                 {
                     ApplicationArea = all;
                 }
+                field(Year; rec.Year)
+                {
+                    ApplicationArea = all;
+                }
+                field(Session; rec.Session)
+                {
+                    ApplicationArea = all;
+                }
+                field(Department; rec.Department)
+                {
+                    ApplicationArea = all;
+                }
+                field(program; rec.program)
+                {
+                    ApplicationArea = all;
+                }
+
                 field(Group; rec.Group)
                 {
                     ApplicationArea = all;
