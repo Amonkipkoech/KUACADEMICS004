@@ -7,11 +7,35 @@ report 40002 "master Rotation Table"
 
     dataset
     {
-        dataitem("Master Rotation Table"; "Master Rotation Table")
+        dataitem("Master Rotation Table"; "Master Rotation Plan2")
         {
             RequestFilterFields = "Plan ID";
             column(Plan_ID; "Plan ID")
             {
+            }
+            column(Year;Year)
+            {
+                
+            }
+            column(Session;Session)
+            {
+                
+            }
+            column(Department;Department)
+            {                
+            }
+            column(Phone_Number;"Phone Number")
+            {                
+            }
+            column(HoD_Name;"HoD Name")
+            {                
+            }
+            column(Start_Date;"Start Date")
+            {                
+            }
+            column(End_Date;"End Date")
+            {
+                
             }
             column(Category; Category)
             {
