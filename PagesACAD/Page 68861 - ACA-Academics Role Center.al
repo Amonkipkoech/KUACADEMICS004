@@ -1419,12 +1419,13 @@ page 68861 "ACA-Academics Role Center"
                     Image = Register;
                     RunObject = Page "TT-Timetable Batches";
                     ApplicationArea = All;
-                    Visible= 
+                    Visible= false;
                 }
                 action("Exam Timetable")
                 {
                     Caption = 'Exam Timetable';
                     RunObject = Page "EXT-Timetable Batches";
+                    Visible= false;
                     ApplicationArea = All;
                 }
             }
