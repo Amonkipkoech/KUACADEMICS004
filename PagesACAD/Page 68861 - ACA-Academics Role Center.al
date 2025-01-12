@@ -1419,6 +1419,7 @@ page 68861 "ACA-Academics Role Center"
                     Image = Register;
                     RunObject = Page "TT-Timetable Batches";
                     ApplicationArea = All;
+                    Visible= 
                 }
                 action("Exam Timetable")
                 {

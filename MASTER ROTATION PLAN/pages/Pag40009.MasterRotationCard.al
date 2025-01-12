@@ -44,7 +44,7 @@ page 40009 "Master Rotation Plan Card"
                 part("Clinical Rotation List"; "Clinical Rotation List Part")
                 {
                     ApplicationArea = All;
-                    SubPageLink = "Plan ID" = field("Plan ID"), Year = field("Year"), Session = field("Session"), Department = field("Department"), Status = field("Status");
+                    SubPageLink = "Plan ID" = field("Plan ID"), Year = field("Year"), Session = field("Session"), Department = field("Department");
                 }
             }
             group("Theoretical Classes 2")
@@ -65,7 +65,7 @@ page 40009 "Master Rotation Plan Card"
                 part("Clinical Rotation List 2"; "Mrp block 2 rotation ")
                 {
                     ApplicationArea = All;
-                    SubPageLink = "Plan ID" = field("Plan ID"), Year = field("Year"), Session = field("Session"), Department = field("Department"), Status = field("Status");
+                    SubPageLink = "Plan ID" = field("Plan ID"), Year = field("Year"), Session = field("Session"), Department = field("Department");
                 }
             }
             group(" Clinical Leave ")
@@ -83,7 +83,7 @@ page 40009 "Master Rotation Plan Card"
                 part("Clinical Rotation List 3"; "Mrp  end Of Leave rotation")
                 {
                     ApplicationArea = All;
-                    SubPageLink = "Plan ID" = field("Plan ID"), Year = field("Year"), Session = field("Session"), Department = field("Department"), Status = field("Status");
+                    SubPageLink = "Plan ID" = field("Plan ID"), Year = field("Year"), Session = field("Session"), Department = field("Department");
                 }
             }
 

@@ -1,14 +1,14 @@
 page 40035 "Mrp Approved "
 {
-    
+
     Caption = 'MRP List';
     PageType = List;
 
 
 
     SourceTable = "Master Rotation Plan2";
-    SourceTableView  = where (Status=filter(Open));
-     
+    SourceTableView = where(Status = filter(Approved));
+
 
     CardPageId = "Master Rotation Plan Card";
 
@@ -37,7 +37,7 @@ page 40035 "Mrp Approved "
                 {
                     ApplicationArea = All;
                 }
-                field(Status;rec.Status)
+                field(Status; rec.Status)
                 {
                     ApplicationArea = All;
                 }
