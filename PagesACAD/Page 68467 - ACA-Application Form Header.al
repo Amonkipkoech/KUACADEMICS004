@@ -550,10 +550,6 @@ page 68467 "ACA-Application Form Header"
                 }
 
 
-                field("Workplace Address"; rec."Workplace Address")
-                {
-                    ApplicationArea = All;
-                }
 
             }
         }
