@@ -174,6 +174,11 @@ table 40021 "Master Rotation Plan2"
         {
             DataClassification = ToBeClassified;
         }
+<<<<<<< HEAD
+        field(30;Cohort;Code[20]){
+            
+        }
+=======
         field(30; "B2 Start Date"; Date)
         {
             DataClassification = ToBeClassified;
@@ -217,6 +222,7 @@ table 40021 "Master Rotation Plan2"
         }
 
 
+>>>>>>> origin/dev-amon
 
 
 
