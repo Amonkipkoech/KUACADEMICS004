@@ -2,7 +2,7 @@ table 40026 Timetable
 {
     Caption = 'Timetable';
     DataClassification = ToBeClassified;
- 
+
     fields
     {
         field(1; Programs; Code[20])
@@ -93,7 +93,7 @@ table 40026 Timetable
         }
         field(7; Semester; Code[20])
         {
-            TableRelation = "ACA-Semesters";
+            TableRelation = "ACA-Semesters".Code;
         }
         field(8; "Lecture Hall"; code[20])
         {
@@ -107,7 +107,7 @@ table 40026 Timetable
         }
         field(10; "Academic Year"; code[20])
         {
-            TableRelation = "ACA-Academic Year".Code;
+            TableRelation = "ACA-Semesters"."Academic Year";
         }
         field(11; Lecturer; code[20])
         {

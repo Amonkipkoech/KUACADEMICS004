@@ -88,7 +88,7 @@ page 68861 "ACA-Academics Role Center"
                     {
                         Image = FixedAssetLedger;
 
-                        Caption = 'Block/session';
+                        Caption = 'Semester';
                         RunObject = Page 68744;
                         ApplicationArea = All;
                     }

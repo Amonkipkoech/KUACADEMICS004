@@ -785,10 +785,10 @@ page 68467 "ACA-Application Form Header"
                 var
                     NotifyAction: Codeunit "Admissions Notification Action";
                 begin
-                       NotifyAction.NotifySuccessfulApplication(rec."Application No.");
+                    NotifyAction.NotifySuccessfulApplication(rec."Application No.");
                     Message('Email notification process triggered for Application ID: %1', rec."Application No.");
                 end;
-                
+
 
             }
 
