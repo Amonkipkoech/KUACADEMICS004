@@ -2476,6 +2476,7 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         AdmissionFormHeader."NCK Cert No" := NckCertNo;
         AdmissionFormHeader."Prof Body Cert No" := profBodycertNo;
         AdmissionFormHeader."international student " := IsInternational;
+        AdmissionFormHeader."Employer Name " := workExpInstitution;
         Programme.RESET;
         Programme.SETRANGE(Programme.Code, appliedprogram);
         IF Programme.FIND('-') THEN BEGIN
