@@ -528,7 +528,7 @@ page 84524 "REG temp App"
                 {
 
                 }
-                field("Second Employment Duration"; "Second Employment Duration")
+                field("Second Employment Duration"; rec."Second Employment Duration")
                 {
 
                 }
