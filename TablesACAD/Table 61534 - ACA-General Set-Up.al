@@ -276,6 +276,13 @@ table 61534 "ACA-General Set-Up"
             DataClassification = ToBeClassified;
             TableRelation = "No. Series";
         }
+         field(50075; "Supplimentary No."; code[20])
+        {
+
+            DataClassification = ToBeClassified;
+            TableRelation = "No. Series";
+        }
+
 
     }
 

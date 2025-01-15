@@ -203,6 +203,11 @@ page 68760 "ACA-General Set-Up"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Release Proforma Invoice';
                 }
+                field("Supplimentary No.";"Supplimentary No.")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Release Proforma Invoice';
+                }
 
             }
             group("ID Setup")

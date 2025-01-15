@@ -56,6 +56,11 @@ page 68520 "ACA-Applic. Documents Verif."
                     ToolTip = 'Specifies the value of the Shortlisted By(Staff Name) field.';
                     ApplicationArea = All;
                 }
+                field(Email2; rec.Email)
+                {
+                    ToolTip = 'Specifies the value of the Shortlisted By(Staff Name) field.';
+                    ApplicationArea = All;
+                }
             }
             group("Intake Info")
             {
@@ -544,6 +549,8 @@ page 68520 "ACA-Applic. Documents Verif."
                 PromotedCategory = Process;
 
                 trigger OnAction()
+                var
+                    NotifyAction: Codeunit "Admissions Notification Action";
                 begin
                     IF (Rec."Admission No" <> '') THEN ERROR('Admission Number axists: ' + Rec."Admission No");
                     CLEAR(settlementPrefix);
@@ -565,13 +572,15 @@ page 68520 "ACA-Applic. Documents Verif."
                         CLEAR(NewAdminCode);
                         BEGIN
                             NewAdminCode := NoSeriesMgt.GetNextNo(AdminSetup."No. Series", TODAY, TRUE);
-                            //Rec."Admission No" := AdminSetup."Programme Prefix" + '/' + settlementPrefix + '/' + NewAdminCode + settlementPrefix + '/' + AdminSetup.Year;
-                            Rec."Admission No" := NewAdminCode;
+                            Rec."Admission No" := AdminSetup."Programme Prefix" + '/' + NewAdminCode + '/' + settlementPrefix + '/' + AdminSetup.Year;
                             Rec.MODIFY;
                         END;
                     END ELSE BEGIN
                         ERROR('The Admission Number Setup For Programme ' + FORMAT(Rec."Admitted Degree") + ' Does Not Exist');
                     END;
+                    // Call the NotifyAdmissionsRequestSuccessful after generating the admission number
+                    NotifyAction.NotifyAdmissionsRequestSuccessful(rec."Application No.");
+                    NotifyAction.NotifyIctSuccessfulAccountCreation(rec."Application No.");
 
                     MESSAGE('Admission number generated successfully!');
                 end;

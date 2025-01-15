@@ -249,6 +249,11 @@ page 68778 "ACA-Student Units"
                     Enabled = false;
                     ApplicationArea = All;
                 }
+                field("Theory Units"; rec."Theory Units")
+                {
+                    Enabled = false;
+                    ApplicationArea = All;
+                }
                 field(Semester; Rec.Semester)
                 {
                     ApplicationArea = All;

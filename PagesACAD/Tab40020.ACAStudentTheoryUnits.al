@@ -8,6 +8,9 @@ table 40020 "ACA-Student Theory Units "
     /// Table ACA-Student Units (ID 61549).
     /// </summary>
 
+    /// Table ACA-Student Units (ID 61549).
+    /// </summary>
+
 
     fields
     {
@@ -106,7 +109,7 @@ table 40020 "ACA-Student Theory Units "
         {
             Editable = true;
             NotBlank = false;
-            TableRelation = "ACA-Units/Subjects".Code WHERE("Programme Code" = FIELD(Programme), "Unit Type" = filter(Clinical .. Theory));
+            TableRelation = "ACA-Units/Subjects".Code WHERE("Programme Code" = FIELD(Programme));// "Unit Type" = filter(Clinical .. Theory));
 
             trigger OnValidate()
             var
@@ -1615,7 +1618,16 @@ table 40020 "ACA-Student Theory Units "
             OptionCaption = 'NA,P1,P2,P3,P4';
             OptionMembers = "NA",P1,P2,P3,P4;
         }
+        field(60206; "Paper2"; Code[20])
+        {
+            Editable = true;
+            NotBlank = false;
+            TableRelation = "ACA-Units/Subjects".Code WHERE("Programme Code" = FIELD(Programme), "Unit Type" = filter(Exam));
 
+
+
+
+        }
 
         // field(60200; faculty; code[20])
         // {

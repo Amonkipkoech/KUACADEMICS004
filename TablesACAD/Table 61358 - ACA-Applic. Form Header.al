@@ -1171,6 +1171,30 @@ table 61358 "ACA-Applic. Form Header"
         {
 
         }
+        field(50107; "Employer Name "; code[60])
+        {
+
+        }
+        field(50108; "Job Title"; code[60])
+        {
+
+        }
+        field(50111; "Department/Unit"; Code[50])
+        {
+
+        }//
+        field(50109; "Employment Start Date"; date)
+        {
+
+        }
+        field(50110; "Employment End Date"; date)
+        {
+
+        }//Workplace Address
+        field(50112; "Workplace Address"; Code[60])
+        {
+
+        }//
 
 
 
@@ -1204,6 +1228,8 @@ table 61358 "ACA-Applic. Form Header"
     }
 
     trigger OnInsert()
+    var
+        NotifyAction: Codeunit "Admissions Notification Action";
     begin
 
         IF "Application No." = '' THEN BEGIN
@@ -1220,6 +1246,10 @@ table 61358 "ACA-Applic. Form Header"
         "First Choice Stage" := GeneralSetup."Default Year";
         "First Choice Semester" := GeneralSetup."Default Semester";
         "Intake Code" := GeneralSetup."Default Intake";
+
+        // Send a notification email upon inserting a new record (successful submission)
+        NotifyAction.NotifyApplicantSuccessfulSubmission("Application No.");
+
     end;
 
     var
@@ -1449,5 +1479,27 @@ table 61358 "ACA-Applic. Form Header"
         END ELSE
             ERROR('Current Academic Year not Specified!');
     end;
+
+    trigger OnModify()
+    var
+        NotifyAction: Codeunit "Admissions Notification Action";
+        RecBefore: Record "ACA-Applic. Form Header";
+    begin
+        // Load the previous state of the record
+        if RecBefore.Get("Application No.") then begin
+            Message('Current Status: %1, Previous Status: %2', Status, RecBefore.Status);
+            if (RecBefore.Status <> Status) and (Status = Status::"Pending Approval") then begin
+                Message('Status changed, sending email...');
+                NotifyAction.NotifyAdmissionsRequestStatus(rec."Application No.");
+            end;
+        end;
+
+
+
+    end;
+
+
+
+
 }
 

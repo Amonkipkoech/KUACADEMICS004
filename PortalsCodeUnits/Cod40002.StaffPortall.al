@@ -929,7 +929,7 @@ codeunit 40002 StaffPortall
         end else begin
             clinicals."Plan ID" := Id;
             clinicals.Group := groupId;
-            clinicals.Block := block;
+            clinicals."Block 1" := block;
             clinicals."Starting Date" := startDate;
             clinicals."Ending Date" := endDate;
             clinicals.Department := department;

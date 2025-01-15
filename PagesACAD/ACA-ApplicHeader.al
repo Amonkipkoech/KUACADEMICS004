@@ -645,6 +645,8 @@ page 84521 "ACA-Application Form"
 
                 trigger OnAction()
                 var
+
+                    NotifyAction: Codeunit "Admissions Notification Action";
                     ApprovalMgt: Codeunit "Export F/O Consolidation";
                     showmessage: Boolean;
                     ManualCancel: Boolean;
@@ -682,9 +684,13 @@ page 84521 "ACA-Application Form"
                     Rec."Application Type" := Rec."Application Type"::Full;
                     Rec."Process Application" := true;
                     Rec.Status := rec.Status::"Pending Approval";
+
                     Send();
-                    Rec.Modify();
+
                     Message('Application Processed Successfullyy!!, An Email Notification has also been sent the respective HOD');
+                    rec.Modify();
+                    NotifyAction.NotifyAdmissionsRequestStatus(rec."Application No.");
+                    Message('Email notification process triggered for Application ID: %1', rec."Application No.");
 
                 end;
             }

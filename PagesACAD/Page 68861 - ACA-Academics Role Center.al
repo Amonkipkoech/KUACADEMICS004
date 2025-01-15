@@ -386,6 +386,14 @@ page 68861 "ACA-Academics Role Center"
                         ApplicationArea = All;
                         Visible = false;
                     }
+                    action("NCK Indexing Report")
+                    {
+                        Caption = 'NCK Indexing Report';
+                        Image = Report;
+                        RunObject = Report "NCK Report ";
+                        ApplicationArea = All;
+                        Visible = true;
+                    }
                     action("Admission Summary 2")
                     {
                         Caption = 'Admission Summary 2';
@@ -955,8 +963,20 @@ page 68861 "ACA-Academics Role Center"
 
                 action(allApps)
                 {
-                    Caption = 'SRO';
+                    Caption = 'All Applications';
                     RunObject = Page "ACA-Application Form H. list";
+                    ApplicationArea = All;
+                }
+                action(International)
+                {
+                    Caption = 'International Students';
+                    RunObject = Page "International Applicants";
+                    ApplicationArea = All;
+                }
+                action(Domestic)
+                {
+                    Caption = 'Domestic  Students';
+                    RunObject = Page "Applicants Domestic";
                     ApplicationArea = All;
                 }
                 action(process)
@@ -1180,15 +1200,85 @@ page 68861 "ACA-Academics Role Center"
                     ApplicationArea = All;
                 }
             }
-            group("Master Rotation Plan")
+            group("Supplementary Applications")
             {
-                Caption = 'Master Rotation Plan';
+                action("Open Applications")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Open Supp Applications';
+                    RunObject = page "Supp Exam Registration List";
+                    RunPageView = where(Status = const(Open));
+                }
+                action("Pending Applications")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Pending Approval Supp Appl';
+                    RunObject = page "Supp Exam Registration List";
+                    RunPageView = where(Status = const("Pending Approval"));
+                }
+                action("Approved  Supp Applications")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Approved Supp Applications';
+                    RunObject = page "Supp Exam Registration List";
+                    RunPageView = where(Status = const(Approved));
+                }
+                action("Rejected  Supp Applications")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Rejected Supp Applications';
+                    RunObject = page "Supp Exam Registration List";
+                    RunPageView = where(Status = const(Rejected));
+                }
+            }
+
+            group("XY Form")
+            {
+                Caption = 'XY Form';
+                Image = ResourcePlanning;
+
+                action("Open master rotation list@")
+                {
+                    Caption = 'Created XY Form ';
+                    Image = Allocate;
+                    RunObject = Page "XY form";
+                    RunPageView = where(status = const(open));
+
+                    ApplicationArea = All;
+                }
+                action("master rotation list@")
+                {
+                    Caption = 'Pending XY Form ';
+                    Image = Allocate;
+                    RunObject = Page "XY form";
+                    RunPageView = where(status = const("pending"));
+
+                    ApplicationArea = All;
+                }
+                action("master rotation list")
+                {
+                    Image = Allocate;
+                    Caption = 'Approved XY Form';
+                    RunObject = Page "XY form";
+                    RunPageView = where(Status = const("Approved"));
+                    ApplicationArea = All;
+                }
+
+
+
+
+            }
+            group(GroupName)
+            {
+
+                Caption = 'Master Rotation';
                 Image = ResourcePlanning;
                 action("Students on Session")
                 {
                     Image = Allocate;
                     RunObject = Page "Student Session Registration";
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 action("Rotation Areas")
                 {
@@ -1202,33 +1292,30 @@ page 68861 "ACA-Academics Role Center"
                     RunObject = Page "Group Assignmnets ";
                     ApplicationArea = All;
                 }
-                action("master rotation list@")
-                {
-                    Caption = 'Pending Master Rotation ';
-                    Image = Allocate;
-                    RunObject = Page "master rotation list ";
-                    RunPageLink = Status = filter("Pending Approval");
-                    ApplicationArea = All;
-                }
-                action("master rotation list")
+
+                action("Open Department MRP")
                 {
                     Image = Allocate;
-                    Caption = 'Approved Master Rotation';
-                    RunObject = Page "master rotation list ";
-                    RunPageLink = Status = filter("Approved");
+                    Caption = 'Open Department MRP';
+                    RunObject = Page "MRP List";
+
                     ApplicationArea = All;
                 }
-                  action("XY Form ")
+                action("Pending Approval Dep MRP")
                 {
                     Image = Allocate;
-                    Caption = 'Approved Master Rotation';
-                    RunObject = Page "XY form";
-                    RunPageLink = Status = filter("Approved");
+                    Caption = 'Pending Approval Dep MRP';
+                    RunObject = Page "Mrp Pending Approval";
+
                     ApplicationArea = All;
                 }
-
-
-
+                action("Approved Dep MRP ")
+                {
+                    Image = Allocate;
+                    Caption = ' Approved Dep MRP';
+                    RunObject = Page "Mrp Approved ";
+                    ApplicationArea = All;
+                }
             }
             group(LectMan)
             {
@@ -1256,6 +1343,13 @@ page 68861 "ACA-Academics Role Center"
                     RunObject = Page 68167;
                     ApplicationArea = All;
                     RunPageLink = Status = const(Inactive);
+                }
+                action(ProgrammLeaders)
+                {
+                    Caption = 'Program Leaders';
+                    RunObject = page "Programme Leaders Card";
+                    ApplicationArea = all;
+
                 }
                 // action(ApprovedLoad)
                 // {
@@ -1325,11 +1419,13 @@ page 68861 "ACA-Academics Role Center"
                     Image = Register;
                     RunObject = Page "TT-Timetable Batches";
                     ApplicationArea = All;
+                    Visible= false;
                 }
                 action("Exam Timetable")
                 {
                     Caption = 'Exam Timetable';
                     RunObject = Page "EXT-Timetable Batches";
+                    Visible= false;
                     ApplicationArea = All;
                 }
             }

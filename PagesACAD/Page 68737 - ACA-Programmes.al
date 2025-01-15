@@ -29,11 +29,30 @@ page 68737 "ACA-Programmes"
                     ApplicationArea = All;
                     Caption = 'Programme Name';
                 }
-                field("Programme Leader"; Rec."Program Leader")
+                field("HoD No."; rec."HoD No.")
                 {
-                    Caption = 'Prog Leader Staff ID';
+                    Caption = 'HoD Staff Id';
                     ApplicationArea = All;
                 }
+                field("Hod Full Name"; rec."Hod Full Name")
+                {
+                    Caption = 'HoD Staff Id';
+                    Editable = false;
+                    ApplicationArea = All;
+                }
+                field("HoD Email"; rec."HoD Email")
+                {
+                    Caption = 'HoD Staff Email';
+                    Editable = false;
+                    ApplicationArea = All;
+                }
+                field("HoD Phone Number"; rec."HoD Phone Number")
+                {
+                    Caption = 'HoD Staff Id';
+                    Editable = false;
+                    ApplicationArea = All;
+                }
+
                 field("Employee Name"; Rec."Employee Name")
                 {
                     Caption = 'Program Leader Name';
@@ -103,7 +122,7 @@ page 68737 "ACA-Programmes"
                     ApplicationArea = All;
                 }
 
-              
+
                 field("Exam Category"; Rec."Exam Category")
                 {
                     Editable = true;
