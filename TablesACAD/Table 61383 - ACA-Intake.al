@@ -26,6 +26,10 @@ table 61383 "ACA-Intake"
         {
             OptionMembers = " ","Proffesional Course",Certificate,Diploma,Bachelor,"Post-Graduate Diploma",Masters,PHD;
         }
+        field(10;Department;Code[10])
+        {
+            
+        }
     }
 
     keys
