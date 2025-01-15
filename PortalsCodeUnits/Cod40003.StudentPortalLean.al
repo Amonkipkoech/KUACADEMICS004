@@ -402,7 +402,8 @@ codeunit 40003 StudentPortalTest
             clinicals.SetRange(clinicals.Block, group.Block);
             if clinicals.Find('-') then begin
                 repeat
-                    Message += 'SUCCESS' + '::' + clinicals.Group + '::' + Format(clinicals."Starting Date") + '::' + Format(clinicals."Ending Date") + '::' + clinicals.Areas + '::' + Format(clinicals."Assessment Start date") + '::' + Format(clinicals."Assessment End Date") + '[]';
+                    Message += 'SUCCESS' + '::' + clinicals.Group + '::' + Format(clinicals."Starting Date") + '::'
+                     + Format(clinicals."Ending Date") + '::' + clinicals.Areas + '::' + Format(clinicals."Assessment Start date") + '::' + Format(clinicals."Assessment End Date") + '[]';
                 until clinicals.Next() = 0;
 
             end
@@ -1160,6 +1161,74 @@ codeunit 40003 StudentPortalTest
         END;
     end;
 
+    procedure CheckIfAllUnitsOkay(StudentNo: Text; Sem: Text): Text
+    var
+        Message: Text;
+    begin
+
+        Message := 'SUCCESS';
+
+        StudentUnits.Reset();
+        StudentUnits.SetRange(StudentUnits."Student No.", StudentNo);
+
+        // StudentUnits.SetRange(StudentUnits.Semester, Sem);
+        StudentUnits.SetRange(StudentUnits.Evaluated, FALSE);
+
+        if StudentUnits.Find('-') then begin
+            repeat
+
+                if StudentUnits."Final Score" < 40 then begin
+                    Message := 'FAIL';
+                    exit(Message);
+                end;
+            until StudentUnits.Next() = 0;
+        end;
+
+        exit(Message);
+    end;
+
+    procedure AreAllUnitsDone(StudentNo: Text; programme: Text): Boolean
+    var
+        Count: Integer;
+        Msg: Boolean;
+    begin
+        Count := 0;
+
+
+        StudentUnits.Reset();
+        StudentUnits.SetRange(StudentUnits."Student No.", StudentNo);
+        StudentUnits.SetRange(StudentUnits.Evaluated, FALSE);
+
+        if StudentUnits.Find('-') then begin
+            repeat
+                Count := Count + 1;
+            until StudentUnits.Next() = 0;
+        end;
+
+        if Count >= GetMinimumNumberOfUnits(programme) then
+            Msg := true
+        else
+            Msg := false;
+
+        exit(Msg);
+    end;
+
+    procedure GetMinimumNumberOfUnits(prog: Text) Message: Integer
+    var
+        programmes: Record "ACA-Programme";
+    begin
+        programmes.RESET;
+        programmes.SETRANGE(programmes.Code, prog);
+        if programmes.FIND('-') then begin
+            Message := programmes."Max No. of Courses";
+        end;
+        exit(Message);
+
+    end;
+
+
+
+
 
     procedure IsUnitRegistered(unitCode: Text; studentNo: Text; semester: Text) message: Boolean
     begin
@@ -1231,7 +1300,7 @@ codeunit 40003 StudentPortalTest
         CourseRegistration."Student No." := studentNo;
         CourseRegistration.Options := ProgrammeOption;
         CourseRegistration.Programmes := Progs;
-        CourseRegistration.VALIDATE(Programmes);
+        //CourseRegistration.VALIDATE(Programmes);
         CourseRegistration.Stage := stage;
         //CourseRegistration.VALIDATE(Stage);
         //CourseRegistration."Date Registered":=TODAY;
@@ -1320,6 +1389,8 @@ codeunit 40003 StudentPortalTest
         END;
         EXIT(filename);
     end;
+
+
 
     procedure GenerateAdmnLetter(index: Text; filenameFromApp: Text) filename: Text
     begin
@@ -1453,7 +1524,7 @@ codeunit 40003 StudentPortalTest
         CourseRegistration.SetRange("Student No.", studentNo);
         CourseRegistration.SetRange(Reversed, false);
         if CourseRegistration.FindFirst() then begin
-            Message := GetProgram(CourseRegistration.Programmes)
+            Message := CourseRegistration.Programmes
 
         end;
         exit(Message);
@@ -1471,14 +1542,15 @@ codeunit 40003 StudentPortalTest
         exit(Message);
 
     end;
-    procedure GetStudentStage(studentNo:Text;sem:Text) Message : Text
+
+    procedure GetStudentStage(studentNo: Text; sem: Text) Message: Text
     begin
         CourseRegistration.Reset();
         CourseRegistration.Ascending(true);
         CourseRegistration.SETRANGE(CourseRegistration."Student No.", StudentNo);
         CourseRegistration.SETRANGE(CourseRegistration.Reversed, FALSE);
         if CourseRegistration.FindFirst() then begin
-            Message := CourseRegistration.Stage ;
+            Message := CourseRegistration.Stage;
         end;
         exit(Message);
 
@@ -1564,6 +1636,7 @@ codeunit 40003 StudentPortalTest
         END;
         exit(Message);
     end;
+
 
     procedure SubmitUnits(studentNo: Text; Unit: Text; Prog: Text; myStage: Text; sem: Text; RegTransID: Text; UnitDescription: Text; AcademicYear: Text; unitType: Option) ReturnMessage: Text[150]
     var
@@ -1712,11 +1785,12 @@ codeunit 40003 StudentPortalTest
         END;
         exit(Message);
     end;
-    procedure GetTranscriptYears(CompanyName: Text[100]; StudentNos: Text[50])Message: Text
+
+    procedure GetTranscriptYears(CompanyName: Text[100]; StudentNos: Text[50]) Message: Text
     var
         CourseRegistrationRec: Record "ACA-Course Registration";
         AcademicYearRec: Record "ACA-Academic Year";
-        
+
     begin
         // Set the company-specific tables
         CourseRegistrationRec.SetCurrentKey("Student No.", "Academic Year");
@@ -2341,7 +2415,7 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         highSchool: Text; yearCompletedHs: text; CollegeUniAttended: text; CollegeUniGradYr: Text; LicencingYr: Text;
         profBodycertNo: Text; NckCertNo: Text; workExpInstitution: Text; workExpInstitution2: Text; workExpInstitution3: Text;
         undegradcertpath: Text; highschcertpath: Text; NCkCertPath: Text; IdPassportPath: Text; NOKName: Text; NOKMoblieNo: Text;
-        NOKEmail: Text; NOKRshp: Text) Message: Text
+        NOKEmail: Text; NOKRshp: Text; IsInternational: Boolean) Message: Text
     var
         Programme: Record "ACA-Programme";
         colfrom: Date;
@@ -2401,6 +2475,7 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         AdmissionFormHeader.IDBirthcertPath := IdPassportPath;
         AdmissionFormHeader."NCK Cert No" := NckCertNo;
         AdmissionFormHeader."Prof Body Cert No" := profBodycertNo;
+        AdmissionFormHeader."international student " := IsInternational;
         Programme.RESET;
         Programme.SETRANGE(Programme.Code, appliedprogram);
         IF Programme.FIND('-') THEN BEGIN

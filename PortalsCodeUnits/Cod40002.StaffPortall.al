@@ -522,14 +522,19 @@ codeunit 40002 StaffPortall
         exit(Message)
     end;
 
-    procedure CreateMRP(Category: Option; prog: Text; dept: Text; HOD: Text; sem: Text; Year: Text; block1Start: Date; block1End: Date; Clinical1Start: Date; clibical1end: Date; block2Start: Date; block2End: Date; clinical2Start: Date; clinical2End: Date) Message: Text
+    procedure CreateMRP(
+        prog: Text; dept: Text; HOD: Text;
+        sem: Text; Year: Text; block1Start: Date; block1End: Date;
+        Clinical1Start: Date; clibical1end: Date; block2Start: Date;
+        block2End: Date; clinical2Start: Date; clinical2End: Date;
+        cohort: Text) Message: Text
     var
         masterRotation: Record "Master Rotation Plan2";
     begin
         masterRotation.Reset();
         masterRotation.SetRange(Department, dept);
         masterRotation.SetRange(Year, Year);
-        masterRotation.SetRange(Category, Category);
+        //masterRotation.SetRange(Category, Category);
         masterRotation.SetRange("Program Code", prog);
 
         if masterRotation.FindFirst() then begin
@@ -537,7 +542,7 @@ codeunit 40002 StaffPortall
             exit(Message);
 
         end else begin
-            masterRotation.Category := Category;
+            //masterRotation.Category := Category;
             masterRotation."Program Code" := prog;
             masterRotation."Program Name" := GetProgram(prog);
             masterRotation.Department := dept;
@@ -555,6 +560,7 @@ codeunit 40002 StaffPortall
             masterRotation.Status := 1;
             masterRotation.Exhausted := False;
             masterRotation."No. Series" := 'MAROT';
+            masterRotation.Cohort := cohort;
 
             if masterRotation.Insert(true) then begin
                 Message := 'SUCCESS' + ' ' + masterRotation."Plan ID" + ' ' + 'Has been Created Successfully!!';
@@ -565,88 +571,6 @@ codeunit 40002 StaffPortall
 
     end;
 
-
-    // procedure CreateMasterRotationPlan(
-    // Yr1sem1Block1StartDate: Date; Yr1sem1Block1EndDate: Date; Yr1sem1clinical1StartDate: Date; Yr1sem1clinical1EndDate: Date;
-    // Yr1sem1Block2StartDate: Date; Yr1sem1Block2EndDate: Date; Yr1sem1clinical2StartDate: Date; Yr1sem1clinical2EndDate: Date;
-
-    // Yr1sem2Block1StartDate: Date; Yr1sem2Block1EndDate: Date; Yr1sem2clinical1StartDate: Date; Yr1sem2clinical1EndDate: Date;
-    // Yr1sem2Block2StartDate: Date; Yr1sem2Block2EndDate: Date; Yr1sem2clinical2StartDate: Date; Yr1sem2clinical2EndDate: Date;
-
-    // Yr2sem1Block1StartDate: Date; Yr2sem1Block1EndDate: Date; Yr2sem1clinical1StartDate: Date; Yr2sem1clinical1EndDate: Date;
-    // Yr2sem1Block2StartDate: Date; Yr2sem1Block2EndDate: Date; Yr2sem1clinical2StartDate: Date; Yr2sem1clinical2EndDate: Date;
-
-    // Yr2sem2Block1StartDate: Date; Yr2sem2Block1EndDate: Date; Yr2sem2clinical1StartDate: Date; Yr2sem2clinical1EndDate: Date;
-    // Yr2sem2Block2StartDate: Date; Yr2sem2Block2EndDate: Date; Yr2sem2clinical2StartDate: Date; Yr2sem2clinical2EndDate: Date;
-
-    // HOD: Text; department: Text; Campus: Text) Message: Text
-    // var
-    //     masterNo: Text;
-
-    // begin
-    //     masterNo := NoSeriesMgt.GetNextNo('MAROT', 0D, TRUE);
-    //     masterRotation.Reset();
-    //     //masterRotation2.SetRange(masterRotation2."Block Name", Block);
-    //     masterRotation.setRange(masterRotation.Department, department);
-    //     if masterRotation.FindFirst() then begin
-    //         Message := 'You have already Created a master Rotation plan for this Block!!';
-    //     end else begin
-    //         masterRotation."Plan ID" := masterNo;
-    //         masterRotation."HoD Name" := GetLecturerNames(HOD);
-    //         masterRotation.Department := department;
-    //         masterRotation.HOD := HOD;
-
-    //         masterRotation.Yr1sem1Block1StartDate := Yr1sem1Block1StartDate;
-    //         masterRotation.Yr1sem1block1EndDate := Yr1sem1Block1EndDate;
-    //         masterRotation.Yr1sem1clinicStart := Yr1sem1clinical1StartDate;
-    //         masterRotation.Yr1sem1clinicEnd := Yr1sem1clinical1EndDate;
-
-    //         masterRotation.Yr1sem1Block2StartDate := Yr1sem2Block1StartDate;
-    //         masterRotation.Yr1sem1block2EndDate := Yr1sem2Block1EndDate;
-    //         masterRotation.Yr1sem1clinic2Start := Yr1sem1clinical2StartDate;
-    //         masterRotation.Yr1sem1clinic2End := Yr1sem1clinical2EndDate;
-
-    //         masterRotation.Yr1sem2Block1StartDate := Yr1sem2Block1StartDate;
-    //         masterRotation.Yr1sem2block1EndDate := Yr1sem2Block1EndDate;
-    //         masterRotation.Yr1sem2clinic1Start := Yr1sem2clinical1StartDate;
-    //         masterRotation.Yr1sem2clinic1End := Yr1sem2clinical1EndDate;
-
-    //         masterRotation.Yr1sem2Block2StartDate := Yr1sem2Block2StartDate;
-    //         masterRotation.Yr1sem2block2EndDate := Yr1sem2Block2EndDate;
-    //         masterRotation.Yr1sem2clinic2Start := Yr1sem2clinical2StartDate;
-    //         masterRotation.Yr1sem2clinic2End := Yr1sem2clinical2EndDate;
-
-    //         masterRotation.Yr2sem1Block1StartDate := Yr2sem1Block1StartDate;
-    //         masterRotation.Yr2sem1block1EndDate := Yr2sem1Block1EndDate;
-    //         masterRotation.Yr2sem1clinic1Start := Yr2sem1clinical1StartDate;
-    //         masterRotation.Yr2sem1clinic1End := Yr2sem1clinical1EndDate;
-
-    //         masterRotation.Yr2sem1Block2StartDate := Yr2sem1Block2StartDate;
-    //         masterRotation.Yr2sem1block2EndDate := Yr2sem1Block2EndDate;
-    //         masterRotation.Yr2sem1clinic2Start := Yr2sem2clinical2StartDate;
-    //         masterRotation.Yr2sem1clinic2End := Yr2sem1clinical2EndDate;
-
-    //         masterRotation.Yr2sem2Block1StartDate := Yr2sem2Block1StartDate;
-    //         masterRotation.Yr2sem2block1EndDate := Yr2sem2Block1EndDate;
-    //         masterRotation.Yr2sem2clinic1Start := Yr2sem2clinical1StartDate;
-    //         masterRotation.Yr2sem2clinic1End := Yr2sem2clinical1EndDate;
-
-    //         masterRotation.Yr2sem2Block2StartDate := Yr2sem2Block1StartDate;
-    //         masterRotation.Yr2sem2block2EndDate := Yr2sem2Block2EndDate;
-    //         masterRotation.Yr2sem2clinic2Start := Yr2sem2clinical2StartDate;
-    //         masterRotation.Yr2sem2clinic2End := Yr2sem2clinical2EndDate;
-    //         masterRotation.Status := masterRotation.Status::Open;
-
-    //         masterRotation."No. Series" := 'MAROT';
-    //         if masterRotation.Insert() then begin
-    //             Message := 'SUCCESS' + '::' + masterRotation."Plan ID";
-    //         end;
-    //         EXIT(Message);
-
-    //     end;
-
-
-    // end;
 
     procedure GetStudentAndGroups(dept: text) Message: Text
     begin
@@ -704,6 +628,43 @@ codeunit 40002 StaffPortall
         end;
 
         exit(Format(counter));
+    end;
+
+    procedure GetMRP2() Message: Text
+    var
+        masterRotation: Record "Master Rotation Plan2";
+    begin
+        masterRotation.Reset();
+        masterRotation.SetRange(Status, masterRotation.Status::Open);
+        masterRotation.SetRange(Exhausted, False);
+        if masterRotation.Find('-') then begin
+            repeat
+                Message += 'SUCCESS' + '::' + masterRotation."Plan ID" + '::' + masterRotation.Department + '::' + masterRotation."HoD Name" + '::' + masterRotation."Program Code"
+                + '::' + masterRotation."Program Name" + '::' + Format(masterRotation."Block1 Start Date") + '::' + Format(masterRotation."Block1 End Date") + '::'
+                + Format(masterRotation."Clinical1 Start Date") + '::' + Format(masterRotation."Clinical1 End Date") + '::' + Format(masterRotation."Block2 Start Date") + '::'
+                + Format(masterRotation."Block2 End Date") + '::' + Format(masterRotation."Clinical2 Start Date") + '::' + Format(masterRotation."Clinical2 End Date") + '::' + Format(masterRotation.Status) + '[]';
+            until masterRotation.Next() = 0;
+
+        end;
+        Exit(Message);
+    end;
+    //http://41.89.201.11:8147/SIALA_TTI/WS/13.01.2025/Codeunit/studentportals
+    procedure ChangeMRPStatus2(mrpNo: Text; status: Integer) Message: Text
+    var
+        masterRotation: Record "Master Rotation Plan2";
+    begin
+        masterRotation.Reset();
+        masterRotation.SetRange(masterRotation."Plan ID", mrpNo);
+        if masterRotation.FindFirst() then begin
+            masterRotation.Status := status;
+
+            if masterRotation.Modify() then begin
+
+                Message := 'SUCCESS';
+
+            end;
+        end;
+        exit(Message);
     end;
 
 
@@ -3009,6 +2970,19 @@ codeunit 40002 StaffPortall
             Message := FORMAT(ExamResults.Score) + '::' + FORMAT(ExamResults."Edit Count");
 
         END
+    end;
+
+    procedure GetCohorts(dept: Text) Message: Text
+    var
+        intakes: Record "ACA-Intake";
+    begin
+        intakes.Reset();
+        intakes.SetRange(Department, dept);
+        intakes.SetRange(Current, true);
+        if intakes.Find('-') then begin
+            Message += intakes.Code + '::';
+        end;
+        exit(Message);
     end;
 
     procedure GetLecturerUnits(lectNo: Text; semester: Text) Message: Text

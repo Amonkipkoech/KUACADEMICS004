@@ -138,6 +138,9 @@ table 40021 "Master Rotation Plan2"
         {
             DataClassification = ToBeClassified;
         }
+        field(30;Cohort;Code[20]){
+            
+        }
 
 
 
