@@ -1442,8 +1442,6 @@ page 68861 "ACA-Academics Role Center"
                 action(Evaluation)
                 {
                     ApplicationArea = All;
-
-
                     RunObject = page "ACA-Evaluation Semesters List";
                 }
                 action("Evaluation Results")
