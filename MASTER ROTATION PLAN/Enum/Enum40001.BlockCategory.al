@@ -1,4 +1,4 @@
-enum 40001  "Block Category Enum"
+enum 40001 "Block Category Enum"
 {
     Extensible = true;
     value(0; Block1)
