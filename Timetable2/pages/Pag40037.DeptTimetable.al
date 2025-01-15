@@ -26,6 +26,13 @@ page 40037 "Dept Timetable "
                 }
 
             }
+            group("Time Table Units")
+            {
+                part("time table list part"; "time table list part")
+                {
+                    SubPageLink = "Academic Year" = field("Academic Year"), Semester = field("Session Year"), Department = field("Department ");
+                }
+            }
         }
     }
 }

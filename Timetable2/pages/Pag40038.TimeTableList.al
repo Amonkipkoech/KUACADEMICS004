@@ -24,6 +24,7 @@ page 40038 "Time Table List"
                     ApplicationArea = all;
                  }
             }
+            
         }
     }
 }
