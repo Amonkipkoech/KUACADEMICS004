@@ -524,26 +524,32 @@ page 68467 "ACA-Application Form Header"
             }
             group("Employement Details")
             {
-                field("Employer Name "; rec."Employer Name ")
+                field(" First Employer Name "; rec."First Employer Name ")
                 {
                     ApplicationArea = All;
                 }
-                field("Job Title"; rec."Job Title")
+                field(" First Department/Unit"; rec." First Department/Unit")
                 {
                     ApplicationArea = All;
                 }
-                field("Department/Unit"; rec."Department/Unit")
+                field(" First Employment Duration"; rec." First Employment Duration")
                 {
                     ApplicationArea = All;
                 }
-                field("Employment Start Date"; rec."Employment Start Date")
+                field("Second Employer Name "; rec."Second Employer Name ")
                 {
                     ApplicationArea = All;
                 }
-                field("Employment End Date"; rec."Employment End Date")
+                field(" Second Department/Unit"; rec." Second Department/Unit")
                 {
                     ApplicationArea = All;
                 }
+                field("Second Employment Duration"; rec."Second Employment Duration")
+                {
+                    ApplicationArea = All;
+                }
+
+
                 field("Workplace Address"; rec."Workplace Address")
                 {
                     ApplicationArea = All;
