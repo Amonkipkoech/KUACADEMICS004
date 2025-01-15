@@ -1417,15 +1417,23 @@ page 68861 "ACA-Academics Role Center"
                 {
                     Caption = 'Teaching Timetable';
                     Image = Register;
+                    RunObject = Page "Time Table List";
+                    ApplicationArea = All;
+
+                }
+                action(TimetableCentral1)
+                {
+                    Caption = 'Teaching Timetable';
+                    Image = Register;
                     RunObject = Page "TT-Timetable Batches";
                     ApplicationArea = All;
-                    Visible= false;
+                    Visible = false;
                 }
                 action("Exam Timetable")
                 {
                     Caption = 'Exam Timetable';
                     RunObject = Page "EXT-Timetable Batches";
-                    Visible= false;
+                    Visible = false;
                     ApplicationArea = All;
                 }
             }
