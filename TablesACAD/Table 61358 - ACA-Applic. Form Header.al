@@ -1171,27 +1171,34 @@ table 61358 "ACA-Applic. Form Header"
         {
 
         }
-        field(50107; "Employer Name "; code[60])
+        field(50107; "First Employer Name "; code[60])
         {
 
         }
-        field(50108; "Job Title"; code[60])
+        field(50119; "Second Employer Name "; code[60])
         {
-
         }
-        field(50111; "Department/Unit"; Code[50])
+        field(50108; " First Job Title"; code[60])
+        {
+        }
+        field(50111; " First Department/Unit"; Code[50])
+        {
+        }
+        field(501192; " Second Department/Unit"; Code[50])
+        {
+        }
+        field(50109; " First Employment Duration"; Code[50])
+        {
+        }
+        field(50110; "Second Employment Duration"; code[50])
+        {
+        }//Workplace Address
+        field(50112; "Workplace Address"; Code[60])
         {
 
         }//
-        field(50109; "Employment Start Date"; date)
-        {
-
-        }
-        field(50110; "Employment End Date"; date)
-        {
-
-        }//Workplace Address
-        field(50112; "Workplace Address"; Code[60])
+        
+        field(50113; "Employment Duaration"; Code[60])
         {
 
         }//
