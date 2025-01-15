@@ -15,7 +15,7 @@ table 40027 "Dept TimeTable List "
         }
         field(3; "Department "; Code[50])
         {
-            Caption = 'Academic Year';
+            Caption = 'Department';
         }
     }
     keys

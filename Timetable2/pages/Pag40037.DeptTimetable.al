@@ -2,8 +2,8 @@ page 40037 "Dept Timetable "
 {
     Caption = 'Dept Timetable ';
     PageType = Card;
-    SourceTable= "Dept TimeTable List ";
-    
+    SourceTable = "Dept TimeTable List ";
+
     layout
     {
         area(Content)
@@ -11,20 +11,20 @@ page 40037 "Dept Timetable "
             group(General)
             {
                 Caption = 'General';
-                field("Academic Year";rec."Academic Year")
+                field("Academic Year"; rec."Academic Year")
                 {
                     ApplicationArea = all;
                 }
                 field("Session Year"; rec."Session Year")
                 {
-                    ApplicationArea= all;
+                    ApplicationArea = all;
                 }
-                field("Department ";rec."Department ")
+                field("Department "; rec."Department ")
                 {
-                    ApplicationArea= all ;
-                    
+                    ApplicationArea = all;
+
                 }
-                
+
             }
         }
     }
