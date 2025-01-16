@@ -37,7 +37,7 @@ page 40010 "Clinical Rotation List Part"
                 field(Group; rec.Group)
                 {
                     ApplicationArea = all;
-                    TableRelation = GroupAssignments.GroupId;
+                    
 
                 }
                 field(Areas; rec.Areas)

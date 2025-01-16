@@ -5,7 +5,7 @@ table 40008 GroupAssignments
 
     fields
     {
-        field(1; GroupId; Text[100])
+        field(1; GroupId; Code[100])
         {
             Caption = 'GroupId';
         }

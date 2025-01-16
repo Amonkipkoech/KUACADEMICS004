@@ -209,7 +209,7 @@ codeunit 40004 "Admissions Notification Action"
         end;
 
         // Prepare email content
-        Recipient := 'amonkiprop68@gmail.com';
+        Recipient := 'gilbert.reagan@kutrrh.go.ke';
         Subject := 'Student Portal Account Created';
         EmailBody := StrSubstNo(
             'Dear ICT,\n\n' +
