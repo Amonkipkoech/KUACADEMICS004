@@ -117,10 +117,12 @@ page 68467 "ACA-Application Form Header"
                 field(Religion; Rec.Religion)
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field(Denomination; Rec.Denomination)
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 // field(Congregation; Rec.Congregation)
                 // {

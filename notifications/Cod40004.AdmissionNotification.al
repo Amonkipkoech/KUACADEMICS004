@@ -69,7 +69,7 @@ codeunit 40004 "Admissions Notification Action"
 
         // Get reporting and completion dates (assuming they are calculated based on admission date)
         ReportingDate := AdmissionsRequest."Date Letter of admission";
-        CompletionDate := ReportingDate + 365; // Example, assume 1 year duration for the program
+        CompletionDate := AdmissionsRequest."Date of Completion"; // Example, assume 1 year duration for the program
 
         // Prepare email notification
         if AdmissionsRequest.Email <> '' then begin

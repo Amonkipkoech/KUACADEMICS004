@@ -172,15 +172,15 @@ report 66679 "Bachelors Admission Letter"
                     error('Program Faculty Name Not Defined');
                 Intake.Reset();
                 //Intake.SetRange(Intake."Code", bAdmLetter."Intake Code");
-                Intake.SetRange(Intake.Level, bAdmLetter."Programme Level");
-                intake.SetRange(Current, true);
-                if Intake.Find('-') then begin
-                    ReportingDate := Intake."Reporting Date";
-                    EndDateText := format(ReportingDate, 0, 4);
-                    appDate := Format("Application Date", 0, 4);
-                end
-                else
-                    Error('No Date Defined on Intake Setup');
+                // Intake.SetRange(Intake.Level, bAdmLetter."Programme Level");
+                // intake.SetRange(Current, true);
+                // if Intake.Find('-') then begin
+                //     ReportingDate := Intake."Reporting Date";
+                //     EndDateText := format(ReportingDate, 0, 4);
+                //     appDate := Format("Application Date", 0, 4);
+                // end
+                // else
+                //     Error('No Date Defined on Intake Setup');
                 if Campus = 'LANGATA' then
                     campusText := langatatext
                 else
