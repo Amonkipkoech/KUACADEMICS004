@@ -18,12 +18,12 @@ page 40030 "Supp Exam Reg ListPart"
 
                 }
 
-                field("Unit Code"; "Unit Code")
+                field("Unit Code"; rec."Unit Code")
                 {
                     ApplicationArea = All;
                 }
 
-                field("Unit Name"; "Unit Name")
+                field("Unit Name"; rec."Unit Name")
                 {
                     ApplicationArea = All;
                 }
