@@ -612,6 +612,35 @@ codeunit 40002 StaffPortall
         exit(Message);
     end;
 
+    procedure GetIqeExamStudents(program: Text) msg: Text
+    var
+        stages: Record "ACA-Programme Stages";
+        units: Record "ACA-Units/Subjects";
+        students: Record "ACA-Student Units";
+    begin
+        stages.RESET;
+        stages.SETRANGE(stages."Programme Code", program);
+        stages.SetRange("Final Stage", true);
+
+        if stages.Find('-') then begin
+            units.Reset();
+            units.SetRange(units."Programme Code", program);
+            units.SetRange(units."Stage Code", stages.Code);
+            units.SetRange(units."Unit Type", units."Unit Type"::"Exam");
+            if units.Find('-') then begin
+                students.Reset();
+                students.setRange(students.Unit, units.Code);
+                if students.FindSet() then begin
+                    repeat
+                        msg += 'SUCCESS' + '::' + students."Student No." + '::' + GetStudentName(students."Student No.") + '[]';
+                    until students.Next() = 0;
+                end;
+
+            end;
+        end;
+
+    end;
+
 
     procedure GetTotalStudentsInDept(dept: Text): Text
     var
@@ -2986,6 +3015,8 @@ codeunit 40002 StaffPortall
     end;
 
     procedure GetLecturerUnits(lectNo: Text; semester: Text) Message: Text
+    var
+        lecunits: Record "Timetable";
     begin
         lecunits.Reset();
         lecunits.SetRange(lecunits.Semester, semester);
@@ -2993,7 +3024,7 @@ codeunit 40002 StaffPortall
 
         if lecunits.FindSet() then begin
             repeat
-                Message += lecunits.Unit + '::' + lecunits.Description + '[]';
+                Message += lecunits."Unit Base Code" + '::' + lecunits."Unit Base Code" + '[]';
             until lecunits.Next() = 0;
         end;
 
@@ -4072,8 +4103,8 @@ codeunit 40002 StaffPortall
 
         StudentUnits.RESET;
         StudentUnits.SETRANGE(StudentUnits.Unit, unitcode);
-        StudentUnits.SETRANGE(StudentUnits.ModeOfStudy, mode);
-        StudentUnits.SETRANGE(StudentUnits.Stream, stream);
+        //StudentUnits.SETRANGE(StudentUnits.ModeOfStudy, mode);
+        //StudentUnits.SETRANGE(StudentUnits.Stream, stream);
         StudentUnits.SETRANGE(StudentUnits.Semester, GetCurrentSem());
         StudentUnits.SETRANGE(StudentUnits."Campus Code", GetHODCampus(lecturer));
         IF StudentUnits.FIND('-') THEN BEGIN
@@ -4407,31 +4438,27 @@ codeunit 40002 StaffPortall
 
     procedure GetUnitsToOffer(progcode: Code[20]; stage: Text) Details: Text
     var
-        theoryUnits: Record "ACA-Student Theory Units ";
+        theoryUnits: Record "Timetable";
     begin
-        UnitSubjects.RESET;
-        StudentUnits.RESET;
 
-        UnitSubjects.SETRANGE(UnitSubjects."Programme Code", progcode);
-        UnitSubjects.SETRANGE(UnitSubjects."Time Table", true);
-        UnitSubjects.SETRANGE(UnitSubjects."Stage Code", stage);
-        UnitSubjects.SETRANGE(UnitSubjects."Unit Type", UnitSubjects."Unit Type"::Theory);
+        // UnitSubjects.SETRANGE(UnitSubjects."Programme Code", progcode);
+        // UnitSubjects.SETRANGE(UnitSubjects."Time Table", true);
+        // UnitSubjects.SETRANGE(UnitSubjects."Stage Code", stage);
+        // UnitSubjects.SETRANGE(UnitSubjects."Unit Type", UnitSubjects."Unit Type"::Theory);
+        theoryUnits.RESET;
+        theoryUnits.SETRANGE(theoryUnits.Programs, progcode);
+        theoryUnits.SetRange(theoryUnits.Semester, stage);
+        //theoryUnits.SetRange(Stage, stage);
 
+        IF theoryUnits.FIND('-') THEN BEGIN
+            repeat
 
-        IF UnitSubjects.FIND('-') THEN BEGIN
-            REPEAT
+                Details += theoryUnits."Unit Base Code" + ' :: ' + theoryUnits."Unit Base Code" + ' []';
 
-                theoryUnits.RESET;
-                theoryUnits.SETRANGE(theoryUnits.Unit, UnitSubjects.Code);
-                theoryUnits.SetRange(theoryUnits.Paper, theoryUnits.Paper::NA);
-                theoryUnits.SetRange(Stage, stage);
+            until theoryUnits.Next = 0;
 
-                IF theoryUnits.FIND('-') THEN BEGIN
-
-                    Details += UnitSubjects.Code + ' :: ' + UnitSubjects.Desription + ' []';
-                END;
-            UNTIL UnitSubjects.NEXT = 0;
         END;
+
     end;
 
     procedure GetDepartmentOfferedUnits(username: Code[20]) Details: Text
@@ -4722,6 +4749,23 @@ codeunit 40002 StaffPortall
                 msg += lecturers.Unit + ' ::' + GetUnitDescription(Lecturers.Unit) + ' ::' + lecturers.ModeOfStudy + ' ::' + lecturers.Stream + ' ::' + lecturers.Day + ' ::' + lecturers.TimeSlot + ' ::' + GetAllocatedLectureHall(lecturers.Lecturer, lecturers.Unit, lecturers.stream, lecturers."Campus Code", lecturers.ModeOfStudy) + ' :::';
             until lecturers.Next = 0;
         end;
+    end;
+
+    procedure GetLecturerUnits2(lectNo: Text; semester: Text) Message: Text
+    var
+        lecunits: Record "Timetable";
+    begin
+        lecunits.Reset();
+        //lecunits.SetRange(lecunits.Semester, semester);
+        lecunits.setRange(lecunits.Lecturer, lectNo);
+
+        if lecunits.FindSet() then begin
+            repeat
+                Message += lecunits."Unit Base Code" + '::' + lecunits."Unit Base Code" + '::' + lecunits.Day + '::' + lecunits.TimeSlot + '::' + lecunits."Lecture Hall" + '[]';
+            until lecunits.Next() = 0;
+        end;
+
+        exit(Message);
     end;
 
     procedure GetLecUnits(lecno: Code[20]) msg: Text

@@ -491,6 +491,24 @@ codeunit 40003 StudentPortalTest
 
     end;
 
+    procedure GetStudentTimetable(programme: Text; Semester: Text) Message: Text
+    var
+        lecunits: Record "Timetable";
+    begin
+        lecunits.Reset();
+        //lecunits.SetRange(lecunits.Semester, semester);
+        lecunits.setRange(lecunits.Programs, programme);
+        lecunits.SetRange(lecunits.Semester, Semester);
+
+        if lecunits.FindSet() then begin
+            repeat
+                Message += lecunits."Unit Base Code" + '::' + lecunits."Unit Base Code" + '::' + lecunits.Day + '::' + lecunits.TimeSlot + '::' + lecunits."Lecture Hall" + '::' + GetLectureName(lecunits.Lecturer) + '[]';
+            until lecunits.Next() = 0;
+        end;
+
+        exit(Message);
+    end;
+
     procedure UnitsToRegister(progCode: Text; stage: Text) Message: Text
 
     begin
@@ -869,6 +887,11 @@ codeunit 40003 StudentPortalTest
         END;
     end;
 
+    procedure LoadTimetable(ProgCode: Code[20]; StageCode: Code[20]; UnitCode: Code[20]; SemCode: Code[20]) Message: Text
+    begin
+
+    end;
+
     procedure StudentSpecificTimetables(Semesters: Code[20]; StudentNo: Code[20]; TimetableType: Text[20]; filenameFromApp: Text) TimetableReturn: Text
     var
         ACACourseRegistration: Record "ACA-Course Registration";
@@ -1161,7 +1184,7 @@ codeunit 40003 StudentPortalTest
         END;
     end;
 
-    procedure CheckIfAllUnitsOkay(StudentNo: Text; Sem: Text): Text
+    procedure CheckIfAllUnitsOkay(StudentNo: Text): Text
     var
         Message: Text;
     begin
@@ -1226,9 +1249,36 @@ codeunit 40003 StudentPortalTest
 
     end;
 
+    procedure GetIqeExam(program: Text) msg: Text
+    var
+        stages: Record "ACA-Programme Stages";
+        units: Record "ACA-Units/Subjects";
+    begin
+        stages.RESET;
+        stages.SETRANGE(stages."Programme Code", program);
+        stages.SetRange("Final Stage", true);
+
+        if stages.Find('-') then begin
+            units.Reset();
+            units.SetRange(units."Programme Code", program);
+            units.SetRange(units."Stage Code", stages.Code);
+            units.SetRange(units."Unit Type", units."Unit Type"::"Exam");
+            if units.Find('-') then begin
+                msg := 'SUCCESS' + '::' + units.Code + '::' + units.Desription + '::' + Format(units."Unit Type") + '::' + units."Stage Code" + '[]';
+            end;
+        end;
+
+    end;
+
+    procedure RegisterIqeExam(studentNo: Text; programme: Text; stage: Text; unitCode: Text; semester: Text) Message: Text
+    var
+        units: Record "ACA-Units/Subjects";
+    begin
+        units.Reset();
 
 
 
+    end;
 
     procedure IsUnitRegistered(unitCode: Text; studentNo: Text; semester: Text) message: Boolean
     begin
@@ -2415,7 +2465,7 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         highSchool: Text; yearCompletedHs: text; CollegeUniAttended: text; CollegeUniGradYr: Text; LicencingYr: Text;
         profBodycertNo: Text; NckCertNo: Text; workExpInstitution: Text; workExpInstitution2: Text; workExpInstitution3: Text;
         undegradcertpath: Text; highschcertpath: Text; NCkCertPath: Text; IdPassportPath: Text; NOKName: Text; NOKMoblieNo: Text;
-        NOKEmail: Text; NOKRshp: Text; IsInternational: Boolean) Message: Text
+        NOKEmail: Text; NOKRshp: Text; IsInternational: Boolean; FirstEmploymentDuration: Text; FirstEmploymentDpt: Text; SecondEmploymentDuration: Text; SecondEmploymentDpt: Text) Message: Text
     var
         Programme: Record "ACA-Programme";
         colfrom: Date;
@@ -2476,13 +2526,19 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         AdmissionFormHeader."NCK Cert No" := NckCertNo;
         AdmissionFormHeader."Prof Body Cert No" := profBodycertNo;
         AdmissionFormHeader."international student " := IsInternational;
-        AdmissionFormHeader."Employer Name " := workExpInstitution;
+        AdmissionFormHeader."First Employer Name " := workExpInstitution;
+        AdmissionFormHeader." First Employment Duration" := FirstEmploymentDuration;
+        AdmissionFormHeader." First Department/Unit" := FirstEmploymentDpt;
+        AdmissionFormHeader."Second Employment Duration" := SecondEmploymentDuration;
+        AdmissionFormHeader." Second Department/Unit" := SecondEmploymentDpt;
+        AdmissionFormHeader."Second Employer Name " := workExpInstitution2;
         Programme.RESET;
         Programme.SETRANGE(Programme.Code, appliedprogram);
         IF Programme.FIND('-') THEN BEGIN
 
             AdmissionFormHeader.programName := Programme.Description;
             AdmissionFormHeader."Programme Department" := Programme."Department Code";
+            AdmissionFormHeader."Programme School" := Programme.Faculty;
         end;
         AdmissionFormHeader.Status := AdmissionFormHeader.Status::Open;
         AdmissionFormHeader.Insert;
