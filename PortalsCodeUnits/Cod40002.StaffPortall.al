@@ -690,7 +690,7 @@ codeunit 40002 StaffPortall
         end;
         Exit(Message);
     end;
-    //http://41.89.201.11:8147/SIALA_TTI/WS/13.01.2025/Codeunit/studentportals
+
     procedure ChangeMRPStatus2(mrpNo: Text; status: Integer) Message: Text
     var
         masterRotation: Record "Master Rotation Plan2";
@@ -707,6 +707,22 @@ codeunit 40002 StaffPortall
             end;
         end;
         exit(Message);
+    end;
+
+    procedure GetStudentDept(prog: Text) Message: Text
+    var
+        customer: Record "ACA-Programme";
+
+    begin
+        Programme.Reset();
+        Programme.SetRange(Programme.Code, prog);
+        if Programme.Find('-') then begin
+
+            Message := Programme."Department Code";
+        end;
+
+        exit(Message);
+
     end;
 
 

@@ -1361,6 +1361,22 @@ codeunit 40003 StudentPortalTest
         CourseRegistration.INSERT(TRUE);
     end;
 
+    procedure GetStudentDept(prog: Text) Message: Text
+    var
+        customer: Record "ACA-Programme";
+
+    begin
+        Programme.Reset();
+        Programme.SetRange(Programme.Code, prog);
+        if Programme.Find('-') then begin
+
+            Message := Programme."Department Code";
+        end;
+
+        exit(Message);
+
+    end;
+
     procedure GenerateFeeStructure(Programz: Code[20]; SettlementType: Code[20]; filenameFromApp: Text) filename: Text
     begin
         filename := FILESPATH + filenameFromApp;
