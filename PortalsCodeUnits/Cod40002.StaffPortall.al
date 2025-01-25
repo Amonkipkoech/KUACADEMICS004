@@ -64,6 +64,19 @@ codeunit 40002 StaffPortall
         TXTCorrectDetails: Label 'Login';
         TXTIncorrectDetails: Label 'Incorrect Username or Password';
         FILESPATH_S: Label 'C:\inetpub\wwwroot\KUPORTALS\StaffPortal\Downloads\';
+        //         <system.webServer>
+        //   <rewrite>
+        //     <rules>
+        //       <rule name="HTTPS Redirect" enabled="true" stopProcessing="true">
+        //         <match url="(.*)" />
+        //         <conditions>
+        //           <add input="{HTTPS}" pattern="^OFF$" />
+        //         </conditions>
+        //         <action type="Redirect" url="https://{HTTP_HOST}/{R:1}" redirectType="Permanent" />
+        //       </rule>
+        //     </rules>
+        //   </rewrite>
+        // </system.webServer>
 
         Text004: Label 'Approval Setup not found.';
         TblCustomer: Record Customer;
@@ -866,6 +879,8 @@ codeunit 40002 StaffPortall
     var
         groupId: Text;
         studentsAssigned: Integer;
+        masterRotation: Record "Master Rotation Plan2";
+
     begin
 
         group.Reset();
