@@ -113,7 +113,7 @@ page 40010 "Clinical Rotation List Part"
                     CsvHandler.ExportCsvFile('UnitCoverageExport', RecRef, FieldRefs, FieldRefLength);
                 end;
             }
-
+              
             action("ImportCSV")
             {
                 Caption = 'Import from CSV';
