@@ -13,10 +13,10 @@ page 40033 "Mrp  end Of Leave rotation"
         {
             repeater("clinical rotation")
             {
-                field("Plan ID"; rec."Plan ID")
-                {
-                    ApplicationArea = all;
-                }
+                // field("Plan ID"; rec."Plan ID")
+                // {
+                //     ApplicationArea = all;
+                // }
                 field(Group; rec.Group)
                 {
                     ApplicationArea = all;
