@@ -854,7 +854,7 @@ tableextension 70001 Customers extends Customer
         {
             DataClassification = ToBeClassified;
         }
-        field(63025; "Passport No"; Code[1])
+        field(63025; "Passport No"; Code[50])
         {
             DataClassification = ToBeClassified;
         }

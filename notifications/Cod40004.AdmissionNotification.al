@@ -1,6 +1,7 @@
 codeunit 40004 "Admissions Notification Action"
 
 {
+
     procedure NotifyAdmissionsRequestStatus(RequestID: Code[20])
     var
         AdmissionsRequest: Record "ACA-Applic. Form Header";
@@ -68,7 +69,7 @@ codeunit 40004 "Admissions Notification Action"
 
         // Get reporting and completion dates (assuming they are calculated based on admission date)
         ReportingDate := AdmissionsRequest."Date Letter of admission";
-        CompletionDate := ReportingDate + 365; // Example, assume 1 year duration for the program
+        CompletionDate := AdmissionsRequest."Date of Completion"; // Example, assume 1 year duration for the program
 
         // Prepare email notification
         if AdmissionsRequest.Email <> '' then begin
@@ -203,7 +204,7 @@ codeunit 40004 "Admissions Notification Action"
 
         // Ensure the admission number exists
         if AdmissionsRequest."Admission No" = '' then begin
-            Message('Admission number is missing for Request ID: %1', RequestID);
+            Message('Application number is missing for Request ID: %1', RequestID);
             exit;
         end;
 
@@ -230,6 +231,48 @@ codeunit 40004 "Admissions Notification Action"
             Message('Notification email sent successfully to ICT.')
         else
             Message('Failed to send notification email to ICT.');
+    end;
+
+    procedure NotifySuccessfulApplication(RequestId: Code[20])
+    var
+        AdmissionRequest: Record "ACA-Applic. Form Header";
+        EmailMessage: Codeunit "Email Message";
+        email: Codeunit Email;
+        subject: Text;
+        EMailBody: Text;
+        recipient: List of [Text];
+        Result: Boolean;
+
+    begin
+        if not AdmissionRequest.get(RequestId) then begin
+            Message('Application Number %1 does not exist', RequestId);
+            exit
+        end;
+
+        if AdmissionRequest."Application No." = '' then begin
+            Message('Application number for Request Id %1, is missing', RequestId);
+            exit;
+        end;
+        if AdmissionRequest.Email <> '' then begin
+            recipient.add(AdmissionRequest.Email);
+            subject := 'Application Submission Status';
+            EMailBody := StrSubstNo(
+               'Dear %1 %2 , \n\n,' +
+               'Your Application Submission  With Appl No. %3 has been submitted successfully, \n' +
+               'Once Application  Processing Starts , You will be notified',
+               AdmissionRequest."First Name",
+               AdmissionRequest."Other Names",
+               RequestId
+
+            );
+
+            EmailMessage.Create(recipient, subject, EMailBody, true);
+            Result := email.Send(EmailMessage, Enum::"Email Scenario"::Default)
+
+        end;
+
+
+
     end;
 
 

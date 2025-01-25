@@ -20,6 +20,16 @@ table 40022 "Supp Exam Registration Header"
         {
             DataClassification = ToBeClassified;
             Caption = 'Student Admission No.';
+            TableRelation = Customer."No.";
+            trigger OnValidate()
+            var
+                cust: Record Customer;
+            begin
+                if cust.get("Student Admission No.") then
+                begin
+                     "Student Full Name" := cust."First Name" + '' + cust."Middle Name";
+                end;
+            end;
         }
 
         field(4; "Program"; Text[100])

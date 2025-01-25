@@ -28,6 +28,15 @@ table 40023 "Supp Exam Registration Line"
         {
             DataClassification = ToBeClassified;
             Caption = 'Unit Code';
+            TableRelation = "ACA-Units Master Table"."Unit Code";
+            trigger OnValidate()
+            var
+                Unit: Record "ACA-Units Master Table";
+            begin
+                if unit.get("Unit Code") then begin
+                    "Unit Name" := unit."Unit Name";
+                end;
+            end;
         }
 
         field(5; "Unit Name"; Text[100])

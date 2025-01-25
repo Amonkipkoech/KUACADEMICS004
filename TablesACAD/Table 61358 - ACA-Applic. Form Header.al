@@ -1197,7 +1197,7 @@ table 61358 "ACA-Applic. Form Header"
         {
 
         }//
-        
+
         field(50113; "Employment Duaration"; Code[60])
         {
 
@@ -1500,10 +1500,8 @@ table 61358 "ACA-Applic. Form Header"
                 NotifyAction.NotifyAdmissionsRequestStatus(rec."Application No.");
             end;
         end;
-
-
-
     end;
+
 
 
 

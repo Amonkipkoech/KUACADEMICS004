@@ -117,10 +117,12 @@ page 68467 "ACA-Application Form Header"
                 field(Religion; Rec.Religion)
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field(Denomination; Rec.Denomination)
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 // field(Congregation; Rec.Congregation)
                 // {
@@ -781,6 +783,14 @@ page 68467 "ACA-Application Form Header"
                 Promoted = true;
                 PromotedCategory = process;
                 PromotedIsBig = true;
+                trigger OnAction()
+                var
+                    NotifyAction: Codeunit "Admissions Notification Action";
+                begin
+                    NotifyAction.NotifySuccessfulApplication(rec."Application No.");
+                    Message('Email notification process triggered for Application ID: %1', rec."Application No.");
+                end;
+
 
             }
 
