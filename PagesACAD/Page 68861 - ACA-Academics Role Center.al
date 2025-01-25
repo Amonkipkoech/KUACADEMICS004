@@ -632,6 +632,14 @@ page 68861 "ACA-Academics Role Center"
                         RunObject = Report "Assesment Form";//"master Rotation Table"
                         ApplicationArea = All;
                     }
+                    action(ActionName)
+                    {
+                        Image = Register;
+                        Caption = 'mrp report 2';
+                        RunObject = report "Mrp Report 2 ";
+                        ApplicationArea = ALL;
+
+                    }
                     action("Master Rotation ")
                     {
                         Image = Register;
