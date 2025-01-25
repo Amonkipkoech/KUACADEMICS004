@@ -743,6 +743,12 @@ tableextension 70001 Customers extends Customer
         {
             DataClassification = ToBeClassified;
         }
+        field(787665; "Department"; Code[60])
+        {
+            Caption = 'Department';
+            TableRelation = "Dimension Value".Code WHERE("Dimension Code" = CONST('DEPARTMENT'));
+            DataClassification = ToBeClassified; // Set appropriate data classification based on the data
+        }
         field(63006; Height; Decimal)
         {
             DataClassification = ToBeClassified;

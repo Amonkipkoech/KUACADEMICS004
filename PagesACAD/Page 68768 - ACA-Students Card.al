@@ -58,6 +58,11 @@ page 68768 "ACA-Students Card"
                 {
                     ApplicationArea = All;
                 }
+                field(Department;rec.Department)
+                {
+                    ApplicationArea = all;
+                }
+
                 field("County of Origin"; Rec."County of Origin")
                 {
                     ApplicationArea = All;
