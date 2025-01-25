@@ -589,6 +589,7 @@ codeunit 40003 StudentPortalTest
             discontinue.programme := program;
             discontinue.stage := stage;
             discontinue."Mobile No" := mobileNo;
+            discontinue.status := discontinue.status::Open;
             //discontinue."School Code" := GetSchool(program);
 
             if discontinue.Insert() then begin
@@ -616,7 +617,7 @@ codeunit 40003 StudentPortalTest
     //                        discontinue."Request No" + '[]';
     //         until discontinue.Next() = 0;
     //     end;
-    // end;
+    // end; 
     procedure GetDeferments(studentNo: Text; sem: Text) Message: Text
     begin
         discontinue.Reset();
