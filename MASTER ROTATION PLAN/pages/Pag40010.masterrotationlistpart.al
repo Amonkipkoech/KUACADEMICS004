@@ -13,26 +13,26 @@ page 40010 "Clinical Rotation List Part"
         {
             repeater("clinical rotation")
             {
-                // field("Plan ID"; rec."Plan ID")
-                // {
-                //     ApplicationArea = all;
-                // }
-                // field(Year; rec.Year)
-                // {
-                //     ApplicationArea = all;
-                // }
-                // field(Session; rec.Session)
-                // {
-                //     ApplicationArea = all;
-                // }
-                // field(Department; rec.Department)
-                // {
-                //     ApplicationArea = all;
-                // }
-                // field(program; rec.program)
-                // {
-                //     ApplicationArea = all;
-                // }
+                field("Plan ID"; rec."Plan ID")
+                {
+                    ApplicationArea = all;
+                }
+                field(Year; rec.Year)
+                {
+                    ApplicationArea = all;
+                }
+                field(Session; rec.Session)
+                {
+                    ApplicationArea = all;
+                }
+                field(Department; rec.Department)
+                {
+                    ApplicationArea = all;
+                }
+                field(program; rec.program)
+                {
+                    ApplicationArea = all;
+                }
 
                 field(Group; rec.Group)
                 {
