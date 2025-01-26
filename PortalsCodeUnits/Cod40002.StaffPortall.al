@@ -697,13 +697,15 @@ codeunit 40002 StaffPortall
     begin
         masterRotation.Reset();
         masterRotation.SetRange(masterRotation."Plan ID", mrpNo);
-        if masterRotation.FindFirst() then begin
+        if masterRotation.Find('-') then begin
             masterRotation.Status := status;
 
             if masterRotation.Modify() then begin
 
                 Message := 'SUCCESS';
 
+            end else begin
+                Message := 'FAILED TO UPDATE RECORD';
             end;
         end;
         exit(Message);
@@ -4478,7 +4480,7 @@ codeunit 40002 StaffPortall
         // UnitSubjects.SETRANGE(UnitSubjects."Unit Type", UnitSubjects."Unit Type"::Theory);
         theoryUnits.RESET;
         theoryUnits.SETRANGE(theoryUnits.Programs, progcode);
-        theoryUnits.SetRange(theoryUnits.Semester, stage);
+        theoryUnits.SetRange(theoryUnits.Stage, stage);
         //theoryUnits.SetRange(Stage, stage);
 
         IF theoryUnits.FIND('-') THEN BEGIN
