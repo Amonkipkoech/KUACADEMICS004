@@ -1,4 +1,4 @@
-page 40041  "PesaFlow Integration"
+page 40041 "PesaFlow Integration"
 {
     var
         PesaflowIntegration: Record "PesaFlow Integration";
@@ -42,7 +42,8 @@ page 40041  "PesaFlow Integration"
             msg := TRUE;
         END;
     end;
-procedure StaffCafeteriaPyments(paymentrefid: Code[50]; customerrefno: Code[20]; invoiceno: Code[20]; invoiceamt: Decimal; paidamt: Decimal; paymentchannel: Text; paymentdate: Text; status: Text) inserted: Boolean
+
+    procedure StaffCafeteriaPyments(paymentrefid: Code[50]; customerrefno: Code[20]; invoiceno: Code[20]; invoiceamt: Decimal; paidamt: Decimal; paymentchannel: Text; paymentdate: Text; status: Text) inserted: Boolean
     begin
         PesaFlowIntegration.RESET;
         PesaFlowIntegration.SETRANGE(PaymentRefID, paymentrefid);
@@ -65,6 +66,7 @@ procedure StaffCafeteriaPyments(paymentrefid: Code[50]; customerrefno: Code[20];
             ERROR('invalid transaction id');
         END;
     end;
+
     procedure UniversityFarmPayments(paymentrefid: Code[50]; customerrefno: Code[20]; invoiceno: Code[20]; invoiceamt: Decimal; paidamt: Decimal; paymentchannel: Text; paymentdate: Text; status: Text) inserted: Boolean
     begin
         PesaFlowIntegration.RESET;
@@ -88,6 +90,7 @@ procedure StaffCafeteriaPyments(paymentrefid: Code[50]; customerrefno: Code[20];
             ERROR('invalid transaction id');
         END;
     end;
+
     procedure PostPesaFlowTrans(paymentrefid: Code[50]; customerrefno: Code[20]; invoiceno: Code[20]; invoiceamt: Decimal; paidamt: Decimal; paymentchannel: Text; paymentdate: Text; status: Text) inserted: Boolean
     begin
         PesaFlowInvoices.RESET;
@@ -219,7 +222,7 @@ procedure StaffCafeteriaPyments(paymentrefid: Code[50]; customerrefno: Code[20];
         HostelRooms: Record "ACA-Students Hostel Rooms";
         HostelRooms1: Record "ACA-Students Hostel Rooms";
         RoomSpaces: Record "ACA-Room Spaces";
-        //StudentNotifications: Codeunit StudentNotifications;
+    //StudentNotifications: Codeunit StudentNotifications;
     begin
         HostelRooms1.RESET;
         HostelRooms1.SETRANGE(HostelRooms1.Student, studentNo);
@@ -321,7 +324,7 @@ procedure StaffCafeteriaPyments(paymentrefid: Code[50]; customerrefno: Code[20];
             StudPay."Amount to pay" := pflow.PaidAmount;
             StudPay.VALIDATE(StudPay."Amount to pay");
             StudPay."Transaction Date" := pflow."Date Received";
-           // StudPay.VALIDATE(StudPay."Auto Post PesaFlow");
+            // StudPay.VALIDATE(StudPay."Auto Post PesaFlow");
             StudPay.INSERT;
             pflow.Posted := TRUE;
             pflow.MODIFY;
@@ -367,7 +370,7 @@ procedure StaffCafeteriaPyments(paymentrefid: Code[50]; customerrefno: Code[20];
                     StudPay."Amount to pay" := pflow.PaidAmount;
                 StudPay.VALIDATE(StudPay."Amount to pay");
                 StudPay."Transaction Date" := pflow."Date Received";
-               // StudPay.VALIDATE(StudPay."Auto Post PesaFlow");
+                // StudPay.VALIDATE(StudPay."Auto Post PesaFlow");
                 StudPay.INSERT;
                 pflow.Posted := TRUE;
                 pflow.MODIFY;

@@ -30,6 +30,18 @@ page 40032 "Mrp block 2 rotation "
 
 
                 }
+
+
+                field("Starting Date"; rec."Starting Date")
+                {
+                    ApplicationArea = all;
+
+                }
+                field("Ending Date"; rec."Ending Date")
+                {
+                    ApplicationArea = all;
+
+                }
                 field("No Of Students"; rec."No Std")
                 {
                     ApplicationArea = all;
@@ -37,16 +49,6 @@ page 40032 "Mrp block 2 rotation "
 
                 }
                 field(Month; rec.Month)
-                {
-                    ApplicationArea = all;
-
-                }
-                field("Starting Date"; rec."Starting Date")
-                {
-                    ApplicationArea = all;
-
-                }
-                field("Ending Date"; rec."Ending Date")
                 {
                     ApplicationArea = all;
 

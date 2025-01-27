@@ -86,7 +86,7 @@ codeunit 40002 StaffPortall
         NextClaimapplicationNo: text;
         NextImprestapplicationNo: Text;
         NextStoreqNo: Text;
-        bankintegration: Codeunit BankIntegration;
+      //  bankintegration: Codeunit BankIntegration;
 
         NextVenueBookingNo: Text;
         LastNum: Text;

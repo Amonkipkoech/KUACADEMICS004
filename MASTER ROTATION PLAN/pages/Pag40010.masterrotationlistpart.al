@@ -13,31 +13,31 @@ page 40010 "Clinical Rotation List Part"
         {
             repeater("clinical rotation")
             {
-                field("Plan ID"; rec."Plan ID")
-                {
-                    ApplicationArea = all;
-                }
-                field(Year; rec.Year)
-                {
-                    ApplicationArea = all;
-                }
-                field(Session; rec.Session)
-                {
-                    ApplicationArea = all;
-                }
-                field(Department; rec.Department)
-                {
-                    ApplicationArea = all;
-                }
-                field(program; rec.program)
-                {
-                    ApplicationArea = all;
-                }
+                // field("Plan ID"; rec."Plan ID")
+                // {
+                //     ApplicationArea = all;
+                // }
+                // field(Year; rec.Year)
+                // {
+                //     ApplicationArea = all;
+                // }
+                // field(Session; rec.Session)
+                // {
+                //     ApplicationArea = all;
+                // }
+                // field(Department; rec.Department)
+                // {
+                //     ApplicationArea = all;
+                // }
+                // field(program; rec.program)
+                // {
+                //     ApplicationArea = all;
+                // }
 
                 field(Group; rec.Group)
                 {
                     ApplicationArea = all;
-                    
+
 
                 }
                 field(Areas; rec.Areas)
@@ -47,23 +47,25 @@ page 40010 "Clinical Rotation List Part"
 
 
                 }
-                field("Week No"; rec."No Of Students")
-                {
-                    ApplicationArea = all;
-                    DrillDownPageID = "Group Assignmnets ";
 
-                }
-                field(Month; rec.Month)
-                {
-                    ApplicationArea = all;
 
-                }
                 field("Starting Date"; rec."Starting Date")
                 {
                     ApplicationArea = all;
 
                 }
                 field("Ending Date"; rec."Ending Date")
+                {
+                    ApplicationArea = all;
+
+                }
+                field("No Of students"; rec."No Of Students")
+                {
+                    ApplicationArea = all;
+                    DrillDownPageID = "Group Assignmnets ";
+
+                }
+                field(Month; rec.Month)
                 {
                     ApplicationArea = all;
 
@@ -113,7 +115,7 @@ page 40010 "Clinical Rotation List Part"
                     CsvHandler.ExportCsvFile('UnitCoverageExport', RecRef, FieldRefs, FieldRefLength);
                 end;
             }
-              
+
             action("ImportCSV")
             {
                 Caption = 'Import from CSV';

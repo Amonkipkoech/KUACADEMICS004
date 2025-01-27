@@ -579,7 +579,7 @@ page 68852 "ACA-Student Fin. Role Center"
                 }
                 action("NCBA Transactions")
                 {
-                    RunObject = page "NCBA Bank Transactions";
+                    // RunObject = page "NCBA Bank Transactions";
                     ApplicationArea = All;
                     Visible = false;
                 }
