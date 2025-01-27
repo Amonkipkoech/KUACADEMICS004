@@ -276,6 +276,30 @@ codeunit 40002 StaffPortall
         exit(Message);
     end;
 
+    procedure ChangeUnitPaper(dept: Text; semester: Text; AcademicYr: Text; stage: Text; paper: Integer) Msg: Text
+    var
+        theoryUnits: Record "ACA-Student Theory Units ";
+        Message: Text;
+    begin
+        theoryUnits.Reset();
+        theoryUnits.SetRange(Programme, dept);
+        theoryUnits.SetRange(Semester, semester);
+        theoryUnits.SetRange("Academic Year", AcademicYr);
+        theoryUnits.SetRange(Stage, stage);
+
+        if theoryUnits.Find('-') then begin
+            theoryUnits.Paper := paper;
+
+            if theoryUnits.Modify then begin
+                Msg := 'SUCCESS';
+            end else begin
+                Msg := 'FAIL'
+            end;
+
+        end;
+
+    end;
+
     procedure AssignLecturerPapers(unitCode: Text; prog: Text; stage: Text; sem: Text; AcdYr: Text; lect: Text): Text
     var
         modifiedCount: Integer;
@@ -4474,10 +4498,7 @@ codeunit 40002 StaffPortall
         theoryUnits: Record "Timetable";
     begin
 
-        // UnitSubjects.SETRANGE(UnitSubjects."Programme Code", progcode);
-        // UnitSubjects.SETRANGE(UnitSubjects."Time Table", true);
-        // UnitSubjects.SETRANGE(UnitSubjects."Stage Code", stage);
-        // UnitSubjects.SETRANGE(UnitSubjects."Unit Type", UnitSubjects."Unit Type"::Theory);
+
         theoryUnits.RESET;
         theoryUnits.SETRANGE(theoryUnits.Programs, progcode);
         theoryUnits.SetRange(theoryUnits.Stage, stage);
