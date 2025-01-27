@@ -276,7 +276,7 @@ codeunit 40002 StaffPortall
         exit(Message);
     end;
 
-    procedure ChangeUnitPaper(dept: Text; semester: Text; AcademicYr: Text; stage: Text; paper: Integer) Msg: Text
+    procedure ChangeUnitPaper(unitCode: Text; dept: Text; semester: Text; AcademicYr: Text; stage: Text; paper: Integer) Msg: Text
     var
         theoryUnits: Record "ACA-Student Theory Units ";
         Message: Text;
@@ -286,6 +286,7 @@ codeunit 40002 StaffPortall
         theoryUnits.SetRange(Semester, semester);
         theoryUnits.SetRange("Academic Year", AcademicYr);
         theoryUnits.SetRange(Stage, stage);
+        theoryUnits.SetRange(Unit, unitCode);
 
         if theoryUnits.Find('-') then begin
             theoryUnits.Paper := paper;
