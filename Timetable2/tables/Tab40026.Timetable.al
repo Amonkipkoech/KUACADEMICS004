@@ -198,6 +198,10 @@ table 40026 Timetable
             OptionMembers = " ","WEEK ONE","WEEK TWO","WEEK THREE","WEEK FOUR","WEEK FIVE","WEEK SIX","WEEK SEVEN";
 
         }
+        field(27; "Stage"; Code[20])
+        {
+
+        }
 
 
     }
