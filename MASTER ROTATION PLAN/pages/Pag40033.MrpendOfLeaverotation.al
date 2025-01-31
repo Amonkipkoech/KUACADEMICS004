@@ -40,18 +40,18 @@ page 40033 "Mrp  end Of Leave rotation"
 
                 }
 
+
+                field(Month; rec.Month)
+                {
+                    ApplicationArea = all;
+
+                }
                 field("No Std"; rec."No Std")
                 {
                     ApplicationArea = all;
                     DrillDownPageId = "Group Assignmnets ";
 
                 }
-                field(Month; rec.Month)
-                {
-                    ApplicationArea = all;
-
-                }
-
                 // Continue with fields up to Site Week 52...
             }
         }

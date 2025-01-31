@@ -42,18 +42,18 @@ page 40032 "Mrp block 2 rotation "
                     ApplicationArea = all;
 
                 }
+
+                field(Month; rec.Month)
+                {
+                    ApplicationArea = all;
+
+                }
                 field("No Of Students"; rec."No Std")
                 {
                     ApplicationArea = all;
                     DrillDownPageId = "Group Assignmnets ";
 
                 }
-                field(Month; rec.Month)
-                {
-                    ApplicationArea = all;
-
-                }
-
 
                 // Continue with fields up to Site Week 52...
             }

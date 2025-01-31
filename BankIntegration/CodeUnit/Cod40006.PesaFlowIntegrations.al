@@ -1,4 +1,4 @@
-codeunit 40006  "PesaFlow Integration"
+codeunit 40006 "PesaFlow Integration"
 {
     var
         PesaflowIntegration: Record "PesaFlow Integration";
@@ -8,6 +8,44 @@ codeunit 40006  "PesaFlow Integration"
         licenseapplic: Record "License Applications";
         stdclearance: Record "Student Clerance";
         ApprovalsMgmt: Codeunit "Approval Mgnt. Util.";
+
+    procedure InsertApplicationFee(paymentrefid: Code[50]; customerrefno: Code[20]; invoiceno: Code[20]; invoiceamt: Decimal; paidamt: Decimal; paymentchannel: Text; paymentdate: Text; status: Text) inserted: Boolean
+    var
+        applicheader: Record "ACA-Applic. Form Header";
+        pesaflowserviceCodes: Record "E-Citizen Services";
+    begin
+        applicheader.RESET;
+        applicheader.SETRANGE("Application No.", customerrefno);
+        IF applicheader.FIND('-') THEN BEGIN
+            PesaFlowIntegration.RESET;
+            PesaFlowIntegration.SETRANGE(PaymentRefID, paymentrefid);
+            IF NOT PesaFlowIntegration.FIND('-') THEN BEGIN
+                PesaFlowIntegration.INIT;
+                PesaFlowIntegration.PaymentRefID := paymentrefid;
+                PesaFlowIntegration.CustomerRefNo := applicheader."Application No.";
+                PesaFlowIntegration."Customer Name" := applicheader."First Name";
+                PesaFlowIntegration.InvoiceNo := invoiceno;
+                PesaFlowIntegration.InvoiceAmount := invoiceamt;
+                PesaFlowIntegration.PaidAmount := paidamt;
+                PesaFlowIntegration.ServiceID := '4914862';
+                PesaFlowIntegration.Description := 'Payment for course application fee';
+                PesaFlowIntegration.PaymentChannel := paymentchannel;
+                PesaFlowIntegration.PaymentDate := paymentdate;
+                PesaFlowIntegration.Status := status;
+                PesaFlowIntegration."Date Received" := TODAY;
+                PesaFlowIntegration.INSERT;
+                inserted := TRUE;
+            END ELSE BEGIN
+                ERROR('invalid transaction id');
+            END;
+            if inserted then begin
+                applicheader."Finance Cleared" := true;
+                applicheader.Modify;
+            end;
+        END ELSE BEGIN
+            ERROR('invalid invoice');
+        END
+    end;
 
 
     procedure ApplicationIDExists(applicid: Code[20]) msg: Boolean
@@ -42,7 +80,8 @@ codeunit 40006  "PesaFlow Integration"
             msg := TRUE;
         END;
     end;
-procedure StaffCafeteriaPyments(paymentrefid: Code[50]; customerrefno: Code[20]; invoiceno: Code[20]; invoiceamt: Decimal; paidamt: Decimal; paymentchannel: Text; paymentdate: Text; status: Text) inserted: Boolean
+
+    procedure StaffCafeteriaPyments(paymentrefid: Code[50]; customerrefno: Code[20]; invoiceno: Code[20]; invoiceamt: Decimal; paidamt: Decimal; paymentchannel: Text; paymentdate: Text; status: Text) inserted: Boolean
     begin
         PesaFlowIntegration.RESET;
         PesaFlowIntegration.SETRANGE(PaymentRefID, paymentrefid);
@@ -65,6 +104,7 @@ procedure StaffCafeteriaPyments(paymentrefid: Code[50]; customerrefno: Code[20];
             ERROR('invalid transaction id');
         END;
     end;
+
     procedure UniversityFarmPayments(paymentrefid: Code[50]; customerrefno: Code[20]; invoiceno: Code[20]; invoiceamt: Decimal; paidamt: Decimal; paymentchannel: Text; paymentdate: Text; status: Text) inserted: Boolean
     begin
         PesaFlowIntegration.RESET;
@@ -88,6 +128,7 @@ procedure StaffCafeteriaPyments(paymentrefid: Code[50]; customerrefno: Code[20];
             ERROR('invalid transaction id');
         END;
     end;
+
     procedure PostPesaFlowTrans(paymentrefid: Code[50]; customerrefno: Code[20]; invoiceno: Code[20]; invoiceamt: Decimal; paidamt: Decimal; paymentchannel: Text; paymentdate: Text; status: Text) inserted: Boolean
     begin
         PesaFlowInvoices.RESET;
@@ -219,7 +260,7 @@ procedure StaffCafeteriaPyments(paymentrefid: Code[50]; customerrefno: Code[20];
         HostelRooms: Record "ACA-Students Hostel Rooms";
         HostelRooms1: Record "ACA-Students Hostel Rooms";
         RoomSpaces: Record "ACA-Room Spaces";
-        //StudentNotifications: Codeunit StudentNotifications;
+    //StudentNotifications: Codeunit StudentNotifications;
     begin
         HostelRooms1.RESET;
         HostelRooms1.SETRANGE(HostelRooms1.Student, studentNo);
@@ -367,7 +408,7 @@ procedure StaffCafeteriaPyments(paymentrefid: Code[50]; customerrefno: Code[20];
                     StudPay."Amount to pay" := pflow.PaidAmount;
                 StudPay.VALIDATE(StudPay."Amount to pay");
                 StudPay."Transaction Date" := pflow."Date Received";
-               // StudPay.VALIDATE(StudPay."Auto Post PesaFlow");
+                // StudPay.VALIDATE(StudPay."Auto Post PesaFlow");
                 StudPay.INSERT;
                 pflow.Posted := TRUE;
                 pflow.MODIFY;

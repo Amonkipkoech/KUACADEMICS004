@@ -59,15 +59,16 @@ page 40010 "Clinical Rotation List Part"
                     ApplicationArea = all;
 
                 }
+
+                field(Month; rec.Month)
+                {
+                    ApplicationArea = all;
+
+                }
                 field("No Of students"; rec."No Of Students")
                 {
                     ApplicationArea = all;
                     DrillDownPageID = "Group Assignmnets ";
-
-                }
-                field(Month; rec.Month)
-                {
-                    ApplicationArea = all;
 
                 }
                 // field(Status; rec.Status)
