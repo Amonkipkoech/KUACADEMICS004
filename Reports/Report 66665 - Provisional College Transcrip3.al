@@ -1,7 +1,7 @@
 report 66665 "Provisional College Transcrip3"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './Reports/SSR/Provisional College Transcrip3.rdl';
+    RDLCLayout = './Reports/SSR/Provisional College Transcrip3.rdl';//Provisional College Transcrip3
     Caption = 'Provisional Transcript';
 
     dataset
@@ -267,7 +267,7 @@ report 66665 "Provisional College Transcrip3"
                 dataitem(StudUnitsss2; "ACA-Student Theory Units ")
                 {
                     DataItemLink = "Student No." = FIELD("Student No."),
-                               Programme = FIELD(Programme),
+                               //Programme = FIELD(Programme),
                                "Year of Study" = FIELD("Year of Study");
                     column(Unit2; StudUnitsss."Unit Code")
                     {

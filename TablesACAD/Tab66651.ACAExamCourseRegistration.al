@@ -6,6 +6,7 @@ table 66651 "ACA-Exam. Course Registration"
         field(1; "Student Number"; Code[20])
         {
             DataClassification = ToBeClassified;
+            TableRelation = Customer."No.";
         }
         field(2; "Student Name"; Text[150])
         {
