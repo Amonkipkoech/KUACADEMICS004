@@ -63,9 +63,14 @@ report 40006 "Mrp Report 3 "
             column(info_mail; info."E-Mail")
             {
             }
-            dataitem("End Of Block one Rotation"; "Clinical rotation")
+            column(seq; seq)
             {
+            }
+            dataitem("Rotation Areas"; "Clinical rotation")
+            {
+
                 DataItemLink = "Plan ID" = field("Plan ID");
+
                 column(Department1; Department)
                 {
                 }
@@ -84,6 +89,14 @@ report 40006 "Mrp Report 3 "
                 column(Ending_Date1; "Ending Date")
                 {
                 }
+                column(Week; Week)
+                {
+
+                }
+                trigger OnAfterGetRecord()
+                begin
+                    seq := seq + 1;
+                end;
 
             }
             dataitem("Mrp Block Two Rotation Areas"; "Mrp Block Two Rotation Areas")//"Mrp Block Two Rotation Areas"
@@ -134,10 +147,7 @@ report 40006 "Mrp Report 3 "
                 {
                 }
             }
-            trigger OnAfterGetRecord()
-            begin
-                seq := seq + 1;
-            end;
+
 
         }
     }

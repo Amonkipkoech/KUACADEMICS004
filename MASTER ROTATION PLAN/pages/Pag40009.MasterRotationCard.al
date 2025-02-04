@@ -28,6 +28,7 @@ page 40009 "Master Rotation Plan Card"
 
             group("Theoretical Classes")
             {
+                Visible = false;
                 Caption = 'Block One Theory Period';
                 field("Block "; rec.Block) { Caption = 'Level'; ApplicationArea = All; }
                 field("Start Date"; rec."Start Date") { ApplicationArea = All; }
@@ -50,6 +51,7 @@ page 40009 "Master Rotation Plan Card"
             group("Theoretical Classes 2")
             {
                 Caption = 'Block Two Theory Period';
+                Visible = false;
                 field("Block 2"; rec.Category) { Caption = 'Level'; ApplicationArea = All; }
                 field("B2 Start Date"; rec."b2 Start Date") { ApplicationArea = All; }
                 field("B2 Start Month"; rec."B2 Start Month") { ApplicationArea = All; }
@@ -62,6 +64,7 @@ page 40009 "Master Rotation Plan Card"
             group("Clinical Classes2")
             {
                 Caption = 'End Of Block Two Clinical Rotation';
+                Visible = false;
                 part("Clinical Rotation List 2"; "Mrp block 2 rotation ")
                 {
                     ApplicationArea = All;
@@ -71,6 +74,7 @@ page 40009 "Master Rotation Plan Card"
             group(" Clinical Leave ")
             {
                 Caption = 'Clinical Leave';
+                Visible = false;
                 field("leave Category"; rec."leave Category") { Caption = 'Level'; ApplicationArea = All; }
                 field("Leave Start Date  "; rec."Leave Start Date  ") { ApplicationArea = All; }
                 field("Leave end Date  "; rec."Leave end Date  ") { ApplicationArea = All; }
@@ -80,6 +84,7 @@ page 40009 "Master Rotation Plan Card"
             group("Clinical Classes 3")
             {
                 Caption = 'End Of Leave Clinical Rotation';
+                Visible = false;
                 part("Clinical Rotation List 3"; "Mrp  end Of Leave rotation")
                 {
                     ApplicationArea = All;
