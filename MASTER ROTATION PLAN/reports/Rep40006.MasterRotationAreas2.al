@@ -1,4 +1,4 @@
-report 40006  "Mrp Report 3 "
+report 40006 "Mrp Report 3 "
 {
 
     DefaultLayout = RDLC;
@@ -77,7 +77,6 @@ report 40006  "Mrp Report 3 "
                 }
                 column(No_Of_Students1; "No Of Students")
                 {
-
                 }
                 column(Starting_Date1; "Starting Date")
                 {
