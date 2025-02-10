@@ -25,6 +25,12 @@ page 68778 "ACA-Student Units"
                 {
                     ApplicationArea = All;
                 }
+                field("Theory Unitsp2"; rec."Theory Units")
+                {
+                    Enabled = false;
+                    ApplicationArea = All;
+                }
+               
                 field("Student No."; Rec."Student No.")
                 {
                     ApplicationArea = All;
@@ -250,11 +256,7 @@ page 68778 "ACA-Student Units"
                     Enabled = false;
                     ApplicationArea = All;
                 }
-                field("Theory Units"; rec."Theory Units")
-                {
-                    Enabled = false;
-                    ApplicationArea = All;
-                }
+
                 field(Semester; Rec.Semester)
                 {
                     ApplicationArea = All;

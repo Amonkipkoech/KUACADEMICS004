@@ -1613,10 +1613,10 @@ table 40020 "ACA-Student Theory Units "
                                                               Semester = FIELD(Semester)));
             FieldClass = FlowField;
         }
-        field(60205; "Paper"; Option)
+        field(60205; "Paper"; enum "Paper Type")
         {
-            OptionCaption = 'NA,P1,P2,P3,P4';
-            OptionMembers = "NA",P1,P2,P3,P4;
+            // OptionCaption = 'NA,P1,P2,P3,P4';
+            // OptionMembers = "NA",P1,P2,P3,P4;
         }
         field(60206; "Paper2"; Code[20])
         {

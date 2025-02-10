@@ -1118,6 +1118,7 @@ table 61549 "ACA-Student Units"
                                                                                   Reversed = FILTER(false)));
             FieldClass = FlowField;
         }
+        
 
         field(50078; "Consolidated Mark Identifier"; Code[2])
         {
