@@ -25,16 +25,16 @@ page 40011 "Group Assignmnets "
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the StudentNo_ field.', Comment = '%';
                 }
-                field(StartDate; Rec.StartDate)
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the StartDate field.', Comment = '%';
-                }
-                field(EndDate; Rec.EndDate)
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the EndDate field.', Comment = '%';
-                }
+                // field(StartDate; Rec.StartDate)
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies the value of the StartDate field.', Comment = '%';
+                // }
+                // field(EndDate; Rec.EndDate)
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies the value of the EndDate field.', Comment = '%';
+                // }
                 field(Department; Rec.Department)
                 {
                     ApplicationArea = All;

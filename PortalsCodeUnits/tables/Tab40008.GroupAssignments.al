@@ -29,6 +29,7 @@ table 40008 GroupAssignments
         {
             Caption = 'Department';
         }
+
         field(7; MasterRotationNo; Text[400])
         {
             Caption = 'Master Rotation Number';
@@ -44,6 +45,10 @@ table 40008 GroupAssignments
         field(10; LecturerName; Code[100])
         {
             Caption = 'Lecturer Name';
+        }
+        field(11; Category; Option)
+        {
+            OptionMembers = " ",Internal,External;
         }
     }
     keys
