@@ -48,7 +48,7 @@ table 40008 GroupAssignments
         }
         field(11; Category; Option)
         {
-            OptionMembers = " ",Internal,External;
+            OptionMembers = Internal,External;
         }
     }
     keys

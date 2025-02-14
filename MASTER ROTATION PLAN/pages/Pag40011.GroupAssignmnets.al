@@ -25,6 +25,10 @@ page 40011 "Group Assignmnets "
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the StudentNo_ field.', Comment = '%';
                 }
+                field(Category;rec.Category)
+                {
+                   ApplicationArea= all;
+                }
                 // field(StartDate; Rec.StartDate)
                 // {
                 //     ApplicationArea = All;

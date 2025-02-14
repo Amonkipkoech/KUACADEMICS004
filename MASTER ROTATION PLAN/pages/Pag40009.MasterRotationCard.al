@@ -14,7 +14,11 @@ page 40009 "Master Rotation Plan Card"
             {
                 Caption = 'General Information';
                 field("Plan ID"; rec."Plan ID") { ApplicationArea = All; }
-                field(Session; rec.Session) { ApplicationArea = All; }
+                field(Session; rec.Session)
+                {
+                    Caption = 'Semester';
+                    ApplicationArea = All;
+                }
                 field("Academic Year"; rec.Year) { ApplicationArea = all; }
                 field("Program Code"; rec."Program Code") { ApplicationArea = All; }
                 field("Program Name"; rec."Program Name") { ApplicationArea = All; }
@@ -103,6 +107,7 @@ page 40009 "Master Rotation Plan Card"
             action("Send For Approval")
             {
                 Caption = 'Send For Approval';
+                Visible = rec.Status = rec.Status::Open;
                 trigger OnAction()
                 begin
                     rec.status := rec.status::"Pending Approval";
@@ -112,10 +117,21 @@ page 40009 "Master Rotation Plan Card"
             action("Approve")
             {
                 Caption = 'Approve';
+                Visible = rec.Status = rec.Status::"Pending Approval";
                 trigger OnAction()
                 begin
                     rec.status := rec.status::Approved;
                     Message('Approved Successfully');
+                end;
+            }
+            action("Reject")
+            {
+                Caption = 'Reject';
+                Visible = rec.Status = rec.Status::"Pending Approval";
+                trigger OnAction()
+                begin
+                    rec.status := rec.status::Open;
+                    Message('Rejected');
                 end;
             }
             action(Attachments1)
