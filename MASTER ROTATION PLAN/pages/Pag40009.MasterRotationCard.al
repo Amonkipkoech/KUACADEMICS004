@@ -14,7 +14,11 @@ page 40009 "Master Rotation Plan Card"
             {
                 Caption = 'General Information';
                 field("Plan ID"; rec."Plan ID") { ApplicationArea = All; }
-                field(Session; rec.Session) { ApplicationArea = All; }
+                field(Session; rec.Session)
+                {
+                    Caption = 'Semester';
+                    ApplicationArea = All;
+                }
                 field("Academic Year"; rec.Year) { ApplicationArea = all; }
                 field("Program Code"; rec."Program Code") { ApplicationArea = All; }
                 field("Program Name"; rec."Program Name") { ApplicationArea = All; }
@@ -28,6 +32,7 @@ page 40009 "Master Rotation Plan Card"
 
             group("Theoretical Classes")
             {
+                Visible = false;
                 Caption = 'Block One Theory Period';
                 field("Block "; rec.Block) { Caption = 'Level'; ApplicationArea = All; }
                 field("Start Date"; rec."Start Date") { ApplicationArea = All; }
@@ -50,6 +55,7 @@ page 40009 "Master Rotation Plan Card"
             group("Theoretical Classes 2")
             {
                 Caption = 'Block Two Theory Period';
+                Visible = false;
                 field("Block 2"; rec.Category) { Caption = 'Level'; ApplicationArea = All; }
                 field("B2 Start Date"; rec."b2 Start Date") { ApplicationArea = All; }
                 field("B2 Start Month"; rec."B2 Start Month") { ApplicationArea = All; }
@@ -62,6 +68,7 @@ page 40009 "Master Rotation Plan Card"
             group("Clinical Classes2")
             {
                 Caption = 'End Of Block Two Clinical Rotation';
+                Visible = false;
                 part("Clinical Rotation List 2"; "Mrp block 2 rotation ")
                 {
                     ApplicationArea = All;
@@ -71,6 +78,7 @@ page 40009 "Master Rotation Plan Card"
             group(" Clinical Leave ")
             {
                 Caption = 'Clinical Leave';
+                Visible = false;
                 field("leave Category"; rec."leave Category") { Caption = 'Level'; ApplicationArea = All; }
                 field("Leave Start Date  "; rec."Leave Start Date  ") { ApplicationArea = All; }
                 field("Leave end Date  "; rec."Leave end Date  ") { ApplicationArea = All; }
@@ -80,6 +88,7 @@ page 40009 "Master Rotation Plan Card"
             group("Clinical Classes 3")
             {
                 Caption = 'End Of Leave Clinical Rotation';
+                Visible = false;
                 part("Clinical Rotation List 3"; "Mrp  end Of Leave rotation")
                 {
                     ApplicationArea = All;
@@ -98,6 +107,7 @@ page 40009 "Master Rotation Plan Card"
             action("Send For Approval")
             {
                 Caption = 'Send For Approval';
+                Visible = rec.Status = rec.Status::Open;
                 trigger OnAction()
                 begin
                     rec.status := rec.status::"Pending Approval";
@@ -107,10 +117,21 @@ page 40009 "Master Rotation Plan Card"
             action("Approve")
             {
                 Caption = 'Approve';
+                Visible = rec.Status = rec.Status::"Pending Approval";
                 trigger OnAction()
                 begin
                     rec.status := rec.status::Approved;
                     Message('Approved Successfully');
+                end;
+            }
+            action("Reject")
+            {
+                Caption = 'Reject';
+                Visible = rec.Status = rec.Status::"Pending Approval";
+                trigger OnAction()
+                begin
+                    rec.status := rec.status::Open;
+                    Message('Rejected');
                 end;
             }
             action(Attachments1)

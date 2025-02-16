@@ -13,10 +13,10 @@ page 40032 "Mrp block 2 rotation "
         {
             repeater("clinical rotation")
             {
-                field("Plan ID"; rec."Plan ID")
-                {
-                    ApplicationArea = all;
-                }
+                // field("Plan ID"; rec."Plan ID")
+                // {
+                //     ApplicationArea = all;
+                // }
                 field(Group; rec.Group)
                 {
                     ApplicationArea = all;
@@ -30,17 +30,8 @@ page 40032 "Mrp block 2 rotation "
 
 
                 }
-                field("No Of Students"; rec."No Std")
-                {
-                    ApplicationArea = all;
-                    DrillDownPageId = "Group Assignmnets ";
 
-                }
-                field(Month; rec.Month)
-                {
-                    ApplicationArea = all;
 
-                }
                 field("Starting Date"; rec."Starting Date")
                 {
                     ApplicationArea = all;
@@ -52,6 +43,17 @@ page 40032 "Mrp block 2 rotation "
 
                 }
 
+                field(Month; rec.Month)
+                {
+                    ApplicationArea = all;
+
+                }
+                field("No Of Students"; rec."No Std")
+                {
+                    ApplicationArea = all;
+                    DrillDownPageId = "Group Assignmnets ";
+
+                }
 
                 // Continue with fields up to Site Week 52...
             }

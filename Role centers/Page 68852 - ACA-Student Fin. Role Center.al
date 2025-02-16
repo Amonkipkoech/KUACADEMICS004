@@ -142,6 +142,11 @@ page 68852 "ACA-Student Fin. Role Center"
                 RunObject = Page "Data Mine2";
                 ApplicationArea = All;
             }
+            action("Application Payments")
+            {
+                RunObject = Page "application Payments";
+                ApplicationArea = All;
+            }
             action("Student Billing")
             {
                 Caption = 'Student Billing';
@@ -579,7 +584,7 @@ page 68852 "ACA-Student Fin. Role Center"
                 }
                 action("NCBA Transactions")
                 {
-                    RunObject = page "NCBA Bank Transactions";
+                    // RunObject = page "NCBA Bank Transactions";
                     ApplicationArea = All;
                     Visible = false;
                 }

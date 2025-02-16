@@ -84,6 +84,10 @@ table 40010 "Clinical rotation"
         {
             DataClassification = ToBeClassified;
         }
+        field(7; Week; Integer)
+        {
+            DataClassification = ToBeClassified;
+        }
 
 
 

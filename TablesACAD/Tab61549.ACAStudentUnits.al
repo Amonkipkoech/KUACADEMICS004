@@ -103,19 +103,19 @@ table 61549 "ACA-Student Units"
         {
             Editable = true;
             NotBlank = false;
-            TableRelation = "ACA-Units/Subjects".Code WHERE("Programme Code" = FIELD(Programme), "Unit Type" = FILTER(exam .. Research));
+            TableRelation = "ACA-Units/Subjects".Code WHERE("Programme Code" = FIELD(Programme), "Unit Type" = FILTER(Exam | Research | "Case Study"));
 
             trigger OnValidate()
             var
                 StageInteger: Integer;
             begin
-                //ACASemesters.RESET;
-                //ACASemesters.SETRANGE(Code,Rec.Semester);
-                //IF ACASemesters.FIND('-') THEN BEGIN
-                // IF ACASemesters."Registration Deadline"<>0D THEN BEGIN
-                // IF ACASemesters."Registration Deadline"<TODAY THEN ERROR('Error:\You cannot register past deadline');
-                // END;
-                //END;
+                ACASemesters.RESET;
+                ACASemesters.SETRANGE(Code, Rec.Semester);
+                IF ACASemesters.FIND('-') THEN BEGIN
+                    IF ACASemesters."Registration Deadline" <> 0D THEN BEGIN
+                        IF ACASemesters."Registration Deadline" < TODAY THEN ERROR('Error:\You cannot register past deadline');
+                    END;
+                END;
                 /*
                 CourseReg.RESET;
                 CourseReg.SETRANGE(CourseReg."Student No.","Student No.");
@@ -1118,6 +1118,7 @@ table 61549 "ACA-Student Units"
                                                                                   Reversed = FILTER(false)));
             FieldClass = FlowField;
         }
+        
 
         field(50078; "Consolidated Mark Identifier"; Code[2])
         {

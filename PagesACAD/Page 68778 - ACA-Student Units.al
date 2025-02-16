@@ -21,6 +21,16 @@ page 68778 "ACA-Student Units"
                         CurrPage.UPDATE;
                     end;
                 }
+                field(Description; Rec.Description)
+                {
+                    ApplicationArea = All;
+                }
+                field("Theory Unitsp2"; rec."Theory Units")
+                {
+                    Enabled = false;
+                    ApplicationArea = All;
+                }
+               
                 field("Student No."; Rec."Student No.")
                 {
                     ApplicationArea = All;
@@ -33,10 +43,7 @@ page 68778 "ACA-Student Units"
                 // {
                 //     ApplicationArea = All;
                 // }
-                field(Description; Rec.Description)
-                {
-                    ApplicationArea = All;
-                }
+
                 field("Date created"; Rec."Date created")
                 {
                     ApplicationArea = All;
@@ -58,28 +65,28 @@ page 68778 "ACA-Student Units"
                 {
                     ApplicationArea = All;
                 }
-                field(LectureHall; Rec.LectureHall)
-                {
-                    ApplicationArea = All;
-                }
-                field(Lecturer; Rec.Lecturer)
-                {
-                    ApplicationArea = All;
-                }
-                field(Stream; Rec.Stream)
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Stream field.';
-                    //Editable = false;
-                }
-                field(Day; Rec.Day)
-                {
-                    ApplicationArea = All;
-                }
-                field(TimeSlot; Rec.TimeSlot)
-                {
-                    ApplicationArea = All;
-                }
+                // field(LectureHall; Rec.LectureHall)
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field(Lecturer; Rec.Lecturer)
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field(Stream; Rec.Stream)
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies the value of the Stream field.';
+                //     //Editable = false;
+                // }
+                // field(Day; Rec.Day)
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field(TimeSlot; Rec.TimeSlot)
+                // {
+                //     ApplicationArea = All;
+                // }
                 field("Special Exam"; Rec."Special Exam")
                 {
                     ApplicationArea = All;
@@ -249,11 +256,7 @@ page 68778 "ACA-Student Units"
                     Enabled = false;
                     ApplicationArea = All;
                 }
-                field("Theory Units"; rec."Theory Units")
-                {
-                    Enabled = false;
-                    ApplicationArea = All;
-                }
+
                 field(Semester; Rec.Semester)
                 {
                     ApplicationArea = All;

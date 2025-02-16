@@ -235,8 +235,6 @@ page 68861 "ACA-Academics Role Center"
                     {
                         Caption = '<Exam Setup>';
                         Image = SetupColumns;
-
-
                         RunObject = Page 68800;
                         ApplicationArea = All;
                     }
@@ -626,11 +624,26 @@ page 68861 "ACA-Academics Role Center"
                         RunObject = Report "Provisional College Transcrip3";
                         ApplicationArea = All;
                     }
+                    action("Final Transcript ")
+
+                    {
+                        Image = Register;
+                        RunObject = report "Final Transcript";
+                        ApplicationArea = all;
+                    }
+
                     action("Assessment Card")
                     {
                         Image = Register;
                         RunObject = Report "Assesment Form";//"master Rotation Table"
                         ApplicationArea = All;
+                    }
+                    action("mrp")
+                    {
+                        Image = Register;
+                        Caption = 'mrp report 3';
+                        RunObject = report "Mrp Report 3 ";
+                        ApplicationArea = ALL;
                     }
                     action(ActionName)
                     {
@@ -1325,6 +1338,52 @@ page 68861 "ACA-Academics Role Center"
                     ApplicationArea = All;
                 }
             }
+            group(GroupName2)
+            {
+
+                Caption = 'Master Rotation 2';
+                Image = ResourcePlanning;
+
+                action("Rotation Areas2")
+                {
+                    Image = Allocate;
+                    Caption = 'Rotation Areas';
+                    RunObject = Page "Rotation Areas";
+                    ApplicationArea = All;
+                }
+                action("Group Assignmnets2 ")
+                {
+                    Image = Allocate;
+                    Caption = 'Group Assignments';
+                    RunObject = Page "Group Assignmnets ";
+                    ApplicationArea = All;
+                }
+
+                action("Open Department MRP2")
+                {
+                    Image = Allocate;
+                    Caption = 'Open Department MRP';
+                    RunObject = Page "MRP List";
+
+                    ApplicationArea = All;
+                }
+                action("Pending Approval Dep MRP2")
+                {
+                    Image = Allocate;
+                    Caption = 'Pending Approval Dep MRP';
+                    RunObject = Page "Mrp Pending Approval";
+
+                    ApplicationArea = All;
+                }
+                action("Approved Dep MRP2 ")
+                {
+                    Image = Allocate;
+                    Caption = ' Approved Dep MRP';
+                    RunObject = Page "Mrp Approved ";
+                    ApplicationArea = All;
+                }
+            }
+
             group(LectMan)
             {
                 Caption = 'Lecturer Management';

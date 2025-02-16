@@ -15,7 +15,7 @@ table 54419 "Bank Intergration - Final"
         {
             DataClassification = ToBeClassified;
         }
-        field(4; billAmount; Decimal)
+        field(4; billAmount; Code[20])
         {
             DataClassification = ToBeClassified;
         }

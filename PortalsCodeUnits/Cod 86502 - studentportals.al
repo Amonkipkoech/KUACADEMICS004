@@ -140,7 +140,7 @@ codeunit 86502 "studentportals"
         portalsetup: Record PortalSetup;
         generalsetup: Record "ACA-General Set-Up";
         marketingstrategies: Record "ACA-Marketing Strategies";
-        bankintergration: Codeunit BankIntegration;
+        //bankintergration: Codeunit BankIntegration;
         CuFileManagement: Codeunit "File Management";
         TbDocumentAttachment: Record "Document Attachment";
         campus: Record "Dimension Value";
