@@ -57,7 +57,7 @@ codeunit 40002 StaffPortall
         State: Option Open,Pending,Approval,Cancelled,Approved,"Pending Approval";
         DocType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,ImprestSurrender,Interbank,TransportRequest,Maintenance,Fuel,ImporterExporter,"Import Permit","Export Permit",TR,"Safari Notice","Student Applications","Water Research","Consultancy Requests","Consultancy Proposals","Meals Bookings","General Journal","Student Admissions","Staff Claim",KitchenStoreRequisition,"Leave Application","Staff Advance","Staff Advance Accounting";
         BaseCalendar: Record "Base Calendar Change";
-        ApprovalEntry: Record "Approval Entry"; 
+        ApprovalEntry: Record "Approval Entry";
         ApprovalEntry_2: Record "Approval Entry";
         NoSeriesMgt: Codeunit NoSeriesManagement;
         Approvals: Codeunit "Approval Workflow Setup Mgt.";
@@ -751,6 +751,23 @@ codeunit 40002 StaffPortall
         exit(Message);
 
     end;
+
+    procedure GetLectAssignedGroupAndMembers(lectNo: Text; Session: Text): Text
+    var
+        message: Text;
+        group: Record GroupAssignments;
+    begin
+        group.Reset();
+        group.SetRange(Block, Session);
+        group.SetRange(LecturerNo, lectNo);
+        if group.FindSet() then begin
+            repeat
+                message += 'SUCCESS' + '::' + group.GroupId + '::' + group.StudentNo + '::' + GetStudentName(group.StudentNo) + '[]';
+            until group.Next() = 0;
+        end;
+        exit(message);
+    end;
+
 
 
     procedure GetOpenMasterPlans() Message: Text

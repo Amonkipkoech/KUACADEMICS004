@@ -89,7 +89,7 @@ report 40006 "Mrp Report 3 "
                 column(Ending_Date1; "Ending Date")
                 {
                 }
-                column(Week; Week)
+                column(Week; "Week")
                 {
 
                 }
