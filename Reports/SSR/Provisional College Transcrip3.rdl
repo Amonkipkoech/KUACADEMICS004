@@ -41,8 +41,15 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>       BLOCK ONE : 10 WEEKS</Value>
+                                  <Value xml:space="preserve">     </Value>
                                   <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>  BLOCK ONE : 10 WEEKS</Value>
+                                  <Style>
+                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -337,7 +344,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>40</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -484,6 +491,9 @@
                   <TablixMembers>
                     <TablixMember />
                   </TablixMembers>
+                  <Visibility>
+                    <Hidden>=iif(trim(Fields!Unit2.Value)="", true,false)</Hidden>
+                  </Visibility>
                 </TablixMember>
                 <TablixMember>
                   <KeepWithGroup>Before</KeepWithGroup>
@@ -865,6 +875,7 @@
                   <TextRun>
                     <Value>A. THEORY COURSES COVERED</Value>
                     <Style>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -914,8 +925,15 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>       BLOCK ONE : 6 WEEKS</Value>
+                                  <Value xml:space="preserve">      </Value>
                                   <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value> BLOCK ONE : 6 WEEKS</Value>
+                                  <Style>
+                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1262,6 +1280,9 @@
                   <TablixMembers>
                     <TablixMember />
                   </TablixMembers>
+                  <Visibility>
+                    <Hidden>=iif(trim(Fields!Unit2.Value)="",true,false)</Hidden>
+                  </Visibility>
                 </TablixMember>
                 <TablixMember>
                   <KeepWithGroup>Before</KeepWithGroup>
