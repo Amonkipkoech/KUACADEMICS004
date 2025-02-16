@@ -6,7 +6,7 @@ report 66665 "Provisional College Transcrip3"
 
     dataset
     {
-        dataitem(CourseRegs; 66651)
+        dataitem(CourseRegs; "ACA-Exam. Course Registration")
         {
             CalcFields = "Failed Some Units";
             PrintOnlyIfDetail = true;
@@ -222,7 +222,7 @@ report 66665 "Provisional College Transcrip3"
             column(LegendDesc6; LegendDesc[6])
             {
             }
-            dataitem(StudUnitsss; 66650)
+            dataitem(StudUnitsss; "ACA-Exam Classification Units")
             {
                 DataItemLink = "Student No." = FIELD("Student Number"),
                                Programme = FIELD(Programme),
@@ -248,7 +248,7 @@ report 66665 "Provisional College Transcrip3"
                 column(Status; StudUnitsss."Grade Comment")
                 {
                 }
-                dataitem(ExamGraddingSetup; 61599)
+                dataitem(ExamGraddingSetup; "ACA-Exam Gradding Setup")
                 {
                     DataItemLink = Category = FIELD("Exam Category");
                     column(ExamCat; ExamGraddingSetup.Category)
@@ -264,22 +264,7 @@ report 66665 "Provisional College Transcrip3"
                     {
                     }
                 }
-                dataitem(StudUnitsss2; "ACA-Student Theory Units ")
-                {
-                    DataItemLink = "Student No." = FIELD("Student No."),
-                               //Programme = FIELD(Programme),
-                               "Year of Study" = FIELD("Year of Study");
-                    column(Unit2; StudUnitsss."Unit Code")
-                    {
-                    }
-                    column(Desc2; StudUnitsss."Unit Description")
-                    {
-                    }
-                    column(CreditHours2; StudUnitsss."Credit Hours")
-                    {
-                    }
 
-                }
 
 
                 trigger OnAfterGetRecord()
@@ -288,6 +273,20 @@ report 66665 "Provisional College Transcrip3"
                     ACAExamGraddingSetup: Record 61599;
                 begin
                 end;
+            }
+            dataitem(StudUnitsss2; "ACA-Student Theory Units ")
+            {
+                DataItemLink = "Student No." = FIELD("Student Number");
+                column(Unit2; StudUnitsss."Unit Code")
+                {
+                }
+                column(Desc2; StudUnitsss."Unit Description")
+                {
+                }
+                column(CreditHours2; StudUnitsss."Credit Hours")
+                {
+                }
+
             }
 
             trigger OnAfterGetRecord()

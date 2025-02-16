@@ -624,6 +624,14 @@ page 68861 "ACA-Academics Role Center"
                         RunObject = Report "Provisional College Transcrip3";
                         ApplicationArea = All;
                     }
+                    action("Final Transcript ")
+
+                    {
+                        Image = Register;
+                        RunObject = report "Final Transcript";
+                        ApplicationArea = all;
+                    }
+
                     action("Assessment Card")
                     {
                         Image = Register;
