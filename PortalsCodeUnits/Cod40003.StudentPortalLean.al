@@ -390,26 +390,63 @@ codeunit 40003 StudentPortalTest
         END;
     end;
 
-    procedure GetClinicalShedule(StudentNo: Text; currentSem: Text) Message: Text
+    procedure GetClinicalShedule(StudentNo: Text; Session: Text): Text
+    var
+        group: Text;
+        Message: Text;
+        clinicals: Record "Clinical rotation";
+    begin
+        group := GetStudentGroup(StudentNo, Session);
+
+        if (group = '') or (StrLen(group) = 0) then
+            Error('The student does not belong to any group!');
+
+
+        clinicals.Reset();
+        clinicals.SetRange(clinicals.Group, group);
+        clinicals.SetRange(clinicals.Session, Session);
+
+
+        if clinicals.FindFirst() then begin
+            repeat
+                Message += 'SUCCESS' + '::' + clinicals.Group + '::' +
+                           Format(clinicals."Starting Date") + '::' +
+                           Format(clinicals."Ending Date") + '::' + clinicals.Areas + '::' +
+                           Format(clinicals."Assessment Start date") + '::' +
+                           Format(clinicals."Assessment End Date") + '[]';
+            until clinicals.Next() = 0;
+        end;
+
+        exit(Message);
+    end;
+
+
+    procedure GetstudentGroup(StudentNo: Text; Session: Text): Text
+    var
+        message: Text;
+        group: Record GroupAssignments;
     begin
         group.Reset();
-        group.SetRange(group.StudentNo, StudentNo);
-        group.setRange(group.Block, currentSem);
-
-        if group.Find('-') then begin
-            clinicals.Reset();
-            clinicals.SetRange(clinicals.Group, group.GroupId);
-            clinicals.SetRange(clinicals.Year, group.Block);
-            if clinicals.Find('-') then begin
-                repeat
-                    Message += 'SUCCESS' + '::' + clinicals.Group + '::' + Format(clinicals."Starting Date") + '::'
-                     + Format(clinicals."Ending Date") + '::' + clinicals.Areas + '::' + Format(clinicals."Assessment Start date") + '::' + Format(clinicals."Assessment End Date") + '[]';
-                until clinicals.Next() = 0;
-
-            end
+        group.SetRange(StudentNo, StudentNo);
+        group.SetRange(Block, Session);
+        if group.FindFirst() then begin
+            message := group.GroupId;
         end;
-        exit(Message);
+        exit(message);
+    end;
 
+    procedure GetstudentGroup1(StudentNo: Text; Session: Text): Text
+    var
+        message: Text;
+        group: Record GroupAssignments;
+    begin
+        group.Reset();
+        group.SetRange(StudentNo, StudentNo);
+        group.SetRange(Block, Session);
+        if group.FindFirst() then begin
+            message := group.GroupId;
+        end;
+        exit(message);
     end;
 
     procedure GetXYForms(studentNo: Text; currentSem: Text) Message: Text
