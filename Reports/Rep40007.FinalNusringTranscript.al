@@ -12,6 +12,22 @@ report 40007 "FinalNusring Transcript"
             column(StudNo; "Student No.")
             {
             }
+            column(Student_Name; "Student Name")
+            {
+            }
+            column(Programmes; Programmes)
+            {
+            }
+            column(Academic_Year1; "Academic Year")
+            {
+            }
+            column(Stage; Stage)
+            {
+            }
+            column(Semester; Semester)
+            {
+
+            }
             column(infoName; info.Name)
             {
             }
@@ -59,6 +75,16 @@ report 40007 "FinalNusring Transcript"
                 column(CreditHours2; "Credit Hours")
                 {
                 }
+                column(Programme; Programme)
+                {
+                }
+                column(Academic_Year; "Academic Year")
+                {
+                }
+                column(Unit_Stage; "Unit Stage")
+                {
+
+                }
 
             }
 
@@ -82,6 +108,14 @@ report 40007 "FinalNusring Transcript"
             }
         }
     }
+    trigger OnPreReport()
+    var
+        myInt: Integer;
+    begin
+        info.CalcFields(Picture);
+        CompanyInformation.CalcFields(Picture);
+    end;
+
     var
         info: Record "Company Information";
         CompanyInformation: Record 79;
