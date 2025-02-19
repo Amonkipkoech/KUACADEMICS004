@@ -9,22 +9,22 @@ report 40007 "FinalNusring Transcript"
         dataitem("Semester Registration"; "ACA-Course Registration")
         {
             RequestFilterFields = "Student No.";
-            column(StudNo; "Student No.")
+            column(StudNCsReg; "Student No.")
             {
             }
-            column(Student_Name; "Student Name")
+            column(Student_NameCReg; "Student Name")
             {
             }
-            column(Programmes; Programmes)
+            column(ProgrammesCsReg; Programmes)
             {
             }
-            column(Academic_Year1; "Academic Year")
+            column(Academic_YearCsReg; "Academic Year")
             {
             }
-            column(Stage; Stage)
+            column(StageCsReg; Stage)
             {
             }
-            column(Semester; Semester)
+            column(SemesterCsReg; Semester)
             {
 
             }
@@ -47,44 +47,68 @@ report 40007 "FinalNusring Transcript"
             {
             }
 
-            column(Sem; '')
-            {
-            }
-            column(Stag; '')
-            {
-            }
-            column(CumSc; '')
-            {
-            }
-            column(CurrSem; '')
-            {
-            }
-            column(Pic; CompanyInformation.Picture)
-            {
-            }
+
+
 
             dataitem(StudUnitsss2; "ACA-Student Theory Units ")
             {
                 DataItemLink = "Student No." = FIELD("Student No.");
-                column(Unit2; unit)
+                column(UnitTheory; unit)
                 {
                 }
-                column(Desc2; "Unit Description")
+                column(DescTheory; "Unit Description")
                 {
                 }
-                column(CreditHours2; "Credit Hours")
+                column(CreditHoursTheory; "Credit Hours")
                 {
                 }
-                column(Programme; Programme)
+                column(ProgrammeTheory; Programme)
                 {
                 }
-                column(Academic_Year; "Academic Year")
+                column(Academic_Year_Theory; "Academic Year")
                 {
                 }
-                column(Unit_Stage; "Unit Stage")
+                column(Unit_Stage_Theory; "Unit Stage")
                 {
 
                 }
+
+            }
+            dataitem("ACA-Student Units"; "ACA-Student Units")
+            {
+                column(Student_No_Exam; "Student No.")
+                {
+
+                }
+                column(SemesterExam; Semester)
+                {
+
+                }
+                column(ProgrammeExam; Programme)
+                {
+
+                }
+                column(UnitExam; Unit)
+                {
+
+                }
+                column(DescriptionExam; Description)
+                {
+
+                }
+                column(Unit_DescriptionExam; "Unit Description")
+                {
+
+                }
+                column(Academic_YearExam; "Academic Year")
+                {
+
+                }
+                column(Credit_HoursExam; "Credit Hours")
+                {
+
+                }
+
 
             }
 
