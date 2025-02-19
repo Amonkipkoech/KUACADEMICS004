@@ -8,7 +8,7 @@ report 40007 "FinalNusring Transcript"
     {
         dataitem("Semester Registration"; "ACA-Course Registration")
         {
-            RequestFilterFields = "Student No.";
+            RequestFilterFields = "Student No.", "Academic Year", Semester;
             column(StudNCsReg; "Student No.")
             {
             }
@@ -76,6 +76,7 @@ report 40007 "FinalNusring Transcript"
             }
             dataitem("ACA-Student Units"; "ACA-Student Units")
             {
+                DataItemLink = "Student No." = field("Student No.");
                 column(Student_No_Exam; "Student No.")
                 {
 

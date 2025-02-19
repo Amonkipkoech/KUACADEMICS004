@@ -182,21 +182,21 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Unit2">
+                        <Textbox Name="UnitTheory">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Unit2.Value</Value>
+                                  <Value>=Fields!UnitTheory.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Unit2</rd:DefaultName>
+                          <rd:DefaultName>UnitTheory</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -212,21 +212,21 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Desc2">
+                        <Textbox Name="DescTheory">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Desc2.Value</Value>
+                                  <Value>=Fields!DescTheory.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Desc2</rd:DefaultName>
+                          <rd:DefaultName>DescTheory</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -242,21 +242,21 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="CreditHours21">
+                        <Textbox Name="CreditHoursTheory">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!CreditHours2.Value</Value>
+                                  <Value>=Fields!CreditHoursTheory.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>CreditHours21</rd:DefaultName>
+                          <rd:DefaultName>CreditHoursTheory</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -441,7 +441,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!CreditHours2.Value)</Value>
+                                  <Value>=Sum(Fields!CreditHoursTheory.Value)</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -475,32 +475,11 @@
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
               <TablixMembers>
-                <TablixMember>
-                  <KeepWithGroup>After</KeepWithGroup>
-                </TablixMember>
-                <TablixMember>
-                  <KeepWithGroup>After</KeepWithGroup>
-                </TablixMember>
-                <TablixMember>
-                  <Group Name="Details2">
-                    <GroupExpressions>
-                      <GroupExpression>=Fields!StudNo.Value</GroupExpression>
-                      <GroupExpression>=Fields!Unit2.Value</GroupExpression>
-                    </GroupExpressions>
-                  </Group>
-                  <TablixMembers>
-                    <TablixMember />
-                  </TablixMembers>
-                  <Visibility>
-                    <Hidden>=iif(trim(Fields!Unit2.Value)="", true,false)</Hidden>
-                  </Visibility>
-                </TablixMember>
-                <TablixMember>
-                  <KeepWithGroup>Before</KeepWithGroup>
-                </TablixMember>
-                <TablixMember>
-                  <KeepWithGroup>Before</KeepWithGroup>
-                </TablixMember>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
@@ -667,7 +646,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=First(Fields!Programmes.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ProgrammesCsReg.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -710,7 +689,7 @@
                     <Style />
                   </TextRun>
                   <TextRun>
-                    <Value>=First(Fields!Student_Name.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Student_NameCReg.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -757,7 +736,7 @@
                     <Style />
                   </TextRun>
                   <TextRun>
-                    <Value>=First(Fields!StudNo.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!StudNCsReg.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -823,7 +802,7 @@
                     <Style />
                   </TextRun>
                   <TextRun>
-                    <Value>=First(Fields!Academic_Year1.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Academic_YearCsReg.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1053,7 +1032,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Unit2.Value</Value>
+                                  <Value>=Fields!UnitTheory.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1072,7 +1051,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -1084,7 +1062,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Desc2.Value</Value>
+                                  <Value>=Fields!DescTheory.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1114,7 +1092,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!CreditHours2.Value</Value>
+                                  <Value>=Fields!CreditHoursTheory.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1211,7 +1189,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!CreditHours2.Value)</Value>
+                                  <Value>=Sum(Fields!CreditHoursTheory.Value)</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1245,29 +1223,10 @@
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
               <TablixMembers>
-                <TablixMember>
-                  <KeepWithGroup>After</KeepWithGroup>
-                </TablixMember>
-                <TablixMember>
-                  <KeepWithGroup>After</KeepWithGroup>
-                </TablixMember>
-                <TablixMember>
-                  <Group Name="Details3">
-                    <GroupExpressions>
-                      <GroupExpression>=Fields!StudNo.Value</GroupExpression>
-                      <GroupExpression>=Fields!Unit2.Value</GroupExpression>
-                    </GroupExpressions>
-                  </Group>
-                  <TablixMembers>
-                    <TablixMember />
-                  </TablixMembers>
-                  <Visibility>
-                    <Hidden>=iif(trim(Fields!Unit2.Value)="",true,false)</Hidden>
-                  </Visibility>
-                </TablixMember>
-                <TablixMember>
-                  <KeepWithGroup>Before</KeepWithGroup>
-                </TablixMember>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
@@ -1501,7 +1460,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Unit2.Value</Value>
+                                  <Value>=Fields!UnitExam.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1531,7 +1490,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Desc2.Value</Value>
+                                  <Value>=Fields!DescriptionExam.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1561,7 +1520,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!CreditHours2.Value</Value>
+                                  <Value>=Fields!Credit_HoursExam.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1658,7 +1617,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!CreditHours2.Value)</Value>
+                                  <Value>=Sum(Fields!Credit_HoursExam.Value)</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1692,26 +1651,10 @@
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
               <TablixMembers>
-                <TablixMember>
-                  <KeepWithGroup>After</KeepWithGroup>
-                </TablixMember>
-                <TablixMember>
-                  <KeepWithGroup>After</KeepWithGroup>
-                </TablixMember>
-                <TablixMember>
-                  <Group Name="Details4">
-                    <GroupExpressions>
-                      <GroupExpression>=Fields!StudNo.Value</GroupExpression>
-                      <GroupExpression>=Fields!Unit2.Value</GroupExpression>
-                    </GroupExpressions>
-                  </Group>
-                  <TablixMembers>
-                    <TablixMember />
-                  </TablixMembers>
-                </TablixMember>
-                <TablixMember>
-                  <KeepWithGroup>Before</KeepWithGroup>
-                </TablixMember>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
@@ -3481,23 +3424,23 @@ oEaT+0fp4tfgPyf8/09o8kzW//Dt8D/h/4v4n/D/NQD/Bz/yHyrxVdkNAAAAAElFTkSuQmCC</ImageD
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
-        <Field Name="StudNo">
-          <DataField>StudNo</DataField>
+        <Field Name="StudNCsReg">
+          <DataField>StudNCsReg</DataField>
         </Field>
-        <Field Name="Student_Name">
-          <DataField>Student_Name</DataField>
+        <Field Name="Student_NameCReg">
+          <DataField>Student_NameCReg</DataField>
         </Field>
-        <Field Name="Programmes">
-          <DataField>Programmes</DataField>
+        <Field Name="ProgrammesCsReg">
+          <DataField>ProgrammesCsReg</DataField>
         </Field>
-        <Field Name="Academic_Year1">
-          <DataField>Academic_Year1</DataField>
+        <Field Name="Academic_YearCsReg">
+          <DataField>Academic_YearCsReg</DataField>
         </Field>
-        <Field Name="Stage">
-          <DataField>Stage</DataField>
+        <Field Name="StageCsReg">
+          <DataField>StageCsReg</DataField>
         </Field>
-        <Field Name="Semester">
-          <DataField>Semester</DataField>
+        <Field Name="SemesterCsReg">
+          <DataField>SemesterCsReg</DataField>
         </Field>
         <Field Name="infoName">
           <DataField>infoName</DataField>
@@ -3517,68 +3460,53 @@ oEaT+0fp4tfgPyf8/09o8kzW//Dt8D/h/4v4n/D/NQD/Bz/yHyrxVdkNAAAAAElFTkSuQmCC</ImageD
         <Field Name="infoPhone">
           <DataField>infoPhone</DataField>
         </Field>
-        <Field Name="Sem">
-          <DataField>Sem</DataField>
+        <Field Name="UnitTheory">
+          <DataField>UnitTheory</DataField>
         </Field>
-        <Field Name="Stag">
-          <DataField>Stag</DataField>
+        <Field Name="DescTheory">
+          <DataField>DescTheory</DataField>
         </Field>
-        <Field Name="CumSc">
-          <DataField>CumSc</DataField>
+        <Field Name="CreditHoursTheory">
+          <DataField>CreditHoursTheory</DataField>
         </Field>
-        <Field Name="CurrSem">
-          <DataField>CurrSem</DataField>
+        <Field Name="CreditHoursTheoryFormat">
+          <DataField>CreditHoursTheoryFormat</DataField>
         </Field>
-        <Field Name="Pic">
-          <DataField>Pic</DataField>
+        <Field Name="ProgrammeTheory">
+          <DataField>ProgrammeTheory</DataField>
         </Field>
-        <Field Name="Unit2">
-          <DataField>Unit2</DataField>
+        <Field Name="Academic_Year_Theory">
+          <DataField>Academic_Year_Theory</DataField>
         </Field>
-        <Field Name="Desc2">
-          <DataField>Desc2</DataField>
+        <Field Name="Unit_Stage_Theory">
+          <DataField>Unit_Stage_Theory</DataField>
         </Field>
-        <Field Name="CreditHours2">
-          <DataField>CreditHours2</DataField>
+        <Field Name="Student_No_Exam">
+          <DataField>Student_No_Exam</DataField>
         </Field>
-        <Field Name="CreditHours2Format">
-          <DataField>CreditHours2Format</DataField>
+        <Field Name="SemesterExam">
+          <DataField>SemesterExam</DataField>
         </Field>
-        <Field Name="Programme">
-          <DataField>Programme</DataField>
+        <Field Name="ProgrammeExam">
+          <DataField>ProgrammeExam</DataField>
         </Field>
-        <Field Name="Academic_Year">
-          <DataField>Academic_Year</DataField>
+        <Field Name="UnitExam">
+          <DataField>UnitExam</DataField>
         </Field>
-        <Field Name="Unit_Stage">
-          <DataField>Unit_Stage</DataField>
+        <Field Name="DescriptionExam">
+          <DataField>DescriptionExam</DataField>
         </Field>
-        <Field Name="Student_No_3">
-          <DataField>Student_No_3</DataField>
+        <Field Name="Unit_DescriptionExam">
+          <DataField>Unit_DescriptionExam</DataField>
         </Field>
-        <Field Name="Semester3">
-          <DataField>Semester3</DataField>
+        <Field Name="Academic_YearExam">
+          <DataField>Academic_YearExam</DataField>
         </Field>
-        <Field Name="Programme3">
-          <DataField>Programme3</DataField>
+        <Field Name="Credit_HoursExam">
+          <DataField>Credit_HoursExam</DataField>
         </Field>
-        <Field Name="Unit3">
-          <DataField>Unit3</DataField>
-        </Field>
-        <Field Name="Description3">
-          <DataField>Description3</DataField>
-        </Field>
-        <Field Name="Unit_Description3">
-          <DataField>Unit_Description3</DataField>
-        </Field>
-        <Field Name="Academic_Year3">
-          <DataField>Academic_Year3</DataField>
-        </Field>
-        <Field Name="Credit_Hours3">
-          <DataField>Credit_Hours3</DataField>
-        </Field>
-        <Field Name="Credit_Hours3Format">
-          <DataField>Credit_Hours3Format</DataField>
+        <Field Name="Credit_HoursExamFormat">
+          <DataField>Credit_HoursExamFormat</DataField>
         </Field>
       </Fields>
       <Query>
