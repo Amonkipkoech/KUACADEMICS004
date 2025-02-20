@@ -26,7 +26,6 @@ report 40007 "FinalNusring Transcript"
             }
             column(SemesterCsReg; Semester)
             {
-
             }
             column(infoName; info.Name)
             {
@@ -112,6 +111,13 @@ report 40007 "FinalNusring Transcript"
 
 
             }
+            dataitem(CompanyInformation2; "Company Information")
+            {
+                column(Picture2; Picture)
+                {
+
+                }
+            }
 
         }
     }
@@ -137,8 +143,8 @@ report 40007 "FinalNusring Transcript"
     var
         myInt: Integer;
     begin
-        info.CalcFields(Picture);
-        CompanyInformation.CalcFields(Picture);
+
+        CompanyInformation2.CalcFields(Picture)
     end;
 
     var
