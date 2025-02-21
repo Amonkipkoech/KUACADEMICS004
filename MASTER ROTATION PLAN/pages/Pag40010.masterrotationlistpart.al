@@ -107,40 +107,50 @@ page 40010 "Clinical Rotation List Part"
                 end;
             }
 
-            // action("ImportCSV")
-            // {
-            //     Caption = 'Import from CSV';
-            //     ApplicationArea = All;
-            //     Promoted = true;
-            //     PromotedCategory = Process;
-            //     Image = Import;
+            action("Export 2")
+            {
+                Caption = 'Export  2';
+                ApplicationArea = All;
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = Import;
 
-            //     trigger OnAction()
-            //     var
-            //         RecRef: RecordRef;
-            //         FieldRefs: array[20] of FieldRef;
-            //         FieldRefLength: Integer;
-            //         CsvHandler: Codeunit "Csv Handler";
-            //     begin
-            //         // Initialize RecordRef
-            //         RecRef.GetTable(Rec);
+                trigger OnAction()
+                var
+                    RecRef: RecordRef;
+                    FieldRefs: array[20] of FieldRef;
+                    FieldRefLength: Integer;
+                    CsvHandler: Codeunit "Csv Handler";
+                begin
 
-            //         // Define FieldRefs for import using explicit field IDs
-            //         FieldRefs[1] := RecRef.Field(1); // Replace with the correct field ID for "Date"
-            //         FieldRefs[2] := RecRef.Field(2); // Replace with the correct field ID for "Time"
-            //         FieldRefs[3] := RecRef.Field(3); // Replace with the correct field ID for "Rotation Area"
-            //         FieldRefs[4] := RecRef.Field(4); // Replace with the correct field ID for "Unit Coverage"
-            //         FieldRefs[5] := RecRef.Field(5);
-            //         FieldRefs[6] := RecRef.Field(6);
-            //         FieldRefs[7] := RecRef.Field(7);
+                    CsvHandler.ExportCsvFile('UnitCoverageImport.csv', RecRef, FieldRefs, FieldRefLength);
 
-            //         // Call ImportCsvFile
-            //         CsvHandler.ImportCsvFile('UnitCoverageImport.csv', RecRef, FieldRefs, FieldRefLength);
+                    // Refresh the page to show imported data
+                    CurrPage.Update();
+                end;
+            }
+            action("Import 2")
+            {
+                Caption = 'Import  2';
+                ApplicationArea = All;
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = Import;
 
-            //         // Refresh the page to show imported data
-            //         CurrPage.Update();
-            //     end;
-            // }
+                trigger OnAction()
+                var
+                    RecRef: RecordRef;
+                    FieldRefs: array[20] of FieldRef;
+                    FieldRefLength: Integer;
+                    CsvHandler: Codeunit "Csv Handler";
+                begin
+
+                    CsvHandler.ImportCsvFile('UnitCoverageImport.csv', RecRef, FieldRefs, FieldRefLength);
+
+                    // Refresh the page to show imported data
+                    CurrPage.Update();
+                end;
+            }
         }
     }
 }
