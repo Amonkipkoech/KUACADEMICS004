@@ -2854,8 +2854,8 @@ codeunit 40002 StaffPortall
         EmployeeCard.SETRANGE(EmployeeCard."No.", username);
         IF EmployeeCard.FIND('-') THEN BEGIN
             fablist.RESET;
-            fablist.SETRANGE(fablist."Programme Department", EmployeeCard."Department Code");
-            fablist.SETRANGE(fablist.Status, fablist.Status::"Pending Approval");
+            fablist.SETRANGE(fablist."First Degree Choice", EmployeeCard."Department Code");
+            fablist.SETRANGE(fablist.Status, fablist.Status::"Open");
             IF fablist.FIND('-') THEN BEGIN
                 REPEAT
                     programs.RESET;
@@ -2864,7 +2864,14 @@ codeunit 40002 StaffPortall
                         progname := programs.Description;
                         faculty := programs.Faculty;
                     END;
-                    apps += fablist."Application No." + ' ::' + progname + ' ::' + faculty + ' ::' + FORMAT(fablist."Application Date") + ' ::' + fablist."First Name" + ' ::' + fablist.Surname + ' ::' + FORMAT(fablist."Application Type") + ' :::';
+
+                    apps += fablist."Application No." + ' ::'
+                    + progname + ' ::' + faculty + ' ::'
+                    + FORMAT(fablist."Application Date") +
+                    ' ::' + fablist."First Name" + ' ::' +
+                     fablist.Surname + ' ::' +
+                     FORMAT(fablist."Application Type") + ' :::';
+
                 UNTIL fablist.Next = 0;
             END;
         END;

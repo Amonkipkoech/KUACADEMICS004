@@ -158,7 +158,7 @@ codeunit 86502 "studentportals"
         unitsOnOffer: Record "ACA-Units Offered";
         clinicals: Record "Clinical rotation";
         group: Record "GroupAssignments";
-    //discontinue: Record defferedStudents;
+        //discontinue: Record "defferedStudents";
 
 
 
