@@ -311,7 +311,7 @@ page 84527 "Fin temp App"
                     ApplicationArea = All;
                     Caption = 'Program Name';
                 }
-                field("Programme Faculty"; Rec."Programme Faculty")
+                field("Programme Faculty"; Rec."Programme School")
                 {
                     Caption = 'Programm Faculty Code';
                     ApplicationArea = All;
@@ -549,13 +549,13 @@ page 84527 "Fin temp App"
                     RunPageLink = "Application No." = FIELD("Application No.");
                     ApplicationArea = All;
                 }
-                action("Fee Payer Information")
-                {
-                    Image = Customer;
-                    RunObject = Page 69304;
-                    RunPageLink = "Application No." = FIELD("Application No.");
-                    ApplicationArea = All;
-                }
+                // action("Fee Payer Information")
+                // {
+                //     Image = Customer;
+                //     RunObject = Page 69304;
+                //     RunPageLink = "Application No." = FIELD("Application No.");
+                //     ApplicationArea = All;
+                // }
                 // action("Upload Attachments")
                 // {
                 //     ApplicationArea = all;
@@ -752,7 +752,7 @@ page 84527 "Fin temp App"
         Text19076066: Label 'Personal Details';
         Text19060472: Label 'Degree Choices';
         Text19037194: Label 'Academic Background';
-        UserMgt: Codeunit 50114;
+        UserMgt: Codeunit "User Management";
         Doc_Type: Option LPO,Requisition,Imprest,"Payment Voucher";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,Admission;
 

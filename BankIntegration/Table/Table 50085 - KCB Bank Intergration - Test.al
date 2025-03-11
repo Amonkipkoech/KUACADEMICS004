@@ -15,7 +15,7 @@ table 54420 "KCB Bank Intergration - Test"
         {
             DataClassification = ToBeClassified;
         }
-        field(4; billAmount; Decimal)
+        field(4; billAmount; Code[20])
         {
             DataClassification = ToBeClassified;
         }

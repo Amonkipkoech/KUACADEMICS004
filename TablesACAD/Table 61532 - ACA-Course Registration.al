@@ -1478,6 +1478,18 @@ table 61532 "ACA-Course Registration"
             Editable = false;
             FieldClass = FlowField;
         }
+        field(211; "Units theory Taken"; Integer)
+        {
+
+            CalcFormula = Count("ACA-Student Theory Units " WHERE("Student No." = FIELD("Student No."),
+                                                           Programme = FIELD(Programmes),
+                                                           Stage = field(Stage),
+                                                           Reversed = FILTER(false),
+                                                           Semester = FIELD(Semester)));
+            Editable = false;
+            FieldClass = FlowField;
+
+        }
         field(22; "User ID"; Code[50])
         {
         }
@@ -1914,8 +1926,8 @@ table 61532 "ACA-Course Registration"
         {
             CalcFormula = Lookup(Customer.Status WHERE("No." = FIELD("Student No.")));
             FieldClass = FlowField;
-            OptionCaption = 'Registration,Current,Alluminae,Dropped Out,Differed,Suspended,Expulsion,Discontinued,Deferred,Deceased,Transferred';
-            OptionMembers = Registration,Current,Alluminae,"Dropped Out",Differed,Suspended,Expulsion,Discontinued,Deferred,Deceased,Transferred;
+            OptionCaption = 'Registration,Current,Alluminae,Dropped Out,Differed,Suspended,Expulsion,Discontinued,Deferred,Deceased,Transferred,Disciplinary,Graduated,Completed,Alumnae,Demoted, Other';
+            OptionMembers = Registration,Current,Alluminae,"Dropped Out",Differed,Suspended,Expulsion,Discontinued,Deferred,Deceased,Transferred,Disciplinary,Graduated,Completed,Alumnae,Demoted,Other;
         }
         field(83; "Account Count"; Integer)
         {

@@ -32,8 +32,14 @@ page 68760 "ACA-General Set-Up"
                 {
                     ApplicationArea = All;
                 }
-                field("Class Allocation Nos."; Rec."Class Allocation Nos.")
+                field("Gown Issuance"; Rec."Class Allocation Nos.")
                 {
+                    Caption = 'Gown Issuance';
+                    ApplicationArea = All;
+                }
+                field("Clinical request"; rec."Clinical request")
+                {
+                    Caption = 'Clinical request';
                     ApplicationArea = All;
                 }
                 field("Defered Account"; Rec."Defered Account")
@@ -88,8 +94,9 @@ page 68760 "ACA-General Set-Up"
                 {
                     ApplicationArea = All;
                 }
-                field("Clearance Nos"; Rec."Clearance Nos")
+                field("Master Rotation Nos"; Rec."Clearance Nos")
                 {
+                    Caption = 'Master Rotation Nos';
                     ApplicationArea = All;
                 }
                 field("Proforma Nos"; Rec."Proforma Nos")
@@ -177,7 +184,7 @@ page 68760 "ACA-General Set-Up"
                     ToolTip = 'Specifies the value of the Scholarship Nos. field.';
                     ApplicationArea = All;
                 }
-                field("Receipt Buffer Nos";Rec."Receipt Buffer Nos")
+                field("Receipt Buffer Nos"; Rec."Receipt Buffer Nos")
                 {
                     ApplicationArea = All;
                 }
@@ -186,7 +193,17 @@ page 68760 "ACA-General Set-Up"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Deferral Nos. field.';
                 }
-                field("Release Proforma Invoice";Rec."Release Proforma Invoice")
+                field("Student Clearance Request"; rec."Student Clearance Request")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Deferral Nos. field.';
+                }
+                field("Release Proforma Invoice"; Rec."Release Proforma Invoice")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Release Proforma Invoice';
+                }
+                field("Supplimentary No.";"Supplimentary No.")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Release Proforma Invoice';
@@ -201,7 +218,7 @@ page 68760 "ACA-General Set-Up"
                     Caption = 'Signature';
                     ApplicationArea = All;
                 }
-                field("Student Portal Message";Rec."Student Portal Message")
+                field("Student Portal Message"; Rec."Student Portal Message")
                 {
                     ApplicationArea = All;
                     MultiLine = true;

@@ -2235,7 +2235,7 @@ report 51698 "Consolidated Marksheet 2"
                             */
                             //Grades
                             //Course Category
-                            IF UnitsR."Unit Type" = UnitsR."Unit Type"::Elective THEN
+                            IF UnitsR."Unit Type" = UnitsR."Unit Type"::Exam THEN
                                 CCat := '-'
                             ELSE
                                 CCat := '';
@@ -2771,7 +2771,7 @@ report 51698 "Consolidated Marksheet 2"
                                         ShowCount := ShowCount + 1;
                                         UnitsR.Show := TRUE;
                                         //IF StudUnits."Reg Option"=CReg.Options THEN
-                                        IF UnitsR."Unit Type" = UnitsR."Unit Type"::Core THEN
+                                        IF UnitsR."Unit Type" = UnitsR."Unit Type"::Exam THEN
                                             UnitsR.MODIFY;
 
                                         IF StudUnits."Reg Option" = CReg.Options THEN

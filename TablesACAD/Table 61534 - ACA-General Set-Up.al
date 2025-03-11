@@ -64,6 +64,10 @@ table 61534 "ACA-General Set-Up"
         {
             TableRelation = "G/L Account"."No.";
         }
+        field(126; "Student Clearance Request"; Code[20])
+        {
+            TableRelation = "No. Series".Code;
+        }
         field(17; "Clearance Nos"; Code[20])
         {
             TableRelation = "No. Series".Code;
@@ -260,7 +264,26 @@ table 61534 "ACA-General Set-Up"
             DataClassification = ToBeClassified;
             TableRelation = "No. Series";
         }
-       
+        field(50073; "Fee Exempt Nos"; code[20])
+        {
+
+            DataClassification = ToBeClassified;
+            TableRelation = "No. Series";
+        }
+        field(50074; "Clinical request"; code[20])
+        {
+
+            DataClassification = ToBeClassified;
+            TableRelation = "No. Series";
+        }
+         field(50075; "Supplimentary No."; code[20])
+        {
+
+            DataClassification = ToBeClassified;
+            TableRelation = "No. Series";
+        }
+
+
     }
 
     keys
@@ -274,4 +297,3 @@ table 61534 "ACA-General Set-Up"
     {
     }
 }
-

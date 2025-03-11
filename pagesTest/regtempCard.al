@@ -298,7 +298,7 @@ page 84524 "REG temp App"
                     ApplicationArea = All;
                     Caption = 'Program Name';
                 }
-                field("Programme Faculty"; Rec."Programme Faculty")
+                field("Programme Faculty"; Rec."Programme School")
                 {
                     Caption = 'Programm Faculty Code';
                     ApplicationArea = All;
@@ -506,6 +506,33 @@ page 84524 "REG temp App"
 
 
             }
+            group("Employment Details")
+            {
+                field("First Employer Name "; rec."First Employer Name ")
+                {
+                    ApplicationArea = all;
+                }
+                field(" First Department/Unit"; rec." First Department/Unit")
+                {
+                    ApplicationArea = all;
+                }
+                field(" First Employment Duration"; rec." First Employment Duration")
+                {
+                    ApplicationArea = all;
+                }
+                field("Second Employer Name "; rec."Second Employer Name ")
+                {
+                    ApplicationArea = all;
+                }
+                field(" Second Department/Unit"; rec." Second Department/Unit")
+                {
+
+                }
+                field("Second Employment Duration"; rec."Second Employment Duration")
+                {
+
+                }
+            }
         }
     }
 
@@ -533,13 +560,13 @@ page 84524 "REG temp App"
                     RunPageLink = "Application No." = FIELD("Application No.");
                     ApplicationArea = All;
                 }
-                action("Fee Payer Information")
-                {
-                    Image = Customer;
-                    RunObject = Page 69304;
-                    RunPageLink = "Application No." = FIELD("Application No.");
-                    ApplicationArea = All;
-                }
+                // action("Fee Payer Information")
+                // {
+                //     Image = Customer;
+                //     RunObject = Page 69304;
+                //     RunPageLink = "Application No." = FIELD("Application No.");
+                //     ApplicationArea = All;
+                // }
                 // action("Upload Attachments")
                 // {
                 //     ApplicationArea = all;

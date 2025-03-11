@@ -88,7 +88,7 @@ page 68861 "ACA-Academics Role Center"
                     {
                         Image = FixedAssetLedger;
 
-
+                        Caption = 'Semester';
                         RunObject = Page 68744;
                         ApplicationArea = All;
                     }
@@ -235,8 +235,6 @@ page 68861 "ACA-Academics Role Center"
                     {
                         Caption = '<Exam Setup>';
                         Image = SetupColumns;
-
-
                         RunObject = Page 68800;
                         ApplicationArea = All;
                     }
@@ -292,34 +290,27 @@ page 68861 "ACA-Academics Role Center"
                 {
                     Caption = 'Applications & General setup';
                     Image = Job;
+                    Visible = false;
                     action("Online Enquiries")
                     {
                         Image = NewOrder;
-
-
                         RunObject = Page 68292;
                         ApplicationArea = All;
+                        Visible = false;
                     }
-                    action("Online Applications")
-                    {
-                        Image = NewCustomer;
 
-
-                        //RunObject = Page 50021;
-                        ApplicationArea = All;
-                    }
                     action("Admission Applications")
                     {
                         Image = NewCustomer;
 
 
-                        RunObject = Page 50059;
+                        RunObject = Page "ACA-Applications List";
                         ApplicationArea = All;
                     }
                     action("Approved Applications")
                     {
                         Image = Archive;
-
+                        Visible = false;
                         RunObject = Page 68011;
                         ApplicationArea = All;
                     }
@@ -357,14 +348,14 @@ page 68861 "ACA-Academics Role Center"
                     action("Rejected Applications")
                     {
                         Image = Reject;
-
+                        Caption = 'Admission Board Rejected';
                         RunObject = Page 68012;
                         ApplicationArea = All;
                     }
                     action("Cancelled Applications")
                     {
                         Image = Cancel;
-
+                        Caption = 'Department Rejected';
                         RunObject = Page 68009;
                         ApplicationArea = All;
                     }
@@ -378,9 +369,8 @@ page 68861 "ACA-Academics Role Center"
                     Image = ResourcePlanning;
                     action("Admissions Summary")
                     {
-                        Caption = 'Admissions Summary';
-                        Image = Report;
 
+                        Caption = 'Applicant  Summary Report';
 
                         RunObject = Report 86663;
                         ApplicationArea = All;
@@ -390,11 +380,17 @@ page 68861 "ACA-Academics Role Center"
                     {
                         Caption = 'Admission By Program';
                         Image = Report;
-
-
                         RunObject = Report 69286;
                         ApplicationArea = All;
                         Visible = false;
+                    }
+                    action("NCK Indexing Report")
+                    {
+                        Caption = 'NCK Indexing Report';
+                        Image = Report;
+                        RunObject = Report "NCK Report ";
+                        ApplicationArea = All;
+                        Visible = true;
                     }
                     action("Admission Summary 2")
                     {
@@ -403,7 +399,7 @@ page 68861 "ACA-Academics Role Center"
 
 
                         ApplicationArea = All;
-                        //  RunObject = Report 69287;
+                        // RunObject = Report 69287;
                         Visible = false;
                     }
                     action("New Applications")
@@ -449,7 +445,7 @@ page 68861 "ACA-Academics Role Center"
                     action("Direct Applications")
                     {
                         Image = Report;
-
+                        Visible = false;
 
                         RunObject = Report 51379;
                         ApplicationArea = All;
@@ -466,15 +462,14 @@ page 68861 "ACA-Academics Role Center"
                     {
                         Image = Report;
 
-
+                        Visible = false;
                         RunObject = Report 51350;
                         ApplicationArea = All;
                     }
                     action("Applicant Shortlisting (Summary)")
                     {
                         Image = Report;
-
-
+                        Visible = false;
                         RunObject = Report 51365;
                         ApplicationArea = All;
                     }
@@ -482,7 +477,7 @@ page 68861 "ACA-Academics Role Center"
                     {
                         Image = Report;
 
-
+                        Visible = false;
                         RunObject = Report 51364;
                         ApplicationArea = All;
                     }
@@ -490,7 +485,7 @@ page 68861 "ACA-Academics Role Center"
                     {
                         Image = Report;
 
-
+                        Visible = false;
                         RunObject = Report "Class Splits Reports";
                         ApplicationArea = All;
                     }
@@ -626,9 +621,50 @@ page 68861 "ACA-Academics Role Center"
                     action("Transcript")
                     {
                         Image = Register;
-                        RunObject = Report "Final Graduation Transcript";
+                        RunObject = Report "Provisional College Transcrip3";
                         ApplicationArea = All;
                     }
+                    action("Final Transcript ")
+
+                    {
+                        Image = Register;
+                        RunObject = report "FinalNusring Transcript";
+                        ApplicationArea = all;
+                    }
+
+                    action("Assessment Card")
+                    {
+                        Image = Register;
+                        RunObject = Report "Assesment Form";//"master Rotation Table"
+                        ApplicationArea = All;
+                    }
+                    action("mrp")
+                    {
+                        Image = Register;
+                        Caption = 'mrp report 3';
+                        RunObject = report "Mrp Report 3 ";
+                        ApplicationArea = ALL;
+                    }
+                    action(ActionName)
+                    {
+                        Image = Register;
+                        Caption = 'mrp report 2';
+                        RunObject = report "Mrp Report 2 ";
+                        ApplicationArea = ALL;
+
+                    }
+                    action("Master Rotation ")
+                    {
+                        Image = Register;
+                        RunObject = Report "master Rotation Table";//"master Rotation Table"
+                        ApplicationArea = All;
+                    }
+                    // action("Master Rotation ")
+                    // {
+                    //     Image = Register;
+                    //     RunObject = Report "master Rotation Table";//"master Rotation Table"
+                    //     ApplicationArea = All;
+                    // }
                     action("Graduation Tracker")
                     {
                         Image = Register;
@@ -639,7 +675,7 @@ page 68861 "ACA-Academics Role Center"
                     {
                         Image = ResourceSkills;
 
-
+                        Caption = 'Block/Session';
                         RunObject = Report "Provisional Transcript2";
                         ApplicationArea = All;
                     }
@@ -647,7 +683,7 @@ page 68861 "ACA-Academics Role Center"
                     {
                         Caption = 'Exam Attendance';
                         Image = Report;
-                        RunObject = Report 84509;
+                        RunObject = Report "Exam Attendance Clearance";
                         ApplicationArea = All;
 
                     }
@@ -865,10 +901,10 @@ page 68861 "ACA-Academics Role Center"
             }
             action("Semester Setup")
             {
-                Caption = 'Semester Setup';
+
                 Image = FixedAssetLedger;
 
-
+                caption = 'Block/Session';
                 RunObject = Page 68744;
                 ApplicationArea = All;
             }
@@ -948,8 +984,20 @@ page 68861 "ACA-Academics Role Center"
 
                 action(allApps)
                 {
-                    Caption = 'SRO';
+                    Caption = 'All Applications';
                     RunObject = Page "ACA-Application Form H. list";
+                    ApplicationArea = All;
+                }
+                action(International)
+                {
+                    Caption = 'International Students';
+                    RunObject = Page "International Applicants";
+                    ApplicationArea = All;
+                }
+                action(Domestic)
+                {
+                    Caption = 'Domestic  Students';
+                    RunObject = Page "Applicants Domestic";
                     ApplicationArea = All;
                 }
                 action(process)
@@ -962,42 +1010,45 @@ page 68861 "ACA-Academics Role Center"
 
                 action(Applications)
                 {
-                    Caption = 'Departmental Admission Board';
+                    Caption = 'Departmental  Approval';
                     RunObject = Page "DAB List";
                     ApplicationArea = All;
                 }
                 action(dabReject)
                 {
-                    Caption = 'DAB Rejected';
+                    Caption = 'HoD Rejected';
                     RunObject = Page "DAB Rejection List";
                     ApplicationArea = All;
                 }
 
                 action("Faculty Admission Board")
                 {
+                    Caption = 'HoS Approval';
                     ApplicationArea = All;
                     RunObject = Page "Applications FAB List";
                 }
                 action("Faculty Applications")
                 {
+
                     ApplicationArea = All;
                     RunObject = Page "ACA-FAB Applications";
                     Visible = false;
                 }
                 action("Faculty Rejections")
                 {
+                    Caption = 'HoS Rejected';
                     ApplicationArea = All;
                     RunObject = Page "FAB Rejection List";
                 }
                 action("UABC Admission Board")
                 {
-                    Caption = 'UAB Admission Board';
+                    Caption = 'Registrar Ratification';
                     ApplicationArea = All;
                     RunObject = Page "Applications UABC List";
                 }
                 action("UAB Reject")
                 {
-                    Caption = 'UAB Reject';
+                    Caption = 'Registrar Ratification';
                     ApplicationArea = All;
                     RunObject = Page "ACA-Rejected Applications List";
                 }
@@ -1015,8 +1066,9 @@ page 68861 "ACA-Academics Role Center"
                     Visible = true;
                     ApplicationArea = All;
                 }
-                action("Registration KUCCPS")
+                action("Registration ")
                 {
+                    Caption = 'Admission';
                     RunObject = Page "ACA-KUCCPS Student Reg";
                     Visible = true;
                     ApplicationArea = All;
@@ -1047,10 +1099,16 @@ page 68861 "ACA-Academics Role Center"
                     RunObject = Page "Units Offered Batches";
                     ApplicationArea = All;
                 }
+                action("Time Timetable")
+                {
+                    Caption = 'Time Timetable';
+                    RunObject = Page "Time Table";
+                    ApplicationArea = All;
+                }
                 action("Exam Timetable1")
                 {
                     Caption = 'Exam Timetable';
-                    RunObject = Page "ACA-Exam Units";
+                    RunObject = Page "ACA-Exam Units";//"Time Table"
                     ApplicationArea = All;
                 }
                 action("Associate Units")
@@ -1163,15 +1221,85 @@ page 68861 "ACA-Academics Role Center"
                     ApplicationArea = All;
                 }
             }
-            group("Master Rotation Plan")
+            group("Supplementary Applications")
             {
-                Caption = 'Master Rotation Plan';
+                action("Open Applications")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Open Supp Applications';
+                    RunObject = page "Supp Exam Registration List";
+                    RunPageView = where(Status = const(Open));
+                }
+                action("Pending Applications")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Pending Approval Supp Appl';
+                    RunObject = page "Supp Exam Registration List";
+                    RunPageView = where(Status = const("Pending Approval"));
+                }
+                action("Approved  Supp Applications")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Approved Supp Applications';
+                    RunObject = page "Supp Exam Registration List";
+                    RunPageView = where(Status = const(Approved));
+                }
+                action("Rejected  Supp Applications")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Rejected Supp Applications';
+                    RunObject = page "Supp Exam Registration List";
+                    RunPageView = where(Status = const(Rejected));
+                }
+            }
+
+            group("XY Form")
+            {
+                Caption = 'XY Form';
+                Image = ResourcePlanning;
+
+                action("Open master rotation list@")
+                {
+                    Caption = 'Created XY Form ';
+                    Image = Allocate;
+                    RunObject = Page "XY form";
+                    RunPageView = where(status = const(open));
+
+                    ApplicationArea = All;
+                }
+                action("master rotation list@")
+                {
+                    Caption = 'Pending XY Form ';
+                    Image = Allocate;
+                    RunObject = Page "XY form";
+                    RunPageView = where(status = const("pending"));
+
+                    ApplicationArea = All;
+                }
+                action("master rotation list")
+                {
+                    Image = Allocate;
+                    Caption = 'Approved XY Form';
+                    RunObject = Page "XY form";
+                    RunPageView = where(Status = const("Approved"));
+                    ApplicationArea = All;
+                }
+
+
+
+
+            }
+            group(GroupName)
+            {
+
+                Caption = 'Master Rotation';
                 Image = ResourcePlanning;
                 action("Students on Session")
                 {
                     Image = Allocate;
                     RunObject = Page "Student Session Registration";
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 action("Rotation Areas")
                 {
@@ -1179,86 +1307,161 @@ page 68861 "ACA-Academics Role Center"
                     RunObject = Page "Rotation Areas";
                     ApplicationArea = All;
                 }
-                action("Rotation Schedule")
+                action("Group Assignmnets ")
                 {
                     Image = Allocate;
-                    RunObject = Page "Full Rotation Schedule";
-                    ApplicationArea = All;
-                }
-                action("master rotation list")
-                {
-                    Image = Allocate;
-                    RunObject = Page "master rotation list ";
+                    RunObject = Page "Group Assignmnets ";
                     ApplicationArea = All;
                 }
 
+                action("Open Department MRP")
+                {
+                    Image = Allocate;
+                    Caption = 'Open Department MRP';
+                    RunObject = Page "MRP List";
 
+                    ApplicationArea = All;
+                }
+                action("Pending Approval Dep MRP")
+                {
+                    Image = Allocate;
+                    Caption = 'Pending Approval Dep MRP';
+                    RunObject = Page "Mrp Pending Approval";
+
+                    ApplicationArea = All;
+                }
+                action("Approved Dep MRP ")
+                {
+                    Image = Allocate;
+                    Caption = ' Approved Dep MRP';
+                    RunObject = Page "Mrp Approved ";
+                    ApplicationArea = All;
+                }
             }
+            group(GroupName2)
+            {
+
+                Caption = 'Master Rotation 2';
+                Image = ResourcePlanning;
+
+                action("Rotation Areas2")
+                {
+                    Image = Allocate;
+                    Caption = 'Rotation Areas';
+                    RunObject = Page "Rotation Areas";
+                    ApplicationArea = All;
+                }
+                action("Group Assignmnets2 ")
+                {
+                    Image = Allocate;
+                    Caption = 'Group Assignments';
+                    RunObject = Page "Group Assignmnets ";
+                    ApplicationArea = All;
+                }
+
+                action("Open Department MRP2")
+                {
+                    Image = Allocate;
+                    Caption = 'Open Department MRP';
+                    RunObject = Page "MRP List";
+
+                    ApplicationArea = All;
+                }
+                action("Pending Approval Dep MRP2")
+                {
+                    Image = Allocate;
+                    Caption = 'Pending Approval Dep MRP';
+                    RunObject = Page "Mrp Pending Approval";
+
+                    ApplicationArea = All;
+                }
+                action("Approved Dep MRP2 ")
+                {
+                    Image = Allocate;
+                    Caption = ' Approved Dep MRP';
+                    RunObject = Page "Mrp Approved ";
+                    ApplicationArea = All;
+                }
+            }
+
             group(LectMan)
             {
                 Caption = 'Lecturer Management';
                 Image = HumanResources;
                 action(SemBatches)
                 {
-                    Caption = 'Lect. Loading Semester Batches';
+                    Caption = 'Lecturer Block/Session Batches';
                     Image = Register;
                     RunObject = Page 65210;
                     ApplicationArea = All;
                 }
-                action(LoadApp)
+                action("Active Lecturers")
                 {
-                    Caption = 'Loading Approvals';
+                    Caption = 'Active Lecturers';
                     Image = Registered;
-
-
-
-                    RunObject = Page 65215;
+                    RunObject = Page 68167;
                     ApplicationArea = All;
+                    RunPageLink = Status = const(Active);
                 }
-                action(ApprovedLoad)
+                action("InActive Lecturers")
                 {
-                    Caption = 'Approved Loading';
-                    RunObject = Page 65227;
-                    ApplicationArea = All;
-                }
-                action(ClaimsGen)
-                {
-                    Caption = 'Lect. Claim Generation';
-                    RunObject = Page 65216;
-                    ApplicationArea = All;
-                }
-                action(LoadPendingDeptApp)
-                {
-                    Caption = 'Loading Pending Dept. Approval';
+                    Caption = 'InActive Lecturers';
                     Image = Registered;
-
-
-
-                    RunObject = Page 65226;
+                    RunObject = Page 68167;
                     ApplicationArea = All;
+                    RunPageLink = Status = const(Inactive);
                 }
-                action(PostedSemBatches)
+                action(ProgrammLeaders)
                 {
-                    Caption = 'Posted Load Batches';
-                    RunObject = Page 65217;
-                    ApplicationArea = All;
+                    Caption = 'Program Leaders';
+                    RunObject = page "Programme Leaders Card";
+                    ApplicationArea = all;
+
                 }
-                action(LoadHist)
-                {
-                    Caption = 'Loading History';
-                    RunObject = Page 65225;
-                    ApplicationArea = All;
-                }
-                action(LoadCentralSetup)
-                {
-                    Caption = 'Loading Central Setup';
-                    Image = Registered;
+                // action(ApprovedLoad)
+                // {
+                //     Caption = 'Approved Loading';
+                //     RunObject = Page 65227;
+                //     ApplicationArea = All;
+                // }
+                // action(ClaimsGen)
+                // {
+                //     Caption = 'Lect. Claim Generation';
+                //     RunObject = Page 65216;
+                //     ApplicationArea = All;
+                // }
+                // action(LoadPendingDeptApp)
+                // {
+                //     Caption = 'Loading Pending Dept. Approval';
+                //     Image = Registered;
 
 
 
-                    RunObject = Page 65204;
-                    ApplicationArea = All;
-                }
+                //     RunObject = Page 65226;
+                //     ApplicationArea = All;
+                // }
+                // action(PostedSemBatches)
+                // {
+                //     Caption = 'Posted Load Batches';
+                //     RunObject = Page 65217;
+                //     ApplicationArea = All;
+                // }
+                // action(LoadHist)
+                // {
+                //     Caption = 'Loading History';
+                //     RunObject = Page 65225;
+                //     ApplicationArea = All;
+                // }
+                // action(LoadCentralSetup)
+                // {
+                //     Caption = 'Loading Central Setup';
+                //     Image = Registered;
+
+
+
+                //     RunObject = Page 65204;
+                //     ApplicationArea = All;
+                // }
             }
             group("Part-Time Claims")
             {
@@ -1281,13 +1484,23 @@ page 68861 "ACA-Academics Role Center"
                 {
                     Caption = 'Teaching Timetable';
                     Image = Register;
+                    RunObject = Page "Time Table List";
+                    ApplicationArea = All;
+
+                }
+                action(TimetableCentral1)
+                {
+                    Caption = 'Teaching Timetable';
+                    Image = Register;
                     RunObject = Page "TT-Timetable Batches";
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 action("Exam Timetable")
                 {
                     Caption = 'Exam Timetable';
                     RunObject = Page "EXT-Timetable Batches";
+                    Visible = false;
                     ApplicationArea = All;
                 }
             }
@@ -1296,8 +1509,6 @@ page 68861 "ACA-Academics Role Center"
                 action(Evaluation)
                 {
                     ApplicationArea = All;
-
-
                     RunObject = page "ACA-Evaluation Semesters List";
                 }
                 action("Evaluation Results")
@@ -1539,6 +1750,7 @@ page 68861 "ACA-Academics Role Center"
                         Caption = 'PRogram Study Plan';
                         Image = Report;
                         RunObject = Report 51203;
+                        Visible = false;
                         ApplicationArea = All;
                     }
                     action(unitsOff)
@@ -1546,6 +1758,7 @@ page 68861 "ACA-Academics Role Center"
                         Caption = 'Units On Offer';
                         Image = Report;
                         RunObject = Report 86522;
+                        Visible = false;
                         ApplicationArea = All;
                     }
                     action("Student Applications Report")
@@ -1553,6 +1766,7 @@ page 68861 "ACA-Academics Role Center"
                         Caption = 'Student Applications Report';
                         Image = Report;
                         RunObject = Report 51862;
+                        Visible = false;
                         ApplicationArea = All;
                     }
                     action("Norminal Roll")

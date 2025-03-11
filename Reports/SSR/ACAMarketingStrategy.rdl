@@ -8,6 +8,7 @@
         <ConnectString />
       </ConnectionProperties>
       <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>19461573-e840-4adc-9a3b-2e61e7d2a5a0</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <ReportSections>
@@ -23,6 +24,7 @@
                   <TextRun>
                     <Value>Matketing Strategy Report</Value>
                     <Style>
+                      <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
@@ -31,10 +33,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.18625in</Top>
-            <Left>0.24875in</Left>
+            <Top>0.96056in</Top>
+            <Left>2.18625in</Left>
             <Height>0.25in</Height>
-            <Width>3.05208in</Width>
+            <Width>2.01167in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -720,9 +722,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>0.74875in</Top>
+            <Top>1.28in</Top>
+            <Left>0.125in</Left>
             <Height>1in</Height>
-            <Width>6.5in</Width>
+            <Width>6.50001in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -730,11 +733,114 @@
               </Border>
             </Style>
           </Tablix>
+          <Image Name="Image1">
+            <Source>Database</Source>
+            <Value>=First(Fields!info_picture.Value, "DataSet_Result")</Value>
+            <MIMEType>image/png</MIMEType>
+            <Sizing>FitProportional</Sizing>
+            <Top>0.25917in</Top>
+            <Left>0.24875in</Left>
+            <Height>0.82292in</Height>
+            <Width>1.48958in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Textbox Name="Textbox3">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!info_name.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>0.11333in</Top>
+            <Left>2.19667in</Left>
+            <Height>0.25in</Height>
+            <Width>3.05208in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!info_email.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!info_Tel.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>0.47792in</Top>
+            <Left>2.24875in</Left>
+            <Height>0.42708in</Height>
+            <Width>2.59375in</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>2in</Height>
+        <Height>2.55208in</Height>
         <Style />
       </Body>
-      <Width>6.5in</Width>
+      <Width>6.91668in</Width>
       <Page>
         <Style />
       </Page>
@@ -778,11 +884,24 @@ End Function
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>8a14ce85-be4f-4769-8f86-03ba60983d9e</rd:ReportID>
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
         <Field Name="mktDesc_desc">
           <DataField>mktDesc_desc</DataField>
+        </Field>
+        <Field Name="info_picture">
+          <DataField>info_picture</DataField>
+        </Field>
+        <Field Name="info_name">
+          <DataField>info_name</DataField>
+        </Field>
+        <Field Name="info_email">
+          <DataField>info_email</DataField>
+        </Field>
+        <Field Name="info_Tel">
+          <DataField>info_Tel</DataField>
         </Field>
         <Field Name="No">
           <DataField>No</DataField>

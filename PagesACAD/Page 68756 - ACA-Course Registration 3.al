@@ -62,7 +62,7 @@ page 68756 "ACA-Course Registration 3"
                 }
                 field(Semester; Rec.Semester)
                 {
-                    Caption = 'Semester';
+                    Caption = 'Block/Session';
                     ApplicationArea = All;
                 }
                 field("Campus Code"; Rec."Campus Code")
@@ -126,6 +126,13 @@ page 68756 "ACA-Course Registration 3"
                 field("Units Taken"; Rec."Units Taken")
                 {
                     Editable = true;
+                    Caption = 'Student Exam Units';
+                    ApplicationArea = All;
+                }
+                field("Units theory Taken"; Rec."Units theory Taken")
+                {
+                    Editable = true;
+                    Caption = 'Student Theory Units';
                     ApplicationArea = All;
                 }
 
@@ -265,12 +272,28 @@ page 68756 "ACA-Course Registration 3"
                 Image = LotInfo;
                 action("Student Units")
                 {
-                    Caption = 'Student Units';
+                    Caption = 'Student Exam Units';
                     Image = BOMRegisters;
                     Promoted = true;
                     PromotedCategory = Process;
                     PromotedIsBig = true;
                     RunObject = Page "ACA-Student Units";
+                    RunPageLink = "Student No." = FIELD("Student No."),
+                                  Semester = FIELD(Semester),
+                                  Programme = FIELD(Programmes),
+                                  Reversed = FILTER(false),
+                                  Stage = FIELD(Stage),
+                                  "Academic Year" = FIELD("Academic Year");
+                    ApplicationArea = All;
+                }
+                action("Student theory Units")
+                {
+                    Caption = 'Student  theory Units';
+                    Image = BOMRegisters;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedIsBig = true;
+                    RunObject = Page "ACA-Student Theory Units";
                     RunPageLink = "Student No." = FIELD("Student No."),
                                   Semester = FIELD(Semester),
                                   Programme = FIELD(Programmes),

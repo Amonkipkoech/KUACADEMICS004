@@ -5,17 +5,63 @@ table 40010 "Clinical rotation"
 
     fields
     {
+        field(111; "No."; Integer)
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'No';
+            AutoIncrement = true;
+            Editable = false; // Set to false as it will be auto-generated
+        }
         field(1; "Plan ID"; Code[20])
         {
             DataClassification = ToBeClassified;
             Caption = 'Plan ID';
+            TableRelation = "Master Rotation Plan2"."Plan ID";
+            Editable = false; // Set to false as it will be auto-generated
+        }
+        field(90; "Year"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Academic Year';
+            TableRelation = "Master Rotation Plan2".Year;
+            Editable = false; // Set to false as it will be auto-generated
+        }
+        field(91; "Session"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Session';
+            TableRelation = "Master Rotation Plan2".Session;
             Editable = false; // Set to false as it will be auto-generated
         }
 
-
-        field(2; "Week No"; Integer)
+        field(92; Department; Code[50])
         {
             DataClassification = ToBeClassified;
+            Caption = 'Department';
+            TableRelation = "Master Rotation Plan2".Department;
+            Editable = false; // Set to false as it will be auto-generated
+        }
+        field(93; program; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'program ';
+            TableRelation = "Master Rotation Plan2"."Program Code";
+            Editable = false; // Set to false as it will be auto-generated
+        }
+        field(94; Status; Enum "Mrp Status Approval")
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Status ';
+            TableRelation = "Master Rotation Plan2".Status;
+            Editable = false; // Set to false as it will be auto-generated
+        }
+        field(2; "No Of Students"; Integer)
+        {
+
+            FieldClass = FlowField;
+            CalcFormula = count(GroupAssignments where("Groupid" = field("Group")));
+
+
         }
 
         field(3; Group; Code[50])
@@ -38,11 +84,12 @@ table 40010 "Clinical rotation"
         {
             DataClassification = ToBeClassified;
         }
-
-        field(7; Department; Code[50])
+        field(7; Week; Integer)
         {
             DataClassification = ToBeClassified;
         }
+
+
 
         field(8; Areas; Code[50])
         {
@@ -55,9 +102,10 @@ table 40010 "Clinical rotation"
             DataClassification = ToBeClassified;
             Description = 'Stores the number series in the database';
         }
-        field(10; Block; Text[100])
+        field(10; Block7; enum "Block Category Enum")
         {
             DataClassification = ToBeClassified;
+            TableRelation = "Master Rotation Plan2".Block;
             Description = 'Block Name';
         }
         field(11; "Assessment Start Date"; Date)
@@ -90,13 +138,40 @@ table 40010 "Clinical rotation"
             DataClassification = ToBeClassified;
             Description = 'Master Plan Number';
         }
+        field(17; "Lecturer No"; Text[20])
+        {
+            DataClassification = ToBeClassified;
+            Description = 'Lecturer Number';
+        }
+        field(18; "Lecturer Name"; Text[20])
+        {
+            DataClassification = ToBeClassified;
+            Description = 'Lecturer Name';
+        }
+        field(19; "Block 1"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "Master Rotation Table"."Block Name";
+            Description = 'Lecturer Name';
+        }
+        field(20; "Block 2"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            Description = 'Lecturer Name';
+        }
+        field(21; "Block 3"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            Description = 'Lecturer Name';
+        }
+
 
         // Add additional fields as needed
     }
 
     keys
     {
-        key(PK; "Plan ID", Department)
+        key(PK; "No.", "Plan ID", Year, Session, Department, program, Status)
         {
             Clustered = true;
         }

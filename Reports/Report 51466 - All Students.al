@@ -172,6 +172,21 @@ report 51466 "All Students"
             column(Phone; Cust."Phone No.")
             {
             }
+            column(info_name; info.Name)
+            {
+            }
+            column(info_mail; info."E-Mail")
+            {
+            }
+            column(info_pic; info.Picture)
+            {
+            }
+            column(info_Phone; info."Phone No.")
+            {
+            }
+            column(info_Address; info.Address)
+            {
+            }
             column(Names; Cust.Name)
             {
             }
@@ -249,6 +264,13 @@ report 51466 "All Students"
     {
     }
 
+    trigger OnPreReport()
+    var
+        myInt: Integer;
+    begin
+        info.CalcFields(Picture);
+    end;
+
     var
         LastFieldNo: Integer;
         FooterPrinted: Boolean;
@@ -281,6 +303,7 @@ report 51466 "All Students"
         Total_JAB_CaptionLbl: Label 'Total JAB:';
         ValUnits: Boolean;
         cust2: Record 18;
+        info: Record "Company Information";
         faculty: Record 349;
 }
 

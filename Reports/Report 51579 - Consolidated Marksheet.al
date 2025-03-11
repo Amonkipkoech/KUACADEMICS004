@@ -689,7 +689,7 @@ report 51579 "Consolidated Marksheet"
 
                             //Grades
                             //Course Category
-                            IF UnitsR."Unit Type" = UnitsR."Unit Type"::Elective THEN
+                            IF UnitsR."Unit Type" = UnitsR."Unit Type"::Theory THEN
                                 CCat := '-'
                             ELSE
                                 CCat := '=';

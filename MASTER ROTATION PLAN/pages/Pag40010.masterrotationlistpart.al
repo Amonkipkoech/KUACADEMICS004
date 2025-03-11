@@ -13,14 +13,31 @@ page 40010 "Clinical Rotation List Part"
         {
             repeater("clinical rotation")
             {
-                field("Plan ID"; rec."Plan ID")
-                {
-                    ApplicationArea = all;
-                }
+                // field("Plan ID"; rec."Plan ID")
+                // {
+                //     ApplicationArea = all;
+                // }
+                // field(Year; rec.Year)
+                // {
+                //     ApplicationArea = all;
+                // }
+                // field(Session; rec.Session)
+                // {
+                //     ApplicationArea = all;
+                // }
+                // field(Department; rec.Department)
+                // {
+                //     ApplicationArea = all;
+                // }
+                // field(program; rec.program)
+                // {
+                //     ApplicationArea = all;
+                // }
+
                 field(Group; rec.Group)
                 {
                     ApplicationArea = all;
-                    TableRelation = GroupAssignments.GroupId;
+
 
                 }
                 field(Areas; rec.Areas)
@@ -30,16 +47,11 @@ page 40010 "Clinical Rotation List Part"
 
 
                 }
-                field("Week No"; rec."Week No")
+                field(Week; rec.week)
                 {
                     ApplicationArea = all;
-
                 }
-                field(Month; rec.Month)
-                {
-                    ApplicationArea = all;
 
-                }
                 field("Starting Date"; rec."Starting Date")
                 {
                     ApplicationArea = all;
@@ -51,8 +63,93 @@ page 40010 "Clinical Rotation List Part"
 
                 }
 
+                field(Month; rec.Month)
+                {
+                    ApplicationArea = all;
+
+                }
+                field("No Of students"; rec."No Of Students")
+                {
+                    ApplicationArea = all;
+                    DrillDownPageID = "Group Assignmnets ";
+
+                }
+                // field(Status; rec.Status)
+                // {
+                //     ApplicationArea = all;
+                // }
 
                 // Continue with fields up to Site Week 52...
+            }
+        }
+    }
+    actions
+    {
+        area(processing)
+        {
+            action("ExportCSV")
+            {
+                Caption = 'Download Excel File';
+                ApplicationArea = All;
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = Export;
+
+                trigger OnAction()
+                var
+                    RecRef: RecordRef;
+                    FieldRefs: array[20] of FieldRef;
+                    FieldRefLength: Integer;
+                    CsvHandler: Codeunit "Export Excell Mrp";
+                begin
+                    CsvHandler.Run();
+
+                end;
+            }
+
+            action("Export 2")
+            {
+                Caption = 'Export  2';
+                ApplicationArea = All;
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = Import;
+
+                trigger OnAction()
+                var
+                    RecRef: RecordRef;
+                    FieldRefs: array[20] of FieldRef;
+                    FieldRefLength: Integer;
+                    CsvHandler: Codeunit "Csv Handler";
+                begin
+
+                    CsvHandler.ExportCsvFile('UnitCoverageImport.csv', RecRef, FieldRefs, FieldRefLength);
+
+                    // Refresh the page to show imported data
+                    CurrPage.Update();
+                end;
+            }
+            action("Import 2")
+            {
+                Caption = 'Import  2';
+                ApplicationArea = All;
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = Import;
+
+                trigger OnAction()
+                var
+                    RecRef: RecordRef;
+                    FieldRefs: array[20] of FieldRef;
+                    FieldRefLength: Integer;
+                    CsvHandler: Codeunit "Csv Handler";
+                begin
+
+                    CsvHandler.ImportCsvFile('UnitCoverageImport.csv', RecRef, FieldRefs, FieldRefLength);
+
+                    // Refresh the page to show imported data
+                    CurrPage.Update();
+                end;
             }
         }
     }

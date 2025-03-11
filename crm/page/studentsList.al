@@ -44,6 +44,7 @@ page 52057 "Issues List"
                 }
                 field(Semester; Rec.Semester)
                 {
+                    Caption = 'Block/Session';
                     ApplicationArea = All;
                 }
             }

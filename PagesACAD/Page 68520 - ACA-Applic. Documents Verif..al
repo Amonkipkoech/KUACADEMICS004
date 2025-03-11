@@ -56,6 +56,11 @@ page 68520 "ACA-Applic. Documents Verif."
                     ToolTip = 'Specifies the value of the Shortlisted By(Staff Name) field.';
                     ApplicationArea = All;
                 }
+                field(Email2; rec.Email)
+                {
+                    ToolTip = 'Specifies the value of the Shortlisted By(Staff Name) field.';
+                    ApplicationArea = All;
+                }
             }
             group("Intake Info")
             {
@@ -130,7 +135,7 @@ page 68520 "ACA-Applic. Documents Verif."
                     ApplicationArea = All;
                 }
             }
-            group("Program & Semester")
+            group("Program")
             {
                 //Editable = false;
                 field("Programme Level"; Rec."Programme Level")
@@ -175,7 +180,7 @@ page 68520 "ACA-Applic. Documents Verif."
                 }
                 field("First Choice Semester"; Rec."First Choice Semester")
                 {
-                    Caption = 'Semester';
+                    Caption = 'Block/Session';
                     ApplicationArea = All;
 
                     trigger OnValidate()
@@ -193,11 +198,11 @@ page 68520 "ACA-Applic. Documents Verif."
                     trigger OnValidate()
                     begin
                         /*Display the age of the user*/
-                        Age := Rec.GetAge(Rec."Date Of Birth");
+                        age2 := Rec.GetAge(Rec."Date Of Birth");
 
                     end;
                 }
-                field(Age; Age)
+                field(Age; rec.Age2)
                 {
                     Editable = false;
                     ApplicationArea = All;
@@ -544,6 +549,8 @@ page 68520 "ACA-Applic. Documents Verif."
                 PromotedCategory = Process;
 
                 trigger OnAction()
+                var
+                    NotifyAction: Codeunit "Admissions Notification Action";
                 begin
                     IF (Rec."Admission No" <> '') THEN ERROR('Admission Number axists: ' + Rec."Admission No");
                     CLEAR(settlementPrefix);
@@ -565,13 +572,15 @@ page 68520 "ACA-Applic. Documents Verif."
                         CLEAR(NewAdminCode);
                         BEGIN
                             NewAdminCode := NoSeriesMgt.GetNextNo(AdminSetup."No. Series", TODAY, TRUE);
-                            //Rec."Admission No" := AdminSetup."Programme Prefix" + '/' + settlementPrefix + '/' + NewAdminCode + settlementPrefix + '/' + AdminSetup.Year;
-                            Rec."Admission No" := NewAdminCode;
+                            Rec."Admission No" := AdminSetup."Programme Prefix" + '/' + NewAdminCode + '/' + settlementPrefix + '/' + AdminSetup.Year;
                             Rec.MODIFY;
                         END;
                     END ELSE BEGIN
                         ERROR('The Admission Number Setup For Programme ' + FORMAT(Rec."Admitted Degree") + ' Does Not Exist');
                     END;
+                    // Call the NotifyAdmissionsRequestSuccessful after generating the admission number
+                    NotifyAction.NotifyAdmissionsRequestSuccessful(rec."Application No.");
+                    NotifyAction.NotifyIctSuccessfulAccountCreation(rec."Application No.");
 
                     MESSAGE('Admission number generated successfully!');
                 end;
@@ -719,7 +728,7 @@ page 68520 "ACA-Applic. Documents Verif."
         FacultyName2: Text[200];
         NationalityName: Text[200];
         CountryOfOriginName: Text[200];
-        Age: Text[200];
+        //Age: Text[200];
         FormerSchoolName: Text[200];
         CustEntry: Record 21;
         Apps: Record "ACA-Applic. Form Header";
@@ -826,7 +835,7 @@ page 68520 "ACA-Applic. Documents Verif."
     trigger OnAfterGetCurrRecord()
     begin
         xRec := Rec;
-        Age := Rec.GetAge(Rec."Date Of Birth");
+        Age2 := Rec.GetAge(Rec."Date Of Birth");
         NationalityName := Rec.GetCountry(Rec.Nationality);
         CountryOfOriginName := Rec.GetCountry(Rec."Country of Origin");
         DegreeName1 := GetDegree1(Rec."First Degree Choice");

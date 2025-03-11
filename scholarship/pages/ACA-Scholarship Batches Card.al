@@ -35,7 +35,7 @@ page 78033 "ACA-Scholarship Batches Card"
                     ToolTip = 'Specifies the value of the Batch No. field.';
                     ApplicationArea = All;
                 }
-                field(Status;Rec.Status)
+                field(Status; Rec.Status)
                 {
                     ToolTip = 'Scholarship Status';
                     ApplicationArea = All;
@@ -81,18 +81,34 @@ page 78033 "ACA-Scholarship Batches Card"
                 {
                     ToolTip = 'Specifies the value of the Receipt Amount field.';
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field("Allocated Amount"; Rec."Allocated Amount")
                 {
                     ToolTip = 'Specifies the value of the Allocated Amount field.';
+                    Editable = false;
                     ApplicationArea = All;
+                    trigger OnValidate()
+                    var
+                        myInt: Integer;
+                    begin
+                        rec."UnAllocated Amount" := rec."Receipt Amount" - rec."Allocated Amount";
+                    end;
+
+                }
+                field("UnAllocated Amount"; Rec."UnAllocated Amount")
+                {
+                    ToolTip = 'Specifies the value of the Allocated Amount field.';
+                    ApplicationArea = All;
+                    Editable = false;
                 }
                 field("No. of Students "; Rec."No. of Students ")
                 {
                     ToolTip = 'Specifies the value of the No. of Students  field.';
                     ApplicationArea = All;
+                    Editable = false;
                 }
-                field("Receipt No";Rec."Receipt No")
+                field("Receipt No"; Rec."Receipt No")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies Receipt No';
@@ -130,6 +146,15 @@ page 78033 "ACA-Scholarship Batches Card"
             }
         }
     }
+    trigger OnOpenPage()
+    var
+        myInt: Integer;
+    begin
+
+        rec."UnAllocated Amount" := rec."Receipt Amount" - rec."Allocated Amount";
+
+    end;
+
     var
         PostReceipts: Codeunit "Post Stud Receipt Buffer";
 }

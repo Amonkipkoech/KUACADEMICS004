@@ -44,6 +44,7 @@ report 69286 "KUCCPS & PSSP Adm. By Program"
             dataitem("ACA-Applic. Form Header"; 61358)
             {
                 DataItemLink = "Admitted Degree" = FIELD(Code);
+                RequestFilterFields = "First Degree Choice";
                 column(CompName; info.Name)
                 {
                 }
@@ -119,6 +120,9 @@ report 69286 "KUCCPS & PSSP Adm. By Program"
                 column(FirstChoiceCat; "ACA-Applic. Form Header"."First Choice Category")
                 {
                 }
+                column(Program_Applied_For; "ACA-Applic. Form Header"."First Degree Choice")
+                {
+                }
 
                 trigger OnAfterGetRecord()
                 begin
@@ -150,10 +154,11 @@ report 69286 "KUCCPS & PSSP Adm. By Program"
                     Caption = 'Apply FIlters Here';
                     field(Semes; Sems)
                     {
-                        Caption = 'Semester';
+                        Caption = 'Block';
                         TableRelation = "ACA-Semesters".Code;
                         ApplicationArea = All;
                     }
+
                 }
             }
         }

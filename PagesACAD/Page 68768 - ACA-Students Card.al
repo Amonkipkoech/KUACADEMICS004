@@ -58,6 +58,11 @@ page 68768 "ACA-Students Card"
                 {
                     ApplicationArea = All;
                 }
+                field(Department;rec.Department)
+                {
+                    ApplicationArea = all;
+                }
+
                 field("County of Origin"; Rec."County of Origin")
                 {
                     ApplicationArea = All;
@@ -146,8 +151,9 @@ page 68768 "ACA-Students Card"
                     ApplicationArea = All;
                     Caption = 'Personal Email';
                 }
-                field("University Email"; Rec."University Email")
+                field("College Mail"; Rec."University Email")
                 {
+                    Caption = 'College Mail';
                     ApplicationArea = All;
                 }
                 field("Email Password"; Rec."Email Password")
@@ -286,8 +292,9 @@ page 68768 "ACA-Students Card"
                 {
                     ApplicationArea = All;
                 }
-                field("VC Cleared"; Rec."VC Cleared")
+                field("Exempt"; Rec."Fee Cleared")
                 {
+                    Caption = 'Exempt';
                     ApplicationArea = All;
                 }
 
@@ -329,14 +336,25 @@ page 68768 "ACA-Students Card"
                     RunPageLink = "Student No." = FIELD("No.");
                     ApplicationArea = All;
                 }
-                action("Student Units")
+                action("Student exam Units")
                 {
-                    Caption = 'Student Units';
+                    Caption = 'Student Exam Units';
                     Image = BOMRegisters;
                     Promoted = true;
                     PromotedCategory = Process;
                     PromotedIsBig = true;
                     RunObject = Page 68778;
+                    RunPageLink = "Student No." = FIELD("No.");
+                    ApplicationArea = All;
+                }
+                action("Student  theory Units")
+                {
+                    Caption = 'Student theory units Units';
+                    Image = BOMRegisters;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedIsBig = true;
+                    RunObject = Page "ACA-Student Theory Units";
                     RunPageLink = "Student No." = FIELD("No.");
                     ApplicationArea = All;
                 }
@@ -350,6 +368,18 @@ page 68768 "ACA-Students Card"
                     RunObject = Page 77721;
                     RunPageLink = "Student No." = FIELD("No.");
                     ApplicationArea = All;
+                }
+                action("Proforma Invoice")
+                {
+                    Caption = 'Proforma Invoice';
+                    Image = CustomerLedger;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    Visible = true;
+                    ApplicationArea = All;
+                    RunObject = report "Student Proforma Invoice2";
+
+
                 }
                 action("Print Statement")
                 {
@@ -365,7 +395,7 @@ page 68768 "ACA-Students Card"
                         Cust.RESET;
                         Cust.SETFILTER(Cust."No.", Rec."No.");
                         IF Cust.FIND('-') THEN
-                            REPORT.RUN(51072, TRUE, TRUE, Cust);
+                            REPORT.RUN(77122, TRUE, TRUE, Cust);
                     end;
                 }
                 action(Picture)

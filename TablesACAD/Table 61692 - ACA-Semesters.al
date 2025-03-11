@@ -143,6 +143,10 @@ table 61692 "ACA-Semesters"
         {
 
         }
+        field(25; "Semester Fee Percentage"; Decimal)
+        {
+
+        }
     }
 
     keys
@@ -152,6 +156,7 @@ table 61692 "ACA-Semesters"
         }
         key(Key2; "Academic Year")
         {
+            
         }
     }
 

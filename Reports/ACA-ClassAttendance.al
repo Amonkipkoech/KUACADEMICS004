@@ -8,7 +8,6 @@ report 86523 "Class Attendance"
     {
         dataitem(att; "Class Attendance Details")
         {
-
             column(AttendanceDate_att; "Attendance Date")
             {
             }
@@ -30,9 +29,8 @@ report 86523 "Class Attendance"
             column(Semester_att; Semester)
             {
             }
-            column(pic ;CompanyInformation.Picture)
+            column(pic; CompanyInformation.Picture)
             {
-                
             }
         }
     }

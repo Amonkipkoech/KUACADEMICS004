@@ -104,10 +104,28 @@ table 78031 "ACA-Scholarship Batches"
         field(16; "Receipt No"; Code[20])
         {
             TableRelation = "FIN-Receipts Header" where("Is Scholarship" = filter(true));
+            trigger OnValidate()
+            var
+                recEipts: Record "FIN-Receipts Header";
+            begin
+                // Find the selected receipt by the "Receipt No"
+                if recEipts.Get("Receipt No") then
+                    // Assign the "Amount Received" from "FIN-Receipts Header" to "Receipt Amount"
+                    "Receipt Amount" := recEipts."Amount Recieved"
+                // Message('Receipt amount %',"Receipt Amount", 'have been update succesfully ')
+
+                else
+                    // Optional: Clear "Receipt Amount" if no matching record is found
+                    "Receipt Amount" := 0;
+            end;
         }
         field(17; "Status"; Option)
         {
             OptionMembers = " ",Active,Inactive;
+        }
+        field(18; "UnAllocated Amount"; Integer)
+        {
+            DataClassification = ToBeClassified;
         }
     }
 

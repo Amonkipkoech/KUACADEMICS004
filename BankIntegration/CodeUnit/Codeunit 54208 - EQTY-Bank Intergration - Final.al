@@ -27,7 +27,7 @@ codeunit 54208 "EQTY-Bank Intergration - Final"
         end;
     end;
 
-    procedure GetPayTransFinal(inbankreference: Code[50]; indebitaccount: Code[20]; intransactionDate: Code[20]; inbillAmount: Decimal; inpaymentMode: Code[20]; inphonenumber: Code[20]; incustomerRefNumber: Code[20]; indebitcustname: Text[150]) Status: Text[250]
+    procedure GetPayTransFinal(inbankreference: Code[50]; indebitaccount: Code[20]; intransactionDate: Code[20]; inbillAmount: Code[20]; inpaymentMode: Code[20]; inphonenumber: Code[20]; incustomerRefNumber: Code[20]; indebitcustname: Text[150]) Status: Text[250]
     var
         Cust: Record Customer;
         BankIntergration: Record "Bank Intergration - Final";

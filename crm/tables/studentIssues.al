@@ -43,6 +43,7 @@ table 86635 "studentIssues"
         }
         field(10; Semester; code[20])
         {
+            Caption = 'Block/Session';
             TableRelation = "ACA-Semester";
         }
         field(11; ClientName; Text[200])

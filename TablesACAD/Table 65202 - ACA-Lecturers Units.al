@@ -236,7 +236,7 @@ table 65202 "ACA-Lecturers Units"
         }
         field(41; "Registered Students"; Integer)
         {
-            CalcFormula = Count("ACA-Student Units" WHERE(Semester = FIELD(Semester), Unit = FIELD(Unit), Stream = field(Stream), "Campus Code" = field("Campus Code"),ModeOfStudy = field(ModeofStudy)));
+            CalcFormula = Count("ACA-Student Units" WHERE(Semester = FIELD(Semester), Unit = FIELD(Unit), Stream = field(Stream), "Campus Code" = field("Campus Code"), ModeOfStudy = field(ModeofStudy)));
             FieldClass = FlowField;
         }
         field(42; "Claim to pay"; Boolean)
@@ -267,6 +267,11 @@ table 65202 "ACA-Lecturers Units"
         {
             CalcFormula = lookup("ACA-Units Offered"."Unit Base Code" where(Lecturer = field(Lecturer), Day = field(Day), TimeSlot = field(TimeSlot)));
             FieldClass = FlowField;
+        }
+        field(49; "Unit Type"; Option)
+        {
+            OptionCaption = 'Theory,Exam,Research,Clinical';
+            OptionMembers = Theory,Exam,Research,Clinical;
         }
     }
 

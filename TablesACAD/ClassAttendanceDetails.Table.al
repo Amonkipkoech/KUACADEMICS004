@@ -8,6 +8,11 @@ table 65801 "Class Attendance Details"
             DataClassification = ToBeClassified;
             TableRelation = "ACA-Semesters".Code;
         }
+        field(21; Block; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "ACA-Semesters".Code;
+        }
         field(2; "Attendance Date"; Date)
         {
             DataClassification = ToBeClassified;
@@ -54,6 +59,10 @@ table 65801 "Class Attendance Details"
         {
             FieldClass = FlowField;
             CalcFormula = count("Class Attendance Details" where("Student No." = field("Student No."), "Unit Code" = field("Unit Code"), Semester = field(Semester)));
+        }
+        field(28; "Remarks"; Code[60])
+        {
+            DataClassification = ToBeClassified;
         }
     }
 

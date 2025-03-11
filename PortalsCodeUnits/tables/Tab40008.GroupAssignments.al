@@ -5,7 +5,7 @@ table 40008 GroupAssignments
 
     fields
     {
-        field(1; GroupId; Text[100])
+        field(1; GroupId; Code[100])
         {
             Caption = 'GroupId';
         }
@@ -29,6 +29,7 @@ table 40008 GroupAssignments
         {
             Caption = 'Department';
         }
+
         field(7; MasterRotationNo; Text[400])
         {
             Caption = 'Master Rotation Number';
@@ -36,6 +37,18 @@ table 40008 GroupAssignments
         field(8; Viewed; Boolean)
         {
             Caption = 'Notification Viewed';
+        }
+        field(9; LecturerNo; Code[100])
+        {
+            Caption = 'Lecturer Number';
+        }
+        field(10; LecturerName; Code[100])
+        {
+            Caption = 'Lecturer Name';
+        }
+        field(11; Category; Option)
+        {
+            OptionMembers = Internal,External;
         }
     }
     keys

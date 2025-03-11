@@ -83,7 +83,7 @@ page 84522 "Supplimentary/Specials"
                 }
                 field(Semester; Rec.Semester)
                 {
-                    Caption = 'Unit Semester';
+                    Caption = 'Unit Block';
                     Editable = true;
                     ApplicationArea = All;
                 }

@@ -142,6 +142,11 @@ page 68852 "ACA-Student Fin. Role Center"
                 RunObject = Page "Data Mine2";
                 ApplicationArea = All;
             }
+            action("Application Payments")
+            {
+                RunObject = Page "application Payments";
+                ApplicationArea = All;
+            }
             action("Student Billing")
             {
                 Caption = 'Student Billing';
@@ -217,6 +222,7 @@ page 68852 "ACA-Student Fin. Role Center"
                     Image = Balance;
                     RunObject = Report "ACA-Fee Structure";
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 action("Scholarship Summary")
                 {
@@ -285,6 +291,14 @@ page 68852 "ACA-Student Fin. Role Center"
                     Image = Journals;
                     RunObject = Report 51072;
                     ApplicationArea = All;
+                    Visible = false;
+                }
+                action("Final Student Statements ")
+                {
+                    Caption = 'Student Statements';
+                    Image = Journals;
+                    RunObject = Report "Student Fee Statement";
+                    ApplicationArea = All;
                 }
                 action("Student Receipts")
                 {
@@ -317,25 +331,27 @@ page 68852 "ACA-Student Fin. Role Center"
                     RunObject = Report 51542;
                     ApplicationArea = All;
                 }
-                action("   Student Balances2")
+                action("   Student Balances ")
                 {
-                    Caption = '   Student Balances2';
-                    RunObject = Report 70092;
+                    Caption = 'Fee Balance Report';
+                    Image = "Report";
+                    RunObject = Report "ACA-Student Balances";
                     ApplicationArea = All;
                 }
                 action(Balances)
                 {
-                    Caption = 'Balances';
+                    Caption = 'Student Fee Arrears';
                     Image = AdjustItemCost;
                     //The property 'PromotedIsBig' can only be set if the property 'Promoted' is set to 'true'
                     //PromotedIsBig = true;
-                    RunObject = Report 65588;
+                    RunObject = Report "Customer Bal. Limit. Variance";
                     ApplicationArea = All;
                 }
                 action(" Fee balances")
                 {
                     Caption = ' Fee balances';
                     Image = AddWatch;
+                    Visible = false;
 
                     RunObject = Report 51258;
                     ApplicationArea = All;
@@ -344,20 +360,22 @@ page 68852 "ACA-Student Fin. Role Center"
                 {
                     Caption = 'Helb Report';
                     Image = Agreement;
-
+                    Visible = false;
                     ApplicationArea = All;
-                    //  RunObject = Report 77702;
+                    //RunObject = Report 77702;
                 }
                 action("Fee collection Report")
                 {
                     Caption = '   Fee collection Report';
-                    RunObject = Report 51370;
+                    Image = InsertTravelFee;
+                    RunObject = Report "Fee Collection";
                     ApplicationArea = All;
                 }
                 action("Fee Balance New")
                 {
                     RunObject = report "Student BalancesNew";
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 action(examattendanceVC)
                 {
@@ -490,34 +508,93 @@ page 68852 "ACA-Student Fin. Role Center"
                     ApplicationArea = All;
                 }
             }
-            group("VC Clerance List")
+            group("Fee Refund")
             {
-
-                action("Vc Cleared List")
+                action("Payment Voucher")
                 {
-                    RunObject = Page "Vc Cleared Batch";
+                    Caption = 'Fee Voucher Refund';
+                    RunObject = Page "FIN-Payment Vouchers";
+                    ApplicationArea = All;
+                }
+                action("Posted Fee Refund")
+                {
+                    Caption = 'Posted Fee Refund';
+                    RunObject = Page "FIN-Posted Payment Vouch.";
+                    ApplicationArea = All;
+                }
+                action("Fee Refund Types")
+                {
+                    RunObject = Page "ACA-Scholarship Batches";
                     ApplicationArea = All;
                 }
             }
-            group("Bank Intergration")
+            group("Student Finance SetUps")
+            {
+                action("Cash Office User Template UP")
+                {
+                    Caption = 'Cash Office User Template UP';
+                    RunObject = Page "Cash Office User Template UP";
+                    ApplicationArea = All;
+                }
+                action("FIN-Payment Types")
+                {
+                    Caption = 'Refund Payment Types';
+                    RunObject = Page "FIN-Payment Types";
+                    ApplicationArea = All;
+                }
+                action("FIN-Receipts Types")
+                {
+                    Caption = 'Receipts Types';
+                    RunObject = Page "FIN-Receipts Types";
+                    ApplicationArea = All;
+                }
+            }
+            group("VC Clerance List")
+            {
+                Caption = 'Fee Exemption';
+
+                action("Vc Cleared List")
+                {
+                    Caption = 'Fee Exemption list';
+                    RunObject = Page "fee clearance  list";
+                    ApplicationArea = All;
+                }
+            }
+            group(" Gowns Billing")
+            {
+                Caption = 'Gowns Billing';
+
+                action("Returned Late")
+                {
+                    Caption = 'Returned Late with fine amount';
+                    ApplicationArea = Basic, Suite;
+                    RunObject = Page "Gown Issuance Card";
+                    RunPageLink = status = const("Returned Late");
+                }
+
+            }
+            group("E-Citizen Integration")
             {
                 action("Coop Bank Transactions")
                 {
                     //Caption = 'Settlement Types';
+                    Visible = false;
                     RunObject = Page coopBankIntergration;
                     ApplicationArea = All;
                 }
                 action("NCBA Transactions")
                 {
-                    RunObject = page "NCBA Bank Transactions";
+                    // RunObject = page "NCBA Bank Transactions";
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 action("Equity Bank Transactions")
                 {
                     RunObject = page "Bank Intergration Transactions";
                     ApplicationArea = All;
+                    Visible = false;
                 }
-                action("Mpesa Trans")
+                action("Transactions ")
                 {
                     RunObject = Page "Confimed Mpesa Trans";
                     ApplicationArea = All;
@@ -527,6 +604,7 @@ page 68852 "ACA-Student Fin. Role Center"
             {
                 Caption = 'Approvals';
                 Image = Alerts;
+                Visible = false;
                 action("Pending My Approval")
                 {
                     Caption = 'Pending My Approval';

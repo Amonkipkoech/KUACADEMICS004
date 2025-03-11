@@ -293,7 +293,7 @@ table 61511 "ACA-Programme"
         }
         field(54; Levels; Option)
         {
-            OptionMembers = " ","Proffesional Course",Certificate,Diploma,Bachelor,"Post-Graduate Diploma",Masters,PHD;
+            OptionMembers = " ",Certificate,Diploma;
         }
         field(96; "Exam Date"; Date)
         {
@@ -325,6 +325,34 @@ table 61511 "ACA-Programme"
         }
         field(104; "Tuition Fees"; Decimal)
         {
+        }
+        field(105; "HoD No."; Code[60])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "HRM-Employee (D)"."No.";
+            trigger OnValidate()
+            var
+                HRM: Record "HRM-Employee (D)";
+            begin
+                if hrm.Get("HoD No.") THEN begin
+                    "HoD Email" := HRM."Company E-Mail";
+                    "Hod Full Name" := HRM."First Name" + ' ' + hrm."Middle Name" + ' ' + HRM."Last Name";
+                    "HoD Phone Number" := HRM."Cellular Phone Number";
+                end;
+
+            end;
+        }
+        field(106; "HoD Email"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(107; "Hod Full Name"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(108; "HoD Phone Number"; Code[50])
+        {
+            DataClassification = ToBeClassified;
         }
         field(50000; "Campus Code"; Code[20])
         {

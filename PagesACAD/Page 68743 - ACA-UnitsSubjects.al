@@ -37,27 +37,33 @@ page 68743 "ACA-Units/Subjects"
                 {
                     ApplicationArea = All;
                     Editable = false;
+                    Visible = false;
                 }
                 field(programDuration; Rec.programDuration)
                 {
                     ApplicationArea = All;
                     //Editable = false;
+                    Visible = false;
                 }
                 field("Associated Unit1"; Rec."Associated Unit1")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Associated Unit2"; Rec."Associated Unit2")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Associated Unit3"; Rec."Associated Unit3")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Associated Unit4"; Rec."Associated Unit4")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Credit Hours"; Rec."Credit Hours")
                 {
@@ -81,6 +87,7 @@ page 68743 "ACA-Units/Subjects"
                 {
                     Visible = false;
                     ApplicationArea = All;
+
                 }
                 field("Unit Type"; Rec."Unit Type")
                 {
@@ -90,17 +97,19 @@ page 68743 "ACA-Units/Subjects"
                 {
                     ApplicationArea = All;
                     Visible = false;
+
                 }
 
                 field("No. Units"; Rec."No. Units")
                 {
-                    Visible = false;
+
                     Caption = 'CF';
                     ApplicationArea = All;
                 }
                 field("Programme Option"; Rec."Programme Option")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
 
                 field("Combination Count"; Rec."Combination Count")
@@ -116,6 +125,7 @@ page 68743 "ACA-Units/Subjects"
                 field("Not Allocated"; Rec."Not Allocated")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Common Unit"; Rec."Common Unit")
                 {
@@ -129,10 +139,12 @@ page 68743 "ACA-Units/Subjects"
                 field(Prerequisite; Rec.Prerequisite)
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Prerequisite 2"; Rec."Prerequisite 2")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Students Registered"; Rec."Students Registered")
                 {

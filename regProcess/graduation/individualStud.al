@@ -52,7 +52,7 @@ report 86626 "Process Graduation2"
                             if studUnitsCount >= maxunits then begin
                                 progUnits.Reset();
                                 progUnits.SetRange("Programme Code", transcript.ProgrammeID);
-                                progUnits.SetRange("Unit Type", progUnits."Unit Type"::Core);
+                                progUnits.SetRange("Unit Type", progUnits."Unit Type"::exam);
                                 if progUnits.Find('-') then begin
                                     Clear(passed);
                                     repeat

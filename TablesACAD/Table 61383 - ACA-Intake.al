@@ -6,6 +6,15 @@ table 61383 "ACA-Intake"
     {
         field(1; "Code"; Code[20])
         {
+            TableRelation = "ACA-Semesters".Code;
+            trigger OnValidate()
+            var
+                sem: Record "ACA-Semesters";
+            begin
+                if sem.Get(Code) then begin
+                    Description := sem.Description;
+                end;
+            end;
         }
         field(2; Description; Text[30])
         {
@@ -26,11 +35,15 @@ table 61383 "ACA-Intake"
         {
             OptionMembers = " ","Proffesional Course",Certificate,Diploma,Bachelor,"Post-Graduate Diploma",Masters,PHD;
         }
+        field(10; Department; Code[10])
+        {
+
+        }
     }
 
     keys
     {
-        key(Key1; "Code",Level)
+        key(Key1; "Code", Level)
         {
         }
     }

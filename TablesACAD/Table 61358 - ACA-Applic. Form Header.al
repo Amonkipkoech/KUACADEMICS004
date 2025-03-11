@@ -89,7 +89,7 @@ table 61358 "ACA-Applic. Form Header"
                     progCode.TestField("Department Code");
                     progCode.TestField(Faculty);
                     "Programme Department" := progCode."Department Code";
-                    "Programme Faculty" := progCode.Faculty;
+                    "Programme School" := progCode.Faculty;
                     programName := progCode.Description;
                     "Faculty Name" := progCode."Faculty Name";
                     Rec.Modify();
@@ -211,6 +211,10 @@ table 61358 "ACA-Applic. Form Header"
             Description = 'Stores the time when the HOD makes the recommendation';
         }
         field(43; "Dean Recommendations"; Text[200])
+        {
+            Description = 'Stores the recomendation of the head of department';
+        }
+        field(423; "Age2"; Text[200])
         {
             Description = 'Stores the recomendation of the head of department';
         }
@@ -688,11 +692,11 @@ table 61358 "ACA-Applic. Form Header"
 
         field(122; "Programme Department"; code[30])
         {
-
+            TableRelation = "Dimension Value".Code WHERE("Dimension Code" = const('DEPARTMENT'));
         }
-        field(123; "Programme Faculty"; code[30])
+        field(123; "Programme School"; code[30])
         {
-
+            TableRelation = "Dimension Value".Code WHERE("Dimension Code" = const('SCHOOL'));
         }
         field(124; formerSchool; code[200])
         {
@@ -711,7 +715,7 @@ table 61358 "ACA-Applic. Form Header"
         }
         field(50001; "Programme Level"; Option)
         {
-            OptionMembers = " ","Proffesional Course",Certificate,Diploma,Bachelor,"Post-Graduate Diploma",Masters,PHD;
+            OptionMembers = " ",Certificate,Diploma;
         }
         field(50002; "Knew Through (Other)"; Text[250])
         {
@@ -1131,6 +1135,75 @@ table 61358 "ACA-Applic. Form Header"
         {
             Editable = false;
         }
+        field(50089; "NCK Certificate"; text[200])
+        {
+
+        }
+        field(50090; "Work Place 1"; Text[200])
+        {
+
+        }
+        field(50100; "Work Place 2"; Text[200])
+        {
+
+        }
+        field(50101; "Work Place 3"; Text[200])
+        {
+
+        }
+        field(50102; "Licensing Yr"; Text[20])
+        {
+
+        }
+        field(50103; "IDBirthcertPath"; Text[200])
+        {
+
+        }
+        field(50104; "Prof Body Cert No"; Text[20])
+        {
+
+        }
+        field(50105; "NCK Cert No"; Text[20])
+        {
+
+        }
+        field(50106; "international student "; Boolean)
+        {
+
+        }
+        field(50107; "First Employer Name "; code[60])
+        {
+
+        }
+        field(50119; "Second Employer Name "; code[60])
+        {
+        }
+        field(50108; " First Job Title"; code[60])
+        {
+        }
+        field(50111; " First Department/Unit"; Code[50])
+        {
+        }
+        field(501192; " Second Department/Unit"; Code[50])
+        {
+        }
+        field(50109; " First Employment Duration"; Code[50])
+        {
+        }
+        field(50110; "Second Employment Duration"; code[50])
+        {
+        }//Workplace Address
+        field(50112; "Workplace Address"; Code[60])
+        {
+
+        }//
+
+        field(50113; "Employment Duaration"; Code[60])
+        {
+
+        }//
+
+
 
 
 
@@ -1162,6 +1235,8 @@ table 61358 "ACA-Applic. Form Header"
     }
 
     trigger OnInsert()
+    var
+        NotifyAction: Codeunit "Admissions Notification Action";
     begin
 
         IF "Application No." = '' THEN BEGIN
@@ -1178,6 +1253,10 @@ table 61358 "ACA-Applic. Form Header"
         "First Choice Stage" := GeneralSetup."Default Year";
         "First Choice Semester" := GeneralSetup."Default Semester";
         "Intake Code" := GeneralSetup."Default Intake";
+
+        // Send a notification email upon inserting a new record (successful submission)
+        NotifyAction.NotifyApplicantSuccessfulSubmission("Application No.");
+
     end;
 
     var
@@ -1193,7 +1272,7 @@ table 61358 "ACA-Applic. Form Header"
         FacultyName2: Text[100];
         NationalityName: Text[100];
         CountryOfOriginName: Text[100];
-        Age: Text[100];
+        //Age: Text[100];
         FormerSchoolName: Text[100];
         CustEntry: Record 21;
         recProgramme: Record 61511;
@@ -1407,5 +1486,25 @@ table 61358 "ACA-Applic. Form Header"
         END ELSE
             ERROR('Current Academic Year not Specified!');
     end;
+
+    trigger OnModify()
+    var
+        NotifyAction: Codeunit "Admissions Notification Action";
+        RecBefore: Record "ACA-Applic. Form Header";
+    begin
+        // Load the previous state of the record
+        if RecBefore.Get("Application No.") then begin
+            Message('Current Status: %1, Previous Status: %2', Status, RecBefore.Status);
+            if (RecBefore.Status <> Status) and (Status = Status::"Pending Approval") then begin
+                Message('Status changed, sending email...');
+                NotifyAction.NotifyAdmissionsRequestStatus(rec."Application No.");
+            end;
+        end;
+    end;
+
+
+
+
+
 }
 

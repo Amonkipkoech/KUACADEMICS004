@@ -25,6 +25,18 @@ report 51370 "Fee Collection"
             column(info_picture; info.Picture)
             {
             }
+            column(info_name; info.Name)
+            {
+            }
+            column(info_mail; info."E-Mail")
+            {
+            }
+            column(info_tel; info."Phone No.")
+            {
+            }
+            column(info_addres; info.Address)
+            {
+            }
 #pragma warning disable AL0667
             column(CurrReport_PAGENO; CurrReport.PAGENO)
 #pragma warning restore AL0667

@@ -2,6 +2,7 @@ report 86521 "ACA-APPLICANTS Report"
 {
     UsageCategory = Administration;
     ApplicationArea = All;
+    Caption = 'Admission Report';
     RDLCLayout = './Reports/SSR/acaAplicants.rdl';
     PreviewMode = PrintLayout;
 
@@ -9,9 +10,13 @@ report 86521 "ACA-APPLICANTS Report"
     {
         dataitem(applicant; "ACA-Applic. Form Header")
         {
-            RequestFilterFields = "First Degree Choice", "Settlement Type";
+            RequestFilterFields = "First Degree Choice", "Settlement Type", Status, "Programme Department", "Programme School";
 
             column(Pic; CompanyInformation.Picture)
+            {
+
+            }
+            column(Company_Name; CompanyInformation.Name)
             {
 
             }
@@ -31,6 +36,22 @@ report 86521 "ACA-APPLICANTS Report"
             column(Gender_applicant; Gender)
             {
             }
+            column(Academic_Year; "Academic Year")
+            {
+
+            }
+            column(Programme_Department; "Programme Department")
+            {
+
+            }
+            column(Programme_School; "Programme School")
+            {
+
+            }
+            column(Intake_Code; "Intake Code")
+            {
+
+            }
             column(DateOfBirth_applicant; "Date Of Birth")
             {
             }
@@ -42,6 +63,10 @@ report 86521 "ACA-APPLICANTS Report"
             }
             column(SettlementType_applicant; "Settlement Type")
             {
+            }
+            column(international_student_; "international student ")
+            {
+
             }
             column(IDNumber_applicant; "ID Number")
             {
@@ -61,10 +86,29 @@ report 86521 "ACA-APPLICANTS Report"
             column(ModeofStudy_applicant; "Mode of Study")
             {
             }
+            column(seq; seq)
+            {
+
+            }
             column(Status; Status)
             {
 
             }
+            column(Age2; Age2)
+            {
+
+            }
+            column(County; County)
+            {
+
+            }
+            trigger OnAfterGetRecord()
+            var
+                myInt: Integer;
+            begin
+                seq := seq + 1;
+            end;
+
         }
     }
 
@@ -91,5 +135,6 @@ report 86521 "ACA-APPLICANTS Report"
 
     var
         myInt: Integer;
+        seq: Integer;
         CompanyInformation: Record 79;
 }

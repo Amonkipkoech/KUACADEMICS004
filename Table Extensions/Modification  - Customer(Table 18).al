@@ -743,6 +743,12 @@ tableextension 70001 Customers extends Customer
         {
             DataClassification = ToBeClassified;
         }
+        field(787665; "Department"; Code[60])
+        {
+            Caption = 'Department';
+            TableRelation = "Dimension Value".Code WHERE("Dimension Code" = CONST('DEPARTMENT'));
+            DataClassification = ToBeClassified; // Set appropriate data classification based on the data
+        }
         field(63006; Height; Decimal)
         {
             DataClassification = ToBeClassified;
@@ -820,8 +826,8 @@ tableextension 70001 Customers extends Customer
         field(63020; Status; Option)
         {
             DataClassification = ToBeClassified;
-            OptionCaption = 'Registration,Current,Alluminae,Dropped Out,Deffered,Suspended,Expulsion,Discontinued,Deferred,Deceased,Transferred,Disciplinary,Unknown,Completed not graduated,Graduated no Certificates,Graduated with Certificate,Did Not Report,Absconded,Resit,Halt';
-            OptionMembers = Registration,Current,Alluminae,"Dropped Out",Deffered,Suspended,Expulsion,Discontinued,Deferred,Deceased,Transferred,Disciplinary,Unknown,Graduand,"Graduated no Certificates","Graduated with Certificate","Did Not Report",Absconded,Resit,Halt;
+            OptionCaption = 'Registration,Current,Alluminae,Dropped Out,Alumnae,Demoted,Other,Deffered,Suspended,Expulsion,Discontinued,Deferred,Deceased,Transferred,Disciplinary,Unknown,Completed not graduated,Graduated no Certificates,Graduated with Certificate,Did Not Report,Absconded,Resit,Halt';
+            OptionMembers = Registration,Current,Alluminae,"Dropped Out",Alumnae,Demoted,Other,Deffered,Suspended,Expulsion,Discontinued,Deferred,Deceased,Transferred,Disciplinary,Unknown,Graduand,"Graduated no Certificates","Graduated with Certificate","Did Not Report",Absconded,Resit,Halt;
 
 
             trigger OnValidate()
@@ -854,7 +860,7 @@ tableextension 70001 Customers extends Customer
         {
             DataClassification = ToBeClassified;
         }
-        field(63025; "Passport No"; Code[1])
+        field(63025; "Passport No"; Code[50])
         {
             DataClassification = ToBeClassified;
         }
@@ -1805,7 +1811,7 @@ tableextension 70001 Customers extends Customer
             Caption = 'Student BioData Verifier Staff ID';
             TableRelation = "HRM-Employee (D)";
         }
-        field(62314; "VC Cleared"; Boolean)
+        field(62314; "Fee Cleared"; Boolean)
         {
 
         }

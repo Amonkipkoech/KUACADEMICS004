@@ -5,7 +5,7 @@ page 68483 "ACA-Pending Admissions List"
     InsertAllowed = false;
     PageType = List;
     SourceTable = "ACA-Applic. Form Header";
-    //SourceTableView = WHERE(Status = FILTER("Provisional Admission"));
+    SourceTableView = WHERE(Status = FILTER(<> Admitted));
 
     layout
     {

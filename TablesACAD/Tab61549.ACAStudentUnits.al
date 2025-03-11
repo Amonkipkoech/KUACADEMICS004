@@ -103,19 +103,19 @@ table 61549 "ACA-Student Units"
         {
             Editable = true;
             NotBlank = false;
-            TableRelation = "ACA-Units/Subjects".Code WHERE("Programme Code" = FIELD(Programme));
+            TableRelation = "ACA-Units/Subjects".Code WHERE("Programme Code" = FIELD(Programme), "Unit Type" = FILTER(Exam | Research | "Case Study"));
 
             trigger OnValidate()
             var
                 StageInteger: Integer;
             begin
-                //ACASemesters.RESET;
-                //ACASemesters.SETRANGE(Code,Rec.Semester);
-                //IF ACASemesters.FIND('-') THEN BEGIN
-                // IF ACASemesters."Registration Deadline"<>0D THEN BEGIN
-                // IF ACASemesters."Registration Deadline"<TODAY THEN ERROR('Error:\You cannot register past deadline');
-                // END;
-                //END;
+                ACASemesters.RESET;
+                ACASemesters.SETRANGE(Code, Rec.Semester);
+                IF ACASemesters.FIND('-') THEN BEGIN
+                    IF ACASemesters."Registration Deadline" <> 0D THEN BEGIN
+                        IF ACASemesters."Registration Deadline" < TODAY THEN ERROR('Error:\You cannot register past deadline');
+                    END;
+                END;
                 /*
                 CourseReg.RESET;
                 CourseReg.SETRANGE(CourseReg."Student No.","Student No.");
@@ -773,7 +773,7 @@ table 61549 "ACA-Student Units"
         }
         field(20035; Lecturer; Code[30])
         {
-            CalcFormula = Lookup("ACA-Units Offered".Lecturer WHERE(Stream = field(Stream), ModeOfStudy = field(ModeOfStudy), "Unit Base Code" = FIELD(Unit), Semester = FIELD(Semester),Campus = field("Campus Code")));
+            CalcFormula = Lookup("ACA-Units Offered".Lecturer WHERE(Stream = field(Stream), ModeOfStudy = field(ModeOfStudy), "Unit Base Code" = FIELD(Unit), Semester = FIELD(Semester), Campus = field("Campus Code")));
             FieldClass = FlowField;
         }
         field(20036; Grade; Code[50])
@@ -1110,6 +1110,16 @@ table 61549 "ACA-Student Units"
                                                                                   Reversed = FILTER(false)));
             FieldClass = FlowField;
         }
+        field(50677; "Theory Units"; Integer)
+        {
+            CalcFormula = count("ACA-Student Theory Units " WHERE("Student No." = FIELD("Student No."),
+                                                                                  Semester = FIELD(Semester),
+                                                                                  Paper2 = field(Unit),
+                                                                                  Reversed = FILTER(false)));
+            FieldClass = FlowField;
+        }
+        
+
         field(50078; "Consolidated Mark Identifier"; Code[2])
         {
         }
@@ -1389,7 +1399,7 @@ table 61549 "ACA-Student Units"
         }
         field(50115; "VC Cleared"; Boolean)
         {
-            CalcFormula = lookup(Customer."VC Cleared" where("No." = field("Student No.")));
+            CalcFormula = lookup(Customer."Fee Cleared" where("No." = field("Student No.")));
             FieldClass = FlowField;
         }
         field(60166; "Balance Due"; Decimal)
@@ -1609,10 +1619,12 @@ table 61549 "ACA-Student Units"
         }
 
 
-        // field(60200; faculty; code[20])
-        // {
+        field(60205; "Unit Category"; Option)
+        {
+            OptionCaption = ' ,Theory,Clinical,Research,Case Study,Exam';
+            OptionMembers = " ","Theory","Clinical","Research","Case Study","Exam";
 
-        // }
+        }
         // field(60199; UnitsExist; Boolean)
         // {
         //     CalcFormula = exist("Final Exam Result2" where (StudentID = field("Student No."),UnitCode = field(Unit)));

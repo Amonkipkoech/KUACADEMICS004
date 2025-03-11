@@ -22,7 +22,7 @@ report 66680 "KUCCPS Admission Letter"
             {
 
             }
-            column(Programme_Faculty; "Programme Faculty")
+            column(Programme_School; "Programme School")
             {
 
             }

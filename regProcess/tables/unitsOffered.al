@@ -25,7 +25,7 @@ table 86618 "ACA-Units Offered"
         }
         field(3; "Unit Base Code"; Code[20])
         {
-            //TableRelation = "ACA-Units/Subjects".Code where("Programme Code" = field(Programs));
+            TableRelation = "ACA-Units/Subjects".Code where("Programme Code" = field(Programs));
             trigger OnValidate()
             begin
                 units.Reset();
@@ -189,13 +189,22 @@ table 86618 "ACA-Units Offered"
             CalcFormula = exist("ACA-Units Offered" where("Unit Base Code" = field("Unit Base Code"), Semester = field(Semester), ModeofStudy = field(ModeofStudy), Day = field(Day), Stream = field(Stream)));
             FieldClass = FlowField;
         }
+        field(25; "Date"; Date)
+        {
+
+        }
+        field(26; "Week"; Option)
+        {
+            OptionMembers = " ","WEEK ONE","WEEK TWO","WEEK THREE","WEEK FOUR","WEEK FIVE","WEEK SIX","WEEK SEVEN";
+
+        }
 
 
     }
 
     keys
     {
-        key(Key1; "Unit Base Code", Programs, Day, TimeSlot, ModeofStudy, Stream, Campus, Semester)
+        key(Key1; "Unit Base Code", Programs, Day, TimeSlot, Campus, Semester, "Academic Year", Lecturer)
         {
             Clustered = true;
         }
