@@ -449,7 +449,7 @@ codeunit 40003 StudentPortalTest
         exit(message);
     end;
 
-    
+
 
     procedure GetXYForms(studentNo: Text; currentSem: Text) Message: Text
     begin
@@ -819,12 +819,16 @@ codeunit 40003 StudentPortalTest
         END;
     end;
 
-    procedure GetStudentRegStatus(username: Text) Message: Text
+    procedure GetStudentRegStatus(username: Text) Message: Boolean
+    var
+        CourseReg: Record "ACA-Course Registration";
     begin
-        Customer.RESET;
-        Customer.SETRANGE(Customer."No.", username);
-        IF Customer.FIND('-') THEN BEGIN
-            Message := FORMAT(Customer.Status);
+        Message := false;
+        CourseReg.RESET;
+        CourseReg.SETRANGE("Student No.", username);
+        CourseReg.SetRange(Semester, GetCurrentSem());
+        IF CourseReg.FIND('-') THEN BEGIN
+            Message := true;
 
         END
     end;
