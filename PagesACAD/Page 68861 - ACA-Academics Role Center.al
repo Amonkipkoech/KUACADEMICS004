@@ -628,7 +628,7 @@ page 68861 "ACA-Academics Role Center"
 
                     {
                         Image = Register;
-                        RunObject = report "Final Transcript";
+                        RunObject = report "FinalNusring Transcript";
                         ApplicationArea = all;
                     }
 

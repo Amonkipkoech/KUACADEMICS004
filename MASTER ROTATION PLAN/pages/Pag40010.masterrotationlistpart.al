@@ -87,73 +87,70 @@ page 40010 "Clinical Rotation List Part"
     {
         area(processing)
         {
-            // action("ExportCSV")
-            // {
-            //     Caption = 'Export to CSV';
-            //     ApplicationArea = All;
-            //     Promoted = true;
-            //     PromotedCategory = Process;
-            //     Image = Export;
+            action("ExportCSV")
+            {
+                Caption = 'Download Excel File';
+                ApplicationArea = All;
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = Export;
 
-            //     trigger OnAction()
-            //     var
-            //         RecRef: RecordRef;
-            //         FieldRefs: array[20] of FieldRef;
-            //         FieldRefLength: Integer;
-            //         CsvHandler: Codeunit "Csv Handler";
-            //     begin
-            //         // Initialize RecordRef
-            //         RecRef.GetTable(Rec);
+                trigger OnAction()
+                var
+                    RecRef: RecordRef;
+                    FieldRefs: array[20] of FieldRef;
+                    FieldRefLength: Integer;
+                    CsvHandler: Codeunit "Export Excell Mrp";
+                begin
+                    CsvHandler.Run();
 
-            //         // Define FieldRefs for export using explicit field IDs
-            //         FieldRefs[1] := RecRef.Field(1); // Replace with the correct field ID for "Date"
-            //         FieldRefs[2] := RecRef.Field(2); // Replace with the correct field ID for "Time"
-            //         FieldRefs[3] := RecRef.Field(3); // Replace with the correct field ID for "Rotation Area"
-            //         FieldRefs[4] := RecRef.Field(4); // Replace with the correct field ID for "Unit Coverage"
-            //         FieldRefs[5] := RecRef.Field(5);
-            //         FieldRefs[6] := RecRef.Field(6);
-            //         FieldRefs[7] := RecRef.Field(7);// Replace with the correct field ID for "Duration Hours"
-            //         FieldRefLength := 7;
+                end;
+            }
 
-            //         // Call ExportCsvFile
-            //         CsvHandler.ExportCsvFile('UnitCoverageExport', RecRef, FieldRefs, FieldRefLength);
-            //     end;
-            // }
+            action("Export 2")
+            {
+                Caption = 'Export  2';
+                ApplicationArea = All;
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = Import;
 
-            // action("ImportCSV")
-            // {
-            //     Caption = 'Import from CSV';
-            //     ApplicationArea = All;
-            //     Promoted = true;
-            //     PromotedCategory = Process;
-            //     Image = Import;
+                trigger OnAction()
+                var
+                    RecRef: RecordRef;
+                    FieldRefs: array[20] of FieldRef;
+                    FieldRefLength: Integer;
+                    CsvHandler: Codeunit "Csv Handler";
+                begin
 
-            //     trigger OnAction()
-            //     var
-            //         RecRef: RecordRef;
-            //         FieldRefs: array[20] of FieldRef;
-            //         FieldRefLength: Integer;
-            //         CsvHandler: Codeunit "Csv Handler";
-            //     begin
-            //         // Initialize RecordRef
-            //         RecRef.GetTable(Rec);
+                    CsvHandler.ExportCsvFile('UnitCoverageImport.csv', RecRef, FieldRefs, FieldRefLength);
 
-            //         // Define FieldRefs for import using explicit field IDs
-            //         FieldRefs[1] := RecRef.Field(1); // Replace with the correct field ID for "Date"
-            //         FieldRefs[2] := RecRef.Field(2); // Replace with the correct field ID for "Time"
-            //         FieldRefs[3] := RecRef.Field(3); // Replace with the correct field ID for "Rotation Area"
-            //         FieldRefs[4] := RecRef.Field(4); // Replace with the correct field ID for "Unit Coverage"
-            //         FieldRefs[5] := RecRef.Field(5);
-            //         FieldRefs[6] := RecRef.Field(6);
-            //         FieldRefs[7] := RecRef.Field(7);
+                    // Refresh the page to show imported data
+                    CurrPage.Update();
+                end;
+            }
+            action("Import 2")
+            {
+                Caption = 'Import  2';
+                ApplicationArea = All;
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = Import;
 
-            //         // Call ImportCsvFile
-            //         CsvHandler.ImportCsvFile('UnitCoverageImport.csv', RecRef, FieldRefs, FieldRefLength);
+                trigger OnAction()
+                var
+                    RecRef: RecordRef;
+                    FieldRefs: array[20] of FieldRef;
+                    FieldRefLength: Integer;
+                    CsvHandler: Codeunit "Csv Handler";
+                begin
 
-            //         // Refresh the page to show imported data
-            //         CurrPage.Update();
-            //     end;
-            // }
+                    CsvHandler.ImportCsvFile('UnitCoverageImport.csv', RecRef, FieldRefs, FieldRefLength);
+
+                    // Refresh the page to show imported data
+                    CurrPage.Update();
+                end;
+            }
         }
     }
 }
