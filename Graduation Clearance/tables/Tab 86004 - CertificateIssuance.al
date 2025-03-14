@@ -13,7 +13,7 @@ table 86004 "Certificate Issuance"
         {
 
             Caption = 'Student No.';
-            TableRelation = "Student Clerance"."Student No" where(Status = filter('Pending'), "Student ID Card Returned" = filter(true));
+            TableRelation = "Student Clerance"."Student No";
             trigger OnValidate()
             begin
                 awardList.Reset();
