@@ -1,6 +1,6 @@
 page 68520 "ACA-Applic. Documents Verif."
 {
-    DeleteAllowed = false;
+    DeleteAllowed = true;
     PageType = Card;
     PromotedActionCategories = 'New, Process,Report,Admit Student,General Inforamtion';
     SourceTable = "ACA-Applic. Form Header";
@@ -12,10 +12,10 @@ page 68520 "ACA-Applic. Documents Verif."
         {
             group("General Information")
             {
-                Editable = false;
+                Editable = true;
                 field("Admission No"; Rec."Admission No")
                 {
-                    //Editable = true;
+                    Editable = true;
                     ApplicationArea = All;
 
                 }

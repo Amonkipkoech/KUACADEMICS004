@@ -1,11 +1,12 @@
+
 /// <summary>
 /// Page ACA-Pending Admissions PSSP (ID 70083).
 /// </summary>
 page 70083 "ACA-Pending Admissions PSSP"
 {
     CardPageID = "ACA-Applic. Documents Verif.";
-    DeleteAllowed = false;
-    InsertAllowed = false;
+    DeleteAllowed = true;
+    InsertAllowed = true;
     PageType = List;
     SourceTable = "ACA-Applic. Form Header";
     SourceTableView = WHERE(Status = FILTER("Provisional Admission"));
