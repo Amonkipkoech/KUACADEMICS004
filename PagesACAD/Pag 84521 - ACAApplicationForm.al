@@ -1028,8 +1028,8 @@ page 84521 "ACA-Application Form"
         //Rec.TestField("Email Subject");
 
 
-        EmailBody := 'Hello, Your Application To CUEA has not been Accepted.Kindly Review and update accordingly';
-        EmailSubject := 'CUEA';
+        EmailBody := 'Hello, Your Application To KUTRH has not been Accepted.Kindly Review and update accordingly';
+        EmailSubject := 'KUTRH';
 
         //Dialogie.Open('Sending to #1  ');
 

@@ -572,7 +572,7 @@ page 68520 "ACA-Applic. Documents Verif."
                         CLEAR(NewAdminCode);
                         BEGIN
                             NewAdminCode := NoSeriesMgt.GetNextNo(AdminSetup."No. Series", TODAY, TRUE);
-                            Rec."Admission No" := AdminSetup."Programme Prefix" + '/' + NewAdminCode + '/' + settlementPrefix + '/' + AdminSetup.Year;
+                            Rec."Admission No" := AdminSetup."Programme Prefix" + '/' + NewAdminCode + '/' + AdminSetup.Year;//Rec."Admission No" := AdminSetup."Programme Prefix" + '/' + NewAdminCode + '/' + settlementPrefix + '/' + AdminSetup.Year;
                             Rec.MODIFY;
                         END;
                     END ELSE BEGIN

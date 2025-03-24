@@ -3674,11 +3674,7 @@ codeunit 40002 StaffPortall
         EmployeeCard.SETRANGE(EmployeeCard."No.", username);
         IF EmployeeCard.FIND('-') THEN BEGIN
             fablist.RESET;
-<<<<<<< HEAD
-            fablist.SETRANGE(fablist."First Degree Choice", EmployeeCard."Department Code");
-=======
             fablist.SETRANGE(fablist."Programme Department", EmployeeCard."Department Code");
->>>>>>> eb07b0f (before merging)
             fablist.SETRANGE(fablist.Status, fablist.Status::"Open");
             IF fablist.FIND('-') THEN BEGIN
                 REPEAT
