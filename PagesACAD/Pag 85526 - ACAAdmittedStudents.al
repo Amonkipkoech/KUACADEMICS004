@@ -2,7 +2,8 @@ page 85526 "ACA-Admitted Students"
 {
     //CardPageID = "ACA-Application Form Header";
     InsertAllowed = false;
-    ModifyAllowed = false;
+    ModifyAllowed = true;
+    Editable=true;
     PageType = List;
     SourceTable = "ACA-Applic. Form Header";
     SourceTableView = WHERE(Status = FILTER(Admitted));
