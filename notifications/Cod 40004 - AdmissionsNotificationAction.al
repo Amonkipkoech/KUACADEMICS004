@@ -212,12 +212,12 @@ codeunit 40004 "Admissions Notification Action"
         Recipient := 'gilbert.reagan@kutrrh.go.ke';
         Subject := 'Student Portal Account Created';
         EmailBody := StrSubstNo(
-            'Dear ICT,\n\n' +
-            'The following student account has been created:\n' +
-            'Admission Number: %1\n\n' +
+            'Dear ICT, ' +
+            'The following student account has been created: ' +
+            'Admission Number: %1 ' +
             'The student can access the student portal using the admission number as their username and the default password. ' +
-            'They will be prompted to change their password to a strong one upon first login.\n\n' +
-            'Regards,\n' +
+            'They will be prompted to change their password to a strong one upon first login.  ' +
+            'Regards, ' +
             'Admissions Department',
             AdmissionsRequest."Admission No"
         );
@@ -257,8 +257,8 @@ codeunit 40004 "Admissions Notification Action"
             recipient.add(AdmissionRequest.Email);
             subject := 'Application Submission Status';
             EMailBody := StrSubstNo(
-               'Dear %1 %2 , \n\n,' +
-               'Your Application Submission  With Appl No. %3 has been submitted successfully, \n' +
+               'Dear %1 %2,' +
+               'Your Application Submission  With Appl No. %3 has been submitted successfully, ' +
                'Once Application  Processing Starts , You will be notified',
                AdmissionRequest."First Name",
                AdmissionRequest."Other Names",

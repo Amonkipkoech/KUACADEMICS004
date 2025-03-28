@@ -131,11 +131,13 @@ page 85526 "ACA-Admitted Students"
                             ERROR('Receipt Number not located within Valid Receipts');
                         END;
 
+
                     end;
                 }
                 field(Campus; Rec.Campus)
                 {
                     ApplicationArea = All;
+                    
                 }
                 field("Intake Code"; Rec."Intake Code")
                 {
