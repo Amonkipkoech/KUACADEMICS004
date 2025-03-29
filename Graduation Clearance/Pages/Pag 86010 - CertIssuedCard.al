@@ -96,6 +96,62 @@ page 86010 "Cert Issued Card"
 
                 end;
             }
+            action("Send Certificate Mail")
+            {
+                ApplicationArea = all;
+                Image = Email;
+                PromotedCategory = Report;
+                Promoted = true;
+                trigger OnAction()
+                var
+                    EmailMsg: Codeunit "Email Message";
+                    Email: Codeunit Email;
+                    ToRecipients: List of [Text];
+                    Subject: Text[100];
+                    Body: Text;
+                    StudentRec: Record "Certificate Issuance";
+                    OutStr: OutStream;
+                    InStr: InStream;
+                    TempBlob: Codeunit "Temp Blob";
+                    FileName: Text[250];
+                begin
+                    // Fetch Student Record
+                    IF Rec.GET(Rec."No.") THEN BEGIN
+                        // Generate Certificate PDF
+                        TempBlob.CreateOutStream(OutStr);
+                        REPORT.SAVEAS(REPORT::"Student Fee Statement", ReportFormat::Pdf, OutStr, Rec); // ✅ FIXED
+
+                        TempBlob.CreateInStream(InStr);
+                        FileName := 'Certificate_' + Rec."Student No." + '.pdf';
+
+                        // Get Student Email
+                        IF Rec."Student Email" <> '' THEN BEGIN
+                            // Prepare Email
+                            ToRecipients.Add(Rec."Student Email");
+                            Subject := 'Certificate for ' + Rec."Student No.";
+                            Body := 'Dear ' + Rec."Student No." + ',<br><br>' +
+                                    'Please find attached your certificate.<br><br>' +
+                                    'Regards,<br><br>' +
+                                    '<font size="2" color="red">This is a system-generated message. Please do not reply.</font>';
+
+                            // Create Email Message
+                            EmailMsg.Create(ToRecipients, Subject, Body, true);
+                            EmailMsg.AddAttachment(FileName, InStr, 'application/pdf'); // ✅ FIXED
+
+                            // Send Email
+                            Email.Send(EmailMsg, Enum::"Email Scenario"::Notification);
+                            MESSAGE('Mail has been sent successfully.');
+                        END ELSE
+                            ERROR('Student does not have a valid email.');
+                    END ELSE
+                        ERROR('No record found for the student.');
+                end;
+            }
+
+
+
+
+
         }
     }
     local procedure Send()
