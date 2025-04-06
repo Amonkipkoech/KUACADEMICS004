@@ -227,7 +227,7 @@ codeunit 40002 StaffPortall
         END
     end;
 
-    procedure GroupSubjects(paper: Option; unitCode: Text; currentsem: Text; AcademicYr: Text; stage: Text): Text
+    procedure GroupSubjects(paper: Code[20]; unitCode: Text; currentsem: Text; AcademicYr: Text; stage: Text): Text
     var
         theoryUnits: Record "ACA-Student Theory Units ";
         modifiedCount: Integer;
@@ -242,7 +242,7 @@ codeunit 40002 StaffPortall
 
         if theoryUnits.FindSet() then begin
             repeat
-                theoryUnits.Paper := paper;
+                theoryUnits.Paper2 := paper;
                 if theoryUnits.Modify() then
                     modifiedCount += 1;
             until theoryUnits.Next() = 0;
@@ -268,7 +268,7 @@ codeunit 40002 StaffPortall
         if theoryUnits.FindSet() then begin
             repeat
 
-                Message += 'SUCCESS' + '::' + theoryUnits.Unit + '::' + GetUnitDescription(theoryUnits.Unit) + '::' + Format(theoryUnits.Paper) + '[]';
+                Message += 'SUCCESS' + '::' + theoryUnits.Unit + '::' + GetUnitDescription(theoryUnits.Unit) + '::' + theoryUnits.Paper2 + '[]';
 
             until theoryUnits.Next() = 0;
         end;
@@ -276,7 +276,7 @@ codeunit 40002 StaffPortall
         exit(Message);
     end;
 
-    procedure ChangeUnitPaper(unitCode: Text; dept: Text; semester: Text; AcademicYr: Text; stage: Text; paper: Integer) Msg: Text
+    procedure ChangeUnitPaper(unitCode: Text; dept: Text; semester: Text; AcademicYr: Text; stage: Text; paper: Code[20]) Msg: Text
     var
         theoryUnits: Record "ACA-Student Theory Units ";
         Message: Text;
@@ -289,7 +289,7 @@ codeunit 40002 StaffPortall
         theoryUnits.SetRange(Unit, unitCode);
 
         if theoryUnits.Find('-') then begin
-            theoryUnits.Paper := paper;
+            theoryUnits.Paper2 := paper;
 
             if theoryUnits.Modify then begin
                 Msg := 'SUCCESS';
@@ -350,7 +350,8 @@ codeunit 40002 StaffPortall
     // end;
     procedure GetAssignedPaperUnits(sem: Text; AcademicYr: Text; Stage: Text; Prog: Text): Text
     var
-        TempUniqueUnits: Record "ACA-Student Units" temporary;
+        StudentUnits: Record "ACA-Student Units";
+        UniqueAssignedUnits: Dictionary of [Text, Boolean];
         Message: Text;
         Keyy: Text;
     begin
@@ -361,27 +362,26 @@ codeunit 40002 StaffPortall
         StudentUnits.SetRange(Programme, Prog);
         StudentUnits.SetRange(StudentUnits."Unit Category", StudentUnits."Unit Category"::Exam);
 
-        if StudentUnits.Find('-') then begin
+        if StudentUnits.FindSet() then begin
             repeat
-                Keyy := StudentUnits.Supervisor + '::' + StudentUnits.Unit;
+                Keyy := StudentUnits.Unit; // Unique Key (Unit-Paper, Supervisor)
 
-                TempUniqueUnits.SetRange(Supervisor, StudentUnits.Supervisor);
-                TempUniqueUnits.SetRange(Unit, StudentUnits.Unit);
-                TempUniqueUnits.SetRange("Unit Category", TempUniqueUnits."Unit Category"::Exam);
+                if not UniqueAssignedUnits.ContainsKey(Keyy) then begin
+                    UniqueAssignedUnits.Add(Keyy, true); // Mark as encountered
 
-                if TempUniqueUnits.IsEmpty() then begin
-                    TempUniqueUnits.Init();
-                    TempUniqueUnits.Supervisor := StudentUnits.Supervisor;
-                    TempUniqueUnits.Unit := StudentUnits.Unit;
-                    TempUniqueUnits.Insert();
-
-                    Message += 'SUCCESS' + '::' + GetLecturerNames(StudentUnits.Supervisor) + '::' + StudentUnits.Supervisor + '::' + StudentUnits.Unit + '::' + GetLecturerDept(StudentUnits.Supervisor) + '::' + StudentUnits.Semester + '[]';
+                    Message += 'SUCCESS' + '::' +
+                               GetLecturerNames(StudentUnits.Supervisor) + '::' +
+                               StudentUnits.Supervisor + '::' +
+                               StudentUnits.Unit + '::' +
+                               GetLecturerDept(StudentUnits.Supervisor) + '::' +
+                               StudentUnits.Semester + '[]';
                 end;
             until StudentUnits.Next() = 0;
         end;
 
         exit(Message);
     end;
+
 
     procedure GetLecturerDept(lecNo: Text) Message: Text
     begin
@@ -702,7 +702,7 @@ codeunit 40002 StaffPortall
         masterRotation: Record "Master Rotation Plan2";
     begin
         masterRotation.Reset();
-        masterRotation.SetRange(Status, masterRotation.Status::Open);
+        masterRotation.SetRange(Status, masterRotation.Status::"Pending Approval");
         masterRotation.SetRange(Exhausted, False);
         if masterRotation.Find('-') then begin
             repeat
@@ -4522,19 +4522,19 @@ codeunit 40002 StaffPortall
 
     procedure GetUnitsToOffer(progcode: Code[20]; stage: Text) Details: Text
     var
-        theoryUnits: Record "Timetable";
+        theoryUnits: Record "ACA-Units/Subjects";
     begin
 
-
         theoryUnits.RESET;
-        theoryUnits.SETRANGE(theoryUnits.Programs, progcode);
-        theoryUnits.SetRange(theoryUnits.Stage, stage);
+        theoryUnits.SETRANGE(theoryUnits."Programme Code", progcode);
+        theoryUnits.SetRange(theoryUnits."Stage Code", stage);
+        theoryUnits.SetRange(theoryUnits."Unit Type", theoryUnits."Unit Type"::Theory);
         //theoryUnits.SetRange(Stage, stage);
 
         IF theoryUnits.FIND('-') THEN BEGIN
             repeat
 
-                Details += theoryUnits."Unit Base Code" + ' :: ' + theoryUnits."Unit Base Code" + ' []';
+                Details += theoryUnits.Code + ' :: ' + theoryUnits.Desription + ' []';
 
             until theoryUnits.Next = 0;
 
@@ -4832,17 +4832,17 @@ codeunit 40002 StaffPortall
         end;
     end;
 
-    procedure GetLecturerUnits2(lectNo: Text; semester: Text) Message: Text
+    procedure GetLecturerUnits2(lectNo: Code[20]; semester: Text) Message: Text
     var
-        lecunits: Record "Timetable";
+        lecunits: Record "ACA-Lecturers Units";
     begin
         lecunits.Reset();
         //lecunits.SetRange(lecunits.Semester, semester);
-        lecunits.setRange(lecunits.Lecturer, lectNo);
+        lecunits.setRange(Lecturer, lectNo);
 
-        if lecunits.FindSet() then begin
+        if lecunits.Find('-') then begin
             repeat
-                Message += lecunits."Unit Base Code" + '::' + lecunits."Unit Base Code" + '::' + lecunits.Day + '::' + lecunits.TimeSlot + '::' + lecunits."Lecture Hall" + '[]';
+                Message += lecunits.Unit + '::' + lecunits.Unit + '::' + lecunits.Day + '::' + lecunits.TimeSlot + '::' + lecunits."Campus Code" + '[]';
             until lecunits.Next() = 0;
         end;
 
@@ -4859,6 +4859,7 @@ codeunit 40002 StaffPortall
                 msg += lecturers.Unit + ' ::' + GetUnitDescription(Lecturers.Unit) + ' ::' + lecturers.ModeOfStudy + ' ::' + lecturers.Stream + ' ::' + lecturers.Day + ' ::' + lecturers.TimeSlot + ' ::' + GetAllocatedLectureHall(lecturers.Lecturer, lecturers.Unit, lecturers.stream, lecturers."Campus Code", lecturers.ModeOfStudy) + ' :::';
             until lecturers.Next = 0;
         end;
+        exit(msg);
     end;
 
     procedure GetExamUnits(lecNo: Code[20]; sem: Code[20]; AcademicYr: Code[20]): Text

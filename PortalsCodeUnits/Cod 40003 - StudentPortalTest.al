@@ -819,18 +819,19 @@ codeunit 40003 StudentPortalTest
         END;
     end;
 
-    procedure GetStudentRegStatus(username: Text) Message: Boolean
+    procedure GetStudentRegStatus(username: Text; currentSem: Text) Message: Boolean
     var
         CourseReg: Record "ACA-Course Registration";
     begin
         Message := false;
         CourseReg.RESET;
+        CourseReg.SetRange(Semester, currentSem);
         CourseReg.SETRANGE("Student No.", username);
-        CourseReg.SetRange(Semester, GetCurrentSem());
         IF CourseReg.FIND('-') THEN BEGIN
             Message := true;
 
-        END
+        END;
+        exit(Message);
     end;
 
     procedure EvaluateLecturer(Programme: Text; Stage: Text; Unit: Text; Semester: Text; StudentNo: Text; LecturerNo: Text; QuestionNo: Text; Response: Text; EvaluationDate: Text; ResponseAnalysis: Integer)
@@ -1777,7 +1778,9 @@ codeunit 40003 StudentPortalTest
         StudentUnits."Academic Year" := AcademicYear;
         StudentUnits."Unit Category" := unitType;
         StudentUnits.INSERT(TRUE);
+
         ReturnMessage := 'Units registered Successfully!';
+
         StudentUnitBaskets.RESET;
         StudentUnitBaskets.SETRANGE("Student No.", studentNo);
         StudentUnitBaskets.SETRANGE(Unit, Unit);
@@ -1888,7 +1891,7 @@ codeunit 40003 StudentPortalTest
         if theoryUnits.FIND('-') THEN BEGIN
             repeat
 
-                Message += theoryUnits.Unit + '::' + theoryUnits."Unit Description" + '[]';
+                Message += theoryUnits.Unit + '::' + theoryUnits."Unit Name" + '[]';
 
             until theoryUnits.NEXT = 0;
 
@@ -3085,6 +3088,19 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
 
         end;
         exit(Message);
+    end;
+
+    procedure HasApplied(program: Text; email: Text): Boolean
+    var
+        ApplicHeader: Record "ACA-Applic. Form Header";
+        response: Boolean;
+    begin
+        response := false;
+        ApplicHeader.Reset();
+        ApplicHeader.SetRange(Email, email);
+        ApplicHeader.SetRange("First Degree Choice", program);
+        if ApplicHeader.FindFirst() then response := true;
+        exit(response);
     end;
 
 
