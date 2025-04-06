@@ -10,7 +10,7 @@ page 40007 "Rotation Areas"
         {
             repeater(General)
             {
-                field("Area cODE";rec."Area cODE")
+                field("Area cODE"; rec."Area cODE")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Lab ID field.', Comment = '%';
@@ -19,6 +19,10 @@ page 40007 "Rotation Areas"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Lab Name field.', Comment = '%';
+                }
+                field(Capacity; REC.Capacity)
+                {
+                    ApplicationArea = All;
                 }
             }
         }

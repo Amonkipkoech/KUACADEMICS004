@@ -52,7 +52,7 @@ codeunit 40003 StudentPortalTest
         xyForm: Record "ACA-XY-FORM";
         AcaSpecialExamsDetails: Record "Aca-Special Exams Details";
         clinicalAbsence: Record "Student Absence Request";
-        masterRotation2: Record "Master Rotation Plan2";
+        masterRotation2: Record "Master Rotation Table";
 
 
         FILESPATH: Label 'C:\inetpub\wwwroot\KUPORTALS\StudentPortal\Downloads\';
