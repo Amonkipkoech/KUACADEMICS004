@@ -20,6 +20,10 @@ table 40004 "Lab"
             Caption = 'Area Description';
             DataClassification = ToBeClassified;
         }
+        field(4; "Capacity"; Code[5])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys
