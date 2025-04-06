@@ -119,7 +119,7 @@ page 86010 "Cert Issued Card"
                     IF Rec.GET(Rec."No.") THEN BEGIN
                         // Generate Certificate PDF
                         TempBlob.CreateOutStream(OutStr);
-                        REPORT.SAVEAS(REPORT::"Student Fee Statement", ReportFormat::Pdf, OutStr, Rec); // ✅ FIXED
+                        //REPORT.SAVEAS(REPORT::"Student Fee Statement", ReportFormat::Pdf, OutStr, Rec); // ✅ FIXED
 
                         TempBlob.CreateInStream(InStr);
                         FileName := 'Certificate_' + Rec."Student No." + '.pdf';
@@ -135,8 +135,8 @@ page 86010 "Cert Issued Card"
                                     '<font size="2" color="red">This is a system-generated message. Please do not reply.</font>';
 
                             // Create Email Message
-                            EmailMsg.Create(ToRecipients, Subject, Body, true);
-                            EmailMsg.AddAttachment(FileName, InStr, 'application/pdf'); // ✅ FIXED
+                            // EmailMsg.Create(ToRecipients, Subject, Body, true);
+                            // EmailMsg.AddAttachment(FileName, InStr, 'application/pdf'); // ✅ FIXED
 
                             // Send Email
                             Email.Send(EmailMsg, Enum::"Email Scenario"::Notification);

@@ -181,7 +181,7 @@ codeunit 40002 StaffPortall
 
         group: Record "GroupAssignments";
         unitsOnOffer: Record "ACA-Units Offered";
-        masterRotation: Record "Master Rotation Table";
+        masterRotation: Record "Master Rotation Plan2";
         clinicals: Record "Clinical rotation";
         clinicalAbs: Record "Student Absence Request";
 
