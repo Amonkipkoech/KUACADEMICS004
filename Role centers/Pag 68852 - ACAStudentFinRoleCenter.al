@@ -335,6 +335,7 @@ page 68852 "ACA-Student Fin. Role Center"
                 {
                     Caption = 'Fee Balance Report';
                     Image = "Report";
+                    Visible= false;
                     RunObject = Report "ACA-Student Balances";
                     ApplicationArea = All;
                 }

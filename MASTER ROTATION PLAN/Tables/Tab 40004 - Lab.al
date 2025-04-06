@@ -1,7 +1,10 @@
 table 40004 "Lab"
 {
     Caption = 'Lab';
+    LookupPageId= "Rotation Areas";
+    DrillDownPageId = "Rotation Areas";
     DataClassification = ToBeClassified;
+    
 
     fields
     {
@@ -20,7 +23,7 @@ table 40004 "Lab"
             Caption = 'Area Description';
             DataClassification = ToBeClassified;
         }
-        field(4; "Capacity"; Code[5])
+        field(4; "Capacity"; Integer)
         {
             DataClassification = ToBeClassified;
         }

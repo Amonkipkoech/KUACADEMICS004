@@ -43,7 +43,7 @@ page 40010 "Clinical Rotation List Part"
                 field(Areas; rec.Areas)
                 {
                     ApplicationArea = all;
-                    TableRelation = Lab."Area cODE";
+                    
 
 
                 }
