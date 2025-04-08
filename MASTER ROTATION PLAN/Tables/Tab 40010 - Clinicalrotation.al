@@ -95,6 +95,15 @@ table 40010 "Clinical rotation"
         {
             DataClassification = ToBeClassified;
             TableRelation = Lab."Area cODE";
+            trigger OnValidate()
+            var
+                lab:Record Lab;
+            begin
+                if lab.Get(Areas) then 
+                begin
+                   Capacity := lab.Capacity;
+                end;
+            end;
         }
 
         field(9; "No. Series"; Code[20])
@@ -164,7 +173,10 @@ table 40010 "Clinical rotation"
             DataClassification = ToBeClassified;
             Description = 'Lecturer Name';
         }
-
+        field(22; Capacity; Integer)
+        {
+            DataClassification = ToBeClassified;
+        }
 
         // Add additional fields as needed
     }

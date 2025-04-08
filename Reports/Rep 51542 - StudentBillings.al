@@ -301,6 +301,20 @@ report 51542 "Student Billings"
             {
 
             }
+            column(info_pic; info.Picture)
+            {
+
+            }
+            column(info_name; info.Name)
+            {
+
+            }
+            column(info_address; info.Address)
+            {
+            }
+            column(info_mail; info."E-Mail")
+            {
+            }
             column(Student_Billings_AnalysisCaption; Student_Billings_AnalysisCaptionLbl)
             {
             }
@@ -404,9 +418,17 @@ report 51542 "Student Billings"
     labels
     {
     }
+    trigger OnPreReport()
+    var
+        myInt: Integer;
+    begin
+        info.get();
+        info.CalcFields(info.Picture)
+    end;
 
     var
         Cust: Record 18;
+        info: Record "Company Information";
         Charges: Record 61515;
         ColumnH: array[30] of Text[100];
         ColumnV: array[30] of Decimal;
@@ -419,5 +441,6 @@ report 51542 "Student Billings"
         Student_CountCaptionLbl: Label 'Student Count';
         seq: Integer;
         CReg: Record 61532;
+
 }
 
