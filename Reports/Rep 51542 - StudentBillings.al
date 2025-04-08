@@ -8,9 +8,9 @@ report 51542 "Student Billings"
         dataitem("ACA-Course Registration"; "ACA-Course Registration")
         {
             DataItemTableView = SORTING("Student No.")
-                                WHERE(Posted = CONST(false),
+                                WHERE(
                                       Reversed = CONST(false));
-            RequestFilterFields = Stage, Semester, "Registration Date", Programmes;
+            RequestFilterFields = Stage, Semester, "Registration Date", Programmes,Posted;
             column(COMPANYNAME; COMPANYNAME)
             {
             }

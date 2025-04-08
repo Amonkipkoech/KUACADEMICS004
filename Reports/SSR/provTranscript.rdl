@@ -11,64 +11,6 @@
       <rd:DataSourceID>6c5934e4-8fa6-46c0-8767-cbdb66aa88fb</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="Student_No_">
-          <DataField>Student_No_</DataField>
-        </Field>
-        <Field Name="Student_Name">
-          <DataField>Student_Name</DataField>
-        </Field>
-        <Field Name="Semester">
-          <DataField>Semester</DataField>
-        </Field>
-        <Field Name="Campus_Code">
-          <DataField>Campus_Code</DataField>
-        </Field>
-        <Field Name="Unit">
-          <DataField>Unit</DataField>
-        </Field>
-        <Field Name="Stage">
-          <DataField>Stage</DataField>
-        </Field>
-        <Field Name="CATs_Marks">
-          <DataField>CATs_Marks</DataField>
-        </Field>
-        <Field Name="CATs_MarksFormat">
-          <DataField>CATs_MarksFormat</DataField>
-        </Field>
-        <Field Name="Exam_Marks">
-          <DataField>Exam_Marks</DataField>
-        </Field>
-        <Field Name="Exam_MarksFormat">
-          <DataField>Exam_MarksFormat</DataField>
-        </Field>
-        <Field Name="Total_Score">
-          <DataField>Total_Score</DataField>
-        </Field>
-        <Field Name="Total_ScoreFormat">
-          <DataField>Total_ScoreFormat</DataField>
-        </Field>
-        <Field Name="Grade">
-          <DataField>Grade</DataField>
-        </Field>
-        <Field Name="Pic">
-          <DataField>Pic</DataField>
-        </Field>
-        <Field Name="CompName">
-          <DataField>CompName</DataField>
-        </Field>
-        <Field Name="desc">
-          <DataField>desc</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -1166,12 +1108,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -1292,4 +1228,62 @@ r6K1+NTpZYdW+y2WNQRWfRhaMacXTnsjhTygp7TmxO7kPHUr2m1aZXXSsh9rmhT2SToqJCaqdH6aLkoN
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Student_No_">
+          <DataField>Student_No_</DataField>
+        </Field>
+        <Field Name="Student_Name">
+          <DataField>Student_Name</DataField>
+        </Field>
+        <Field Name="Semester">
+          <DataField>Semester</DataField>
+        </Field>
+        <Field Name="Campus_Code">
+          <DataField>Campus_Code</DataField>
+        </Field>
+        <Field Name="Unit">
+          <DataField>Unit</DataField>
+        </Field>
+        <Field Name="Stage">
+          <DataField>Stage</DataField>
+        </Field>
+        <Field Name="CATs_Marks">
+          <DataField>CATs_Marks</DataField>
+        </Field>
+        <Field Name="CATs_MarksFormat">
+          <DataField>CATs_MarksFormat</DataField>
+        </Field>
+        <Field Name="Exam_Marks">
+          <DataField>Exam_Marks</DataField>
+        </Field>
+        <Field Name="Exam_MarksFormat">
+          <DataField>Exam_MarksFormat</DataField>
+        </Field>
+        <Field Name="Total_Score">
+          <DataField>Total_Score</DataField>
+        </Field>
+        <Field Name="Total_ScoreFormat">
+          <DataField>Total_ScoreFormat</DataField>
+        </Field>
+        <Field Name="Grade">
+          <DataField>Grade</DataField>
+        </Field>
+        <Field Name="Pic">
+          <DataField>Pic</DataField>
+        </Field>
+        <Field Name="CompName">
+          <DataField>CompName</DataField>
+        </Field>
+        <Field Name="desc">
+          <DataField>desc</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>

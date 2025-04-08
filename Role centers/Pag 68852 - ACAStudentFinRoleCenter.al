@@ -335,17 +335,26 @@ page 68852 "ACA-Student Fin. Role Center"
                 {
                     Caption = 'Fee Balance Report';
                     Image = "Report";
-                    Visible= false;
+                    Visible = false;
                     RunObject = Report "ACA-Student Balances";
                     ApplicationArea = All;
                 }
                 action(Balances)
                 {
-                    Caption = 'Student Fee Arrears';
+                    Caption = 'Student Fee Balance';
                     Image = AdjustItemCost;
                     //The property 'PromotedIsBig' can only be set if the property 'Promoted' is set to 'true'
                     //PromotedIsBig = true;
-                    RunObject = Report "Customer Bal. Limit. Variance";
+                    RunObject = Report "Customer Bal. Limit. Variance";//"Fines Report"
+                    ApplicationArea = All;
+                }
+                action("Fines Report")
+                {
+                    Caption = 'Fines Report';
+                    Image = AdjustItemCost;
+                    //The property 'PromotedIsBig' can only be set if the property 'Promoted' is set to 'true'
+                    //PromotedIsBig = true;
+                    RunObject = Report "Fines Report";
                     ApplicationArea = All;
                 }
                 action(" Fee balances")
@@ -557,7 +566,8 @@ page 68852 "ACA-Student Fin. Role Center"
                 action("Vc Cleared List")
                 {
                     Caption = 'Fee Exemption list';
-                    RunObject = Page "fee clearance  list";
+                    RunObject = Page "ACA-Std Card List";
+                    RunPageLink = "Fee Cleared" = CONST(true);
                     ApplicationArea = All;
                 }
             }
