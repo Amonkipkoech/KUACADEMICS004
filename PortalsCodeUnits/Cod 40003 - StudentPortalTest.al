@@ -3110,6 +3110,7 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         FeeRefundHeader."Shortcut Dimension 2 Code" := department;
         FeeRefundHeader."Global Dimension 1 Code" := 'KUTTRH';
         FeeRefundHeader."Payment Narration" := DetailedReason;
+        FeeRefundHeader.
         if FeeRefundHeader.Insert() then begin
             if CreateFeeRefundLines(studentNo, 0.0, department, FeeRefundHeader."No.") then response := true;
         end;
