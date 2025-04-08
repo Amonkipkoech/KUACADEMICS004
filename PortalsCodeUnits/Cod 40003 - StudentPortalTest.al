@@ -401,12 +401,9 @@ codeunit 40003 StudentPortalTest
         if (group = '') or (StrLen(group) = 0) then
             Error('The student does not belong to any group!');
 
-
         clinicals.Reset();
         clinicals.SetRange(clinicals.Group, group);
         clinicals.SetRange(clinicals.Session, Session);
-
-
         if clinicals.FindFirst() then begin
             repeat
                 Message += 'SUCCESS' + '::' + clinicals.Group + '::' +
@@ -1752,17 +1749,11 @@ codeunit 40003 StudentPortalTest
     procedure SubmitUnits(studentNo: Text; Unit: Text; Prog: Text; myStage: Text; sem: Text; RegTransID: Text; UnitDescription: Text; AcademicYear: Text; unitType: Option) ReturnMessage: Text[150]
     var
         Customer: Record "Customer";
+        studentUnits: Record "ACA-Student Units";
+        StudentUnitBaskets : Record "ACA-Student Units Reservour";
 
     begin
-        /*IF Customer.GET(studentNo) THEN BEGIN
-            Customer.CALCFIELDS(Balance);
-            IF Customer.Balance > 0 THEN BEGIN
-                ReturnMessage := 'Units not registered! Your Balance is greater than zero!';
-            END;
-        END;
-        IF NOT (Customer.Balance > 0) THEN BEGIN*/
-
-
+       
 
         StudentUnits.INIT;
 
@@ -3100,6 +3091,53 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         ApplicHeader.SetRange(Email, email);
         ApplicHeader.SetRange("First Degree Choice", program);
         if ApplicHeader.FindFirst() then response := true;
+        exit(response);
+    end;
+
+    procedure CreateFeeRefundHeader(studentNo:Text;DetailedReason:Text;checkNo:Text;department : Text):Boolean
+    var FeeRefundHeader : Record "FIN-Payments Header";
+        response : Boolean;
+    begin
+       
+        FeeRefundHeader.Init();
+        FeeRefundHeader."No." := NoSeriesMgt.GetNextNo('BNKREC',0D,true);
+        FeeRefundHeader.Date:= Today;
+        FeeRefundHeader."No. Series" := 'BNKREC';
+        FeeRefundHeader.Payee := studentNo;
+        FeeRefundHeader."Cheque No.":= checkNo;
+        FeeRefundHeader."Responsibility Center":='FIN';
+        FeeRefundHeader."Shortcut Dimension 2 Code" := department;
+        if FeeRefundHeader.Insert() then begin
+            if CreateFeeRefundLines(studentNo,0.0,department,FeeRefundHeader."No.") then response := true;
+        end;
+    exit(response);
+    end;
+
+    procedure CreateFeeRefundLines(studentNo : Text;Amount:Decimal;department:Code[10];number:Text):Boolean
+    var FeeRefundLines : Record "FIN-Payment Line";
+        response : Boolean;
+    begin
+        FeeRefundLines.Init();
+        FeeRefundLines."Account No." := studentNo;
+        FeeRefundLines."Account Name" := GetStudentFullName(studentNo);
+        FeeRefundLines.Grouping := 'STUDENT';
+        FeeRefundLines."Account Type" := FeeRefundLines."Account Type"::Customer;
+        FeeRefundLines."Advance Type" := FeeRefundLines."Advance Type"::"G/L Account";
+        FeeRefundLines.Amount := Amount;
+        FeeRefundLines."Shortcut Dimension 2 Code" := department;
+        FeeRefundLines.No := number;
+        if FeeRefundLines.Insert() then response := true;
+
+        exit(response);
+    end;
+
+    procedure GetDepartmentCode(programme : Code[10]):Text
+    var ProgrammeList : Record "ACA-Programme";
+        response : Text;
+    begin
+        ProgrammeList.Reset();
+        ProgrammeList.SetRange(Code,programme);
+        if ProgrammeList.FindFirst() then response := ProgrammeList."Department Code";
         exit(response);
     end;
 
