@@ -1750,10 +1750,10 @@ codeunit 40003 StudentPortalTest
     var
         Customer: Record "Customer";
         studentUnits: Record "ACA-Student Units";
-        StudentUnitBaskets : Record "ACA-Student Units Reservour";
+        StudentUnitBaskets: Record "ACA-Student Units Reservour";
 
     begin
-       
+
 
         StudentUnits.INIT;
 
@@ -3094,32 +3094,36 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         exit(response);
     end;
 
-    procedure CreateFeeRefundHeader(studentNo:Text;DetailedReason:Text;checkNo:Text;department : Text):Boolean
-    var FeeRefundHeader : Record "FIN-Payments Header";
-        response : Boolean;
+    procedure CreateFeeRefundHeader(studentNo: Text; DetailedReason: Text; checkNo: Text; department: Text): Boolean
+    var
+        FeeRefundHeader: Record "FIN-Payments Header";
+        response: Boolean;
     begin
-       
+
         FeeRefundHeader.Init();
-        FeeRefundHeader."No." := NoSeriesMgt.GetNextNo('BNKREC',0D,true);
-        FeeRefundHeader.Date:= Today;
+        FeeRefundHeader."No." := NoSeriesMgt.GetNextNo('BNKREC', 0D, true);
+        FeeRefundHeader.Date := Today;
         FeeRefundHeader."No. Series" := 'BNKREC';
         FeeRefundHeader.Payee := studentNo;
-        FeeRefundHeader."Cheque No.":= checkNo;
-        FeeRefundHeader."Responsibility Center":='FIN';
+        FeeRefundHeader."Cheque No." := checkNo;
+        FeeRefundHeader."Responsibility Center" := 'FIN';
         FeeRefundHeader."Shortcut Dimension 2 Code" := department;
+        FeeRefundHeader."Global Dimension 1 Code" := 'KUTTRH';
+        FeeRefundHeader."Payment Narration" := DetailedReason;
         if FeeRefundHeader.Insert() then begin
-            if CreateFeeRefundLines(studentNo,0.0,department,FeeRefundHeader."No.") then response := true;
+            if CreateFeeRefundLines(studentNo, 0.0, department, FeeRefundHeader."No.") then response := true;
         end;
-    exit(response);
+        exit(response);
     end;
 
-    procedure CreateFeeRefundLines(studentNo : Text;Amount:Decimal;department:Code[10];number:Text):Boolean
-    var FeeRefundLines : Record "FIN-Payment Line";
-        response : Boolean;
+    procedure CreateFeeRefundLines(studentNo: Text; Amount: Decimal; department: Code[10]; number: Text): Boolean
+    var
+        FeeRefundLines: Record "FIN-Payment Line";
+        response: Boolean;
     begin
         FeeRefundLines.Init();
         FeeRefundLines."Account No." := studentNo;
-        FeeRefundLines."Account Name" := GetStudentFullName(studentNo);
+        FeeRefundLines."Account Name" := GetStudentName(studentNo);
         FeeRefundLines.Grouping := 'STUDENT';
         FeeRefundLines."Account Type" := FeeRefundLines."Account Type"::Customer;
         FeeRefundLines."Advance Type" := FeeRefundLines."Advance Type"::"G/L Account";
@@ -3131,12 +3135,13 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         exit(response);
     end;
 
-    procedure GetDepartmentCode(programme : Code[10]):Text
-    var ProgrammeList : Record "ACA-Programme";
-        response : Text;
+    procedure GetDepartmentCode(programme: Code[10]): Text
+    var
+        ProgrammeList: Record "ACA-Programme";
+        response: Text;
     begin
         ProgrammeList.Reset();
-        ProgrammeList.SetRange(Code,programme);
+        ProgrammeList.SetRange(Code, programme);
         if ProgrammeList.FindFirst() then response := ProgrammeList."Department Code";
         exit(response);
     end;
