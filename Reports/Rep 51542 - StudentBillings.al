@@ -10,7 +10,7 @@ report 51542 "Student Billings"
             DataItemTableView = SORTING("Student No.")
                                 WHERE(
                                       Reversed = CONST(false));
-            RequestFilterFields = Stage, Semester, "Registration Date", Programmes,Posted;
+            RequestFilterFields = Stage, Semester, "Registration Date", Programmes, Posted;
             column(COMPANYNAME; COMPANYNAME)
             {
             }
