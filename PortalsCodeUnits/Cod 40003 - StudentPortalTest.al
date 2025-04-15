@@ -3110,7 +3110,6 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         FeeRefundHeader."Shortcut Dimension 2 Code" := department;
         FeeRefundHeader."Global Dimension 1 Code" := 'KUTTRH';
         FeeRefundHeader."Payment Narration" := DetailedReason;
-        FeeRefundHeader.
         if FeeRefundHeader.Insert() then begin
             if CreateFeeRefundLines(studentNo, 0.0, department, FeeRefundHeader."No.") then response := true;
         end;
@@ -3145,6 +3144,58 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         ProgrammeList.SetRange(Code, programme);
         if ProgrammeList.FindFirst() then response := ProgrammeList."Department Code";
         exit(response);
+    end;
+
+    procedure GetStudentUnitAttendance(StudentNo: Code[20]): Text
+    var
+        Attendance: Record "Class Attendance Details";
+        Summary: Dictionary of [Code[20], Dictionary of [Text, Integer]];
+        UnitCode: Code[20];
+        InnerDict: Dictionary of [Text, Integer];
+        IsPresent: Boolean;
+        PresentCount: Integer;
+        AbsentCount: Integer;
+        Result: Text;
+        UnitDesc: Text;
+    begin
+        Attendance.Reset();
+        Attendance.SetRange("Student No.", StudentNo);
+
+        if Attendance.FindSet() then begin
+            repeat
+                UnitCode := Attendance."Unit Code";
+                IsPresent := Attendance.Present;
+
+                if not Summary.ContainsKey(UnitCode) then begin
+                    Clear(InnerDict);
+                    InnerDict.Add('Present', 0);
+                    InnerDict.Add('Absent', 0);
+                    Summary.Add(UnitCode, InnerDict);
+                end;
+
+                Summary.Get(UnitCode).Get('Present', PresentCount);
+                Summary.Get(UnitCode).Get('Absent', AbsentCount);
+
+                if IsPresent then
+                    Summary.Get(UnitCode).Set('Present', PresentCount + 1)
+                else
+                    Summary.Get(UnitCode).Set('Absent', AbsentCount + 1);
+            until Attendance.Next() = 0;
+        end;
+
+        foreach UnitCode in Summary.Keys do begin
+            if Attendance.Get(UnitCode) then
+                UnitDesc := GetUnitName(UnitCode)
+            else
+                UnitDesc := GetUnitName(UnitCode);
+
+            Summary.Get(UnitCode).Get('Present', PresentCount);
+            Summary.Get(UnitCode).Get('Absent', AbsentCount);
+
+            Result += UnitCode + '::' + UnitDesc + '::' + Format(PresentCount) + '::' + Format(AbsentCount) + '|';
+        end;
+
+        exit(Result);
     end;
 
 
