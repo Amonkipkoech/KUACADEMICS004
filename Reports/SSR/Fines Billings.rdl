@@ -11,76 +11,6 @@
       <rd:DataSourceID>c9807bf1-a745-44a2-b228-6958f9d47619</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="No">
-          <DataField>No</DataField>
-        </Field>
-        <Field Name="StudentNo">
-          <DataField>StudentNo</DataField>
-        </Field>
-        <Field Name="StudentName">
-          <DataField>StudentName</DataField>
-        </Field>
-        <Field Name="School">
-          <DataField>School</DataField>
-        </Field>
-        <Field Name="Department">
-          <DataField>Department</DataField>
-        </Field>
-        <Field Name="Status">
-          <DataField>Status</DataField>
-        </Field>
-        <Field Name="DateIssued">
-          <DataField>DateIssued</DataField>
-        </Field>
-        <Field Name="ExpectedReturnDate">
-          <DataField>ExpectedReturnDate</DataField>
-        </Field>
-        <Field Name="ActualReturnDate">
-          <DataField>ActualReturnDate</DataField>
-        </Field>
-        <Field Name="Issued">
-          <DataField>Issued</DataField>
-        </Field>
-        <Field Name="Returned">
-          <DataField>Returned</DataField>
-        </Field>
-        <Field Name="NumberofGownsLeft">
-          <DataField>NumberofGownsLeft</DataField>
-        </Field>
-        <Field Name="DaysPassed">
-          <DataField>DaysPassed</DataField>
-        </Field>
-        <Field Name="Fine">
-          <DataField>Fine</DataField>
-        </Field>
-        <Field Name="FineFormat">
-          <DataField>FineFormat</DataField>
-        </Field>
-        <Field Name="info_pic">
-          <DataField>info_pic</DataField>
-        </Field>
-        <Field Name="info_name">
-          <DataField>info_name</DataField>
-        </Field>
-        <Field Name="info_address">
-          <DataField>info_address</DataField>
-        </Field>
-        <Field Name="info_mail">
-          <DataField>info_mail</DataField>
-        </Field>
-        <Field Name="seq">
-          <DataField>seq</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -892,12 +822,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -937,4 +861,74 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="StudentNo">
+          <DataField>StudentNo</DataField>
+        </Field>
+        <Field Name="StudentName">
+          <DataField>StudentName</DataField>
+        </Field>
+        <Field Name="School">
+          <DataField>School</DataField>
+        </Field>
+        <Field Name="Department">
+          <DataField>Department</DataField>
+        </Field>
+        <Field Name="Status">
+          <DataField>Status</DataField>
+        </Field>
+        <Field Name="DateIssued">
+          <DataField>DateIssued</DataField>
+        </Field>
+        <Field Name="ExpectedReturnDate">
+          <DataField>ExpectedReturnDate</DataField>
+        </Field>
+        <Field Name="ActualReturnDate">
+          <DataField>ActualReturnDate</DataField>
+        </Field>
+        <Field Name="Issued">
+          <DataField>Issued</DataField>
+        </Field>
+        <Field Name="Returned">
+          <DataField>Returned</DataField>
+        </Field>
+        <Field Name="NumberofGownsLeft">
+          <DataField>NumberofGownsLeft</DataField>
+        </Field>
+        <Field Name="DaysPassed">
+          <DataField>DaysPassed</DataField>
+        </Field>
+        <Field Name="Fine">
+          <DataField>Fine</DataField>
+        </Field>
+        <Field Name="FineFormat">
+          <DataField>FineFormat</DataField>
+        </Field>
+        <Field Name="info_pic">
+          <DataField>info_pic</DataField>
+        </Field>
+        <Field Name="info_name">
+          <DataField>info_name</DataField>
+        </Field>
+        <Field Name="info_address">
+          <DataField>info_address</DataField>
+        </Field>
+        <Field Name="info_mail">
+          <DataField>info_mail</DataField>
+        </Field>
+        <Field Name="seq">
+          <DataField>seq</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
