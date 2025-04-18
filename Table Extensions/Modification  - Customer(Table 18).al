@@ -1828,6 +1828,11 @@ tableextension 70001 Customers extends Customer
             FieldClass = FlowField;
             CalcFormula = lookup("ACA-Academics Central Setups".Description where("Title Code" = field(Nationality)));
         }
+        field(62318; "Password Reset OTP"; Code[10])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Password Reset OTP';
+        }
 
     }
     keys
