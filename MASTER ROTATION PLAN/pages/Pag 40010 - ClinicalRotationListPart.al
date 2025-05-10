@@ -43,7 +43,7 @@ page 40010 "Clinical Rotation List Part"
                 field(Areas; rec.Areas)
                 {
                     ApplicationArea = all;
-                    
+
 
 
                 }
@@ -74,10 +74,19 @@ page 40010 "Clinical Rotation List Part"
                     DrillDownPageID = "Group Assignmnets ";
 
                 }
-                // field(Status; rec.Status)
-                // {
-                //     ApplicationArea = all;
-                // }
+                field(Capacity; rec.Capacity)
+                {
+                    Caption = 'Rotation Area Capacity';
+                    ApplicationArea = all;
+                }
+                field("Remaining Capacity"; Integer)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Remaining Capacity';
+                    Editable = false;
+                    // Calculated on the fly in the page
+                }
+
 
                 // Continue with fields up to Site Week 52...
             }
