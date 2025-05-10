@@ -641,24 +641,31 @@ page 68861 "ACA-Academics Role Center"
                     action("mrp")
                     {
                         Image = Register;
-                        Caption = 'mrp report 3';
+                        Caption = 'Master Rotation Report';
                         RunObject = report "Mrp Report 3 ";
                         ApplicationArea = ALL;
                     }
-                    action(ActionName)
+                    action("mrp capacity")
                     {
                         Image = Register;
-                        Caption = 'mrp report 2';
-                        RunObject = report "Mrp Report 2 ";
+                        Caption = 'Master Rotation Capacity Distribution Report';
+                        RunObject = report "Rotation Capacity Summary";
                         ApplicationArea = ALL;
+                    }
+                    // action(ActionName)
+                    // {
+                    //     Image = Register;
+                    //     Caption = 'mrp report 2';
+                    //     RunObject = report "Mrp Report 2 ";
+                    //     ApplicationArea = ALL;
 
-                    }
-                    action("Master Rotation ")
-                    {
-                        Image = Register;
-                        RunObject = Report "master Rotation Table";//"master Rotation Table"
-                        ApplicationArea = All;
-                    }
+                    // }
+                    // action("Master Rotation ")
+                    // {
+                    //     Image = Register;
+                    //     RunObject = Report "master Rotation Table";//"master Rotation Table"
+                    //     ApplicationArea = All;
+                    // }
                     // action("Master Rotation ")
                     // {
                     //     Image = Register;

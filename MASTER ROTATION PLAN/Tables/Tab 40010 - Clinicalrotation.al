@@ -182,9 +182,9 @@ table 40010 "Clinical rotation"
             DataClassification = ToBeClassified;
             Description = 'Lecturer Name';
         }
-        field("Remaining Capacity"; Integer)
+        field(56; "Remaining Capacity"; Integer)
         {
-            ApplicationArea = All;
+
             Caption = 'Remaining Capacity';
             Editable = false;
             // Calculated on the fly in the page

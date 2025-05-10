@@ -79,7 +79,7 @@ page 40010 "Clinical Rotation List Part"
                     Caption = 'Rotation Area Capacity';
                     ApplicationArea = all;
                 }
-                field("Remaining Capacity"; Integer)
+                field("Remaining Capacity"; RemainingCapacity)
                 {
                     ApplicationArea = All;
                     Caption = 'Remaining Capacity';
@@ -162,5 +162,13 @@ page 40010 "Clinical Rotation List Part"
             }
         }
     }
+    var
+        RemainingCapacity: Integer;
+
+    trigger OnAfterGetRecord()
+    begin
+        RemainingCapacity := Rec.Capacity - Rec."No Of Students";
+    end;
+
 }
 
