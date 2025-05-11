@@ -202,13 +202,17 @@ table 40026 Timetable
         {
 
         }
+        field(35; "Status"; Option)
+        {
+            OptionMembers = open,"Pending Approval",Rejected,Approved;
+        }
 
 
     }
 
     keys
     {
-        key(Key1; "Unit Base Code", Programs, Day, TimeSlot, Campus, Semester, "Academic Year", Lecturer)
+        key(Key1; "Unit Base Code", Programs, Day, TimeSlot, Campus, Semester, "Academic Year", Lecturer, Department)
         {
             Clustered = true;
         }

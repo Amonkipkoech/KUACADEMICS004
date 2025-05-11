@@ -24,13 +24,21 @@ page 40037 "Dept Timetable "
                     ApplicationArea = all;
 
                 }
+                field(Campus; rec.Campus)
+                {
+                    ApplicationArea = all;
+                }
+                field(Status; rec.Status)
+                {
+                    ApplicationArea = all;
+                }
 
             }
             group("Time Table Units")
             {
                 part("time table list part"; "time table list part")
                 {
-                    SubPageLink = "Academic Year" = field("Academic Year"), Semester = field("Session Year"), Department = field("Department ");
+                    SubPageLink = "Academic Year" = field("Academic Year"), Semester = field("Session Year"), Department = field("Department "), Campus = field(Campus), Status = field(Status);
                 }
             }
         }
