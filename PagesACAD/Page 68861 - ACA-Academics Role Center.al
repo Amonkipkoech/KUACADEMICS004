@@ -1487,6 +1487,22 @@ page 68861 "ACA-Academics Role Center"
             {
                 Caption = 'Timetable Management';
                 Image = Statistics;
+                action("Lecture Buildings")
+                {
+                    Caption = 'Lecture Buildings';
+                    Image = Register;
+                    RunObject = Page "ACA-Buildings Setup";
+                    ApplicationArea = All;
+
+                }
+                action("Lecture Halls")
+                {
+                    Caption = 'Lecture Halls';
+                    Image = Register;
+                    RunObject = Page "ACA-LectureHalls Setup";
+                    ApplicationArea = All;
+
+                }
                 action(TimetableCentral)
                 {
                     Caption = 'Teaching Timetable';

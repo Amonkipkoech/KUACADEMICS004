@@ -1,4 +1,4 @@
-table 40026 Timetable
+table 40031 "TimeTable Two"
 {
     Caption = 'Timetable';
     DataClassification = ToBeClassified;
@@ -25,39 +25,59 @@ table 40026 Timetable
         }
         field(3; "Unit Base Code"; Code[20])
         {
-            TableRelation = "ACA-Units/Subjects".Code WHERE("Programme Code" = FIELD(Programs));
-
+            TableRelation = "ACA-Units/Subjects".Code where("Programme Code" = field(Programs));
             trigger OnValidate()
-            var
-                HRMEmployee: Record "HRM-Employee (D)";
-                TimetableRec: Record Timetable;
             begin
-                // Check if the unit is already allocated on the same day, week, and month
-                TimetableRec.Reset();
-                TimetableRec.SetRange("Academic Year", Rec."Academic Year");
-                TimetableRec.SetRange(Semester, Rec.Semester);
-                TimetableRec.SetRange(Department, Rec.Department);
-                TimetableRec.SetRange(Programs, Rec.Programs);
-                TimetableRec.SetRange("Unit Base Code", Rec."Unit Base Code");
-                TimetableRec.SetRange(Day, Rec.Day);
-                TimetableRec.SetRange(Week, Rec.Week);
-                TimetableRec.SetRange(Month, Rec.Month);
-
-                if TimetableRec.FindFirst() then begin
-                    Error(
-                        'Unit %1 is already allocated on %2 (Week %3, %4).',
-                        Rec."Unit Base Code",
-                        FORMAT(Rec.Day), FORMAT(Rec.Week), FORMAT(Rec.Month)
-                    );
+                units.Reset();
+                units.SetRange("Unit Base Code", Rec."Unit Base Code");
+                units.SetRange(ModeofStudy, Rec.ModeofStudy);
+                units.SetRange(Semester, Rec.Semester);
+                units.SetRange(Campus, Rec.Campus);
+                //generate stream
+                IF units.Find('-') then begin
+                    if units.Count = 1
+                    then
+                        Rec.Stream := 'Stream B' else
+                        if units.Count = 2
+                        then
+                            Rec.Stream := 'Stream C' else
+                            if units.Count = 3
+                            then
+                                Rec.Stream := 'Stream D' else
+                                if units.Count = 4
+                                then
+                                    Rec.Stream := 'Stream E' else
+                                    if units.Count = 5
+                                    then
+                                        Rec.Stream := 'Stream F';
+                end else begin
+                    Rec.Stream := 'Stream A'
                 end;
 
-                // // Fetch and assign Lecturer Name (optional and safe)
-                // if HRMEmployee.Get(Rec.Lecturer) then
-                //     "Lecturer Name" := StrSubstNo('%1 %2 %3',
-                //         HRMEmployee."First Name", HRMEmployee."Middle Name", HRMEmployee."Last Name");
-            end;
-        }
+                unitAss.Reset();
+                unitAss.SetRange("Associated Unit", Rec."Unit Base Code");
+                if not unitAss.Find('-') then begin
+                    units.Reset();
+                    units.SetRange("Unit Base Code", Rec."Unit Base Code");
+                    units.SetRange(Day, Rec.Day);
+                    units.SetRange(TimeSlot, Rec.TimeSlot);
+                    units.SetRange(ModeofStudy, Rec.ModeofStudy);
+                    units.SetRange(Semester, GetCurrentSemester());
+                    units.SetRange(Stream, Rec.Stream);
+                    if units.Find('-') then begin
+                        Error('Unit Has Already Been Allocated On this Time Slot');
+                    end;
+                end;
 
+
+
+            end;
+
+
+
+
+
+        }
         field(4; Department; code[20])
         {
 
@@ -75,87 +95,53 @@ table 40026 Timetable
         {
             TableRelation = "ACA-Semesters".Code;
         }
-        field(8; "Lecture Hall"; Code[20])
+        field(8; "Lecture Hall"; code[20])
         {
             TableRelation = "ACA-Lecturer Halls Setup"."Lecture Room Code";
 
-            trigger OnValidate()
-            var
-                HallRec: Record "ACA-Lecturer Halls Setup";
-                TimetableRec: Record Timetable;
-            begin
-                // Validate if hall is already allocated on same slot
-                TimetableRec.Reset();
-                TimetableRec.SetRange("Lecture Hall", Rec."Lecture Hall");
-                TimetableRec.SetRange("Academic Year", Rec."Academic Year");
-                TimetableRec.SetRange(Semester, Rec.Semester);
-                TimetableRec.SetRange(Day, Rec.Day);
-                TimetableRec.SetRange(TimeSlot, Rec.TimeSlot);
-                TimetableRec.SetRange(Week, Rec.Week);
-                TimetableRec.SetRange(Month, Rec.Month);
-
-                if TimetableRec.FindFirst() then
-                    Error(
-                        'Lecture Hall %1 is already allocated on %2 (Week %3, %4, %5 - %6).',
-                        Rec."Lecture Hall",
-                        FORMAT(Rec.Day), FORMAT(Rec.Week), FORMAT(Rec.Month),
-                        Rec.Semester, Rec."Academic Year"
-                    );
-
-                // Validate and fetch sitting capacity
-                if HallRec.Get(Rec."Lecture Hall") then begin
-                    Rec."Sitting Capacity" := HallRec."Sitting Capacity";
-                end else
-                    Error('Lecture Hall %1 not found in setup.', Rec."Lecture Hall");
-            end;
         }
-
         field(9; "Sitting Capacity"; Integer)
         {
-            // Use FlowField as backup, if needed
-            CalcFormula = Lookup("ACA-Lecturer Halls Setup"."Sitting Capacity"
-                        WHERE("Lecture Room Code" = FIELD("Lecture Hall")));
+            CalcFormula = lookup("ACA-Lecturer Halls Setup"."Sitting Capacity" where("Lecture Room Code" = field("Lecture Hall")));
             FieldClass = FlowField;
         }
-
         field(10; "Academic Year"; code[20])
         {
             TableRelation = "ACA-Semesters"."Academic Year";
         }
-        field(11; Lecturer; Code[20])
+        field(11; Lecturer; code[20])
         {
-            TableRelation = "HRM-Employee (D)"."No." WHERE(Lecturer = FILTER(true));
-
+            TableRelation = "HRM-Employee (D)"."No." where(Lecturer = filter(true));
             trigger OnValidate()
-            var
-                HRMEmployee: Record "HRM-Employee (D)";
-                TimetableRec: Record Timetable;
+            VAR
+                HRM: Record "HRM-Employee (D)";
             begin
-                // Check if the lecturer is already allocated for the same combination
-                TimetableRec.Reset();
-                TimetableRec.SetRange(Lecturer, Rec.Lecturer);
-                TimetableRec.SetRange(Semester, rec.Semester);
-                TimetableRec.SetRange("Academic Year", rec."Academic Year");
-                TimetableRec.SetRange(Department, rec.Department);
-                TimetableRec.SetRange(Day, Rec.Day);
-                TimetableRec.SetRange(TimeSlot, Rec.TimeSlot);
-                TimetableRec.SetRange(Week, Rec.Week);
-                TimetableRec.SetRange(Month, Rec.Month);
 
 
-                if TimetableRec.FindFirst() then begin
-                    if HRMEmployee.Get(Rec.Lecturer) then
-                        Error('Lecturer %1 is already allocated a class on %2 during %3 in %4.',
-                            HRMEmployee."First Name" + ' ' + HRMEmployee."Middle Name" + ' ' + HRMEmployee."Last Name",
-                            FORMAT(Rec.Day), FORMAT(Rec.TimeSlot), FORMAT(Rec.Month));
+                lecturers.Reset;
+                lecturers.SetRange(Lecturer, Rec.lecturer);
+                lecturers.SetRange(Semester, GetCurrentSemester());
+                lecturers.SetRange(Day, day);
+                lecturers.SetRange(TimeSlot, timeslot);
+                if lecturers.Find('-') then begin
+                    Error('The selected Lecturer already has a lesson in the selected timeslot!')
                 end;
-
-                // Fetch Lecturer Name
-                if HRMEmployee.Get(Rec.Lecturer) then
-                    "Lecturer Name" := StrSubstNo('%1 %2 %3', HRMEmployee."First Name", HRMEmployee."Middle Name", HRMEmployee."Last Name");
+                // lecturers.Reset();
+                // lecturers.SetRange(Lecturer, Rec.Lecturer);
+                // lecturers.SetRange(Semester, Rec.Semester);
+                // lecturers.SetRange(Unit, Rec."Unit Base Code");
+                // lecturers.SetRange(ModeOfStudy, Rec.ModeofStudy);
+                // lecturers.SetRange(Stream, Rec.Stream);
+                // if lecturers.Find('-') then begin
+                //     Error('The selected Lecturer already has a lesson in the selected timeslot!');
+                // end;
+                HRM.Reset();
+                if HRM.Get(Lecturer) then begin
+                    "Lecturer Name" := HRM."First Name" + ' ' + HRM."Middle Name" + '' + HRM."Last Name";
+                end;
             end;
-        }
 
+        }
         field(12; ModeofStudy; code[20])
         {
             TableRelation = "ACA-Student Types";
@@ -330,3 +316,4 @@ table 40026 Timetable
     end;
 
 }
+
