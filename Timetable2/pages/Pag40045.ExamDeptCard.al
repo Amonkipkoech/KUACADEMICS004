@@ -60,12 +60,27 @@ page 40045 "Exam Dept Card "
                 Caption = 'Send for Approval';
                 Image = Send;
                 ApplicationArea = All;
-                Enabled = (rec.Status2 = rec.Status2::Open);
+                Enabled = (Rec.Status2 = Rec.Status2::Open);
+
                 trigger OnAction()
+                var
+                    ExamLine: Record "Examination Timetable";
                 begin
-                    rec.Status2 := rec.Status2::"Pending Approval";
-                    // rec.Modify();
-                    // CurrPage.Update(); // Refreshes subpage data
+                    Rec.Status2 := Rec.Status2::"Pending Approval";
+                    Rec.Modify();
+
+                    ExamLine.Reset();
+                    ExamLine.SetRange(Campus, Rec.Campus);
+                    ExamLine.SetRange("Academic Year", Rec."Academic Year");
+                    ExamLine.SetRange(Semester, Rec."Session Year");
+                    ExamLine.SetRange(Department, Rec."Department ");
+                    if ExamLine.FindSet() then
+                        repeat
+                            ExamLine.Status := ExamLine.Status::"Pending Approval";
+                            ExamLine.Modify();
+                        until ExamLine.Next() = 0;
+
+                    CurrPage.Update();
                     Message('Timetable sent for approval.');
                 end;
             }
@@ -75,13 +90,28 @@ page 40045 "Exam Dept Card "
                 Caption = 'Approve Timetable';
                 Image = Approve;
                 ApplicationArea = All;
-                Enabled = (rec.Status2 = rec.Status2::"Pending Approval");
+                Enabled = (Rec.Status2 = Rec.Status2::"Pending Approval");
+
                 trigger OnAction()
+                var
+                    ExamLine: Record "Examination Timetable";
                 begin
-                    rec.Status2 := rec.Status2::Approved;
-                    // rec.Modify();
-                    // CurrPage.Update(); // Refreshes subpage data
-                    Message('Timetable approved.');
+                    Rec.Status2 := Rec.Status2::Approved;
+                    Rec.Modify();
+
+                    ExamLine.Reset();
+                    ExamLine.SetRange(Campus, Rec.Campus);
+                    ExamLine.SetRange("Academic Year", Rec."Academic Year");
+                    ExamLine.SetRange(Semester, Rec."Session Year");
+                    ExamLine.SetRange(Department, Rec."Department ");
+                    if ExamLine.FindSet() then
+                        repeat
+                            ExamLine.Status := ExamLine.Status::Approved;
+                            ExamLine.Modify();
+                        until ExamLine.Next() = 0;
+
+                    CurrPage.Update();
+                    Message('Timetable approved and released to students and Lectures for viewing ');
                 end;
             }
 
@@ -90,15 +120,31 @@ page 40045 "Exam Dept Card "
                 Caption = 'Reject Timetable';
                 Image = Reject;
                 ApplicationArea = All;
-                Enabled = (rec.Status2 = rec.Status2::"Pending Approval");
+                Enabled = (Rec.Status2 = Rec.Status2::"Pending Approval");
+
                 trigger OnAction()
+                var
+                    ExamLine: Record "Examination Timetable";
                 begin
-                    rec.Status2 := rec.Status2::Rejected;
-                    rec.Modify();
-                    // CurrPage.Update(); // Refreshes subpage data
+                    Rec.Status2 := Rec.Status2::Rejected;
+                    Rec.Modify();
+
+                    ExamLine.Reset();
+                    ExamLine.SetRange(Campus, Rec.Campus);
+                    ExamLine.SetRange("Academic Year", Rec."Academic Year");
+                    ExamLine.SetRange(Semester, Rec."Session Year");
+                    ExamLine.SetRange(Department, Rec."Department ");
+                    if ExamLine.FindSet() then
+                        repeat
+                            ExamLine.Status := ExamLine.Status::Rejected;
+                            ExamLine.Modify();
+                        until ExamLine.Next() = 0;
+
+                    CurrPage.Update();
                     Message('Timetable rejected.');
                 end;
             }
+
         }
     }
 }

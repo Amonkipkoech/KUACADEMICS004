@@ -60,45 +60,102 @@ page 40037 "Dept Timetable "
                 Caption = 'Send for Approval';
                 Image = Send;
                 ApplicationArea = All;
-                Enabled = (rec.Status2 = rec.Status2::Open);
+                Enabled = (Rec.Status2 = Rec.Status2::Open);
+
                 trigger OnAction()
+                var
+                    DeplistPart: Record Timetable;
                 begin
-                    rec.Status2 := rec.Status2::"Pending Approval";
-                    // rec.Modify();
-                    // CurrPage.Update(); // Refreshes subpage data
+                    // Update header status
+                    Rec.Status2 := Rec.Status2::"Pending Approval";
+                    Rec.Modify(); // Save the change
+
+                    // Update related timetable lines
+                    DeplistPart.Reset();
+                    DeplistPart.SetRange(Campus, Rec.Campus);
+                    DeplistPart.SetRange("Academic Year", Rec."Academic Year");
+                    DeplistPart.SetRange(Semester, Rec."Session Year");
+                    DeplistPart.SetRange(Department, Rec."Department ");
+                    if DeplistPart.FindSet() then begin
+                        repeat
+                            DeplistPart.Status := DeplistPart.Status::"Pending Approval";
+                            DeplistPart.Modify();
+                        until DeplistPart.Next() = 0;
+                    end;
+
+                    CurrPage.Update(); // Refresh UI
                     Message('Timetable sent for approval.');
                 end;
             }
+
 
             action(ApproveTimetable)
             {
                 Caption = 'Approve Timetable';
                 Image = Approve;
                 ApplicationArea = All;
-                Enabled = (rec.Status2 = rec.Status2::"Pending Approval");
+                Enabled = (Rec.Status2 = Rec.Status2::"Pending Approval");
+
                 trigger OnAction()
+                var
+                    DeplistPart: Record Timetable;
                 begin
-                    rec.Status2 := rec.Status2::Approved;
-                    // rec.Modify();
-                    // CurrPage.Update(); // Refreshes subpage data
-                    Message('Timetable approved.');
+                    // Update header status
+                    Rec.Status2 := Rec.Status2::Approved;
+                    Rec.Modify(); // Save the change
+
+                    // Update related timetable lines
+                    DeplistPart.Reset();
+                    DeplistPart.SetRange(Campus, Rec.Campus);
+                    DeplistPart.SetRange("Academic Year", Rec."Academic Year");
+                    DeplistPart.SetRange(Semester, Rec."Session Year");
+                    DeplistPart.SetRange(Department, Rec."Department ");
+                    if DeplistPart.FindSet() then begin
+                        repeat
+                            DeplistPart.Status := DeplistPart.Status::Approved;
+                            DeplistPart.Modify();
+                        until DeplistPart.Next() = 0;
+                    end;
+
+                    CurrPage.Update(); // Refresh UI
+                    Message('Timetable approved and released to students and lecturers for viewing');
                 end;
             }
+
 
             action(RejectTimetable)
             {
                 Caption = 'Reject Timetable';
                 Image = Reject;
                 ApplicationArea = All;
-                Enabled = (rec.Status2 = rec.Status2::"Pending Approval");
+                Enabled = (Rec.Status2 = Rec.Status2::"Pending Approval");
+
                 trigger OnAction()
+                var
+                    DeplistPart: Record Timetable;
                 begin
-                    rec.Status2 := rec.Status2::Rejected;
-                    rec.Modify();
-                    // CurrPage.Update(); // Refreshes subpage data
-                    Message('Timetable rejected.');
+                    // Update header status
+                    Rec.Status2 := Rec.Status2::Rejected;
+                    Rec.Modify(); // Save the change
+
+                    // Update related timetable lines
+                    DeplistPart.Reset();
+                    DeplistPart.SetRange(Campus, Rec.Campus);
+                    DeplistPart.SetRange("Academic Year", Rec."Academic Year");
+                    DeplistPart.SetRange(Semester, Rec."Session Year");
+                    DeplistPart.SetRange(Department, Rec."Department ");
+                    if DeplistPart.FindSet() then begin
+                        repeat
+                            DeplistPart.Status := DeplistPart.Status::Rejected;
+                            DeplistPart.Modify();
+                        until DeplistPart.Next() = 0;
+                    end;
+
+                    CurrPage.Update(); // Refresh UI
+                    Message('Timetable rejected and sent back for revision.');
                 end;
             }
+
         }
     }
 }

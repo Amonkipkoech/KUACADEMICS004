@@ -3,6 +3,8 @@ page 40050 "Consolidated teaching Listpart"
     Caption = 'Consolidated teaching Listpart';
     SourceTable = Timetable;
     PageType = ListPart;
+    // Only show records where Status = Approved
+    SourceTableView = where(Status = const(Approved));
 
     layout
     {

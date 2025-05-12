@@ -55,7 +55,19 @@ page 40047 TimeTabling
                     action(lecHalls)
                     {
                         Image = RefreshDiscount;
-                        RunObject = Page "ACA-LectureHalls Setup";
+                        RunObject = Page "ACA-LectureHalls Setup";//TT-Days List
+                        ApplicationArea = All;
+                    }
+                    action("Days Of Week")
+                    {
+                        Image = RefreshDiscount;
+                        RunObject = Page "TT-Days List";//TT-Daily Lessons List
+                        ApplicationArea = All;
+                    }
+                    action("Times Of The Day")
+                    {
+                        Image = RefreshDiscount;
+                        RunObject = Page "TT-Daily Lessons List";
                         ApplicationArea = All;
                     }
 
@@ -67,6 +79,37 @@ page 40047 TimeTabling
         }
         area(sections)
         {
+            group("General Set Up Management")
+            {
+                action(Buildings2)
+                {
+                    Caption = 'Buildings';
+                    Image = Insurance;
+                    RunObject = Page "ACA-Buildings Setup";
+                    ApplicationArea = All;
+                }
+                action(lecHalls2)
+                {
+                    Image = RefreshDiscount;
+                    Caption = 'Lecture Halls';
+                    RunObject = Page "ACA-LectureHalls Setup";//TT-Days List
+                    ApplicationArea = All;
+                }
+                action("Days Of Week2")
+                {
+                    Image = RefreshDiscount;
+                    Caption = 'Days Of Week';
+                    RunObject = Page "TT-Days List";//TT-Daily Lessons List
+                    ApplicationArea = All;
+                }
+                action("Times Of The Day2")
+                {
+                    Image = RefreshDiscount;
+                    Caption = 'Times Of The Day';
+                    RunObject = Page "TT-Daily Lessons List";
+                    ApplicationArea = All;
+                }
+            }
             group(Timetabling)
             {
                 Caption = 'Teaching Timetable Management';
@@ -183,109 +226,22 @@ page 40047 TimeTabling
                 {
                     Caption = 'Approved Departmental Exam Timetables';
                     Image = List;
-                    RunObject = Page "Examination Timetable List";
+                    RunObject = Page "Examination Timetable List";//"Consolidated Exam list"
+                    ApplicationArea = All;
+                    RunPageView = WHERE(Status2 = FILTER(Approved));
+                }
+                action("Consolidated Exam list")
+                {
+                    Caption = 'Consolidated Exam TimeTable';
+                    Image = List;
+                    RunObject = Page "Consolidated Exam list";
                     ApplicationArea = All;
                     RunPageView = WHERE(Status2 = FILTER(Approved));
                 }
 
-
             }
 
-            group(Setups)
-            {
-                Caption = 'Setups';
-                Image = Setup;
-                action(Programmes)
-                {
-                    Caption = 'Programmes';
-                    RunObject = Page 68757;
-                    ApplicationArea = All;
-                }
-                action(Nationality)
-                {
-                    Caption = 'Nationality';
-                    RunObject = Page 68868;
-                    ApplicationArea = All;
-                }
-                action("Marketing Strategies")
-                {
-                    Caption = 'Marketing Strategies';
-                    RunObject = Page 68865;
-                    ApplicationArea = All;
-                }
-                action("Schools/Faculties")
-                {
-                    Caption = 'Schools/Faculties';
-                    RunObject = Page 68832;
-                    ApplicationArea = All;
-                }
-                action(Religions)
-                {
-                    Caption = 'Religions';
-                    RunObject = Page 68841;
-                    ApplicationArea = All;
-                }
-                action(Denominations)
-                {
-                    Caption = 'Denominations';
-                    RunObject = Page 68842;
-                    ApplicationArea = All;
-                }
-                action("Insurance Companies")
-                {
-                    Caption = 'Insurance Companies';
-                    ApplicationArea = All;
-                    //RunObject = Page 68844;
-                }
-                action(Relationships)
-                {
-                    Caption = 'Relationships';
-                    RunObject = Page 68845;
-                    ApplicationArea = All;
-                }
-                action(Counties)
-                {
-                    Caption = 'Counties';
-                    RunObject = Page 68871;
-                    ApplicationArea = All;
-                }
-                action("Clearance Codes")
-                {
-                    Caption = 'Clearance Codes';
-                    Image = Setup;
-                    RunObject = Page 68966;
-                    ApplicationArea = All;
-                }
-                action("Registration List")
-                {
-                    Image = Allocations;
-                    RunObject = Page 69187;
-                    ApplicationArea = All;
-                }
-            }
-            group(Approvals)
-            {
-                Caption = 'Approvals';
-                Image = Alerts;
-                action("Pending My Approval")
-                {
-                    Caption = 'Pending My Approval';
-                    RunObject = Page 658;
-                    ApplicationArea = All;
-                }
-                action("My Approval requests")
-                {
-                    Caption = 'My Approval requests';
-                    RunObject = Page 662;
-                    ApplicationArea = All;
-                }
-                action("Clearance Requests")
-                {
-                    Caption = 'Clearance Requests';
-                    RunObject = Page 68970;
-                    ApplicationArea = All;
-                }
-            }
+
 
         }
         area(reporting)
