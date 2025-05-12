@@ -1485,13 +1485,13 @@ page 68861 "ACA-Academics Role Center"
             }
             group(Timetabling)
             {
-                Caption = 'Timetable Management';
+                Caption = 'Teaching Timetable Management';
                 Image = Statistics;
                 action("Lecture Buildings")
                 {
                     Caption = 'Lecture Buildings';
                     Image = Register;
-                    RunObject = Page "ACA-Buildings Setup";
+                    RunObject = Page "Aca Buildings ";
                     ApplicationArea = All;
 
                 }
@@ -1503,13 +1503,40 @@ page 68861 "ACA-Academics Role Center"
                     ApplicationArea = All;
 
                 }
-                action(TimetableCentral)
+                action(OpenTimetables)
                 {
-                    Caption = 'Teaching Timetable';
-                    Image = Register;
+                    Caption = 'Open Departmental Timetables';
+                    Image = List;
                     RunObject = Page "Time Table List";
                     ApplicationArea = All;
+                    RunPageView = WHERE(Status2 = FILTER(Open));
+                }
 
+                action(PendingApprovalTimetables)
+                {
+                    Caption = 'Pending Departmental Approval Timetables';
+                    Image = List;
+                    RunObject = Page "Time Table List";
+                    ApplicationArea = All;
+                    RunPageView = WHERE(Status2 = FILTER("Pending Approval"));
+                }
+
+                action(RejectedTimetables)
+                {
+                    Caption = 'Rejected Departmental Timetables';
+                    Image = List;
+                    RunObject = Page "Time Table List";
+                    ApplicationArea = All;
+                    RunPageView = WHERE(Status2 = FILTER(Rejected));
+                }
+
+                action(ApprovedTimetables)
+                {
+                    Caption = 'Approved Departmental Timetables';
+                    Image = List;
+                    RunObject = Page "Time Table List";
+                    ApplicationArea = All;
+                    RunPageView = WHERE(Status2 = FILTER(Approved));
                 }
                 action(TimetableCentral1)
                 {
@@ -1522,10 +1549,68 @@ page 68861 "ACA-Academics Role Center"
                 action("Exam Timetable")
                 {
                     Caption = 'Exam Timetable';
-                    RunObject = Page "EXT-Timetable Batches";
+                    RunObject = Page "Examination Timetable List";
                     Visible = false;
                     ApplicationArea = All;
                 }
+            }
+            group(TimetablingExam)
+            {
+                Caption = 'Exam Timetable Management';
+                Image = Statistics;
+                action("Exam Lecture Buildings")
+                {
+                    Caption = 'Lecture Buildings';
+                    Image = Register;
+                    RunObject = Page "Aca Buildings ";
+                    ApplicationArea = All;
+
+                }
+                action("Exam Lecture Halls")
+                {
+                    Caption = 'Lecture Halls';
+                    Image = Register;
+                    RunObject = Page "ACA-LectureHalls Setup";
+                    ApplicationArea = All;
+
+                }
+                action(OpenExamTimetables)
+                {
+                    Caption = 'Open Departmental Exam Timetables';
+                    Image = List;
+                    RunObject = Page "Examination Timetable List";
+                    ApplicationArea = All;
+                    RunPageView = WHERE(Status2 = FILTER(Open));
+                }
+
+                action(PendingApprovalExamTimetables)
+                {
+                    Caption = 'Pending Departmental Approval Exam Timetables';
+                    Image = List;
+                    RunObject = Page "Examination Timetable List";
+                    ApplicationArea = All;
+                    RunPageView = WHERE(Status2 = FILTER("Pending Approval"));
+                }
+
+                action(RejectedExamTimetables)
+                {
+                    Caption = 'Rejected Departmental Exam Timetables';
+                    Image = List;
+                    RunObject = Page "Examination Timetable List";
+                    ApplicationArea = All;
+                    RunPageView = WHERE(Status2 = FILTER(Rejected));
+                }
+
+                action(ApprovedExamTimetables)
+                {
+                    Caption = 'Approved Departmental Exam Timetables';
+                    Image = List;
+                    RunObject = Page "Examination Timetable List";
+                    ApplicationArea = All;
+                    RunPageView = WHERE(Status2 = FILTER(Approved));
+                }
+
+
             }
             group("Lecture Evaluation")
             {

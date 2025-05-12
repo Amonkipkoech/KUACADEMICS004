@@ -29,6 +29,14 @@ table 40027 "Dept TimeTable List "
         {
             OptionMembers = open,"Pending Approval",Rejected,Approved;
         }
+        field(7; "Status2"; Option)
+        {
+            OptionMembers = open,"Pending Approval",Rejected,Approved;
+        }
+        field(6; "HoI Comment"; text[250])
+        {
+
+        }
     }
     keys
     {

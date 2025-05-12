@@ -81,34 +81,32 @@ table 40026 Timetable
 
             trigger OnValidate()
             var
-                HallRec: Record "ACA-Lecturer Halls Setup";
+                LecturerHallSetup: Record "ACA-Lecturer Halls Setup";
                 TimetableRec: Record Timetable;
+                CleanLectureHall: Code[20];
+                ErrorMsg: Text;
             begin
-                // Validate if hall is already allocated on same slot
+                CleanLectureHall := DelChr("Lecture Hall", '=', ' '); // Trim spaces
+
+                // Check for duplicate bookings
                 TimetableRec.Reset();
-                TimetableRec.SetRange("Lecture Hall", Rec."Lecture Hall");
+                TimetableRec.SetRange("Lecture Hall", CleanLectureHall);
+                TimetableRec.SetRange(Day, Rec.Day);
+                TimetableRec.SetRange(Month, Rec.Month);
                 TimetableRec.SetRange("Academic Year", Rec."Academic Year");
                 TimetableRec.SetRange(Semester, Rec.Semester);
-                TimetableRec.SetRange(Day, Rec.Day);
                 TimetableRec.SetRange(TimeSlot, Rec.TimeSlot);
-                TimetableRec.SetRange(Week, Rec.Week);
-                TimetableRec.SetRange(Month, Rec.Month);
 
-                if TimetableRec.FindFirst() then
-                    Error(
-                        'Lecture Hall %1 is already allocated on %2 (Week %3, %4, %5 - %6).',
-                        Rec."Lecture Hall",
-                        FORMAT(Rec.Day), FORMAT(Rec.Week), FORMAT(Rec.Month),
-                        Rec.Semester, Rec."Academic Year"
-                    );
-
-                // Validate and fetch sitting capacity
-                if HallRec.Get(Rec."Lecture Hall") then begin
-                    Rec."Sitting Capacity" := HallRec."Sitting Capacity";
-                end else
-                    Error('Lecture Hall %1 not found in setup.', Rec."Lecture Hall");
+                if TimetableRec.FindFirst() then begin
+                    ErrorMsg := StrSubstNo(
+                        'Lecture Hall %1 is already booked for %2 %3 in %4 (%5).',
+                        CleanLectureHall, Format(Rec.Day), Format(Rec.TimeSlot), Rec.Month, Rec.Semester);
+                    "Lecture Hall" := ''; // Clear field
+                    Error(ErrorMsg);
+                end;
             end;
         }
+
 
         field(9; "Sitting Capacity"; Integer)
         {
