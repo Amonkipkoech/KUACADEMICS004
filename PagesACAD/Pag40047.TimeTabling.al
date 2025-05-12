@@ -124,19 +124,13 @@ page 40047 TimeTabling
                 }
                 action(TimetableCentral1)
                 {
-                    Caption = 'Teaching Timetable';
+                    Caption = 'Consolidated Teaching Timetable';
                     Image = Register;
-                    RunObject = Page "TT-Timetable Batches";
+                    RunObject = Page "ConsolidateD Teaching Tbl";
                     ApplicationArea = All;
-                    Visible = false;
+
                 }
-                action("Exam Timetable")
-                {
-                    Caption = 'Exam Timetable';
-                    RunObject = Page "Examination Timetable List";
-                    Visible = false;
-                    ApplicationArea = All;
-                }
+
             }
             group(TimetablingExam)
             {
