@@ -1,9 +1,9 @@
-report 40012 "Consolidated Exam Timetable"
+report 40012 ExamTimetable
 {
     Caption = 'consolidated Exam Timetable';
 
     DefaultLayout = RDLC;
-    RDLCLayout = './Timetable2/Reports/SSR/ConsolidatedExamTimetable.rdl';
+    RDLCLayout = './Timetable2/Reports/SSR/ExamTimetableFinal.rdl';
     dataset
     {
         dataitem(ExaminationTimetable; "Examination Timetable")

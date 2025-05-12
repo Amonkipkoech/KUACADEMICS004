@@ -249,6 +249,21 @@ page 40047 TimeTabling
             group(Periodic)
             {
                 Caption = 'Periodic Reports';
+                action("Teaching TimeTable")
+                {
+                    ApplicationArea = basic, suit;
+                    Caption = 'Consolidated  Teaching Timetable';
+                    Image = Report;
+                    RunObject = report "Teaching  Timetable";
+                }
+                action("Exam TimeTable")
+                {
+                    ApplicationArea = basic, suit;
+                    Caption = 'Consolidated  Exam Timetable';
+                    Image = Report;
+                    RunObject = report "ExamTimetable";
+                }
+
 
             }
         }

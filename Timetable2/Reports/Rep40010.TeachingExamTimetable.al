@@ -1,6 +1,6 @@
-report 40010 "Teaching Exam Timetable"
+report 40010 "Teaching  Timetable"
 {
-    Caption = 'Teaching Exam Timetable';
+    Caption = 'Teaching  Timetable';
     DefaultLayout = RDLC;
     RDLCLayout = './Timetable2/Reports/SSR/ConsolidatedTeachingTimetable.rdl';
     dataset
