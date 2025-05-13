@@ -5458,6 +5458,25 @@ codeunit 40002 StaffPortall
             ;
         end
     end;
+
+    procedure GetTimetable(lecturer: Code[10]): Text
+    var
+        Timetable: Record Timetable;
+        response: Text;
+    begin
+        Timetable.Reset();
+        Timetable.SetRange(Status, Timetable.Status::Approved);
+        Timetable.SetRange(Lecturer, lecturer);
+        Timetable.SetRange(Semester, GetCurrentSem());
+        if Timetable.FindSet() then begin
+            repeat
+                response += Timetable.Day + '::' + Timetable."Unit Base Code" + '::' +
+                 Timetable.TimeSlot + '::' + Format(Timetable.Week) + '::' +
+                 Timetable."Lecture Hall" + '::' + Timetable."Lecturer Name" + '::' + Format(Timetable.Month) + '|';
+            until Timetable.Next() = 0;
+        end;
+        exit(response);
+    end;
 }
 
 
