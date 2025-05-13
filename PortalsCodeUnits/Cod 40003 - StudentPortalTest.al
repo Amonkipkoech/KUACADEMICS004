@@ -3198,7 +3198,101 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         exit(Result);
     end;
 
+    procedure IsValidStudent(StudentNo: Text): Boolean
+    var
+        Customer: Record Customer;
+        response: Boolean;
+    begin
+        Customer.RESET;
+        Customer.SETRANGE(Customer."No.", StudentNo);
+        if Customer.FIND('-') then begin
+            response := true;
+        end else begin
+            response := false;
+        end;
+        exit(response);
+    end;
 
+    procedure GetStudentEmail(StudentNo: Text): Text
+    var
+        Customer: Record Customer;
+        response: Text;
+    begin
+        Customer.RESET;
+        Customer.SETRANGE(Customer."No.", StudentNo);
+        if Customer.FIND('-') then begin
+            response := Customer."E-Mail";
+        end else begin
+            response := '';
+        end;
+        exit(response);
+    end;
 
+    procedure InsertOtpCode(StudentNo: Text; OtpCode: Text): Boolean
+    var
+        OtpRecord: Record Customer;
+        response: Boolean;
+    begin
+        OtpRecord.RESET;
+        OtpRecord.SETRANGE(OtpRecord."No.", StudentNo);
+        if OtpRecord.FindFirst() then begin
+            OtpRecord."Password Reset OTP" := OtpCode;
+            OtpRecord.MODIFY;
+            response := true;
+        end else begin
+            response := false;
+        end;
+        exit(response);
+    end;
+
+    procedure SendAnyEmail(EmailAddress: Text; EmailBody: Text; EmailSubject: Text): Boolean
+    var
+        SendMail: Codeunit "Email Message";
+        emailObj: Codeunit Email;
+        sent: Boolean;
+    begin
+        sent := false;
+
+        SendMail.Create(EmailAddress, EmailSubject, EmailBody);
+        if emailObj.Send(SendMail, Enum::"Email Scenario"::Notification) then sent := true;
+
+        exit(sent);
+    end;
+
+    procedure ResetStudentPassword(StudentNo: Text; NewPassword: Text): Boolean
+    var
+        Customer: Record Customer;
+        response: Boolean;
+    begin
+        Customer.RESET;
+        Customer.SETRANGE(Customer."No.", StudentNo);
+        if Customer.FIND('-') then begin
+            Customer."Password" := NewPassword;
+            Customer.MODIFY;
+            response := true;
+        end else begin
+            response := false;
+        end;
+        exit(response);
+    end;
+
+    procedure GetTimetable(program: Code[10]): Text
+    var
+        Timetable: Record Timetable;
+        response: Text;
+    begin
+        Timetable.Reset();
+        Timetable.SetRange(Status, Timetable.Status::Approved);
+        Timetable.SetRange(Programs, program);
+        Timetable.SetRange(Semester, GetCurrentSem());
+        if Timetable.FindSet() then begin
+            repeat
+                response += Timetable.Day + '::' + Timetable."Unit Base Code" + '::' +
+                 Timetable.TimeSlot + '::' + Format(Timetable.Week) + '::' +
+                 Timetable."Lecture Hall" + '::' + Timetable."Lecturer Name" + '::' + Format(Timetable.Month) + '|';
+            until Timetable.Next() = 0;
+        end;
+        exit(response);
+    end;
 
 }
