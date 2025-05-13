@@ -3276,4 +3276,23 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         exit(response);
     end;
 
+    procedure GetTimetable(program: Code[10]): Text
+    var
+        Timetable: Record Timetable;
+        response: Text;
+    begin
+        Timetable.Reset();
+        Timetable.SetRange(Status, Timetable.Status::Approved);
+        Timetable.SetRange(Programs, program);
+        Timetable.SetRange(Semester, GetCurrentSem());
+        if Timetable.FindSet() then begin
+            repeat
+                response += Timetable.Day + '::' + Timetable."Unit Base Code" + '::' +
+                 Timetable.TimeSlot + '::' + Format(Timetable.Week) + '::' +
+                 Timetable."Lecture Hall" + '::' + Timetable."Lecturer Name" + '|';
+            until Timetable.Next() = 0;
+        end;
+        exit(response);
+    end;
+
 }

@@ -22,88 +22,6 @@
       <rd:DataSourceID>1857b318-57e8-4bc9-b2ca-269a2edceb64</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="infor_name">
-          <DataField>infor_name</DataField>
-        </Field>
-        <Field Name="infor_pic">
-          <DataField>infor_pic</DataField>
-        </Field>
-        <Field Name="infor_mail">
-          <DataField>infor_mail</DataField>
-        </Field>
-        <Field Name="infor_address">
-          <DataField>infor_address</DataField>
-        </Field>
-        <Field Name="infor_phone">
-          <DataField>infor_phone</DataField>
-        </Field>
-        <Field Name="Programs">
-          <DataField>Programs</DataField>
-        </Field>
-        <Field Name="ProgramName">
-          <DataField>ProgramName</DataField>
-        </Field>
-        <Field Name="UnitBaseCode">
-          <DataField>UnitBaseCode</DataField>
-        </Field>
-        <Field Name="Department">
-          <DataField>Department</DataField>
-        </Field>
-        <Field Name="Day">
-          <DataField>Day</DataField>
-        </Field>
-        <Field Name="TimeSlot">
-          <DataField>TimeSlot</DataField>
-        </Field>
-        <Field Name="Semester">
-          <DataField>Semester</DataField>
-        </Field>
-        <Field Name="LectureHall">
-          <DataField>LectureHall</DataField>
-        </Field>
-        <Field Name="SittingCapacity">
-          <DataField>SittingCapacity</DataField>
-        </Field>
-        <Field Name="AcademicYear">
-          <DataField>AcademicYear</DataField>
-        </Field>
-        <Field Name="Lecturer">
-          <DataField>Lecturer</DataField>
-        </Field>
-        <Field Name="ModeofStudy">
-          <DataField>ModeofStudy</DataField>
-        </Field>
-        <Field Name="RegisteredStudents">
-          <DataField>RegisteredStudents</DataField>
-        </Field>
-        <Field Name="Campus">
-          <DataField>Campus</DataField>
-        </Field>
-        <Field Name="Status">
-          <DataField>Status</DataField>
-        </Field>
-        <Field Name="LecturerName">
-          <DataField>LecturerName</DataField>
-        </Field>
-        <Field Name="Month">
-          <DataField>Month</DataField>
-        </Field>
-        <Field Name="Week">
-          <DataField>Week</DataField>
-        </Field>
-        <Field Name="seq">
-          <DataField>seq</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -1050,12 +968,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -1095,4 +1007,86 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="infor_name">
+          <DataField>infor_name</DataField>
+        </Field>
+        <Field Name="infor_pic">
+          <DataField>infor_pic</DataField>
+        </Field>
+        <Field Name="infor_mail">
+          <DataField>infor_mail</DataField>
+        </Field>
+        <Field Name="infor_address">
+          <DataField>infor_address</DataField>
+        </Field>
+        <Field Name="infor_phone">
+          <DataField>infor_phone</DataField>
+        </Field>
+        <Field Name="Programs">
+          <DataField>Programs</DataField>
+        </Field>
+        <Field Name="ProgramName">
+          <DataField>ProgramName</DataField>
+        </Field>
+        <Field Name="UnitBaseCode">
+          <DataField>UnitBaseCode</DataField>
+        </Field>
+        <Field Name="Department">
+          <DataField>Department</DataField>
+        </Field>
+        <Field Name="Day">
+          <DataField>Day</DataField>
+        </Field>
+        <Field Name="TimeSlot">
+          <DataField>TimeSlot</DataField>
+        </Field>
+        <Field Name="Semester">
+          <DataField>Semester</DataField>
+        </Field>
+        <Field Name="LectureHall">
+          <DataField>LectureHall</DataField>
+        </Field>
+        <Field Name="SittingCapacity">
+          <DataField>SittingCapacity</DataField>
+        </Field>
+        <Field Name="AcademicYear">
+          <DataField>AcademicYear</DataField>
+        </Field>
+        <Field Name="Lecturer">
+          <DataField>Lecturer</DataField>
+        </Field>
+        <Field Name="ModeofStudy">
+          <DataField>ModeofStudy</DataField>
+        </Field>
+        <Field Name="RegisteredStudents">
+          <DataField>RegisteredStudents</DataField>
+        </Field>
+        <Field Name="Campus">
+          <DataField>Campus</DataField>
+        </Field>
+        <Field Name="Status">
+          <DataField>Status</DataField>
+        </Field>
+        <Field Name="LecturerName">
+          <DataField>LecturerName</DataField>
+        </Field>
+        <Field Name="Month">
+          <DataField>Month</DataField>
+        </Field>
+        <Field Name="Week">
+          <DataField>Week</DataField>
+        </Field>
+        <Field Name="seq">
+          <DataField>seq</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
