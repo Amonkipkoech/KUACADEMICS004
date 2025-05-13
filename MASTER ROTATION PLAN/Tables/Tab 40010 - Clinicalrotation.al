@@ -89,21 +89,30 @@ table 40010 "Clinical rotation"
             DataClassification = ToBeClassified;
         }
 
+        field(22; Capacity; Integer)
+        {
+
+            Caption = 'Lab Capacity';
+            FieldClass = FlowField;
+            CalcFormula = Lookup(Lab.Capacity WHERE("Area cODE" = FIELD(Areas)));
+            Editable = false;
 
 
-        field(8; Areas; Code[50])
+        }
+
+
+        field(128; Areas; Code[50])
         {
             DataClassification = ToBeClassified;
             TableRelation = Lab."Area cODE";
-            trigger OnValidate()
-            var
-                lab:Record Lab;
-            begin
-                if lab.Get(Areas) then 
-                begin
-                   Capacity := lab.Capacity;
-                end;
-            end;
+            // trigger OnValidate()
+            // var
+            //     lab: Record Lab;
+            // begin
+            //     if lab.Get(Areas) then begin
+            //         rec.Capacity := lab.Capacity;
+            //     end;
+            // end;
         }
 
         field(9; "No. Series"; Code[20])
@@ -173,10 +182,14 @@ table 40010 "Clinical rotation"
             DataClassification = ToBeClassified;
             Description = 'Lecturer Name';
         }
-        field(22; Capacity; Integer)
+        field(56; "Remaining Capacity"; Integer)
         {
-            DataClassification = ToBeClassified;
+
+            Caption = 'Remaining Capacity';
+            Editable = false;
+            // Calculated on the fly in the page
         }
+
 
         // Add additional fields as needed
     }

@@ -93,6 +93,14 @@ report 40006 "Mrp Report 3 "
                 {
 
                 }
+                column(Capacity; Capacity)
+                {
+
+                }
+                column(Remaining_Capacity; "Remaining Capacity")
+                {
+
+                }
                 trigger OnAfterGetRecord()
                 begin
                     seq := seq + 1;

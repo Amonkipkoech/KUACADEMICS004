@@ -8,7 +8,7 @@ table 40027 "Dept TimeTable List "
         field(1; "Academic Year"; Code[50])
         {
             Caption = 'Academic Year';
-            TableRelation = "ACA-Semesters".Code;
+            TableRelation = "ACA-Academic Year".Code;
         }
         field(2; "Session Year"; Code[50])
         {
@@ -20,10 +20,27 @@ table 40027 "Dept TimeTable List "
             Caption = 'Department';
             TableRelation = "Dimension Value".Code;
         }
+        field(4; "Campus"; Code[50])
+        {
+            Caption = 'Campus';
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
+        }
+        field(5; "Status"; Option)
+        {
+            OptionMembers = open,"Pending Approval",Rejected,Approved;
+        }
+        field(7; "Status2"; Option)
+        {
+            OptionMembers = open,"Pending Approval",Rejected,Approved;
+        }
+        field(6; "HoI Comment"; text[250])
+        {
+
+        }
     }
     keys
     {
-        key(PK; "Academic Year", "Session Year", "Department ")
+        key(PK; "Academic Year", "Session Year", "Department ", Status)
         {
             Clustered = true;
         }
