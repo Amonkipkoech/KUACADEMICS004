@@ -44,7 +44,7 @@ table 40026 Timetable
                 TimetableRec.SetRange(Month, Rec.Month);
 
                 if TimetableRec.FindFirst() then begin
-                    Error(
+                    Message(
                         'Unit %1 is already allocated on %2 (Week %3, %4).',
                         Rec."Unit Base Code",
                         FORMAT(Rec.Day), FORMAT(Rec.Week), FORMAT(Rec.Month)

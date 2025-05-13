@@ -111,7 +111,7 @@ table 40032 "Examination Timetable"
         field(9; "Sitting Capacity"; Integer)
         {
             // Use FlowField as backup, if needed
-            CalcFormula = Lookup("ACA-Lecturer Halls Setup"."Sitting Capacity"
+            CalcFormula = Lookup("ACA-Lecturer Halls Setup"."Exam Sitting Capacity"
                         WHERE("Lecture Room Code" = FIELD("Lecture Hall")));
             FieldClass = FlowField;
         }
