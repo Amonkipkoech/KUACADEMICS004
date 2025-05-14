@@ -50,6 +50,24 @@ table 40008 GroupAssignments
         {
             OptionMembers = Internal,External;
         }
+        field(12; "Student Name"; Text[30])
+        {
+            Caption = 'Student Name';
+            FieldClass = FlowField;
+            CalcFormula = Lookup(Customer.Name WHERE("No." = FIELD(StudentNo)));
+        }
+        field(13; "Student Program "; Text[30])
+        {
+            Caption = 'Student Program';
+            FieldClass = FlowField;
+            CalcFormula = Lookup("ACA-Course Registration".ProgramName WHERE("Student No." = FIELD(StudentNo)));// 
+        }
+        field(14; "Student Phone Number"; Text[30])
+        {
+            Caption = 'Student Phone Number';
+            FieldClass = FlowField;
+            CalcFormula = Lookup(Customer."Mobile Phone No." WHERE("No." = FIELD(StudentNo)));//ACA-Course Registration 
+        }
     }
     keys
     {

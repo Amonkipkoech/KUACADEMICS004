@@ -84,12 +84,55 @@ page 40054 "Master Rotation Plan"
                 {
                     Image = Allocate;
                     Caption = 'Rotation Area Wards';
-                    RunObject = Page "Rotation Area Wards";
+                    RunObject = Page "Rotation Area Wards";//"Institute List"
                     ApplicationArea = All;
                 }
             }
             group("External Request Management")
             {
+                action("Institute List")
+                {
+                    Image = Allocate;
+                    Caption = 'Institute Master List';
+                    RunObject = Page "Institute List";
+                    ApplicationArea = All;
+                }
+                action("Institute Requests - Open")
+                {
+                    Image = List;
+                    Caption = 'Institutional Requests - Open';
+                    RunObject = Page "Institution Request List";
+                    RunPageView = WHERE(Status = CONST(Open));
+                    ApplicationArea = All;
+                }
+
+                action("Institute Requests - Pending")
+                {
+                    Image = Question;
+                    Caption = 'Institutional Requests - Pending Approval';
+                    RunObject = Page "Institution Request List";
+                    RunPageView = WHERE(Status = CONST("Pending Approval"));
+                    ApplicationArea = All;
+                }
+
+                action("Institute Requests - Approved")
+                {
+                    Image = Approve;
+                    Caption = 'Institutional Requests - Approved';
+                    RunObject = Page "Institution Request List";
+                    RunPageView = WHERE(Status = CONST(Approved));
+                    ApplicationArea = All;
+                }
+
+                action("Institute Requests - Rejected")
+                {
+                    Image = Cancel;
+                    Caption = 'Institutional Requests - Rejected';
+                    RunObject = Page "Institution Request List";
+                    RunPageView = WHERE(Status = CONST(Rejected));
+                    ApplicationArea = All;
+                }
+
 
             }
             group("Student MRP  Management")
@@ -111,7 +154,7 @@ page 40054 "Master Rotation Plan"
             group(GroupName)
             {
 
-                Caption = 'Master Rotation Management';
+                Caption = 'Institute MRP Management';
                 Image = ResourcePlanning;
                 action("Students on Session")
                 {
@@ -152,13 +195,20 @@ page 40054 "Master Rotation Plan"
                     RunObject = Page "Mrp Approved ";//"Consolidated Ward MRP"
                     ApplicationArea = All;
                 }
+                action("Consolidated  MRP ")
+                {
+                    Image = Allocate;
+                    Caption = 'Consolidated  MRP';
+                    RunObject = Page "Consolidated Ward MRP";
+                    ApplicationArea = All;
+                }
             }
-            group("Hospital Ward RotationS")
+            group("Hospital Ward  Management")
             {
                 action("Consolidated Ward MRP ")
                 {
                     Image = Allocate;
-                    Caption = 'Consolidated Ward MRP';
+                    Caption = 'Ward MRP Distributions';
                     RunObject = Page "Consolidated Ward MRP";
                     ApplicationArea = All;
                 }
@@ -176,7 +226,14 @@ page 40054 "Master Rotation Plan"
                 {
                     Image = Register;
                     Caption = 'Consolidated Master Rotation Report';
-                    RunObject = report "Mrp Report 3 ";
+                    RunObject = report "Mrp Report 3 ";//"Student Ward Performance Repor"
+                    ApplicationArea = ALL;
+                }
+                action("Student Ward Performance Report")
+                {
+                    Image = Register;
+                    Caption = 'Student Ward Performance Report';
+                    RunObject = report "Student Ward Performance Repor";
                     ApplicationArea = ALL;
                 }
 

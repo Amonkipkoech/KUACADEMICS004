@@ -16,6 +16,11 @@ page 40058 "Student Ward Performance"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the StudentNo_ field.', Comment = '%';
                 }
+                field("Student Name"; "Student Name")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Block field.', Comment = '%';
+                }
                 field(GroupId; Rec.GroupId)
                 {
                     ApplicationArea = All;
@@ -26,6 +31,7 @@ page 40058 "Student Ward Performance"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Block field.', Comment = '%';
                 }
+
 
                 field(Category; rec.Category)
                 {

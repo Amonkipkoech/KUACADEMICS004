@@ -2,7 +2,6 @@ page 40060 "Hospital Ward Rotation"
 {
     Caption = 'Hospital Ward Rotation';
     PageType = Card;
-
     SourceTable = "Ward Rotation Management";
 
 

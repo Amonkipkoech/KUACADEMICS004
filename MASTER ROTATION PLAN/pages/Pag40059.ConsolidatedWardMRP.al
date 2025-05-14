@@ -16,7 +16,6 @@ page 40059 "Consolidated Ward MRP"
                     ApplicationArea = All;
                 }
 
-
                 field(Year; rec.Year)
                 {
                     ApplicationArea = All;

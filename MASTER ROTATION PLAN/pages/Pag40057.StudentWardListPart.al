@@ -17,6 +17,8 @@ page 40057 "Student Ward ListPart"
                 field("Rotation Area"; rec."Rotation Area") { }
                 field("Start Date"; rec."Start Date") { }
                 field("End Date"; rec."End Date") { }
+                field(Attendance; rec.Attendance) { }
+                field(Achievements; rec.Achievements) { }
                 field(Comment; rec.Comment) { }
             }
         }

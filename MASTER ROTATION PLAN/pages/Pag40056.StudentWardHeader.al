@@ -24,6 +24,7 @@ page 40056 "Student Ward Header"
                     Editable = false;
                     ToolTip = 'Specifies the value of the StudentNo_ field.', Comment = '%';
                 }
+
                 field(Department; Rec.Department)
                 {
                     ApplicationArea = All;
@@ -53,9 +54,22 @@ page 40056 "Student Ward Header"
             {
                 part(WardRotation; "Student Ward ListPart")
                 {
-                    SubPageLink = GroupId = FIELD(GroupId), StudentNo = FIELD(StudentNo);
+                    SubPageLink = GroupId = FIELD(GroupId), StudentNo = FIELD(StudentNo), Semester = field(Block);
                     ApplicationArea = All;
                 }
+            }
+        }
+    }
+    actions
+    {
+        area(Reporting)
+        {
+            action("Student Ward Performance Report")
+            {
+                Image = Register;
+                Caption = 'Student Ward Performance Report';
+                RunObject = report "Student Ward Performance Repor";
+                ApplicationArea = ALL;
             }
         }
     }
