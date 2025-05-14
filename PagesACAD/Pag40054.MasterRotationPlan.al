@@ -149,7 +149,17 @@ page 40054 "Master Rotation Plan"
                 {
                     Image = Allocate;
                     Caption = ' Approved Dep MRP';
-                    RunObject = Page "Mrp Approved ";
+                    RunObject = Page "Mrp Approved ";//"Consolidated Ward MRP"
+                    ApplicationArea = All;
+                }
+            }
+            group("Hospital Ward RotationS")
+            {
+                action("Consolidated Ward MRP ")
+                {
+                    Image = Allocate;
+                    Caption = 'Consolidated Ward MRP';
+                    RunObject = Page "Consolidated Ward MRP";
                     ApplicationArea = All;
                 }
             }

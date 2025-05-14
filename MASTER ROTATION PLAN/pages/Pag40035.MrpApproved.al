@@ -3,13 +3,8 @@ page 40035 "Mrp Approved "
 
     Caption = 'MRP List';
     PageType = List;
-
-
-
     SourceTable = "Master Rotation Plan2";
     SourceTableView = where(Status = filter(Approved));
-
-
     CardPageId = "Master Rotation Plan Card";
 
     layout
