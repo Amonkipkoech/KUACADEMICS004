@@ -72,13 +72,25 @@ page 40054 "Master Rotation Plan"
         {
             group("General Set Up Management")
             {
+                Caption = 'Rotation Areas Management';
                 action("Rotation Areas 2")
                 {
                     Image = Allocate;
                     Caption = 'Rotation Areas';
-                    RunObject = Page "Rotation Areas";
+                    RunObject = Page "Rotation Areas";//"Rotation Area Wards"
                     ApplicationArea = All;
                 }
+                action("Rotation Area Wards")
+                {
+                    Image = Allocate;
+                    Caption = 'Rotation Area Wards';
+                    RunObject = Page "Rotation Area Wards";
+                    ApplicationArea = All;
+                }
+            }
+            group("External Request Management")
+            {
+
             }
 
             group(GroupName)
@@ -98,6 +110,7 @@ page 40054 "Master Rotation Plan"
                     Image = Allocate;
                     RunObject = Page "Rotation Areas";
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 action("Group Assignmnets ")
                 {
