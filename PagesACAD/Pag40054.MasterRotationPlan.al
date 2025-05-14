@@ -92,6 +92,21 @@ page 40054 "Master Rotation Plan"
             {
 
             }
+            group("Student MRP  Management")
+            {
+                action("Student Group  Assignmnets ")
+                {
+                    Image = Allocate;
+                    RunObject = Page "Group Assignmnets ";
+                    ApplicationArea = All;
+                }
+                action("Student Ward Performance ")
+                {
+                    Image = Allocate;
+                    RunObject = Page "Student Ward Performance";
+                    ApplicationArea = All;
+                }
+            }
 
             group(GroupName)
             {
@@ -112,12 +127,7 @@ page 40054 "Master Rotation Plan"
                     ApplicationArea = All;
                     Visible = false;
                 }
-                action("Group Assignmnets ")
-                {
-                    Image = Allocate;
-                    RunObject = Page "Group Assignmnets ";
-                    ApplicationArea = All;
-                }
+
 
                 action("Open Department MRP")
                 {

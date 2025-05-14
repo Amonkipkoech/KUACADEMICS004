@@ -1,9 +1,10 @@
 page 40011 "Group Assignmnets "
 {
-    Caption = 'Group Assignmnets ';
+    Caption = 'Group Assignmnets';
     PageType = List;
+    CardPageId = "Student Ward Header";
     SourceTable = GroupAssignments;
-    
+
     layout
     {
         area(Content)
@@ -25,9 +26,9 @@ page 40011 "Group Assignmnets "
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the StudentNo_ field.', Comment = '%';
                 }
-                field(Category;rec.Category)
+                field(Category; rec.Category)
                 {
-                   ApplicationArea= all;
+                    ApplicationArea = all;
                 }
                 // field(StartDate; Rec.StartDate)
                 // {
