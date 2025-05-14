@@ -3295,4 +3295,22 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         exit(response);
     end;
 
+    procedure GetExamTimetable(program: Code[10]): Text
+    var
+        Timetable: Record "Examination TimeTable";
+        response: Text;
+    begin
+        Timetable.Reset();
+        Timetable.SetRange(Programs, program);
+        Timetable.SetRange(Semester, GetCurrentSem());
+        if Timetable.FindSet() then begin
+            repeat
+                response += Format(Timetable.Month) + '::' + Timetable.Day + '::' + Timetable."Unit Base Code" + '::' +
+                 Timetable.TimeSlot + '::' + Format(Timetable."Final Exam Date") + '::' +
+                 Timetable."Lecture Hall" + '::' + Timetable.Lecturer + '::' + Format(Timetable.Week) + '|';
+            until Timetable.Next() = 0;
+        end;
+        exit(response);
+    end;
+
 }
