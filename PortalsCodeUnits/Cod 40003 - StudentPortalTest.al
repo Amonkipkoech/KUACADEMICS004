@@ -3313,4 +3313,9 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         exit(response);
     end;
 
+    procedure GenerateBillRefNo() msg: Text
+    begin
+        msg := NoSeriesMgt.GetNextNo('RCPT', 0D, true);
+    end;
+
 }
