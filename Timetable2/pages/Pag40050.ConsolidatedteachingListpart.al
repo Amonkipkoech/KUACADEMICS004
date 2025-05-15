@@ -63,16 +63,17 @@ page 40050 "Consolidated teaching Listpart"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Lecturer field.', Comment = '%';
                 }
-                field("Lecturer Name"; REC."Lecturer Name")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Lecturer field.', Comment = '%';
-                }
+
 
                 field("Lecture Hall"; Rec."Lecture Hall")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Lecture Hall field.', Comment = '%';
+                }
+                field("Lecturer Name"; REC."Lecturer Name")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Lecturer field.', Comment = '%';
                 }
                 field("Sitting Capacity"; Rec."Sitting Capacity")
                 {

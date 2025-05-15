@@ -17,6 +17,10 @@ table 40041 "Institution Request Line"
         field(4; "Student Name"; Text[100]) { }
         field(5; "Phone Number"; Text[30]) { }
         field(6; "School Email"; Text[100]) { }
+        field(7; "ID/Passport"; Code[15])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

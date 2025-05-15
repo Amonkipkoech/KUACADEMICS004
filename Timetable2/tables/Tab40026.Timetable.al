@@ -228,7 +228,8 @@ table 40026 Timetable
         }
         field(36; "Lecturer Name"; Code[50])
         {
-
+            FieldClass = FlowField;
+            CalcFormula = Lookup("HRM-Employee (D)"."Full Name" WHERE("No." = FIELD(Lecturer)));
         }
         field(37; "Month"; Option)
         {

@@ -12,6 +12,8 @@ page 40057 "Student Ward ListPart"
         {
             repeater(Group)
             {
+                field(StudentNo; REC.StudentNo) { }
+                field(GroupId; REC.GroupId) { }
                 field("Rotation Ward Area"; rec."Rotation Ward Area") { }
                 field("Rotation Ward Name"; rec."Rotation Ward Name") { }
                 field("Rotation Area"; rec."Rotation Area") { }

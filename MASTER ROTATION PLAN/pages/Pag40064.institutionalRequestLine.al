@@ -15,6 +15,7 @@ page 40064 "Institution Request Line Part"
                 field("Student Name"; "Student Name") { }
                 field("Phone Number"; "Phone Number") { }
                 field("School Email"; "School Email") { }
+                field("ID/Passport"; "ID/Passport") { }
             }
         }
     }

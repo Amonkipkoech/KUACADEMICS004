@@ -18,12 +18,18 @@ page 40065 "Institution Request Card"
                 field("Phone Number"; "Phone Number") { }
                 field(Semester; Semester) { }
                 field("Academic Year"; "Academic Year") { }
-                field(Status; Status) { }
+                field(Status; rec.Status) { }
             }
-
+            group("Rotation Areas")
+            {
+                part("External Request Areas"; "External Request Areas")
+                {
+                    SubPageLink = "Request Number" = field("Request Number");
+                }
+            }
             group("Students Involved")
             {
-                part(Lines; "Institution Request Line Part")
+                part(Lines; "Institution Request Line Part")//"External Request Areas"
                 {
                     SubPageLink = "Request Number" = field("Request Number");
                 }
