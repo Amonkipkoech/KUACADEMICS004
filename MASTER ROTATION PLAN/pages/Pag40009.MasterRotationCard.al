@@ -4,7 +4,7 @@ page 40009 "Master Rotation Plan Card"
     PageType = Card;
     SourceTable = "Master Rotation Plan2";
 
-    Caption = 'Departmental MRP';
+    Caption = 'Consolidated Institute MRP';
 
     layout
     {
@@ -30,18 +30,7 @@ page 40009 "Master Rotation Plan Card"
             }
 
 
-            group("Theoretical Classes")
-            {
-                Visible = false;
-                Caption = 'Block One Theory Period';
-                field("Block "; rec.Block) { Caption = 'Level'; ApplicationArea = All; }
-                field("Start Date"; rec."Start Date") { ApplicationArea = All; }
-                field("Start Month"; rec."Start Month") { ApplicationArea = All; }
-                field("End Date"; rec."End Date") { ApplicationArea = All; }
-                field("End Month"; rec."End Month") { ApplicationArea = All; }
-                field("Number of Weeks"; rec."Number of Weeks") { ApplicationArea = All; }
 
-            }
 
             group("Clinical Classes")
             {
@@ -52,49 +41,7 @@ page 40009 "Master Rotation Plan Card"
                     SubPageLink = "Plan ID" = field("Plan ID"), Year = field("Year"), Session = field("Session"), Department = field("Department");
                 }
             }
-            group("Theoretical Classes 2")
-            {
-                Caption = 'Block Two Theory Period';
-                Visible = false;
-                field("Block 2"; rec.Category) { Caption = 'Level'; ApplicationArea = All; }
-                field("B2 Start Date"; rec."b2 Start Date") { ApplicationArea = All; }
-                field("B2 Start Month"; rec."B2 Start Month") { ApplicationArea = All; }
-                field("B2 End Date"; rec." B2 End Date") { ApplicationArea = All; }
-                field("B2 End Month"; rec."b2 End Month") { ApplicationArea = All; }
-                field("B2 Number of Weeks"; rec."B2 Number of Weeks") { ApplicationArea = All; }
 
-            }
-
-            group("Clinical Classes2")
-            {
-                Caption = 'End Of Block Two Clinical Rotation';
-                Visible = false;
-                part("Clinical Rotation List 2"; "Mrp block 2 rotation ")
-                {
-                    ApplicationArea = All;
-                    SubPageLink = "Plan ID" = field("Plan ID"), Year = field("Year"), Session = field("Session"), Department = field("Department");
-                }
-            }
-            group(" Clinical Leave ")
-            {
-                Caption = 'Clinical Leave';
-                Visible = false;
-                field("leave Category"; rec."leave Category") { Caption = 'Level'; ApplicationArea = All; }
-                field("Leave Start Date  "; rec."Leave Start Date  ") { ApplicationArea = All; }
-                field("Leave end Date  "; rec."Leave end Date  ") { ApplicationArea = All; }
-                field("Leave Period  "; rec."Leave Period  ") { ApplicationArea = All; }
-
-            }
-            group("Clinical Classes 3")
-            {
-                Caption = 'End Of Leave Clinical Rotation';
-                Visible = false;
-                part("Clinical Rotation List 3"; "Mrp  end Of Leave rotation")
-                {
-                    ApplicationArea = All;
-                    SubPageLink = "Plan ID" = field("Plan ID"), Year = field("Year"), Session = field("Session"), Department = field("Department");
-                }
-            }
 
 
 

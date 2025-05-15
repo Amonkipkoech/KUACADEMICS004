@@ -16,14 +16,14 @@ table 40010 "Clinical rotation"
         {
             DataClassification = ToBeClassified;
             Caption = 'Plan ID';
-            TableRelation = "Master Rotation Plan2"."Plan ID";
+            TableRelation = "ACA-Semesters".Code;
             Editable = false; // Set to false as it will be auto-generated
         }
         field(90; "Year"; Code[20])
         {
             DataClassification = ToBeClassified;
             Caption = 'Academic Year';
-            TableRelation = "Master Rotation Plan2".Year;
+            TableRelation = "ACA-Academic Year".Code;
             Editable = false; // Set to false as it will be auto-generated
         }
         field(91; "Session"; Code[20])

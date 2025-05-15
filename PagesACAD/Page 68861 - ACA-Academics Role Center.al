@@ -645,13 +645,13 @@ page 68861 "ACA-Academics Role Center"
                         RunObject = report "Mrp Report 3 ";
                         ApplicationArea = ALL;
                     }
-                    action("mrp capacity")
-                    {
-                        Image = Register;
-                        Caption = 'Master Rotation Capacity Distribution Report';
-                        RunObject = report "Rotation Capacity Summary";
-                        ApplicationArea = ALL;
-                    }
+                    // action("mrp capacity")
+                    // {
+                    //     Image = Register;
+                    //     Caption = 'Master Rotation Capacity Distribution Report';
+                    //     RunObject = report "MRP Rotation Arear Distributio";
+                    //     ApplicationArea = ALL;
+                    // }
                     // action(ActionName)
                     // {
                     //     Image = Register;

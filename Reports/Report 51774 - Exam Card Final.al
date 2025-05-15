@@ -7,8 +7,8 @@ report 51774 "Exam Card Final"
     {
         dataitem("ACA-Course Registration"; "ACA-Course Registration")
         {
-            DataItemTableView = WHERE(Reversed = FILTER(false),
-                                      "Units Taken" = FILTER(> 0));
+            // DataItemTableView = WHERE(Reversed = FILTER(false),
+            //                           "Units Taken" = FILTER(> 0));
             RequestFilterFields = "Student No.", Programmes, Semester, Stage, "Date Filter";
             column(ExamCardSerial; "ACA-Course Registration"."Reg. Transacton ID")
             {
@@ -197,12 +197,12 @@ report 51774 "Exam Card Final"
 
                 CALCFIELDS("Units Taken");
 
-                IF "Units Taken" <= 0 THEN CurrReport.SKIP;
+                //IF "Units Taken" <= 0 THEN CurrReport.SKIP;
 
 
-                IF (bal > 5000) THEN BEGIN
-                    CurrReport.SKIP;
-                END;
+                // IF (bal > 5000) THEN BEGIN
+                //     CurrReport.SKIP;
+                // END;
 
                 IF (bal > 5000) THEN BEGIN
                     //CurrReport.SKIP;
@@ -255,11 +255,11 @@ report 51774 "Exam Card Final"
         IF CompInf.GET THEN
             CompInf.CALCFIELDS(CompInf.Picture);
 
-        usersetup.RESET;
-        usersetup.SETRANGE("Can Post Customer Refund", TRUE);
-        IF usersetup.FIND('-') THEN BEGIN
-            usersetup.CALCFIELDS("User Signature");
-        END;
+        // usersetup.RESET;
+        // usersetup.SETRANGE("Can Post Customer Refund", TRUE);
+        // IF usersetup.FIND('-') THEN BEGIN
+        //     usersetup.CALCFIELDS("User Signature");
+        // END;
     end;
 
     var

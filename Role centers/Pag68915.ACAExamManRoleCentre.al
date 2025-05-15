@@ -1119,7 +1119,7 @@ page 68915 "ACA-Exam Man. Role Centre"
             {
                 Caption = 'Master Rotation';
                 Image = ResourcePlanning;
-
+                Visible = false;
                 action("Roation Areas")
                 {
                     ApplicationArea = all;
@@ -1134,7 +1134,7 @@ page 68915 "ACA-Exam Man. Role Centre"
             }
             group("Registration Process")
             {
-
+                Visible = false;
                 action("Units Offered")
                 {
                     RunObject = Page "ACA-Units Offered";
@@ -1194,6 +1194,7 @@ page 68915 "ACA-Exam Man. Role Centre"
             {
                 Caption = 'Lecturer Management';
                 Image = HumanResources;
+                Visible = false;
                 action(SemBatches)
                 {
                     Caption = 'Lect. Loading Semester Batches';
@@ -1521,6 +1522,7 @@ page 68915 "ACA-Exam Man. Role Centre"
             }
             group(Timetabling)
             {
+                Visible = false;
                 Caption = 'Timetable Management';
                 Image = Statistics;
                 action(TimetableCentral)
@@ -1779,8 +1781,6 @@ page 68915 "ACA-Exam Man. Role Centre"
                     {
                         Caption = 'population By Faculty';
                         Image = PrintExcise;
-
-
                         RunObject = Report 51781;
                         ApplicationArea = All;
                     }

@@ -63,11 +63,13 @@ page 40051 "Consolidated  Exam Timetable"
                 field(Lecturer; Rec.Lecturer)
                 {
                     ApplicationArea = All;
+                    Caption = 'Invigilator Number';
                     ToolTip = 'Specifies the value of the Lecturer field.', Comment = '%';
                 }
                 field("Lecturer Name"; REC."Lecturer Name")
                 {
                     ApplicationArea = All;
+                    Caption = 'Invigilator Name';
                     ToolTip = 'Specifies the value of the Lecturer field.', Comment = '%';
                 }
 
