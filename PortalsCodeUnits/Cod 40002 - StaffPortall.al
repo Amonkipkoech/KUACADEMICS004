@@ -1159,6 +1159,42 @@ codeunit 40002 StaffPortall
 
     end;
 
+    procedure GetAttendanceStudents(unitCode: Text; semester: Text): Text
+    var
+        StudentUnits: Record "ACA-Student Units";
+        jsonObj: JsonObject;
+        jsonArray: JsonArray;
+        TempBlob: Codeunit "Temp Blob";
+        OutStream: OutStream;
+        InStream: InStream;
+        ResultText: Text;
+
+    begin
+        StudentUnits.Reset();
+        StudentUnits.SetRange(StudentUnits.Unit, unitCode);
+        StudentUnits.SetRange(StudentUnits.Semester, semester);
+
+        if StudentUnits.FindSet() then begin
+            repeat
+                Clear(jsonObj);
+                jsonObj.Add('UnitCode', StudentUnits.Unit);
+                jsonObj.Add('StudentNo', StudentUnits."Student No.");
+                jsonObj.Add('StudentName', GetStudentName(StudentUnits."Student No."));
+                jsonObj.Add('Status', Format(StudentUnits.Status));
+
+                jsonArray.Add(jsonObj);
+            until StudentUnits.Next() = 0;
+            TempBlob.CreateOutStream(OutStream);
+            jsonArray.WriteTo(OutStream);
+
+            TempBlob.CreateInStream(InStream);
+            InStream.ReadText(ResultText);
+        end else begin
+            ResultText := '[]';
+        end;
+        exit(ResultText);
+    end;
+
     procedure CheckStaffLoginForUnchangedPass(Username: Code[20]; password: Text[50]) ReturnMsg: Text[200];
     begin
         EmployeeCard.Reset();
