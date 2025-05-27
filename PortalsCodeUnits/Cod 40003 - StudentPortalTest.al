@@ -3318,4 +3318,74 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         msg := NoSeriesMgt.GetNextNo('RCPT', 0D, true);
     end;
 
+    procedure SavePesaFlowInvoice(refno: Code[20]; invoiceno: Code[20]; custno: Code[20]; custname: Text[100]; invoiceamt: Decimal; serviceid: Code[20]; desc: Text[50]; token: Text[100]; link: Text[150]) inserted: Boolean
+    var
+        PesaFlowInvoices: Record "PesaFlow Invoices";
+    begin
+        PesaFlowInvoices.RESET;
+        PesaFlowInvoices.SETRANGE(BillRefNo, refno);
+        IF NOT PesaFlowInvoices.FIND('-') THEN BEGIN
+            PesaFlowInvoices.INIT;
+            PesaFlowInvoices.BillRefNo := refno;
+            PesaFlowInvoices.CustomerRefNo := custno;
+            PesaFlowInvoices.InvoiceNo := invoiceno;
+            PesaFlowInvoices.CustomerName := custname;
+            PesaFlowInvoices.InvoiceAmount := invoiceamt;
+            PesaFlowInvoices.ServiceID := serviceid;
+            PesaFlowInvoices.Description := desc;
+            PesaFlowInvoices.TokenHash := token;
+            PesaFlowInvoices.InvoiceLink := link;
+            PesaFlowInvoices.INSERT;
+            inserted := TRUE;
+        END;
+    end;
+
+    procedure GetSupplementaryExams(StudentNo: Code[50]): Text
+    var
+        StudentUnits: Record "ACA-Exam Results";
+        jsonArray: JsonArray;
+        TempBlob: Codeunit "Temp Blob";
+        OutStream: OutStream;
+        InStream: InStream;
+        ResultText: Text;
+        jsonObj: JsonObject;
+    begin
+        StudentUnits.RESET;
+        StudentUnits.SETRANGE("Student No.", StudentNo);
+        StudentUnits.SetFilter(Grade, '%1|%2|%3', 'E', 'F', 'D');
+        if StudentUnits.FINDSET() then begin
+            repeat
+                Clear(jsonObj);
+                jsonObj.Add('UnitCode', StudentUnits.Unit);
+                jsonObj.Add('UnitName', StudentUnits.Unit);
+                jsonObj.Add('Grade', StudentUnits.Grade);
+                jsonArray.Add(jsonObj);
+            until StudentUnits.NEXT = 0;
+
+            TempBlob.CreateOutStream(OutStream);
+            jsonArray.WriteTo(OutStream);
+
+            TempBlob.CreateInStream(InStream);
+            InStream.ReadText(ResultText);
+        end else begin
+            ResultText := '[]';
+        end;
+        exit(ResultText);
+    end;
+
+    procedure HasFailedUnits(StudentNo: Code[50]): Boolean
+    var
+        StudentUnits: Record "ACA-Exam Results";
+        hasFailed: Boolean;
+    begin
+        hasFailed := false;
+        StudentUnits.RESET;
+        StudentUnits.SETRANGE("Student No.", StudentNo);
+        StudentUnits.SetFilter(Grade, '%1|%2|%3', 'E', 'F', 'D');
+        if StudentUnits.FINDSET() then begin
+            hasFailed := true;
+        end;
+        exit(hasFailed);
+    end;
+
 }
