@@ -584,8 +584,34 @@ page 68852 "ACA-Student Fin. Role Center"
                 }
 
             }
+            group("Bank Intergration")
+            {
+
+                action("E-Citizen Services")
+                {
+                    //Caption = 'Settlement Types';
+                    RunObject = Page "E-Citizen Services";
+                    ApplicationArea = All;
+                }
+                action("Pesa Flow")
+                {
+                    RunObject = page "PesaFlow Integration";
+                    ApplicationArea = All;
+                }
+                action("Posted Pesa Flow-Transactions")
+                {
+                    RunObject = page "PesaFlow Integration Posted";
+                    ApplicationArea = All;
+                }
+                // action("Mpesa Trans")
+                // {
+                //     RunObject = Page "Confimed Mpesa Trans";
+                //     ApplicationArea = All;
+                // }
+            }
             group("E-Citizen Integration")
             {
+                Visible = false;
                 action("Coop Bank Transactions")
                 {
                     //Caption = 'Settlement Types';
