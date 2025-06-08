@@ -595,7 +595,7 @@ page 68852 "ACA-Student Fin. Role Center"
                 }
                 action("Pesa Flow")
                 {
-                    RunObject = page "PesaFlow Integration";
+                    RunObject = page "PesaFlow";
                     ApplicationArea = All;
                 }
                 action("Posted Pesa Flow-Transactions")

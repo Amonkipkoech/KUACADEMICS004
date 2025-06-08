@@ -1,4 +1,4 @@
-page 40040  "E-Citizen Services"
+page 40040 "E-Citizen Services"
 {
     PageType = List;
     SourceTable = "E-Citizen Services";
