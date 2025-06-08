@@ -82,4 +82,31 @@ page 54376 "PesaFlow Integration Posted"
             }
         }
     }
+    actions
+    {
+        area(Processing)
+        {
+            action("Post Payment")
+            {
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    PaymentProcessor: Codeunit "KU Payment Processor";
+                begin
+                    // Replace '18770' with your actual Bank Account Code
+                    PaymentProcessor.ProcessPayment(
+                        Rec.PaymentRefID,
+                        Rec.CustomerRefNo,
+                        Rec.PaidAmount,
+                        Rec."Customer Name",
+                        'BNK002' // ← Bank Account No.
+                    );
+                end;
+            }
+
+
+        }
+    }
+
 }

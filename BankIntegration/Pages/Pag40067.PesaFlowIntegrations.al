@@ -100,28 +100,47 @@ page 40067 "PesaFlow"
     {
         area(Processing)
         {
-            action("Batch Post")
+            action("Post Payment")
             {
                 ApplicationArea = All;
-                Promoted = true;
-                PromotedCategory = New;
-                Image = PostBatch;
 
                 trigger OnAction()
                 var
-                    pint: Codeunit "PesaFlow Integration";
+                    PaymentProcessor: Codeunit "KU Payment Processor";
                 begin
-                    if Confirm('Post Unposted Transactions ?', true) = false then Error('Cancelled');
-                    pint.PostBatchPesaFlow();
+                    // Replace '18770' with your actual Bank Account Code
+                    PaymentProcessor.ProcessPayment(
+                        Rec.PaymentRefID,
+                        Rec.CustomerRefNo,
+                        Rec.PaidAmount,
+                        Rec."Customer Name",
+                        'BNK002' // ← Bank Account No.
+                    );
                 end;
             }
-            action("Fetch Trans")
-            {
-                ApplicationArea = All;
-                Promoted = true;
-                PromotedCategory = Process;
-                RunObject = xmlport "PesaFlow Integration";
-            }
+
+            // action("Batch Post")
+            // {
+            //     ApplicationArea = All;
+            //     Promoted = true;
+            //     PromotedCategory = New;
+            //     Image = PostBatch;
+
+            //     trigger OnAction()
+            //     var
+            //         pint: Codeunit "PesaFlow Integration";
+            //     begin
+            //         if Confirm('Post Unposted Transactions ?', true) = false then Error('Cancelled');
+            //         pint.PostBatchPesaFlow();
+            //     end;
+            // }
+            // action("Fetch Trans")
+            // {
+            //     ApplicationArea = All;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     RunObject = xmlport "PesaFlow Integration";
+            // }
         }
     }
 
