@@ -1216,6 +1216,31 @@ codeunit 40002 StaffPortall
         exit(response);
     end;
 
+    procedure GetExamPapers(semester: Code[10]; prog: Code[10]): Text
+    var
+        studentUnits: Record "ACA-Student Units";
+        uniqueUnits: Record "ACA-Student Units" temporary;
+        response: Text;
+    begin
+        studentUnits.Reset();
+        studentUnits.SetRange(Semester, semester);
+        studentUnits.SetRange("Unit Category", studentUnits."Unit Category"::Exam);
+        studentUnits.SetRange(Programme, prog);
+        if studentUnits.FindSet() then
+            repeat
+                if not uniqueUnits.Get(studentUnits."Unit") then begin
+                    uniqueUnits.Init();
+                    uniqueUnits."Unit" := studentUnits."Unit";
+                    uniqueUnits.Insert();
+                    response += studentUnits."Unit" + '::';
+                end;
+            until studentUnits.Next() = 0;
+
+        exit(response);
+    end;
+
+
+
     procedure CheckStaffLoginForUnchangedPass(Username: Code[20]; password: Text[50]) ReturnMsg: Text[200];
     begin
         EmployeeCard.Reset();
@@ -1486,6 +1511,17 @@ codeunit 40002 StaffPortall
   EmployeeCard."Job Title" + '::' + EmployeeCard."Company E-Mail" + '::' + FORMAT(EmployeeCard.Title) + '::' + FORMAT(EmployeeCard."Date Of Birth");
 
         END
+    end;
+
+    procedure GetStaffDepartment(userNo: Text): Text
+    var
+        EmployeeCard: Record "HRM-Employee (D)";
+        department: Text;
+    begin
+        EmployeeCard.Reset();
+        EmployeeCard.SetRange("No.", userNo);
+        if EmployeeCard.FindFirst() then department := EmployeeCard."Department Code";
+        exit(department);
     end;
 
     procedure GetStaffGender(username: Code[30]) Message: Text

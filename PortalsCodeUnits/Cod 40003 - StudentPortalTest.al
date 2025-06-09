@@ -1884,6 +1884,26 @@ codeunit 40003 StudentPortalTest
         exit(Message);
     end;
 
+    procedure GetIQEUnits(studentNo: Text; stage: Text; semester: Text; Programme: Text) Message: Text
+    var
+        theoryUnits: Record "ACA-Student Units";
+    begin
+        theoryUnits.Reset();
+        theoryUnits.SetRange("Student No.", studentNo);
+        theoryUnits.SetRange(Stage, stage);
+        theoryUnits.SetRange(Semester, semester);
+        theoryUnits.SetRange(Programme, Programme);
+        if theoryUnits.FIND('-') THEN BEGIN
+            repeat
+
+                Message += theoryUnits.Unit + '::' + theoryUnits."Unit Name" + '[]';
+
+            until theoryUnits.NEXT = 0;
+
+        END;
+        exit(Message);
+    end;
+
     procedure GetTranscriptYears(CompanyName: Text[100]; StudentNos: Text[50]) Message: Text
     var
         CourseRegistrationRec: Record "ACA-Course Registration";
