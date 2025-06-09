@@ -1800,7 +1800,7 @@ codeunit 40003 StudentPortalTest
         StudentUnits."Reg. Transacton ID" := RegTransID;
         StudentUnits."Unit Description" := UnitDescription;
         StudentUnits."Academic Year" := AcademicYear;
-        StudentUnits."Unit Category" := unitType;
+        StudentUnits."Unit Category" := studentUnits."Unit Category"::Exam;
         if StudentUnits.INSERT(TRUE) then begin
             examAttendance.Init();
             examAttendance."Programme Code" := prog;
