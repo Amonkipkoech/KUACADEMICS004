@@ -43,6 +43,10 @@ table 66661 "ACA-Exam Attendance Register"
         {
             DataClassification = ToBeClassified;
         }
+        field(11; "Present"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys
