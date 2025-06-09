@@ -4,7 +4,7 @@ page 40067 "PesaFlow"
     SourceTable = "PesaFlow Integration";
     DeleteAllowed = false;
     InsertAllowed = false;
-    //ModifyAllowed = false;
+    ModifyAllowed = false;
     SourceTableView = where(Posted = filter(false));
     PromotedActionCategories = 'Post,Import';
 
