@@ -1161,7 +1161,7 @@ codeunit 40002 StaffPortall
 
     procedure GetAttendanceStudents(unitCode: Text; semester: Text): Text
     var
-        StudentUnits: Record "ACA-Student Units";
+        ExamAttendance: Record "ACA-Exam Attendance Register";
         jsonObj: JsonObject;
         jsonArray: JsonArray;
         TempBlob: Codeunit "Temp Blob";
@@ -1170,20 +1170,23 @@ codeunit 40002 StaffPortall
         ResultText: Text;
 
     begin
-        StudentUnits.Reset();
-        StudentUnits.SetRange(StudentUnits.Unit, unitCode);
-        StudentUnits.SetRange(StudentUnits.Semester, semester);
+        ExamAttendance.Reset();
+        ExamAttendance.SetRange(ExamAttendance."Unit Code", unitCode);
+        ExamAttendance.SetRange(ExamAttendance."Semester Code", semester);
 
         if StudentUnits.FindSet() then begin
             repeat
                 Clear(jsonObj);
-                jsonObj.Add('UnitCode', StudentUnits.Unit);
-                jsonObj.Add('StudentNo', StudentUnits."Student No.");
-                jsonObj.Add('StudentName', GetStudentName(StudentUnits."Student No."));
-                jsonObj.Add('Status', Format(StudentUnits.Status));
+                jsonObj.Add('UnitCode', ExamAttendance."Unit Code");
+                jsonObj.Add('StudentNo', ExamAttendance."Student No.");
+                jsonObj.Add('StudentName', GetStudentName(ExamAttendance."Student No."));
+                jsonObj.Add('Venue', (ExamAttendance."Exam Hall ID"));
+                jsonObj.Add('StartTime', (ExamAttendance."Exam Start Time"));
+                jsonObj.Add('EndTime', (ExamAttendance."Exam End Time"));
+                jsonObj.Add('Date', (ExamAttendance."Exam Date"));
 
                 jsonArray.Add(jsonObj);
-            until StudentUnits.Next() = 0;
+            until ExamAttendance.Next() = 0;
             TempBlob.CreateOutStream(OutStream);
             jsonArray.WriteTo(OutStream);
 
@@ -1193,6 +1196,24 @@ codeunit 40002 StaffPortall
             ResultText := '[]';
         end;
         exit(ResultText);
+    end;
+
+    procedure MarkExamAttendance(StudentNo: Code[20]; UnitCode: Code[20]; SemesterCode: Code[20]; Present: Boolean): Boolean
+    var
+        ExamAttendance: Record "ACA-Exam Attendance Register";
+        response: Boolean;
+    begin
+        ExamAttendance.RESET;
+        ExamAttendance.SETRANGE("Student No.", StudentNo);
+        ExamAttendance.SETRANGE("Unit Code", UnitCode);
+        ExamAttendance.SETRANGE("Semester Code", SemesterCode);
+
+        if ExamAttendance.FindFirst() then begin
+            ExamAttendance.Present := Present;
+            ExamAttendance.MODIFY();
+            response := true;
+        end;
+        exit(response);
     end;
 
     procedure CheckStaffLoginForUnchangedPass(Username: Code[20]; password: Text[50]) ReturnMsg: Text[200];
