@@ -107,6 +107,10 @@ page 40067 "PesaFlow"
                 trigger OnAction()
                 var
                     PaymentProcessor: Codeunit "KU Payment Processor";
+                    EmailMessage: Codeunit "Email Message";
+                    Email: Codeunit Email;
+                    Recipients: List of [Text];
+                    StudentRec: Record Customer; // Replace with 'Student' if you use a custom table
                 begin
                     // Replace '18770' with your actual Bank Account Code
                     PaymentProcessor.ProcessPayment(
@@ -116,31 +120,25 @@ page 40067 "PesaFlow"
                         Rec."Customer Name",
                         'BNK002' // ← Bank Account No.
                     );
+                    // Get student email using CustomerRefNo (assumed as Customer No.)
+                    if StudentRec.Get(Rec.CustomerRefNo) then begin
+                        if StudentRec."E-Mail" <> '' then begin
+                            Recipients.Add(StudentRec."E-Mail");
+                            EmailMessage.Create(
+                                Recipients,
+                                'Payment Received',
+                                StrSubstNo('Dear %1, we have received your payment of %2. Kindly check your clearance status.', StudentRec.Name, Format(Rec.PaidAmount)),
+                                true
+                            );
+                            if not Email.Send(EmailMessage, Enum::"Email Scenario"::Default) then
+                                Message('Failed to send email to %1', StudentRec."E-Mail");
+                        end;
+                    end;
+
+                    // Mark as posted
+                    Rec.Posted := true;
                 end;
             }
-
-            // action("Batch Post")
-            // {
-            //     ApplicationArea = All;
-            //     Promoted = true;
-            //     PromotedCategory = New;
-            //     Image = PostBatch;
-
-            //     trigger OnAction()
-            //     var
-            //         pint: Codeunit "PesaFlow Integration";
-            //     begin
-            //         if Confirm('Post Unposted Transactions ?', true) = false then Error('Cancelled');
-            //         pint.PostBatchPesaFlow();
-            //     end;
-            // }
-            // action("Fetch Trans")
-            // {
-            //     ApplicationArea = All;
-            //     Promoted = true;
-            //     PromotedCategory = Process;
-            //     RunObject = xmlport "PesaFlow Integration";
-            // }
         }
     }
 

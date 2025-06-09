@@ -255,7 +255,7 @@ page 77717 "Process Exams Central"
                                     ClassClassificationStudents."Year of Study" := GetYearOfStudy(ClassUnitsSubjects."Stage Code");
                                     ClassClassificationStudents."Program Group" := Format(ClassStudentUnits."Prog. Category");
                                     if ((ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::Certificate) or
-                                      (ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::"Proffesional Course")) then
+                                      (ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::Professional)) then
                                         ClassClassificationStudents."Program Group Order" := 3
                                     else
                                         if ((ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::Diploma)) then
@@ -399,8 +399,8 @@ page 77717 "Process Exams Central"
                             ProgBar2.Update(5, 'Remaining: ' + Format(RemeiningRecs));
                             ProgBar2.Update(6, '----------------------------------------------------');
                             if Progyz.Get(ClassClassificationStudents.Programme) then begin
-                                ClassClassificationStudents.Department := Progyz."Shortcut Dimension 4 Code";
-                                ClassClassificationStudents."School Code" := Progyz."Shortcut Dimension 3 Code";
+                                ClassClassificationStudents.Department := Progyz."Department Code";
+                                ClassClassificationStudents."School Code" := Progyz."School Code";
                             end;
                             ClassClassificationStudents."Department Name" := GetDepartmentNameOrSchool(ClassClassificationStudents.Department);
                             ClassClassificationStudents."School Name" := GetDepartmentNameOrSchool(ClassClassificationStudents."School Code");
@@ -953,7 +953,7 @@ page 77717 "Process Exams Central"
                                         ClassClassificationStudents."Year of Study" := GetYearOfStudy(ClassUnitsSubjects."Stage Code");
                                         ClassClassificationStudents."Program Group" := Format(ClassStudentUnits."Prog. Category");
                                         if ((ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::Certificate) or
-                                          (ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::"Post-Graduate Diploma")) then
+                                          (ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::Postgraduate)) then
                                             ClassClassificationStudents."Program Group Order" := 3
                                         else
                                             if ((ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::Diploma)) then
