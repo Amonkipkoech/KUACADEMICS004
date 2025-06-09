@@ -1,6 +1,6 @@
-table 40043 "Duty Roter Header"
+table 40045 "Student Rotar header"
 {
-    Caption = 'Duty Roter Header';
+    Caption = 'Student Rotar header';
     DataClassification = ToBeClassified;
     
     fields
