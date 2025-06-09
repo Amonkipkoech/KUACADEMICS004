@@ -329,23 +329,25 @@ codeunit 40006 "PesaFlow Integration"
         END;
     end;
 
-    Procedure PostPesaFlow(ecitizen: Record "PesaFlow Integration")
+    procedure PostPesaFlow(ecitizen: Record "PesaFlow Integration")
     var
         pflow: Record "PesaFlow Integration";
         bsetup: Record "E-Citizen Services";
         StudPay: Record "ACA-Std Payments";
+        PaymentProcessor: Codeunit "KU Payment Processor";
     begin
         pflow.RESET;
         pflow.SETRANGE(Posted, FALSE);
         pflow.SETRANGE(PaymentRefID, ecitizen.PaymentRefID);
-        IF pflow.FIND('-') THEN BEGIN
-            //REPEAT
 
+        IF pflow.FIND('-') THEN BEGIN
+            // Delete old student payment if exists
             StudPay.RESET;
             StudPay.SETRANGE(StudPay."Student No.", pflow.CustomerRefNo);
             IF StudPay.FIND('-') THEN
                 StudPay.DELETEALL;
 
+            // Insert new student payment
             StudPay.INIT;
             StudPay."Student No." := pflow.CustomerRefNo;
             StudPay."User ID" := USERID;
@@ -353,21 +355,34 @@ codeunit 40006 "PesaFlow Integration"
             StudPay."Cheque No" := pflow.PaymentRefID;
             StudPay."Drawer Name" := pflow."Customer Name";
             StudPay."Payment By" := pflow."Customer Name";
+
             bsetup.RESET;
             bsetup.SETRANGE("Service Code", pflow.ServiceID);
             IF bsetup.FIND('-') THEN
                 StudPay."Bank No." := bsetup."Bank Code"
             ELSE
                 ERROR('%1%2%3', 'Service ID ', pflow.ServiceID, ' has not been setup with an associated bank');
+
             StudPay."Amount to pay" := pflow.PaidAmount;
             StudPay.VALIDATE(StudPay."Amount to pay");
             StudPay."Transaction Date" := pflow."Date Received";
-            //StudPay.VALIDATE(StudPay."Auto Post PesaFlow");
             StudPay.INSERT;
+
+            // ✅ Post to General Journal automatically using KU Payment Processor
+            PaymentProcessor.ProcessPayment(
+                pflow.PaymentRefID,
+                pflow.CustomerRefNo,
+                pflow.PaidAmount,
+                pflow."Customer Name",
+                bsetup."Bank Code"
+            );
+
+            // Mark PesaFlow as posted
             pflow.Posted := TRUE;
             pflow.MODIFY;
-        end;
+        END;
     end;
+
 
 
     Procedure PostBatchPesaFlow()

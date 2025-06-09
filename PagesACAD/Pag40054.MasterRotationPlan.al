@@ -213,6 +213,28 @@ page 40054 "Master Rotation Plan"
                     ApplicationArea = All;
                 }
             }
+            group("Duty Rota  Management")
+            {
+                action("View Open Rotas")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Open Duty Rotas';
+                    Image = View;
+                    RunObject = Page "Student Duty Rotas List";
+                    RunPageView = where(Status = filter(Open));
+
+                }
+
+                action("View Released Rotas")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Released Duty Rotas';
+                    Image = View;
+                    RunObject = Page "Student Duty Rotas List";
+                    RunPageView = where(Status = filter(Released));
+                }
+
+            }
 
 
 
