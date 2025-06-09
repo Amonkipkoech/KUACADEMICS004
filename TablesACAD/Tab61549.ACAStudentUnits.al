@@ -1118,7 +1118,7 @@ table 61549 "ACA-Student Units"
                                                                                   Reversed = FILTER(false)));
             FieldClass = FlowField;
         }
-        
+
 
         field(50078; "Consolidated Mark Identifier"; Code[2])
         {
@@ -1491,7 +1491,7 @@ table 61549 "ACA-Student Units"
             CalcFormula = Lookup("ACA-Programme".Category WHERE(Code = FIELD(Programme)));
             FieldClass = FlowField;
             OptionCaption = ',Certificate ,Diploma,Undergraduate,Postgraduate,Professional,Course List';
-            OptionMembers = ,"Certificate ",Diploma,Undergraduate,Postgraduate,Professional,"Course List";
+            OptionMembers = ,"Certificate",Diploma,Undergraduate,Postgraduate,Professional,"Course List";
         }
         field(60183; "Processed Marks"; Boolean)
         {

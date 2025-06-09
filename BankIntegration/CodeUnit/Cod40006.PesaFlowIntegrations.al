@@ -335,6 +335,10 @@ codeunit 40006 "PesaFlow Integration"
         bsetup: Record "E-Citizen Services";
         StudPay: Record "ACA-Std Payments";
         PaymentProcessor: Codeunit "KU Payment Processor";
+        EmailMessage: Codeunit "Email Message";
+        Email: Codeunit Email;
+        Recipients: List of [Text];
+        StudentRec: Record Customer; // Replace with 'Student' if you use a custom table
     begin
         pflow.RESET;
         pflow.SETRANGE(Posted, FALSE);
@@ -376,6 +380,29 @@ codeunit 40006 "PesaFlow Integration"
                 pflow."Customer Name",
                 bsetup."Bank Code"
             );
+            // Email notification
+            if StudentRec.Get(pflow.CustomerRefNo) then begin
+                if StudentRec."E-Mail" <> '' then begin
+                    Recipients.Add(StudentRec."E-Mail");
+                    EmailMessage.Create(
+                        Recipients,
+                        'Payment Received',
+                        StrSubstNo(
+                            'Dear %1, we have received your payment of KES %2 on %3. Kindly check your clearance status.',
+                            StudentRec.Name,
+                            Format(pflow.PaidAmount),
+                            Format(pflow."Date Received")
+                        ),
+                        true // isHTML
+                    );
+                    if not Email.Send(EmailMessage, Enum::"Email Scenario"::Default) then
+                        Message('⚠️ Failed to send email to %1', StudentRec."E-Mail");
+                end else
+                    Message('⚠️ No email address found for student %1 (%2)', StudentRec.Name, StudentRec."No.");
+            end else
+                Message('⚠️ Student with No. %1 not found in Customer table.', pflow.CustomerRefNo);
+
+
 
             // Mark PesaFlow as posted
             pflow.Posted := TRUE;

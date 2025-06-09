@@ -4,6 +4,7 @@ page 40070 "Student Duty Rotas List"
     SourceTable = "Student Rota Header";
     Caption = 'All Duty Rotas';
     Editable = false;
+    CardPageId = "Student Rota Header Card";
 
     layout
     {

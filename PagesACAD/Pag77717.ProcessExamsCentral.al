@@ -61,6 +61,7 @@ page 77717 "Process Exams Central"
                 PromotedIsBig = true;
                 PromotedOnly = true;
                 PromotedCategory = Process;
+                ApplicationArea = All;
 
                 trigger OnAction()
                 var
@@ -99,6 +100,9 @@ page 77717 "Process Exams Central"
                     New_Total_Courses: Integer;
                     New_Classifiable_Average: Decimal;
                     ExistsOption: Option " ","Both Exists","CAT Only","Exam Only","None Exists";
+                    status1: Option " ","Both Exists","CAT Only","Exam Only","None Exists";
+                    xxGrade: Code[20];
+                    gradSys: Record "ACA-Exam Gradding Setup";
                 begin
                     //IF ((USERID<>'COSMAS.MUTHAMIA') AND (USERID<>'WANJALA') AND (USERID<>'OOKOTH') AND (USERID<>'JODERO')) THEN EXIT;
                     //if ((UserId <> 'ikioko') and (UserId <> 'Tom') and (UserId <> 'JODERO')) then exit;
@@ -226,7 +230,19 @@ page 77717 "Process Exams Central"
                             ClassUnitsSubjects.Reset;
                             ClassUnitsSubjects.SetRange("Programme Code", ClassStudentUnits.Programme);
                             ClassUnitsSubjects.SetRange(Code, ClassStudentUnits.Unit);
+                            //ClassUnitsSubjects.SetFilter("Old Unit", '<>%1', true);
                             if ClassUnitsSubjects.Find('-') then begin
+                                // if ClassUnitsSubjects."Old Unit" = true then begin
+                                //     studUnits.Reset();
+                                //     studUnits.SetRange(Unit, ClassUnitsSubjects.Code);
+                                //     if studUnits.Find('-') then begin
+                                //         //if studUnits.grad
+                                //         gradSys.Reset();
+                                //         gradSys.SetRange(Category, ClassUnitsSubjects."Default Exam Category");
+                                //         gradSys.SetFilter("Lower Limit", '<=%1', studUnits."Total Score");
+                                //         gradSys.SetFilter("Upper Limit", '>=%1', studUnits."Total Score");
+                                //         if gradSys.FindFirst() then begin
+                                //             if (gradSys.Remarks = 'INCOMPLETE') or (gradSys.Remarks = 'MISSING') then begin
                                 ClassClassificationStudents.Reset;
                                 ClassClassificationStudents.SetRange("Student Number", ClassStudentUnits."Student No.");
                                 ClassClassificationStudents.SetRange(Programme, ClassStudentUnits.Programme);
@@ -238,8 +254,7 @@ page 77717 "Process Exams Central"
                                     ClassClassificationStudents."Graduation Academic Year" := GradAcademicYear;
                                     ClassClassificationStudents."Year of Study" := GetYearOfStudy(ClassUnitsSubjects."Stage Code");
                                     ClassClassificationStudents."Program Group" := Format(ClassStudentUnits."Prog. Category");
-                                    if ((ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::"Certificate ") or
-                                      (ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::"Course List") or
+                                    if ((ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::Certificate) or
                                       (ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::Professional)) then
                                         ClassClassificationStudents."Program Group Order" := 3
                                     else
@@ -267,8 +282,57 @@ page 77717 "Process Exams Central"
                                     if ClassClassificationUnits."Year of Study" = 0 then
                                         ClassClassificationUnits."Year of Study" := GetYearOfStudy(ClassUnitsSubjects."Stage Code");
                                     ClassClassificationUnits."Graduation Academic Year" := GradAcademicYear;
-                                    if ClassClassificationUnits.Insert then;
+                                    ClassClassificationUnits.Insert;
                                 end;
+                                //             end;
+                                //         end;
+                                //     end;
+                                // end else begin
+
+                                //     ClassClassificationStudents.Reset;
+                                //     ClassClassificationStudents.SetRange("Student Number", ClassStudentUnits."Student No.");
+                                //     ClassClassificationStudents.SetRange(Programme, ClassStudentUnits.Programme);
+                                //     ClassClassificationStudents.SetRange("Graduation Academic Year", GradAcademicYear);
+                                //     if not ClassClassificationStudents.Find('-') then begin
+                                //         ClassClassificationStudents.Init;
+                                //         ClassClassificationStudents."Student Number" := ClassStudentUnits."Student No.";
+                                //         ClassClassificationStudents.Programme := ClassStudentUnits.Programme;
+                                //         ClassClassificationStudents."Graduation Academic Year" := GradAcademicYear;
+                                //         ClassClassificationStudents."Year of Study" := GetYearOfStudy(ClassUnitsSubjects."Stage Code");
+                                //         ClassClassificationStudents."Program Group" := Format(ClassStudentUnits."Prog. Category");
+                                //         if ((ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::"Certificate ") or
+                                //           (ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::"Course List") or
+                                //           (ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::Professional)) then
+                                //             ClassClassificationStudents."Program Group Order" := 3
+                                //         else
+                                //             if ((ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::Diploma)) then
+                                //                 ClassClassificationStudents."Program Group Order" := 2
+                                //             else
+                                //                 ClassClassificationStudents."Program Group Order" := 1;
+                                //         //   ClassClassificationStudents."Programme Option":=FORMAT(ClassStudentUnits."Program Option (Flow)");
+                                //         ClassClassificationStudents.Insert;
+                                //     end;
+                                //     ClassClassificationUnits.Reset;
+                                //     ClassClassificationUnits.SetRange("Student No.", ClassStudentUnits."Student No.");
+                                //     ClassClassificationUnits.SetRange(Programme, ClassStudentUnits.Programme);
+                                //     ClassClassificationUnits.SetRange("Unit Code", ClassStudentUnits.Unit);
+                                //     ClassClassificationUnits.SetRange("Graduation Academic Year", GradAcademicYear);
+                                //     if not ClassClassificationUnits.Find('-') then begin
+                                //         ClassClassificationUnits.Init;
+                                //         ClassClassificationUnits."Student No." := ClassStudentUnits."Student No.";
+                                //         ClassClassificationUnits.Programme := ClassStudentUnits.Programme;
+                                //         ClassClassificationUnits."Unit Code" := ClassStudentUnits.Unit;
+                                //         ClassClassificationUnits."Credit Hourse" := ClassUnitsSubjects."Credit Hours";
+                                //         ClassClassificationUnits."Unit Type" := Format(ClassUnitsSubjects."Unit Type");
+                                //         ClassClassificationUnits."Unit Description" := ClassUnitsSubjects.Desription;
+                                //         ClassClassificationUnits."Year of Study" := GetYearOfStudy(ClassUnitsSubjects."Stage Code");
+                                //         if ClassClassificationUnits."Year of Study" = 0 then
+                                //             ClassClassificationUnits."Year of Study" := GetYearOfStudy(ClassUnitsSubjects."Stage Code");
+                                //         ClassClassificationUnits."Graduation Academic Year" := GradAcademicYear;
+                                //         if ClassClassificationUnits.Insert then;
+                                //     end;
+                                // end;
+
                             end else begin
                                 ClassStudentUnits."Unit not in Catalogue" := true;
                             end;
@@ -394,9 +458,9 @@ page 77717 "Process Exams Central"
                                                 // //                IF ClassExamResults.FIND('+') THEN BEGIN
                                                 if ClassStudentUnits."CATs Marks Exists" then begin
                                                     ClassClassificationUnits."CAT Score" := Format(ClassStudentUnits."CATs Marks");
-                                                    ClassClassificationUnits."CAT Score Decimal" := ClassStudentUnits."CATs Marks";
+                                                    ClassClassificationUnits."CAT Score Decimal" := ClassStudentUnits."CATs Marks"
                                                 end else begin
-                                                    ClassClassificationUnits."CAT Score" := '';
+                                                    ClassClassificationUnits."CAT Score" := '0';
                                                     ClassClassificationUnits."CAT Score Decimal" := 0;
                                                 end;
                                                 // //                  END;
@@ -434,7 +498,10 @@ page 77717 "Process Exams Central"
                                                 ClassExamResults.SetCurrentKey(Semester);
                                                 if ClassExamResults.Find('+') then begin
                                                     ClassClassificationUnits."CAT Score" := Format(ClassExamResults.Score);
-                                                    ClassClassificationUnits."CAT Score Decimal" := ClassExamResults.Score;
+                                                    ClassClassificationUnits."CAT Score Decimal" := ClassExamResults.Score
+                                                end else begin
+                                                    ClassClassificationUnits."CAT Score" := '0';
+                                                    ClassClassificationUnits."CAT Score Decimal" := 0;
                                                 end;
                                             end;
 
@@ -450,6 +517,7 @@ page 77717 "Process Exams Central"
                                                     ClassClassificationUnits."Total Score Decimal" := ClassClassificationUnits."Exam Score Decimal" + ClassClassificationUnits."CAT Score Decimal";
                                                     ClassClassificationUnits."Weighted Total Score" := ClassClassificationUnits."Credit Hourse" * ClassClassificationUnits."Total Score Decimal";
                                                     ClassClassificationUnits.Grade := GetGrade(ClassClassificationUnits."Total Score Decimal", ClassClassificationUnits."Unit Code", ClassClassificationUnits.Programme);
+                                                    //ClassClassificationUnits.Grade := GetGrade(ClassClassificationUnits."Total Score Decimal", 'IAM 1210', ClassClassificationUnits.Programme);
                                                     ClassClassificationUnits.Pass := GetUnitPassStatus(ClassClassificationUnits."Total Score Decimal", ClassClassificationUnits."Unit Code", ClassClassificationUnits.Programme);
                                                     // IF ClassClassificationUnits.Pass THEN BEGIN
                                                     //  END;
@@ -566,7 +634,7 @@ page 77717 "Process Exams Central"
                             ClassClassificationStudents.CalcFields(ClassClassificationStudents."Prog. Exam Category");
                             ClassClassificationStudents.CalcFields("Total Marks", "Total Courses", "Total Weighted Marks",
                             "Total Units", "Classified Total Marks", "Total Classified C. Count", "Classified W. Total", "Attained Stage Units");
-                            if ((ClassClassificationStudents."Program Group" = 'DEGREE') or (ClassClassificationStudents."Program Group" = 'UNDERGRADUATE')) then begin
+                            if ((ClassClassificationStudents."Program Group" = 'Bachelor') or (ClassClassificationStudents."Program Group" = 'UNDERGRADUATE')) then begin
                                 ClassClassificationCourseReg.Reset;
                                 ClassClassificationCourseReg.SetRange("Student Number", ClassClassificationStudents."Student Number");
                                 ClassClassificationCourseReg.SetRange(Programme, ClassClassificationStudents.Programme);
@@ -647,7 +715,7 @@ page 77717 "Process Exams Central"
                                 ACANotGraduatingReasons."Graduation Academic Year" := GradAcademicYear;
                                 ACANotGraduatingReasons."Student No." := ClassClassificationStudents."Student Number";
                                 ACANotGraduatingReasons."Reason Code" := 'FAILED COURSES';
-                                ACANotGraduatingReasons."Reason Details" := 'Failed Some Courses:\ e.g. ' + ClassClassificationUnits."Unit Code";
+                                ACANotGraduatingReasons."Reason Details" := 'Failed Some Courses ';//+ ClassClassificationUnits."Unit Code";
                                 if ACANotGraduatingReasons.Insert then;
                             end;
                             //Unit Registered not on the Catalog
@@ -666,20 +734,20 @@ page 77717 "Process Exams Central"
                                 if ACANotGraduatingReasons.Insert then;
                             end;
                             //Multiple Programs Registered
-                            ACAClassificationStudentsCheck.Reset;
-                            ACAClassificationStudentsCheck.SetRange("Student Number", ClassClassificationStudents."Student Number");
-                            if ACAClassificationStudentsCheck.Find('-') then begin
-                                if ACAClassificationStudentsCheck.Count > 1 then begin
-                                    ToGraduate := false;
-                                    ACANotGraduatingReasons.Init;
-                                    ACANotGraduatingReasons."Graduation Academic Year" := GradAcademicYear;
-                                    ACANotGraduatingReasons."Student No." := ClassClassificationStudents."Student Number";
-                                    ACANotGraduatingReasons."Reason Code" := 'MULTIPLE COURSE REG';
-                                    ACANotGraduatingReasons."Reason Details" := 'Multiple Course Registration identified with Multiple Programs';
-                                    if ACANotGraduatingReasons.Insert then;
-                                end;
-                            end;
-                            // Missing Both CAT and Exam
+                            // ACAClassificationStudentsCheck.Reset;
+                            // ACAClassificationStudentsCheck.SetRange("Student Number", ClassClassificationStudents."Student Number");
+                            // if ACAClassificationStudentsCheck.Find('-') then begin
+                            //     if ACAClassificationStudentsCheck.Count > 1 then begin
+                            //         ToGraduate := false;
+                            //         ACANotGraduatingReasons.Init;
+                            //         ACANotGraduatingReasons."Graduation Academic Year" := GradAcademicYear;
+                            //         ACANotGraduatingReasons."Student No." := ClassClassificationStudents."Student Number";
+                            //         ACANotGraduatingReasons."Reason Code" := 'MULTIPLE COURSE REG';
+                            //         ACANotGraduatingReasons."Reason Details" := 'Multiple Course Registration identified with Multiple Programs';
+                            //         if ACANotGraduatingReasons.Insert then;
+                            //     end;
+                            // end;
+                            //Missing Both CAT and Exam
                             ClassClassificationUnits.Reset;
                             ClassClassificationUnits.SetRange("Student No.", ClassClassificationStudents."Student Number");
                             ClassClassificationUnits.SetRange(Programme, ClassClassificationStudents.Programme);
@@ -884,9 +952,8 @@ page 77717 "Process Exams Central"
                                         ClassClassificationStudents."Graduation Academic Year" := GradAcademicYear;
                                         ClassClassificationStudents."Year of Study" := GetYearOfStudy(ClassUnitsSubjects."Stage Code");
                                         ClassClassificationStudents."Program Group" := Format(ClassStudentUnits."Prog. Category");
-                                        if ((ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::"Certificate ") or
-                                          (ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::"Course List") or
-                                          (ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::Professional)) then
+                                        if ((ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::Certificate) or
+                                          (ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::Postgraduate)) then
                                             ClassClassificationStudents."Program Group Order" := 3
                                         else
                                             if ((ClassStudentUnits."Prog. Category" = ClassStudentUnits."Prog. Category"::Diploma)) then
@@ -1028,6 +1095,7 @@ page 77717 "Process Exams Central"
                                                 ClassStudentUnits.SetRange("Student No.", ClassClassificationUnits."Student No.");
                                                 ClassStudentUnits.SetRange(Programme, ClassClassificationUnits.Programme);
                                                 ClassStudentUnits.SetRange("Reg. Reversed", false);
+                                                //ClassStudentUnits.SetRange(Unit, 'IAM 1210');
                                                 ClassStudentUnits.SetRange(Unit, ClassClassificationUnits."Unit Code");
                                                 if ClassStudentUnits.Find('+') then begin
                                                     ClassStudentUnits.CalcFields("EXAMs Marks", "CATs Marks", "CATs Marks Exists", "EXAMs Marks Exists");
@@ -1081,7 +1149,11 @@ page 77717 "Process Exams Central"
                                                     if ClassExamResults.Find('+') then begin
                                                         ClassClassificationUnits."CAT Score" := Format(ClassExamResults.Score);
                                                         ClassClassificationUnits."CAT Score Decimal" := ClassExamResults.Score;
+                                                    end else begin
+                                                        ClassClassificationUnits."CAT Score" := '0';
+                                                        ClassClassificationUnits."CAT Score Decimal" := 0;
                                                     end;
+
                                                 end;
 
                                                 //Update Tatal Marks
@@ -1308,20 +1380,20 @@ page 77717 "Process Exams Central"
                                     ACANotGraduatingReasons."Reason Details" := 'Some Registered Units are Missing in the Course Catalog:\ e.g. ' + ClassClassificationUnits."Unit Code";
                                     if ACANotGraduatingReasons.Insert then;
                                 end;
-                                //Multiple Programs Registered
-                                ACAClassificationStudentsCheck.Reset;
-                                ACAClassificationStudentsCheck.SetRange("Student Number", ClassClassificationStudents."Student Number");
-                                if ACAClassificationStudentsCheck.Find('-') then begin
-                                    if ACAClassificationStudentsCheck.Count > 1 then begin
-                                        ToGraduate := false;
-                                        ACANotGraduatingReasons.Init;
-                                        ACANotGraduatingReasons."Graduation Academic Year" := GradAcademicYear;
-                                        ACANotGraduatingReasons."Student No." := ClassClassificationStudents."Student Number";
-                                        ACANotGraduatingReasons."Reason Code" := 'MULTIPLE COURSE REG';
-                                        ACANotGraduatingReasons."Reason Details" := 'Multiple Course Registration identified with Multiple Programs';
-                                        if ACANotGraduatingReasons.Insert then;
-                                    end;
-                                end;
+                                // //Multiple Programs Registered
+                                // ACAClassificationStudentsCheck.Reset;
+                                // ACAClassificationStudentsCheck.SetRange("Student Number", ClassClassificationStudents."Student Number");
+                                // if ACAClassificationStudentsCheck.Find('-') then begin
+                                //     if ACAClassificationStudentsCheck.Count > 1 then begin
+                                //         ToGraduate := false;
+                                //         ACANotGraduatingReasons.Init;
+                                //         ACANotGraduatingReasons."Graduation Academic Year" := GradAcademicYear;
+                                //         ACANotGraduatingReasons."Student No." := ClassClassificationStudents."Student Number";
+                                //         ACANotGraduatingReasons."Reason Code" := 'MULTIPLE COURSE REG';
+                                //         ACANotGraduatingReasons."Reason Details" := 'Multiple Course Registration identified with Multiple Programs';
+                                //         if ACANotGraduatingReasons.Insert then;
+                                //     end;
+                                // end;
                                 // Missing Both CAT and Exam
                                 ClassClassificationUnits.Reset;
                                 ClassClassificationUnits.SetRange("Student No.", ClassClassificationStudents."Student Number");
@@ -1471,6 +1543,7 @@ page 77717 "Process Exams Central"
         Progressbar: Dialog;
         ToGraduate: Boolean;
         ProgFilters: Text[1024];
+        studUnits: Record "ACA-Student Units";
 
     local procedure UpdateFilters(UserCode: Code[50]; ProgCodes: Code[1024]; SemCodes: Code[1024]; GradYearOfStudy: Code[1024])
     var
@@ -1493,6 +1566,68 @@ page 77717 "Process Exams Central"
             ACAExamProcessingFilterLog."Graduation Year" := GradAcademicYear;
             ACAExamProcessingFilterLog.Insert;
         end;
+    end;
+
+    procedure GetGrade(EXAMMark: Decimal; UnitG: Code[20]; Proga: Code[20]; AcadYearz: Code[20]; MarksStatus: Option " ","Both Exists","CAT Only","Exam Only","None Exists") xGrade: Text[100]
+    var
+        UnitsRR: Record "ACA-Units/Subjects";
+        ProgrammeRec: Record "ACA-Programme";
+        LastGrade: Code[20];
+        LastRemark: Code[20];
+        ExitDo: Boolean;
+        LastScore: Decimal;
+        Gradings: Record "ACA-Exam Gradding Setup";
+        Gradings2: Record "ACA-Exam Gradding Setup";
+        GradeCategory: Code[20];
+        GLabel: array[6] of Code[20];
+        i: Integer;
+        GLabel2: array[6] of Code[100];
+        FStatus: Boolean;
+        Grd: Code[80];
+        Grade: Code[20];
+        Marks: Decimal;
+        ACAExamGradingSource: Record "ACA-Exam Grading Source";
+    begin
+        CLEAR(Marks);
+        Marks := EXAMMark;
+        GradeCategory := '';
+        UnitsRR.RESET;
+        UnitsRR.SETRANGE(UnitsRR."Programme Code", Proga);
+        UnitsRR.SETRANGE(UnitsRR.Code, UnitG);
+        //UnitsRR.SETRANGE(UnitsRR."Stage Code","Student Units".Stage);
+        IF UnitsRR.FIND('-') THEN BEGIN
+            IF UnitsRR."Default Exam Category" <> '' THEN BEGIN
+                GradeCategory := UnitsRR."Default Exam Category";
+            END ELSE BEGIN
+                ProgrammeRec.RESET;
+                IF ProgrammeRec.GET(UnitG) THEN
+                    GradeCategory := ProgrammeRec."Exam Category";
+                IF GradeCategory = '' THEN GradeCategory := 'DEFAULT';
+            END;
+        END;
+        xGrade := '';
+        ACAExamGradingSource.RESET;
+        ACAExamGradingSource.SETRANGE("Exam Catregory", GradeCategory);
+        ACAExamGradingSource.SETRANGE("Academic Year", AcadYearz);
+        ACAExamGradingSource.SETRANGE("Total Score", Marks);
+        ACAExamGradingSource.SETRANGE("Results Exists Status", MarksStatus);
+        IF ACAExamGradingSource.FIND('-') THEN BEGIN
+            xGrade := ACAExamGradingSource.Grade;
+            // // xGrade:=Gradings.Grade;
+            // // IF Gradings.Failed=FALSE THEN
+            // // LastRemark:='PASS'
+            // // ELSE
+            // // LastRemark:='FAIL';
+            // // ExitDo:=TRUE;
+            // // END;
+            // // END;
+            // //
+            // //
+            // // END;
+            // //
+            // // END ELSE BEGIN
+            // // Grade:='';
+        END;
     end;
 
     procedure GetGrade(EXAMMark: Decimal; UnitG: Code[20]; Proga: Code[20]) xGrade: Text[100]
@@ -1519,7 +1654,7 @@ page 77717 "Process Exams Central"
         Marks := EXAMMark;
         GradeCategory := '';
         UnitsRR.Reset;
-        UnitsRR.SetRange(UnitsRR."Programme Code", Proga);
+        //UnitsRR.SetRange(UnitsRR."Programme Code", Proga);
         UnitsRR.SetRange(UnitsRR.Code, UnitG);
         //UnitsRR.SETRANGE(UnitsRR."Stage Code","Student Units".Stage);
         if UnitsRR.Find('-') then begin
@@ -1539,7 +1674,7 @@ page 77717 "Process Exams Central"
         Gradings.SetRange(Gradings.Category, GradeCategory);
         Gradings.SetFilter(Gradings."Lower Limit", '<%1|=%2', Marks, Marks);
         Gradings.SetFilter(Gradings."Upper Limit", '>%1|=%2', Marks, Marks);
-        Gradings.SetFilter(Gradings."Results Exists Status", '%1', Gradings."Results Exists Status"::"Both Exists");
+        //Gradings.SetFilter(Gradings."Results Exists Status", '%1', Gradings."Results Exists Status"::"Both Exists");
         // // LastGrade:='';
         // // LastRemark:='';
         // // LastScore:=0;
@@ -1564,7 +1699,7 @@ page 77717 "Process Exams Central"
         end;
     end;
 
-    procedure GetUnitPassStatus(EXAMMark: Decimal; UnitG: Code[20]; Proga: Code[20]) Passed: Boolean
+    procedure GetUnitPassStatuss(EXAMMark: Decimal; UnitG: Code[20]; Proga: Code[20]) Passed: Boolean
     var
         UnitsRR: Record "ACA-Units/Subjects";
         ProgrammeRec: Record "ACA-Programme";
@@ -1617,14 +1752,29 @@ page 77717 "Process Exams Central"
                 LastScore := Gradings."Up to";
                 if Marks < LastScore then begin
                     if ExitDo = false then begin
-                        if Gradings.Failed then
-                            Passed := false else
-                            Passed := true;
-                        if Gradings.Failed = false then
-                            LastRemark := 'PASS'
-                        else
-                            LastRemark := 'FAIL';
-                        ExitDo := true;
+                        if Gradings.Failed then begin
+                            UnitsRR.Reset();
+                            UnitsRR.SetRange(Code, UnitG);
+                            if UnitsRR.Find() then begin
+                                if UnitsRR."Old Unit" then
+                                    Passed := true else
+                                    Passed := false;
+                            end
+                            else
+                                Passed := true;
+                            if Gradings.Failed = false then
+                                LastRemark := 'PASS'
+                            else
+                                UnitsRR.Reset();
+                            UnitsRR.SetRange(Code, UnitG);
+                            if UnitsRR.Find() then begin
+                                if UnitsRR."Old Unit" then
+                                    LastRemark := 'PASS' else
+                                    LastRemark := 'FAIL'
+                            end;
+                            ExitDo := true;
+                        end;
+
                     end;
                 end;
 
@@ -1633,6 +1783,52 @@ page 77717 "Process Exams Central"
 
         end else begin
             Passed := false;
+        end;
+    end;
+
+    procedure GetUnitPassStatus(EXAMMark: Decimal; UnitG: Code[20]; Proga: Code[20]) Passed: Boolean
+    var
+        UnitsRR: Record "ACA-Units/Subjects";
+        ProgrammeRec: Record "ACA-Programme";
+        gradSys: Record "ACA-Exam Gradding Setup";
+        GradeCategory: Code[20];
+        LastRemark: Code[20];
+    begin
+        GradeCategory := '';
+        UnitsRR.Reset;
+        UnitsRR.SetRange(UnitsRR."Programme Code", Proga);
+        UnitsRR.SetRange(UnitsRR.Code, UnitG);
+        //UnitsRR.SETRANGE(UnitsRR."Stage Code","Student Units".Stage);
+        if UnitsRR.Find('-') then begin
+            if UnitsRR."Default Exam Category" <> '' then begin
+                GradeCategory := UnitsRR."Default Exam Category";
+            end else begin
+                ProgrammeRec.Reset;
+                if ProgrammeRec.Get(Proga) then
+                    GradeCategory := ProgrammeRec."Exam Category";
+                if GradeCategory = '' then GradeCategory := 'DEFAULT';
+            end;
+        end;
+        Passed := false;
+        gradSys.Reset();
+        gradSys.SetRange(Category, GradeCategory);
+        gradSys.SetFilter("Lower Limit", '<=%1', EXAMMark);
+        gradSys.SetFilter("Upper Limit", '>=%1', EXAMMark);
+        gradSys.SetFilter(gradSys."Results Exists Status", '%1', gradSys."Results Exists Status"::"Both Exists");
+        if gradSys.FindFirst() then begin
+            if gradSys.Failed then begin
+                UnitsRR.Reset();
+                UnitsRR.SetRange(UnitsRR."Programme Code", Proga);
+                UnitsRR.SetRange(Code, UnitG);
+                UnitsRR.SetRange("Old Unit", true);
+                if UnitsRR.Find() then begin
+                    Passed := true;
+                    LastRemark := 'PASS'
+                end else
+                    Passed := false;
+                LastRemark := 'FAIL'
+            end else
+                Passed := true;
         end;
     end;
 
@@ -1816,9 +2012,9 @@ page 77717 "Process Exams Central"
             end else begin
                 Classification := ACAGradingSystemSetup.Remarks;
             end;
-            if ((Programz1."Special Programme Class" = Programz1."Special Programme Class"::"Medicine & Nursing") or
-              (Programz1.Category = Programz1.Category::Postgraduate)) then
-                if not ACAGradingSystemSetup.Failed then Classification := 'PASS';
+            // if ((Programz1."Special Programme Class" = Programz1."Special Programme Class"::"Medicine & Nursing") or
+            //   (Programz1.Category = Programz1.Category::Postgraduate)) then
+            //     if not ACAGradingSystemSetup.Failed then Classification := 'PASS';
         end;
     end;
 

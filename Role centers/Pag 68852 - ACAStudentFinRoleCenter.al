@@ -587,7 +587,7 @@ page 68852 "ACA-Student Fin. Role Center"
             group("Bank Intergration")
             {
 
-                Caption = 'Bank Intergration';
+                Caption = 'E-Citizen Services';
                 action("E-Citizen Services")
                 {
                     //Caption = 'Settlement Types';
@@ -596,12 +596,14 @@ page 68852 "ACA-Student Fin. Role Center"
                 }
                 action("Pesa Flow")
                 {
+                    Caption = 'Unposted Transactions';
                     RunObject = page "PesaFlow";
                     ApplicationArea = All;
                 }
                 action("Posted Pesa Flow-Transactions")
                 {
                     RunObject = page "PesaFlow Integration Posted";
+                    Caption = 'posted Transactions';
                     ApplicationArea = All;
                 }
                 // action("Mpesa Trans")
