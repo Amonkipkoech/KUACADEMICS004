@@ -70,29 +70,23 @@ codeunit 40003 StudentPortalTest
     begin
         filename := FILESPATH + filenameFromApp;
 
-        // Check if the file already exists, if so, delete it
         IF EXISTS(filename) THEN
             ERASE(filename);
 
-        // Set filters for attendance to check if attendance records are filled
         examAttendance.Reset();
         examAttendance.SetRange(examAttendance."Student No.", StudentNo);
         examAttendance.SetRange(examAttendance."Programme Code", prog);
         examAttendance.SetRange(examAttendance."Semester Code", Sem);
-
-        // Check if any attendance record exists for this student, program, and semester
         IF examAttendance.Find('-') THEN BEGIN
-            // Attendance exists, so proceed to generate the exam card report
             CourseRegistration.RESET();
             CourseRegistration.SETRANGE(CourseRegistration."Student No.", StudentNo);
             CourseRegistration.SETRANGE(CourseRegistration.Semester, Sem);
-            // Find the first course registration and generate the report as PDF
             IF CourseRegistration.FINDFIRST THEN BEGIN
                 REPORT.SAVEASPDF(report::"Exam Card Final", filename, CourseRegistration);
                 Message := 'Exam card generated successfully.';
             END ELSE BEGIN
-                // No course registration found
-                Message := 'No courses found for the student in the specified semester.';
+
+                Error('No courses found for the student in the specified semester.');
             END;
 
         END ELSE BEGIN
@@ -3386,6 +3380,52 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
             hasFailed := true;
         end;
         exit(hasFailed);
+    end;
+
+    procedure GetFinalStage(prog: Code[20]): Text
+    var
+        Programme: Record "ACA-Programme Stages";
+        FinalStage: Text;
+    begin
+        Programme.RESET;
+        Programme.SETRANGE("Programme Code", prog);
+        Programme.SetRange("Final Stage", true);
+        if Programme.FIND('-') then begin
+            FinalStage := Programme.Code;
+        end;
+        exit(FinalStage);
+    end;
+
+    procedure GetIQEExam(prog: Code[20]; stage: Code[20]): Text
+    var
+        Units: Record "ACA-Units/Subjects";
+        jsonArray: JsonArray;
+        TempBlob: Codeunit "Temp Blob";
+        OutStream: OutStream;
+        InStream: InStream;
+        ResultText: Text;
+        jsonObj: JsonObject;
+    begin
+        Units.RESET;
+        Units.SETRANGE("Programme Code", prog);
+        Units.SETRANGE("Stage Code", stage);
+        if Units.FINDSET() then begin
+            repeat
+                Clear(jsonObj);
+                jsonObj.Add('UnitCode', Units.Code);
+                jsonObj.Add('UnitName', Units.Desription);
+                jsonArray.Add(jsonObj);
+            until Units.NEXT = 0;
+
+            TempBlob.CreateOutStream(OutStream);
+            jsonArray.WriteTo(OutStream);
+
+            TempBlob.CreateInStream(InStream);
+            InStream.ReadText(ResultText);
+        end else begin
+            ResultText := '[]';
+        end;
+        exit(ResultText);
     end;
 
 }
