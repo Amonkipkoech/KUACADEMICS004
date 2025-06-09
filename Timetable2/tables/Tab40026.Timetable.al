@@ -51,10 +51,10 @@ table 40026 Timetable
                     );
                 end;
 
-                // // Fetch and assign Lecturer Name (optional and safe)
-                // if HRMEmployee.Get(Rec.Lecturer) then
-                //     "Lecturer Name" := StrSubstNo('%1 %2 %3',
-                //         HRMEmployee."First Name", HRMEmployee."Middle Name", HRMEmployee."Last Name");
+                // Fetch and assign Lecturer Name (optional and safe)
+                if HRMEmployee.Get(Rec.Lecturer) then
+                    "Lecturer Name" := StrSubstNo('%1 %2 %3',
+                        HRMEmployee."First Name", HRMEmployee."Middle Name", HRMEmployee."Last Name");
             end;
         }
 
@@ -228,8 +228,8 @@ table 40026 Timetable
         }
         field(36; "Lecturer Name"; Code[50])
         {
-            FieldClass = FlowField;
-            CalcFormula = Lookup("HRM-Employee (D)"."Full Name" WHERE("No." = FIELD(Lecturer)));
+            // FieldClass = FlowField;
+            // CalcFormula = Lookup("HRM-Employee (D)".name WHERE("No." = FIELD(Lecturer)));
         }
         field(37; "Month"; Option)
         {

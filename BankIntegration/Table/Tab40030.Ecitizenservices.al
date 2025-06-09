@@ -1,4 +1,4 @@
-table 40030  "E-Citizen Services"
+table 40030 "E-Citizen Services"
 {
     LookupPageId = "E-Citizen Services";
     DrillDownPageId = "E-Citizen Services";
@@ -39,18 +39,18 @@ table 40030  "E-Citizen Services"
 
     }
 
-    trigger OnModify()
-    begin
-        if UserId <> 'FRANKIE' then Error('');
-    end;
+    // trigger OnModify()
+    // begin
+    //     if UserId <> 'FRANKIE' then Error('');
+    // end;
 
-    trigger OnInsert()
-    begin
-        if UserId <> 'FRANKIE' then Error('');
-    end;
+    // trigger OnInsert()
+    // begin
+    //     if UserId <> 'FRANKIE' then Error('');
+    // end;
 
-    trigger OnDelete()
-    begin
-        if UserId <> 'FRANKIE' then Error('');
-    end;
+    // trigger OnDelete()
+    // begin
+    //     if UserId <> 'FRANKIE' then Error('');
+    // end;
 }
