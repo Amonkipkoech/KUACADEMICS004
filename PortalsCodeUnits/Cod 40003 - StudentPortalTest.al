@@ -1779,6 +1779,50 @@ codeunit 40003 StudentPortalTest
         END;
     end;
 
+    procedure SubmitIQEUnit(studentNo: Text; Unit: Text; Prog: Text; myStage: Text; sem: Text; RegTransID: Text; UnitDescription: Text; AcademicYear: Text; unitType: Option) ReturnMessage: Text[150]
+    var
+        Customer: Record "Customer";
+        studentUnits: Record "ACA-Student Units";
+        StudentUnitBaskets: Record "ACA-Student Units Reservour";
+
+    begin
+
+
+        StudentUnits.INIT;
+
+        StudentUnits."Student No." := studentNo;
+        StudentUnits.Unit := Unit;
+        StudentUnits."Unit Name" := UnitDescription;
+        StudentUnits.Programme := Prog;
+        StudentUnits.Stage := myStage;
+        StudentUnits.Semester := sem;
+        StudentUnits.Taken := TRUE;
+        StudentUnits."Reg. Transacton ID" := RegTransID;
+        StudentUnits."Unit Description" := UnitDescription;
+        StudentUnits."Academic Year" := AcademicYear;
+        StudentUnits."Unit Category" := unitType;
+        if StudentUnits.INSERT(TRUE) then begin
+            examAttendance.Init();
+            examAttendance."Programme Code" := prog;
+            examAttendance."Student No." := StudentNo;
+            examAttendance."Unit Code" := studentUnits.Unit;
+            examAttendance."Semester Code" := Sem;
+            examAttendance.Insert();
+            ReturnMessage := 'Units registered Successfully!';
+        end;
+        StudentUnitBaskets.RESET;
+        StudentUnitBaskets.SETRANGE("Student No.", studentNo);
+        StudentUnitBaskets.SETRANGE(Unit, Unit);
+        StudentUnitBaskets.SETRANGE(Programme, Prog);
+        //StudentUnitBaskets.SETRANGE(Stage, myStage);
+        StudentUnitBaskets.SETRANGE(Semester, sem);
+        StudentUnitBaskets.SETRANGE("Reg. Transacton ID", RegTransID);
+        StudentUnitBaskets.SETRANGE("Academic Year", AcademicYear);
+        IF StudentUnitBaskets.FIND('-') THEN begin
+            StudentUnitBaskets.Delete();
+        END;
+    end;
+
     procedure RegisterTheoryUnits(studentNo: Text; Unit: Text; Prog: Text; myStage: Text; sem: Text; RegTransID: Text; AcademicYear: Text; unitType: Option) Message: Text
     var
         theoryUnits: Record "ACA-Student Theory Units ";

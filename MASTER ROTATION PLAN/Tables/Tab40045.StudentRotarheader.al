@@ -1,11 +1,5 @@
-<<<<<<< HEAD:MASTER ROTATION PLAN/Tables/Tab40045.StudentRotarheader.al
-table 40045 "Student Rotar header"
-{
-    Caption = 'Student Rotar header';
-=======
 table 40043 "Student Rota Header"
 {
->>>>>>> 53ad504bfff112e4801953aeff7cee623da2fa7a:MASTER ROTATION PLAN/Tables/Tab40043.DutyRoterHeader.al
     DataClassification = ToBeClassified;
 
     fields
