@@ -587,6 +587,7 @@ page 68852 "ACA-Student Fin. Role Center"
             group("Bank Intergration")
             {
 
+                Caption = 'Bank Intergration';
                 action("E-Citizen Services")
                 {
                     //Caption = 'Settlement Types';
