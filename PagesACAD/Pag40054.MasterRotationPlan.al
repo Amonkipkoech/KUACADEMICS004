@@ -231,7 +231,7 @@ page 40054 "Master Rotation Plan"
                     Caption = 'Released Duty Rotas';
                     Image = View;
                     RunObject = Page "Student Duty Rotas List";
-                    RunPageView = where(Status = filter(Released));//Student Duty Rotas List
+                    RunPageView = where(Status = filter(Released));
                 }
                 action("Student Duty Rotas List")
                 {
@@ -239,7 +239,7 @@ page 40054 "Master Rotation Plan"
                     Caption = 'Student Duty Rotas List';
                     Image = View;
                     RunObject = Page "Student Duty Rotas List";
-                    RunPageView = where(Status = filter(Released));//Student Duty Rotas List
+                    RunPageView = where(Status = filter(Released));
                 }
 
             }

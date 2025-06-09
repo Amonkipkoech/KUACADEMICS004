@@ -1,9 +1,10 @@
 page 40072 "Student Rota Lines"
 {
-    Caption = 'Student Rota Lines';
+    Caption = 'All Student Rota Lines';
     PageType = List;
+    Editable = false;
     SourceTable = "Student Rota Line";
-    
+
     layout
     {
         area(Content)
