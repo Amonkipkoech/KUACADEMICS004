@@ -3492,4 +3492,39 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         exit(ResultText);
     end;
 
+    procedure GetStudentRota(studentNo: Code[20]): Text
+    var
+        Rota: Record "Student Rota Line";
+        jsonArray: JsonArray;
+        TempBlob: Codeunit "Temp Blob";
+        OutStream: OutStream;
+        InStream: InStream;
+        ResultText: Text;
+        jsonObj: JsonObject;
+    begin
+        Rota.RESET;
+        Rota.SETRANGE("Student Name", studentNo);
+        Rota.SETRANGE(Viewable, true);
+
+        if Rota.FINDSET() then begin
+            repeat
+                Clear(jsonObj);
+                jsonObj.Add('Institution', Rota.Institution);
+                jsonObj.Add('Date', Rota.Date);
+                jsonObj.Add('Shift', Rota."Shift Code");
+                jsonArray.Add(jsonObj);
+            until Rota.NEXT = 0;
+
+            TempBlob.CreateOutStream(OutStream);
+            jsonArray.WriteTo(OutStream);
+
+            TempBlob.CreateInStream(InStream);
+            InStream.ReadText(ResultText);
+        end else begin
+            ResultText := '[]';
+        end;
+        exit(ResultText);
+    end;
+
+
 }
