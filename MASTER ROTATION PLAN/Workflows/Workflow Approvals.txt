@@ -1,0 +1,408 @@
+    //1.Approval Management  ***********************************************************************************Status"*************************************
+    var
+        WorkflowManagement: Codeunit "Workflow Management";
+        WorkflowEventHandling: Codeunit "WorkFlow Event Handling Ext.";
+        NoWorkflowEnableErr: TextConst ENU = 'No approval worklow for this record type is enabled.';
+        NothingToApproveErr: TextConst ENU = 'Lines Must Contain Record(s)';
+        
+        /*Disposal Header */
+        DisposalHeader: Record "Disposal Header";
+
+
+    /*Disposal Header */
+    [IntegrationEvent(false, false)]	
+
+    procedure OnSendDisposalHeaderForApproval(var DisposalHeader: Record "Disposal Header")
+    begin
+
+    end;
+
+    [IntegrationEvent(false, false)]
+
+    procedure OnCancelDisposalHeaderForApproval(var DisposalHeader: Record "Disposal Header")
+    begin
+
+    end;
+
+    procedure CheckDisposalHeadersWorkflowEnable(var DisposalHeader: Record "Disposal Header"): Boolean
+    begin
+        IF NOT IsDisposalHeaderApplicationApprovalsWorkflowEnable(DisposalHeader) then
+            Error(NoWorkflowEnableErr);
+        exit(true)
+    end;
+
+    procedure IsDisposalHeaderApplicationApprovalsWorkflowEnable(var DisposalHeader: Record "Disposal Header"): Boolean
+
+    begin
+        IF DisposalHeader."Status" <> DisposalHeader."Status"::Open then
+            exit(false);
+        exit(WorkflowManagement.CanExecuteWorkflow(DisposalHeader, WorkflowEventHandling.RunWorkflowOnSendDisposalHeaderForApprovalCode));
+    end;
+
+    /* ****************************************************************************************************************************************** */
+
+ [EventSubscriber(ObjectType::Codeunit, 1535, 'OnPopulateApprovalEntryArgument', '', false, false)]
+    local procedure OnPopulateApprovalEntryArgument(var RecRef: RecordRef; var ApprovalEntryArgument: Record "Approval Entry"; WorkflowStepInstance: Record "Workflow Step Instance")
+    begin
+        
+        case RecRef.Number of
+        /*Disposal Header */
+           Database::"Disposal Header":
+                begin
+                    RecRef.SetTable(DisposalHeader);
+                    ApprovalEntryArgument."Document No." := DisposalHeader."No.";
+                end;
+        end;
+    end;
+
+
+
+//2. "Workflow Setup Ext"   ************************************************************************************************************************
+    
+    var
+        WorkflowSetup: CodeUnit "Workflow Setup";
+        WorkflowStepArgument: Record "Workflow Step Argument";
+        BlankDateFormula: DateFormula;
+        WorkflowResponseHandling: Codeunit "Workflow Response Handling";
+        WorkflowEventHandling: Codeunit "Workflow Event Handling Ext";
+               /*Disposal Header */
+        DisposalHeader: Record "Disposal Header";
+        DisposalHeaderWorkflowCategoryTxt: TextConst ENU = 'Disposal Header';
+        DisposalHeaderWorkflowCategoryDescTxt: TextConst ENU = 'Disposal Header Document';
+        DisposalHeaderWorkflowCodeTxt: TextConst ENU = 'DHAW';
+        DisposalHeaderWorkfowDescTxt: TextConst ENU = 'Disposal Header Approval Workflow';
+        DisposalHeaderTypeCondTxt: TextConst ENU = '<?xml version = "1.0" encoding="utf-8" standalone="yes"?><ReportParameters><DataItems><DataItem name=DisposalHeader>%1</DataItem></DataItems></ReportParameters>';
+    
+    /* *************************************************************************************************************************************/
+
+  [EventSubscriber(ObjectType::Codeunit, Codeunit::"Workflow Setup", 'OnAddWorkflowCategoriesToLibrary', '', true, true)]
+
+    local procedure OnAddWorkflowCategoriesToLibrary()
+
+    begin
+        WorkflowSetup.InsertWorkflowCategory(DisposalHeaderWorkflowCategoryTxt, DisposalHeaderWorkflowCategoryDescTxt);
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Workflow Setup", 'OnAfterInsertApprovalsTableRelations', '', true, true)]
+
+    local procedure OnAfterInsertApprovalsTableRelations()
+    var
+        ApprovalEntry: Record "Approval Entry";
+    begin
+        WorkflowSetup.InsertTableRelation(Database::"Disposal Header", 0, Database::"Approval Entry", ApprovalEntry.FieldNo("Record ID to Approve"));
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Workflow Setup", 'OnInsertWorkflowTemplates', '', true, true)]
+
+    local procedure OnInsertWorkflowTemplates()
+    begin
+        InsertDisposalHeaderWorkflowTemplate();    
+    end;
+
+     /*Disposal Header */
+    local procedure InsertDisposalHeaderWorkflowTemplate()
+    var
+        Workflow: Record Workflow;      
+    begin
+        WorkflowSetup.InsertWorkflowTemplate(Workflow, DisposalHeaderWorkflowCodeTxt, DisposalHeaderWorkfowDescTxt, DisposalHeaderWorkflowCategoryTxt);
+        InsertDisposalHeaderWorkflowDetails(Workflow);
+        WorkflowSetup.MarkWorkflowAsTemplate(Workflow);
+    end;
+
+    local procedure InsertDisposalHeaderWorkflowDetails(var Workflow: Record Workflow)  
+    begin
+        WorkflowSetup.initWorkflowStepArgument(WorkflowStepArgument, WorkflowStepArgument."Approver Type"::Approver, WorkflowStepArgument."Approver Limit Type"::"Direct Approver", 0, '', BlankDateFormula, true);
+        WorkflowSetup.InsertDocApprovalWorkflowSteps(
+            Workflow,
+            BuildDisposalHeaderTypeConditions(DisposalHeader.Status::Open),
+            WorkflowEventHandling.RunWorkflowOnSendDisposalHeaderForApprovalCode,
+            BuildDisposalHeaderTypeConditions(DisposalHeader.Status::Pending),
+            WorkflowEventHandling.RunWorkflowOnCancelDisposalHeaderCode,
+            WorkflowStepArgument,
+            true
+        );
+    end;
+
+    local procedure BuildDisposalHeaderTypeConditions(Status: Integer): Text
+    begin
+    DisposalHeader.Reset;
+        DisposalHeader.SetRange(Status, Status);
+        exit(StrSubstNo(DisposalHeaderTypeCondTxt, WorkflowSetup.Encode(DisposalHeader.GetView(false))))
+    end;
+
+/*******************************************************************************************************************************************************/
+
+
+//3."Workflow Event Handling Ext"  ************************************************************************************************************************
+  
+  var
+        WorkflowManagement: Codeunit "Workflow Management";
+        WorkflowEventHandling: Codeunit "Workflow Event Handling";
+         /*Disposal Header */
+        DisposalHeaderSendForApprovalEventDescTxt: TextConst ENU = 'Approval of Disposal Header is Requested';
+        DisposalHeaderRequestCancelEventDescTxt: TextConst ENU = 'Approval of Disposal Header is Canceled';
+
+    [EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventsToLibrary', '', false, false)]
+    local procedure OnAddWorkflowEventsToLibrary()
+    begin
+        /*Disposal Header */
+        WorkflowEventHandling.AddEventToLibrary(RunWorkflowOnSendDisposalHeaderForApprovalCode, Database::"Disposal Header", DisposalHeaderSendForApprovalEventDescTxt, 0, false);
+        WorkflowEventHandling.AddEventToLibrary(RunWorkflowOnCancelDisposalHeaderCode, Database::"Disposal Header", DisposalHeaderRequestCancelEventDescTxt, 0, false);
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventPredecessorsToLibrary', '', false, false)]
+    local procedure OnAddWorkflowEventPredecessorsToLibrary(EventFunctionName: Code[128])
+    var
+        WorkflowEvent: Codeunit "Workflow Event Handling";
+    begin
+        /*Disposal Header */
+        case EventFunctionName of
+            RunWorkflowOnCancelDisposalHeaderCode:
+                WorkflowEventHandling.AddEventPredecessor(RunWorkflowOnCancelDisposalHeaderCode, RunWorkflowOnSendDisposalHeaderForApprovalCode);
+            WorkflowEventHandling.RunWorkflowOnApproveApprovalRequestCode:
+                WorkflowEventHandling.AddEventPredecessor(WorkflowEventHandling.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendDisposalHeaderForApprovalCode);
+        end;
+    end;
+
+    /*Disposal Header */
+    procedure RunWorkflowOnSendDisposalHeaderForApprovalCode(): Code[128]
+    begin
+        exit(UpperCase('RunWorkflowOnSendDisposalHeaderForApproval'));
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approval Mgnt. Ext.", 'OnSendDisposalHeaderForApproval', '', true, true)]
+    local procedure RunWorkflowOnSendDisposalHeaderForApproval(Var DisposalHeader: Record "Disposal Header")
+    begin
+    
+        WorkflowManagement.HandleEvent(RunWorkflowOnSendDisposalHeaderForApprovalCode, DisposalHeader)
+    end;
+
+    procedure RunWorkflowOnCancelDisposalHeaderCode(): Code[128]
+    begin
+        exit(UpperCase('RunWorkflowOnCancelDisposalHeader'));
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approval Mgnt. Ext.", 'OnCancelDisposalHeaderForApproval', '', true, true)]
+    local procedure RunWorkflowOnCancelDisposalHeader(Var DisposalHeader: Record "Disposal Header")	
+    begin
+        WorkflowManagement.HandleEvent(RunWorkflowOnCancelDisposalHeaderCode, DisposalHeader);
+        DisposalHeader.Reset();
+        DisposalHeader.SetRange("No.", DisposalHeader."No.");
+        if DisposalHeader.FindFirst() then begin
+            DisposalHeader.Status := DisposalHeader.Status::Open;
+            DisposalHeader.Modify()
+        end;
+    end;
+	
+    /*************************************************************************************************************************** */
+    procedure RunWorkflowOnSendBContrForApprovalCode(): Code[128]
+    begin
+        EXIT(UPPERCASE('RunWorkflowOnSendBContrForApproval'));
+    end;
+
+    procedure RunWorkflowOnCancelBContrApprovalRequestCode(): Code[128]
+    begin
+        EXIT(UPPERCASE('RunWorkflowOnCancelBContrApprovalRequest'));
+    end;
+
+    procedure RunWorkflowOnAfterReleaseBContrCode(): Code[128]
+    begin
+        EXIT(UPPERCASE('RunWorkflowOnAfterReleaseBContr'));
+    end;
+
+  
+
+//4. "Workflow Response Handling Ext" ************************************************************************************************************************
+ 
+ 
+var
+    DisposalHeader: Record "Disposal Header";
+
+[EventSubscriber(ObjectType::Codeunit, Codeunit::"Workflow Response Handling", 'OnOpenDocument', '', true, true)]
+    local procedure OnOpenDocument(RecRef: RecordRef; var Handled: Boolean)
+    begin
+        case RecRef.Number of
+         /*Disposal Header */
+           Database::"Disposal Header":
+                begin
+                    RecRef.SetTable(DisposalHeader);
+                    DisposalHeader.Status := DisposalHeader.Status::Open;
+                    DisposalHeader.Modify;
+                    Handled := true;
+                end;
+        end;
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Workflow Response Handling", 'OnReleaseDocument', '', true, true)]
+
+    local procedure OnReleaseDocument(RecRef: RecordRef; var Handled: Boolean)
+    begin
+        case RecRef.Number of
+            /*Disposal Header */
+               Database::"Disposal Header":
+                    begin
+                        RecRef.setTable(DisposalHeader);
+                        DisposalHeader.Status := DisposalHeader.Status::Approved;
+                        DisposalHeader.Modify();
+                        Handled := true;
+                    end;
+        end;
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, 1535, 'OnSetStatusToPendingApproval', '', true, true)]
+
+    local procedure OnSetStatusToPendingApproval(RecRef: RecordRef; var IsHandled: Boolean)
+    begin
+        case RecRef.Number of
+         /*Disposal Header */
+           Database::"Disposal Header":
+                begin
+                    RecRef.setTable(DisposalHeader);
+                    DisposalHeader.Status := DisposalHeader.Status::Pending;
+                    DisposalHeader.Modify();
+                    IsHandled := true;
+                end;
+        end;
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Workflow Response Handling", 'OnAddWorkflowResponsePredecessorsToLibrary', '', true, true)]
+
+    local procedure OnAddWorkflowResponsePredecessorsToLibrary(ResponseFunctionName: Code[128])
+
+    var
+        WorkflowResponseHandling: Codeunit "Workflow Response Handling";
+        WorkflowEventHandling: Codeunit "Workflow Event Handling Ext.";
+    begin
+     /*Disposal Header */
+        CASE ResponseFunctionName of
+            WorkflowResponseHandling.SetStatusToPendingApprovalCode:
+                WorkflowResponseHandling.AddResponsePredecessor(WorkflowResponseHandling.SetStatusToPendingApprovalCode,
+                WorkflowEventHandling.RunWorkflowOnSendDisposalHeaderForApprovalCode);
+            WorkflowResponseHandling.SendApprovalRequestForApprovalCode:
+                WorkflowResponseHandling.AddResponsePredecessor(WorkflowResponseHandling.SendApprovalRequestForApprovalCode,
+                WorkflowEventHandling.RunWorkflowOnSendDisposalHeaderForApprovalCode);
+            WorkflowResponseHandling.CancelAllApprovalRequestsCode:
+                WorkflowResponseHandling.AddResponsePredecessor(WorkflowResponseHandling.CancelAllApprovalRequestsCode,
+                WorkflowEventHandling.RunWorkflowOnCancelDisposalHeaderCode);
+            WorkflowResponseHandling.OpenDocumentCode:
+                    WorkflowResponseHandling.AddResponsePredecessor(WorkflowResponseHandling.OpenDocumentCode, WorkflowEventHandling.RunWorkflowOnCancelDisposalHeaderCode);
+        END;
+    end;
+    
+  
+************************************************************************************************************************
+    actions
+    {
+        area(Processing)
+        {
+             action(Approvals)
+            {
+                Image = Approvals;
+                Promoted = true;
+                PromotedCategory = Process;
+                ApplicationArea = Basic, Suite;
+                RunObject = page "Approval Entries";
+                RunPageLink = "Document No." = field("No.");
+                Visible = not (Rec.Status=Rec.Status::Open);
+            }
+            action("Request Approval")
+            {
+                ApplicationArea = Basic, Suite;
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = SendApprovalRequest;
+                Visible = Rec.Status=Rec.Status::Open;
+
+                trigger OnAction()
+                begin
+                    If ApprovalsMgmt.CheckDisposalHeadersWorkflowEnable(Rec) then
+                        ApprovalsMgmt.OnSendDisposalHeaderForApproval(Rec);
+                end;
+            }
+            action("Cancel Approval")
+            {
+                ApplicationArea = Basic, Suite;
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = CancelApprovalRequest;
+                Visible = Rec.Status=Rec.Status::Pending;
+
+                trigger OnAction()
+                begin
+                    ApprovalsMgmt.OnCancelDisposalHeaderForApproval(Rec);
+                end;
+            }
+              action("Re-Open")
+            {
+                ApplicationArea = Basic, Suite;
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = ReOpen;
+                Visible = (Rec.Status=Rec.Status::Cancelled);
+
+                trigger OnAction()
+                var
+                    SuccessMsg: Label 'The Document has been re-openned successfully';
+                begin
+                    Rec.Status := Rec.Status::Open;
+                    Rec.Modify();
+                    Message(SuccessMsg);
+                    CurrPage.Update();
+                end;
+            }
+
+        }
+    }
+
+ trigger OnInit()
+    begin
+        PageCtrls();
+    end;
+
+    trigger OnOpenPage()
+    begin
+        PageCtrls();
+    end;
+
+    trigger OnModifyRecord(): Boolean
+    begin
+        PageCtrls();
+    end;
+
+    local procedure PageCtrls()
+    begin
+        if Rec.Status = Rec.Status::Open then
+            Rec,Status=Rec.Status::Open := true else begin
+            Rec,Status=Rec.Status::Open := false;
+            if Rec.Status = Rec.Status::Pending then
+                Rec.Status=Rec.Status::Pending := true else begin
+                Rec.Status=Rec.Status::Pending := false;
+                if Rec.Status = Rec.Status::Cancelled then
+                    IsCancelled := true else begin
+                    IsCancelled := false;
+                    if Rec.Status = Rec.Status::Approved then
+                        IsApproved := true else begin
+                        IsApproved := false;
+                        if Rec.Status = Rec.Status::Rejected then
+                            Rec.Status=Rec.Status::Rejected := true else begin
+                            Rec.Status=Rec.Status::Rejected := false;
+                            if Rec.Status = Rec.Status::Closed then
+                                Rec.Status=Rec.Status::Closed := true else begin
+                                Rec.Status=Rec.Status::Closed := false;
+                            end;
+                        end;
+                    end;
+                end;
+            end;
+        end;
+    end;
+
+    var
+            ApprovalsMgmt:CodeUnit "Approval Mgnt. Ext.";
+            Rec,Status=Rec.Status::Open, Rec.Status=Rec.Status::Pending, Rec.Status=Rec.Status::Closed, Rec.Status=Rec.Status::Rejected, IsApproved, IsCancelled : Boolean;
+
+
+
+
+
+

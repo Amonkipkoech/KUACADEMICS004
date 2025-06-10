@@ -9,7 +9,7 @@ page 40068 "Student Rota Header Card"
         {
             group(General)
             {
-                field("ID"; "ID") { Editable = false; }
+                field("ID"; "ID") { }
                 field("Semester"; "Semester") { }
                 field("Academic Year"; "Academic Year") { }
                 field("Status"; "Status") { }
