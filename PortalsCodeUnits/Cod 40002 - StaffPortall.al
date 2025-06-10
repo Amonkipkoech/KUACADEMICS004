@@ -3214,6 +3214,8 @@ codeunit 40002 StaffPortall
     end;
 
     procedure SubmitMarks(sem: Text; units: Text; StudentNo: Text; CatMark: Decimal; ExamTypes: Text; Reg_TransactonID: Text; AcademicYear: Text; username: Text; LectName: Text)
+    var
+        ExamResults: Record "ACA-Exam Results";
     begin
         ExamResults.RESET;
         ExamResults.SETRANGE("Student No.", StudentNo);
