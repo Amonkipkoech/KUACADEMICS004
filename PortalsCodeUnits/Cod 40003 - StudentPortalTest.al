@@ -1779,6 +1779,50 @@ codeunit 40003 StudentPortalTest
         END;
     end;
 
+    procedure SubmitIQEUnit(studentNo: Text; Unit: Text; Prog: Text; myStage: Text; sem: Text; RegTransID: Text; UnitDescription: Text; AcademicYear: Text; unitType: Option) ReturnMessage: Text[150]
+    var
+        Customer: Record "Customer";
+        studentUnits: Record "ACA-Student Units";
+        StudentUnitBaskets: Record "ACA-Student Units Reservour";
+
+    begin
+
+
+        StudentUnits.INIT;
+
+        StudentUnits."Student No." := studentNo;
+        StudentUnits.Unit := Unit;
+        StudentUnits."Unit Name" := UnitDescription;
+        StudentUnits.Programme := Prog;
+        StudentUnits.Stage := myStage;
+        StudentUnits.Semester := sem;
+        StudentUnits.Taken := TRUE;
+        StudentUnits."Reg. Transacton ID" := RegTransID;
+        StudentUnits."Unit Description" := UnitDescription;
+        StudentUnits."Academic Year" := AcademicYear;
+        StudentUnits."Unit Category" := studentUnits."Unit Category"::Exam;
+        if StudentUnits.INSERT(TRUE) then begin
+            examAttendance.Init();
+            examAttendance."Programme Code" := prog;
+            examAttendance."Student No." := StudentNo;
+            examAttendance."Unit Code" := studentUnits.Unit;
+            examAttendance."Semester Code" := Sem;
+            examAttendance.Insert();
+            ReturnMessage := 'Units registered Successfully!';
+        end;
+        StudentUnitBaskets.RESET;
+        StudentUnitBaskets.SETRANGE("Student No.", studentNo);
+        StudentUnitBaskets.SETRANGE(Unit, Unit);
+        StudentUnitBaskets.SETRANGE(Programme, Prog);
+        //StudentUnitBaskets.SETRANGE(Stage, myStage);
+        StudentUnitBaskets.SETRANGE(Semester, sem);
+        StudentUnitBaskets.SETRANGE("Reg. Transacton ID", RegTransID);
+        StudentUnitBaskets.SETRANGE("Academic Year", AcademicYear);
+        IF StudentUnitBaskets.FIND('-') THEN begin
+            StudentUnitBaskets.Delete();
+        END;
+    end;
+
     procedure RegisterTheoryUnits(studentNo: Text; Unit: Text; Prog: Text; myStage: Text; sem: Text; RegTransID: Text; AcademicYear: Text; unitType: Option) Message: Text
     var
         theoryUnits: Record "ACA-Student Theory Units ";
@@ -3447,5 +3491,40 @@ highSchool: Text; hschF: Date; hschT: Date) Message: Text
         end;
         exit(ResultText);
     end;
+
+    procedure GetStudentRota(studentNo: Code[20]): Text
+    var
+        Rota: Record "Student Rota Line";
+        jsonArray: JsonArray;
+        TempBlob: Codeunit "Temp Blob";
+        OutStream: OutStream;
+        InStream: InStream;
+        ResultText: Text;
+        jsonObj: JsonObject;
+    begin
+        Rota.RESET;
+        Rota.SETRANGE("Student Name", studentNo);
+        Rota.SETRANGE(Viewable, true);
+
+        if Rota.FINDSET() then begin
+            repeat
+                Clear(jsonObj);
+                jsonObj.Add('Institution', Rota.Institution);
+                jsonObj.Add('Date', Rota.Date);
+                jsonObj.Add('Shift', Rota."Shift Code");
+                jsonArray.Add(jsonObj);
+            until Rota.NEXT = 0;
+
+            TempBlob.CreateOutStream(OutStream);
+            jsonArray.WriteTo(OutStream);
+
+            TempBlob.CreateInStream(InStream);
+            InStream.ReadText(ResultText);
+        end else begin
+            ResultText := '[]';
+        end;
+        exit(ResultText);
+    end;
+
 
 }
