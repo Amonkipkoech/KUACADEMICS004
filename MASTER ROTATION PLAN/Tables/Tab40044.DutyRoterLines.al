@@ -5,7 +5,9 @@ table 40044 "Student Rota Line"
     fields
     {
         field(1; "Entry No."; Integer) { AutoIncrement = true; }
-        field(2; "Header ID"; Code[20]) { TableRelation = "Student Rota Header".ID; }
+        field(2; "Header ID"; Code[20])
+        { //TableRelation = "Student Rota Header".ID;
+        }
         field(3; "Student Name"; Text[100]) { }
         field(4; "Institution"; Code[10]) { }
         field(5; "Program"; Code[10]) { }
@@ -15,6 +17,8 @@ table 40044 "Student Rota Line"
         {
             OptionMembers = D,N,OFF,WC;
         }
+        field(12; "Semester"; Text[30]) { }
+        field(13; "Academic Year"; Text[20]) { }
         field(9; "Viewable"; Boolean) { Editable = false; }
     }
 
