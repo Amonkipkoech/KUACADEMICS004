@@ -5,38 +5,38 @@
         NoWorkflowEnableErr: TextConst ENU = 'No approval worklow for this record type is enabled.';
         NothingToApproveErr: TextConst ENU = 'Lines Must Contain Record(s)';
         
-        /*Disposal Header */
-        DisposalHeader: Record "Disposal Header";
+        /*Master Rotation Plan2 */
+        MasterRotationPlan: Record "Master Rotation Plan2";
 
 
-    /*Disposal Header */
+    /*Master Rotation Plan2 */
     [IntegrationEvent(false, false)]	
 
-    procedure OnSendDisposalHeaderForApproval(var DisposalHeader: Record "Disposal Header")
+    procedure OnSendMasterRotationPlanForApproval(var MasterRotationPlan: Record "Master Rotation Plan2")
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
 
-    procedure OnCancelDisposalHeaderForApproval(var DisposalHeader: Record "Disposal Header")
+    procedure OnCancelMasterRotationPlanForApproval(var MasterRotationPlan: Record "Master Rotation Plan2")
     begin
 
     end;
 
-    procedure CheckDisposalHeadersWorkflowEnable(var DisposalHeader: Record "Disposal Header"): Boolean
+    procedure CheckMasterRotationPlansWorkflowEnable(var MasterRotationPlan: Record "Master Rotation Plan2"): Boolean
     begin
-        IF NOT IsDisposalHeaderApplicationApprovalsWorkflowEnable(DisposalHeader) then
+        IF NOT IsMasterRotationPlanApplicationApprovalsWorkflowEnable(MasterRotationPlan) then
             Error(NoWorkflowEnableErr);
         exit(true)
     end;
 
-    procedure IsDisposalHeaderApplicationApprovalsWorkflowEnable(var DisposalHeader: Record "Disposal Header"): Boolean
+    procedure IsMasterRotationPlanApplicationApprovalsWorkflowEnable(var MasterRotationPlan: Record "Master Rotation Plan2"): Boolean
 
     begin
-        IF DisposalHeader."Status" <> DisposalHeader."Status"::Open then
+        IF MasterRotationPlan."Status" <> MasterRotationPlan."Status"::Open then
             exit(false);
-        exit(WorkflowManagement.CanExecuteWorkflow(DisposalHeader, WorkflowEventHandling.RunWorkflowOnSendDisposalHeaderForApprovalCode));
+        exit(WorkflowManagement.CanExecuteWorkflow(MasterRotationPlan, WorkflowEventHandling.RunWorkflowOnSendMasterRotationPlanForApprovalCode));
     end;
 
     /* ****************************************************************************************************************************************** */
@@ -46,11 +46,11 @@
     begin
         
         case RecRef.Number of
-        /*Disposal Header */
-           Database::"Disposal Header":
+        /*Master Rotation Plan2 */
+           Database::"Master Rotation Plan2":
                 begin
-                    RecRef.SetTable(DisposalHeader);
-                    ApprovalEntryArgument."Document No." := DisposalHeader."No.";
+                    RecRef.SetTable(MasterRotationPlan);
+                    ApprovalEntryArgument."Document No." := MasterRotationPlan."No.";
                 end;
         end;
     end;
@@ -65,13 +65,13 @@
         BlankDateFormula: DateFormula;
         WorkflowResponseHandling: Codeunit "Workflow Response Handling";
         WorkflowEventHandling: Codeunit "Workflow Event Handling Ext";
-               /*Disposal Header */
-        DisposalHeader: Record "Disposal Header";
-        DisposalHeaderWorkflowCategoryTxt: TextConst ENU = 'Disposal Header';
-        DisposalHeaderWorkflowCategoryDescTxt: TextConst ENU = 'Disposal Header Document';
-        DisposalHeaderWorkflowCodeTxt: TextConst ENU = 'DHAW';
-        DisposalHeaderWorkfowDescTxt: TextConst ENU = 'Disposal Header Approval Workflow';
-        DisposalHeaderTypeCondTxt: TextConst ENU = '<?xml version = "1.0" encoding="utf-8" standalone="yes"?><ReportParameters><DataItems><DataItem name=DisposalHeader>%1</DataItem></DataItems></ReportParameters>';
+               /*Master Rotation Plan2 */
+        MasterRotationPlan: Record "Master Rotation Plan2";
+        MasterRotationPlanWorkflowCategoryTxt: TextConst ENU = 'Master Rotation';
+        MasterRotationPlanWorkflowCategoryDescTxt: TextConst ENU = 'Master Rotation Plan Document';
+        MasterRotationPlanWorkflowCodeTxt: TextConst ENU = 'MRPAW';
+        MasterRotationPlanWorkfowDescTxt: TextConst ENU = 'Master Rotation Plan Approval Workflow';
+        MasterRotationPlanTypeCondTxt: TextConst ENU = '<?xml version = "1.0" encoding="utf-8" standalone="yes"?><ReportParameters><DataItems><DataItem name=MasterRotationPlan>%1</DataItem></DataItems></ReportParameters>';
     
     /* *************************************************************************************************************************************/
 
@@ -80,7 +80,7 @@
     local procedure OnAddWorkflowCategoriesToLibrary()
 
     begin
-        WorkflowSetup.InsertWorkflowCategory(DisposalHeaderWorkflowCategoryTxt, DisposalHeaderWorkflowCategoryDescTxt);
+        WorkflowSetup.InsertWorkflowCategory(MasterRotationPlanWorkflowCategoryTxt, MasterRotationPlanWorkflowCategoryDescTxt);
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Workflow Setup", 'OnAfterInsertApprovalsTableRelations', '', true, true)]
@@ -89,45 +89,45 @@
     var
         ApprovalEntry: Record "Approval Entry";
     begin
-        WorkflowSetup.InsertTableRelation(Database::"Disposal Header", 0, Database::"Approval Entry", ApprovalEntry.FieldNo("Record ID to Approve"));
+        WorkflowSetup.InsertTableRelation(Database::"Master Rotation Plan2", 0, Database::"Approval Entry", ApprovalEntry.FieldNo("Record ID to Approve"));
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Workflow Setup", 'OnInsertWorkflowTemplates', '', true, true)]
 
     local procedure OnInsertWorkflowTemplates()
     begin
-        InsertDisposalHeaderWorkflowTemplate();    
+        InsertMasterRotationPlanWorkflowTemplate();    
     end;
 
-     /*Disposal Header */
-    local procedure InsertDisposalHeaderWorkflowTemplate()
+     /*Master Rotation Plan2 */
+    local procedure InsertMasterRotationPlanWorkflowTemplate()
     var
         Workflow: Record Workflow;      
     begin
-        WorkflowSetup.InsertWorkflowTemplate(Workflow, DisposalHeaderWorkflowCodeTxt, DisposalHeaderWorkfowDescTxt, DisposalHeaderWorkflowCategoryTxt);
-        InsertDisposalHeaderWorkflowDetails(Workflow);
+        WorkflowSetup.InsertWorkflowTemplate(Workflow, MasterRotationPlanWorkflowCodeTxt, MasterRotationPlanWorkfowDescTxt, MasterRotationPlanWorkflowCategoryTxt);
+        InsertMasterRotationPlanWorkflowDetails(Workflow);
         WorkflowSetup.MarkWorkflowAsTemplate(Workflow);
     end;
 
-    local procedure InsertDisposalHeaderWorkflowDetails(var Workflow: Record Workflow)  
+    local procedure InsertMasterRotationPlanWorkflowDetails(var Workflow: Record Workflow)  
     begin
         WorkflowSetup.initWorkflowStepArgument(WorkflowStepArgument, WorkflowStepArgument."Approver Type"::Approver, WorkflowStepArgument."Approver Limit Type"::"Direct Approver", 0, '', BlankDateFormula, true);
         WorkflowSetup.InsertDocApprovalWorkflowSteps(
             Workflow,
-            BuildDisposalHeaderTypeConditions(DisposalHeader.Status::Open),
-            WorkflowEventHandling.RunWorkflowOnSendDisposalHeaderForApprovalCode,
-            BuildDisposalHeaderTypeConditions(DisposalHeader.Status::Pending),
-            WorkflowEventHandling.RunWorkflowOnCancelDisposalHeaderCode,
+            BuildMasterRotationPlanTypeConditions(MasterRotationPlan.Status::Open),
+            WorkflowEventHandling.RunWorkflowOnSendMasterRotationPlanForApprovalCode,
+            BuildMasterRotationPlanTypeConditions(MasterRotationPlan.Status::Pending),
+            WorkflowEventHandling.RunWorkflowOnCancelMasterRotationPlanCode,
             WorkflowStepArgument,
             true
         );
     end;
 
-    local procedure BuildDisposalHeaderTypeConditions(Status: Integer): Text
+    local procedure BuildMasterRotationPlanTypeConditions(Status: Integer): Text
     begin
-    DisposalHeader.Reset;
-        DisposalHeader.SetRange(Status, Status);
-        exit(StrSubstNo(DisposalHeaderTypeCondTxt, WorkflowSetup.Encode(DisposalHeader.GetView(false))))
+    MasterRotationPlan.Reset;
+        MasterRotationPlan.SetRange(Status, Status);
+        exit(StrSubstNo(MasterRotationPlanTypeCondTxt, WorkflowSetup.Encode(MasterRotationPlan.GetView(false))))
     end;
 
 /*******************************************************************************************************************************************************/
@@ -138,16 +138,16 @@
   var
         WorkflowManagement: Codeunit "Workflow Management";
         WorkflowEventHandling: Codeunit "Workflow Event Handling";
-         /*Disposal Header */
-        DisposalHeaderSendForApprovalEventDescTxt: TextConst ENU = 'Approval of Disposal Header is Requested';
-        DisposalHeaderRequestCancelEventDescTxt: TextConst ENU = 'Approval of Disposal Header is Canceled';
+         /*Master Rotation Plan2 */
+        MasterRotationPlanSendForApprovalEventDescTxt: TextConst ENU = 'Approval of Master Rotation Plan is Requested';
+        MasterRotationPlanRequestCancelEventDescTxt: TextConst ENU = 'Approval of Master Rotation Plan is Canceled';
 
     [EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventsToLibrary', '', false, false)]
     local procedure OnAddWorkflowEventsToLibrary()
     begin
-        /*Disposal Header */
-        WorkflowEventHandling.AddEventToLibrary(RunWorkflowOnSendDisposalHeaderForApprovalCode, Database::"Disposal Header", DisposalHeaderSendForApprovalEventDescTxt, 0, false);
-        WorkflowEventHandling.AddEventToLibrary(RunWorkflowOnCancelDisposalHeaderCode, Database::"Disposal Header", DisposalHeaderRequestCancelEventDescTxt, 0, false);
+        /*Master Rotation Plan2 */
+        WorkflowEventHandling.AddEventToLibrary(RunWorkflowOnSendMasterRotationPlanForApprovalCode, Database::"Master Rotation Plan2", MasterRotationPlanSendForApprovalEventDescTxt, 0, false);
+        WorkflowEventHandling.AddEventToLibrary(RunWorkflowOnCancelMasterRotationPlanCode, Database::"Master Rotation Plan2", MasterRotationPlanRequestCancelEventDescTxt, 0, false);
     end;
 
     [EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventPredecessorsToLibrary', '', false, false)]
@@ -155,42 +155,42 @@
     var
         WorkflowEvent: Codeunit "Workflow Event Handling";
     begin
-        /*Disposal Header */
+        /*Master Rotation Plan2 */
         case EventFunctionName of
-            RunWorkflowOnCancelDisposalHeaderCode:
-                WorkflowEventHandling.AddEventPredecessor(RunWorkflowOnCancelDisposalHeaderCode, RunWorkflowOnSendDisposalHeaderForApprovalCode);
+            RunWorkflowOnCancelMasterRotationPlanCode:
+                WorkflowEventHandling.AddEventPredecessor(RunWorkflowOnCancelMasterRotationPlanCode, RunWorkflowOnSendMasterRotationPlanForApprovalCode);
             WorkflowEventHandling.RunWorkflowOnApproveApprovalRequestCode:
-                WorkflowEventHandling.AddEventPredecessor(WorkflowEventHandling.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendDisposalHeaderForApprovalCode);
+                WorkflowEventHandling.AddEventPredecessor(WorkflowEventHandling.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendMasterRotationPlanForApprovalCode);
         end;
     end;
 
-    /*Disposal Header */
-    procedure RunWorkflowOnSendDisposalHeaderForApprovalCode(): Code[128]
+    /*Master Rotation Plan2 */
+    procedure RunWorkflowOnSendMasterRotationPlanForApprovalCode(): Code[128]
     begin
-        exit(UpperCase('RunWorkflowOnSendDisposalHeaderForApproval'));
+        exit(UpperCase('RunWorkflowOnSendMasterRotationPlanForApproval'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approval Mgnt. Ext.", 'OnSendDisposalHeaderForApproval', '', true, true)]
-    local procedure RunWorkflowOnSendDisposalHeaderForApproval(Var DisposalHeader: Record "Disposal Header")
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approval Mgnt. Ext.", 'OnSendMasterRotationPlanForApproval', '', true, true)]
+    local procedure RunWorkflowOnSendMasterRotationPlanForApproval(Var MasterRotationPlan: Record "Master Rotation Plan2")
     begin
     
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendDisposalHeaderForApprovalCode, DisposalHeader)
+        WorkflowManagement.HandleEvent(RunWorkflowOnSendMasterRotationPlanForApprovalCode, MasterRotationPlan)
     end;
 
-    procedure RunWorkflowOnCancelDisposalHeaderCode(): Code[128]
+    procedure RunWorkflowOnCancelMasterRotationPlanCode(): Code[128]
     begin
-        exit(UpperCase('RunWorkflowOnCancelDisposalHeader'));
+        exit(UpperCase('RunWorkflowOnCancelMasterRotationPlan'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approval Mgnt. Ext.", 'OnCancelDisposalHeaderForApproval', '', true, true)]
-    local procedure RunWorkflowOnCancelDisposalHeader(Var DisposalHeader: Record "Disposal Header")	
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approval Mgnt. Ext.", 'OnCancelMasterRotationPlanForApproval', '', true, true)]
+    local procedure RunWorkflowOnCancelMasterRotationPlan(Var MasterRotationPlan: Record "Master Rotation Plan2")	
     begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelDisposalHeaderCode, DisposalHeader);
-        DisposalHeader.Reset();
-        DisposalHeader.SetRange("No.", DisposalHeader."No.");
-        if DisposalHeader.FindFirst() then begin
-            DisposalHeader.Status := DisposalHeader.Status::Open;
-            DisposalHeader.Modify()
+        WorkflowManagement.HandleEvent(RunWorkflowOnCancelMasterRotationPlanCode, MasterRotationPlan);
+        MasterRotationPlan.Reset();
+        MasterRotationPlan.SetRange("No.", MasterRotationPlan."No.");
+        if MasterRotationPlan.FindFirst() then begin
+            MasterRotationPlan.Status := MasterRotationPlan.Status::Open;
+            MasterRotationPlan.Modify()
         end;
     end;
 	
@@ -216,18 +216,18 @@
  
  
 var
-    DisposalHeader: Record "Disposal Header";
+    MasterRotationPlan: Record "Master Rotation Plan2";
 
 [EventSubscriber(ObjectType::Codeunit, Codeunit::"Workflow Response Handling", 'OnOpenDocument', '', true, true)]
     local procedure OnOpenDocument(RecRef: RecordRef; var Handled: Boolean)
     begin
         case RecRef.Number of
-         /*Disposal Header */
-           Database::"Disposal Header":
+         /*Master Rotation Plan2 */
+           Database::"Master Rotation Plan2":
                 begin
-                    RecRef.SetTable(DisposalHeader);
-                    DisposalHeader.Status := DisposalHeader.Status::Open;
-                    DisposalHeader.Modify;
+                    RecRef.SetTable(MasterRotationPlan);
+                    MasterRotationPlan.Status := MasterRotationPlan.Status::Open;
+                    MasterRotationPlan.Modify;
                     Handled := true;
                 end;
         end;
@@ -238,12 +238,12 @@ var
     local procedure OnReleaseDocument(RecRef: RecordRef; var Handled: Boolean)
     begin
         case RecRef.Number of
-            /*Disposal Header */
-               Database::"Disposal Header":
+            /*Master Rotation Plan2 */
+               Database::"Master Rotation Plan2":
                     begin
-                        RecRef.setTable(DisposalHeader);
-                        DisposalHeader.Status := DisposalHeader.Status::Approved;
-                        DisposalHeader.Modify();
+                        RecRef.setTable(MasterRotationPlan);
+                        MasterRotationPlan.Status := MasterRotationPlan.Status::Approved;
+                        MasterRotationPlan.Modify();
                         Handled := true;
                     end;
         end;
@@ -254,12 +254,12 @@ var
     local procedure OnSetStatusToPendingApproval(RecRef: RecordRef; var IsHandled: Boolean)
     begin
         case RecRef.Number of
-         /*Disposal Header */
-           Database::"Disposal Header":
+         /*Master Rotation Plan2 */
+           Database::"Master Rotation Plan2":
                 begin
-                    RecRef.setTable(DisposalHeader);
-                    DisposalHeader.Status := DisposalHeader.Status::Pending;
-                    DisposalHeader.Modify();
+                    RecRef.setTable(MasterRotationPlan);
+                    MasterRotationPlan.Status := MasterRotationPlan.Status::Pending;
+                    MasterRotationPlan.Modify();
                     IsHandled := true;
                 end;
         end;
@@ -273,19 +273,19 @@ var
         WorkflowResponseHandling: Codeunit "Workflow Response Handling";
         WorkflowEventHandling: Codeunit "Workflow Event Handling Ext.";
     begin
-     /*Disposal Header */
+     /*Master Rotation Plan2 */
         CASE ResponseFunctionName of
             WorkflowResponseHandling.SetStatusToPendingApprovalCode:
                 WorkflowResponseHandling.AddResponsePredecessor(WorkflowResponseHandling.SetStatusToPendingApprovalCode,
-                WorkflowEventHandling.RunWorkflowOnSendDisposalHeaderForApprovalCode);
+                WorkflowEventHandling.RunWorkflowOnSendMasterRotationPlanForApprovalCode);
             WorkflowResponseHandling.SendApprovalRequestForApprovalCode:
                 WorkflowResponseHandling.AddResponsePredecessor(WorkflowResponseHandling.SendApprovalRequestForApprovalCode,
-                WorkflowEventHandling.RunWorkflowOnSendDisposalHeaderForApprovalCode);
+                WorkflowEventHandling.RunWorkflowOnSendMasterRotationPlanForApprovalCode);
             WorkflowResponseHandling.CancelAllApprovalRequestsCode:
                 WorkflowResponseHandling.AddResponsePredecessor(WorkflowResponseHandling.CancelAllApprovalRequestsCode,
-                WorkflowEventHandling.RunWorkflowOnCancelDisposalHeaderCode);
+                WorkflowEventHandling.RunWorkflowOnCancelMasterRotationPlanCode);
             WorkflowResponseHandling.OpenDocumentCode:
-                    WorkflowResponseHandling.AddResponsePredecessor(WorkflowResponseHandling.OpenDocumentCode, WorkflowEventHandling.RunWorkflowOnCancelDisposalHeaderCode);
+                    WorkflowResponseHandling.AddResponsePredecessor(WorkflowResponseHandling.OpenDocumentCode, WorkflowEventHandling.RunWorkflowOnCancelMasterRotationPlanCode);
         END;
     end;
     
@@ -315,8 +315,8 @@ var
 
                 trigger OnAction()
                 begin
-                    If ApprovalsMgmt.CheckDisposalHeadersWorkflowEnable(Rec) then
-                        ApprovalsMgmt.OnSendDisposalHeaderForApproval(Rec);
+                    If ApprovalsMgmt.CheckMasterRotationPlansWorkflowEnable(Rec) then
+                        ApprovalsMgmt.OnSendMasterRotationPlanForApproval(Rec);
                 end;
             }
             action("Cancel Approval")
@@ -329,7 +329,7 @@ var
 
                 trigger OnAction()
                 begin
-                    ApprovalsMgmt.OnCancelDisposalHeaderForApproval(Rec);
+                    ApprovalsMgmt.OnCancelMasterRotationPlanForApproval(Rec);
                 end;
             }
               action("Re-Open")

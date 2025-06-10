@@ -100,7 +100,67 @@ page 40009 "Master Rotation Plan Card"
                     DocumentAttachment.RUNMODAL;
                 end;
             }
+
+            action(Approvals)
+            {
+                Image = Approvals;
+                Promoted = true;
+                PromotedCategory = Process;
+                ApplicationArea = Basic, Suite;
+                RunObject = page "Approval Entries";
+                RunPageLink = "Document No." = field("Plan ID");
+                Visible = not (Rec.Status = Rec.Status::Open);
+            }
+            action("Request Approval")
+            {
+                ApplicationArea = Basic, Suite;
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = SendApprovalRequest;
+                Visible = Rec.Status = Rec.Status::Open;
+
+                trigger OnAction()
+                begin
+                    If ApprovalsMgmt.CheckMasterRotationPlansWorkflowEnable(Rec) then
+                        ApprovalsMgmt.OnSendMasterRotationPlanForApproval(Rec);
+                end;
+            }
+            action("Cancel Approval")
+            {
+                ApplicationArea = Basic, Suite;
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = CancelApprovalRequest;
+                Visible = Rec.Status = Rec.Status::"Pending Approval";
+
+                trigger OnAction()
+                begin
+                    ApprovalsMgmt.OnCancelMasterRotationPlanForApproval(Rec);
+                end;
+            }
+            action("Re-Open")
+            {
+                ApplicationArea = Basic, Suite;
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = ReOpen;
+                Visible = (Rec.Status = Rec.Status::Cancelled);
+
+                trigger OnAction()
+                var
+                    SuccessMsg: Label 'The Document has been re-openned successfully';
+                begin
+                    Rec.Status := Rec.Status::Open;
+                    Rec.Modify();
+                    Message(SuccessMsg);
+                    CurrPage.Update();
+                end;
+            }
         }
     }
+    var
+        ApprovalsMgmt: CodeUnit "Approval Mgnt. Util.";
+
+
 }
 

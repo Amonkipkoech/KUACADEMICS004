@@ -4,6 +4,7 @@ codeunit 86005 "Workflow Resp. Handling"
 
 
         StudentClearance: Record "Student Clerance";
+        MasterRotationPlan: Record "Master Rotation Plan2";
 
 
     /*******************************************************************************************************************************************************/
@@ -21,6 +22,14 @@ codeunit 86005 "Workflow Resp. Handling"
                     RecRef.SetTable(StudentClearance);
                     StudentClearance.Status := StudentClearance.Status::Open;
                     StudentClearance.Modify;
+                    Handled := true;
+                end;
+            /*Master Rotation Plan2 */
+            Database::"Master Rotation Plan2":
+                begin
+                    RecRef.SetTable(MasterRotationPlan);
+                    MasterRotationPlan.Status := MasterRotationPlan.Status::Open;
+                    MasterRotationPlan.Modify;
                     Handled := true;
                 end;
         end;
@@ -43,6 +52,15 @@ codeunit 86005 "Workflow Resp. Handling"
                     Handled := true;
                 end;
 
+            /*Master Rotation Plan2 */
+            Database::"Master Rotation Plan2":
+                begin
+                    RecRef.setTable(MasterRotationPlan);
+                    MasterRotationPlan.Status := MasterRotationPlan.Status::Approved;
+                    MasterRotationPlan.Modify();
+                    Handled := true;
+                end;
+
         end;
     end;
 
@@ -59,6 +77,14 @@ codeunit 86005 "Workflow Resp. Handling"
                     RecRef.SetTable(StudentClearance);
                     StudentClearance.Status := StudentClearance.Status::Pending;
                     StudentClearance.Modify;
+                    IsHandled := true;
+                end;
+            /*Master Rotation Plan2 */
+            Database::"Master Rotation Plan2":
+                begin
+                    RecRef.setTable(MasterRotationPlan);
+                    MasterRotationPlan.Status := MasterRotationPlan.Status::"Pending Approval";
+                    MasterRotationPlan.Modify();
                     IsHandled := true;
                 end;
         end;
@@ -87,6 +113,20 @@ codeunit 86005 "Workflow Resp. Handling"
                 WorkflowEventHandling.RunWorkflowOnCancelStudentClearanceCode);
             WorkflowResponseHandling.OpenDocumentCode:
                 WorkflowResponseHandling.AddResponsePredecessor(WorkflowResponseHandling.OpenDocumentCode, WorkflowEventHandling.RunWorkflowOnCancelStudentClearanceCode);
+        END;
+        /*Master Rotation Plan2 */
+        CASE ResponseFunctionName of
+            WorkflowResponseHandling.SetStatusToPendingApprovalCode:
+                WorkflowResponseHandling.AddResponsePredecessor(WorkflowResponseHandling.SetStatusToPendingApprovalCode,
+                WorkflowEventHandling.RunWorkflowOnSendMasterRotationPlanForApprovalCode);
+            WorkflowResponseHandling.SendApprovalRequestForApprovalCode:
+                WorkflowResponseHandling.AddResponsePredecessor(WorkflowResponseHandling.SendApprovalRequestForApprovalCode,
+                WorkflowEventHandling.RunWorkflowOnSendMasterRotationPlanForApprovalCode);
+            WorkflowResponseHandling.CancelAllApprovalRequestsCode:
+                WorkflowResponseHandling.AddResponsePredecessor(WorkflowResponseHandling.CancelAllApprovalRequestsCode,
+                WorkflowEventHandling.RunWorkflowOnCancelMasterRotationPlanCode);
+            WorkflowResponseHandling.OpenDocumentCode:
+                WorkflowResponseHandling.AddResponsePredecessor(WorkflowResponseHandling.OpenDocumentCode, WorkflowEventHandling.RunWorkflowOnCancelMasterRotationPlanCode);
         END;
     end;
 }

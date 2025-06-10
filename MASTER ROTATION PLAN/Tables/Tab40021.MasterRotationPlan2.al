@@ -136,7 +136,7 @@ table 40021 "Master Rotation Plan2"
         field(20; "Status"; Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = Open,"Pending Approval",Approved;
+            OptionMembers = Open,"Pending Approval",Approved,Cancelled;
         }
         field(21; "Block1 Start Date"; Date)
         {
