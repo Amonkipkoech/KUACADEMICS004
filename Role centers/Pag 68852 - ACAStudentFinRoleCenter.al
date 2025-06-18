@@ -300,12 +300,12 @@ page 68852 "ACA-Student Fin. Role Center"
                     RunObject = Report "Student Fee Statement";
                     ApplicationArea = All;
                 }
-                action("Student Receipts")
-                {
-                    Image = Receipt;
-                    RunObject = Report "Student Fee Receipts";
-                    ApplicationArea = All;
-                }
+                // action("Student Receipts")
+                // {
+                //     Image = Receipt;
+                //     RunObject = Report "Student Fee Receipts";
+                //     ApplicationArea = All;
+                // }
                 action("Payment Journals")
                 {
                     Caption = 'Payment Journals';

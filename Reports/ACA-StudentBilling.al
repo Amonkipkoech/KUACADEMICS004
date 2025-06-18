@@ -8,7 +8,7 @@ report 86664 "Verify Student Billing"
         dataitem("ACA-Course Registration"; "ACA-Course Registration")
         {
             RequestFilterFields = "Settlement Type";
-            CalcFields =  "Semester Total Units Taken";
+            CalcFields = "Semester Total Units Taken";
             column(Title1; 'STUDENTS REGISTERED  ' + FORMAT(Semester))
             {
             }
@@ -52,21 +52,21 @@ report 86664 "Verify Student Billing"
             column(idno; "ID Number")
             {
             }
-            column(Semester_Total_Units_Taken;"Semester Total Units Taken")
+            column(Semester_Total_Units_Taken; "Semester Total Units Taken")
             {
 
             }
-            column(Programmes;Programmes)
+            column(Programmes; Programmes)
             {
-                
+
             }
-            column(Total_Billed;"Total Billed")
+            column(Total_Billed; "Total Billed")
             {
-                
+
             }
-            column(Campus_Code;"Campus Code")
+            column(Campus_Code; "Campus Code")
             {
-                
+
             }
 
             trigger OnAfterGetRecord()

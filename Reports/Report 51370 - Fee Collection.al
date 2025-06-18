@@ -10,12 +10,13 @@ report 51370 "Fee Collection"
     {
         dataitem("Cust. Ledger Entry"; "Cust. Ledger Entry")
         {
+            //RequestFilterFields = "Posting Date";
             DataItemTableView = SORTING("Entry No.")
                                 ORDER(Descending)
                                 WHERE("Credit Amount" = FILTER(<> 0),
                                       "Customer Posting Group" = CONST('STUDENT'),
                                       "Bal. Account Type" = CONST("Bank Account"));
-            RequestFilterFields = "Customer No.", Description, "Settlement Type", "Date Filter", "Credit Amount (LCY)";
+            RequestFilterFields = "Customer No.", Description, "Settlement Type", "Date Filter", "Credit Amount (LCY)", "Posting Date";
             column(FORMAT_TODAY_0_4_; FORMAT(TODAY, 0, 4))
             {
             }
