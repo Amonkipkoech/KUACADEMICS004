@@ -11,6 +11,7 @@ report 86664 "Verify Student Billing"
             CalcFields = "Semester Total Units Taken";
             column(Title1; 'STUDENTS REGISTERED  ' + FORMAT(Semester))
             {
+
             }
             column("Count"; cou)
             {

@@ -89,6 +89,14 @@ page 68852 "ACA-Student Fin. Role Center"
                 ApplicationArea = All;
                 //Visible = false;
             }
+            action("Post Batch Billing Two ")
+            {
+                Caption = 'Post Batch Billing two';
+                Image = Report2;
+                RunObject = Report "Post Batch Billing two";
+                ApplicationArea = All;
+                //Visible = false;
+            }
             action("Genereal Setup")
             {
                 Caption = 'General Setup';
