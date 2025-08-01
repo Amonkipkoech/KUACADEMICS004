@@ -10,6 +10,7 @@ report 66679 "Bachelors Admission Letter"
     {
         dataitem(bAdmLetter; "ACA-Applic. Form Header")
         {
+            RequestFilterFields = "Admission No", "Application No.";
             column(Admission_No; "Admission No")
             {
             }
