@@ -151,7 +151,7 @@ page 86007 "Gown Issuance Register"
         FineRatePerDay := 500.0; // Initialize the fine rate here
 
         if Rec."Actual Return Date" > Rec."Expected Return Date" then
-            exit(DaysPassed * FineRatePerDay) // Calculates the fine based on days passed
+            exit(rec.DaysPassed * FineRatePerDay) // Calculates the fine based on days passed
         else
             exit(0); // No fine if returned on or before the expected date
     end;

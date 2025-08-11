@@ -625,51 +625,39 @@ page 68520 "ACA-Applic. Documents Verif."
                             Report.Run(66679, true, true, admletter);
 
                         end;
-                    //         if (Rec."Programme Level" = Rec."Programme Level"::certificate) and (Rec."Application Type" = Rec."Application Type"::Full) then begin
-
-                    //             admletter.Reset();
-                    //             admletter.SetRange("Application No.", Rec."Application No.");
-                    //             Report.Run(66679, true, true, admletter);
-
-                    //         end else
-                    //             if (Rec."Programme Level" = Rec."Programme Level"::certificate) and (Rec."Application Type" = Rec."Application Type"::Full) then begin
-
-                    //                 admletter.Reset();
-                    //                 admletter.SetRange("Application No.", Rec."Application No.");
-                    //                 Report.Run(66679, true, true, admletter);
-
-                    //             end else
-                    //                 if (Rec."Programme Level" = Rec."Programme Level"::certificate) and (Rec."Application Type" = Rec."Application Type"::Full) then begin
-
-                    //                     admletter.Reset();
-                    //                     admletter.SetRange("Application No.", Rec."Application No.");
-                    //                     Report.Run(66679, true, true, admletter);
-
-                    //                 end else
-                    //                     if  (Rec."Programme Level" = Rec."Programme Level"::certificate) and (Rec."Application Type" = Rec."Application Type"::Full)then begin
-
-                    //                         admletter.Reset();
-                    //                         admletter.SetRange("Application No.", Rec."Application No.");
-                    //                         Report.Run(66679, true, true, admletter);
-
-                    //                     end else
-                    //                         if  (Rec."Programme Level" = Rec."Programme Level"::certificate) and (Rec."Application Type" = Rec."Application Type"::Full)then begin
-
-                    //                             admletter.Reset();
-                    //                             admletter.SetRange("Application No.", Rec."Application No.");
-                    //                             Report.Run(66679, true, true, admletter);
-
-                    //                         end else
-                    //                             if Rec."Settlement Type" = '4YR-HEF' then begin
-                    //                                 admletter.Reset();
-                    //                                 admletter.SetRange("Application No.", Rec."Application No.");
-                    //                                 Report.Run(66680, true, true, admletter);
-                    //                             end;
 
 
                 end;
 
             }
+            action("Admission Letter 2")
+            {
+                Caption = 'New Admission Letter';
+                trigger OnAction()
+                var
+                    admletter: Record "ACA-Applic. Form Header";
+                begin
+                    if (Rec."Application Type" = Rec."Application Type"::Full) then begin
+                        admletter.Reset();
+                        admletter.SetRange("Application No.", Rec."Application No.");
+                        admletter.SetRange("Admission No", Rec."Admission No");
+                        Report.Run(40015, true, true, admletter);
+
+                    end else
+                        if (Rec."Application Type" = Rec."Application Type"::Provisional) then begin
+                            admletter.Reset();
+                            admletter.SetRange("Application No.", Rec."Application No.");
+                            admletter.SetRange("Admission No", Rec."Admission No");
+                            Report.Run(40015, true, true, admletter);
+
+                        end;
+
+
+                end;
+
+
+            }
+
             action(Admit)
             {
                 Caption = 'Admit Student';
