@@ -5590,6 +5590,18 @@ codeunit 40002 StaffPortall
         end;
         exit(response);
     end;
+    procedure SendAnyEmail(EmailAddress: Text; EmailBody: Text; EmailSubject: Text): Boolean;
+    var
+
+        SendMail: Codeunit "Email Message";
+        emailObj: Codeunit Email;
+        sent: Boolean;
+    begin
+        sent := false;
+        SendMail.Create(EmailAddress, EmailSubject, EmailBody);
+        if emailObj.Send(SendMail, Enum::"Email Scenario"::Notification) then sent := true;
+        exit(sent);
+    end;
 
 }
 
