@@ -58,6 +58,13 @@ codeunit 86007 "Workflow Setup Ext."
         XyClearanceWorkfowDescTxt: TextConst ENU = 'Xy Clearance Request Approval Workflow';
         XyClearanceTypeCondTxt: TextConst ENU = '<?xml version = "1.0" encoding="utf-8" standalone="yes"?><ReportParameters><DataItems><DataItem name=StudentClearance>%1</DataItem></DataItems></ReportParameters>';
 
+        /*Master Rotation Plan2 */
+        MasterRotationPlan: Record "Master Rotation Plan2";
+        MasterRotationPlanWorkflowCategoryTxt: TextConst ENU = 'Master Rotation';
+        MasterRotationPlanWorkflowCategoryDescTxt: TextConst ENU = 'Master Rotation Plan Document';
+        MasterRotationPlanWorkflowCodeTxt: TextConst ENU = 'MRPAW';
+        MasterRotationPlanWorkfowDescTxt: TextConst ENU = 'Master Rotation Plan Approval Workflow';
+        MasterRotationPlanTypeCondTxt: TextConst ENU = '<?xml version = "1.0" encoding="utf-8" standalone="yes"?><ReportParameters><DataItems><DataItem name=MasterRotationPlan>%1</DataItem></DataItems></ReportParameters>';
 
 
     /* ************************************************************************************************************************************8 */
@@ -74,7 +81,9 @@ codeunit 86007 "Workflow Setup Ext."
         WorkflowSetup.InsertWorkflowCategory(UtilityBillWorkflowCategoryTxt, UtilityBillWorkflowCategoryDescTxt);
         WorkflowSetup.InsertWorkflowCategory(StudentClearanceInfoWorkflowCategoryTxt, StudentClearanceWorkflowCategoryDescTxt);
         WorkflowSetup.InsertWorkflowCategory(XyClearanceInfoWorkflowCategoryTxt, XYClearanceWorkflowCategoryDescTxt);
+        WorkflowSetup.InsertWorkflowCategory(MasterRotationPlanWorkflowCategoryTxt, MasterRotationPlanWorkflowCategoryDescTxt);
     end;
+
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Workflow Setup", 'OnAfterInsertApprovalsTableRelations', '', true, true)]
 
@@ -86,6 +95,7 @@ codeunit 86007 "Workflow Setup Ext."
 
         WorkflowSetup.InsertTableRelation(Database::"Student Clerance", 0, Database::"Approval Entry", ApprovalEntry.FieldNo("Record ID to Approve"));
         WorkflowSetup.InsertTableRelation(Database::"ACA-XY-FORM", 0, Database::"Approval Entry", ApprovalEntry.FieldNo("Record ID to Approve"));
+        WorkflowSetup.InsertTableRelation(Database::"Master Rotation Plan2", 0, Database::"Approval Entry", ApprovalEntry.FieldNo("Record ID to Approve"));
     end;
 
 
@@ -98,9 +108,42 @@ codeunit 86007 "Workflow Setup Ext."
         InsertMeetingBookingWorkflowTemplate();
         InsertStudentClearanceWorkflowTemplate();
         InsertStudentClearanceWorkflowTemplate();
+        InsertMasterRotationPlanWorkflowTemplate();
     end;
 
+    /*Master Rotation Plan2 */
+    local procedure InsertMasterRotationPlanWorkflowTemplate()
+    var
+        Workflow: Record Workflow;
+    begin
+        WorkflowSetup.InsertWorkflowTemplate(Workflow, MasterRotationPlanWorkflowCodeTxt, MasterRotationPlanWorkfowDescTxt, MasterRotationPlanWorkflowCategoryTxt);
+        InsertMasterRotationPlanWorkflowDetails(Workflow);
+        WorkflowSetup.MarkWorkflowAsTemplate(Workflow);
+    end;
+
+    local procedure InsertMasterRotationPlanWorkflowDetails(var Workflow: Record Workflow)
+    begin
+        WorkflowSetup.initWorkflowStepArgument(WorkflowStepArgument, WorkflowStepArgument."Approver Type"::Approver, WorkflowStepArgument."Approver Limit Type"::"Direct Approver", 0, '', BlankDateFormula, true);
+        WorkflowSetup.InsertDocApprovalWorkflowSteps(
+            Workflow,
+            BuildMasterRotationPlanTypeConditions(MasterRotationPlan.Status::Open),
+            WorkflowEventHandling.RunWorkflowOnSendMasterRotationPlanForApprovalCode,
+            BuildMasterRotationPlanTypeConditions(MasterRotationPlan.Status::"Pending Approval"),
+            WorkflowEventHandling.RunWorkflowOnCancelMasterRotationPlanCode,
+            WorkflowStepArgument,
+            true
+        );
+    end;
+
+    local procedure BuildMasterRotationPlanTypeConditions(Status: Integer): Text
+    begin
+        MasterRotationPlan.Reset;
+        MasterRotationPlan.SetRange(Status, Status);
+        exit(StrSubstNo(MasterRotationPlanTypeCondTxt, WorkflowSetup.Encode(MasterRotationPlan.GetView(false))))
+    end;
     /* ************************************************************************************************************************************8 */
+
+
     //MEETING BOOKING
     local procedure InsertMeetingBookingWorkflowTemplate()
     var

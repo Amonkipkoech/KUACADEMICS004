@@ -25,6 +25,9 @@ codeunit 86006 "Workflow Event Handling Ext."
         //XYstudentClearance
         XyClearanceForApprovalEventDescTxt: TextConst ENU = 'Approval of Xy Clearance is Requested';
         XyclearanceRequestCancelEventDescTxt: TextConst ENU = 'Approval of Xy Clearance is Canceled';
+        /*Master Rotation Plan2 */
+        MasterRotationPlanSendForApprovalEventDescTxt: TextConst ENU = 'Approval of Master Rotation Plan is Requested';
+        MasterRotationPlanRequestCancelEventDescTxt: TextConst ENU = 'Approval of Master Rotation Plan is Canceled';
 
 
 
@@ -41,6 +44,9 @@ codeunit 86006 "Workflow Event Handling Ext."
         //XyClearance
         WorkflowEventHandling.AddEventToLibrary(RunWorkflowOnSendXyForApprovalCode, Database::"ACA-XY-FORM", XyClearanceForApprovalEventDescTxt, 0, false);
         WorkflowEventHandling.AddEventToLibrary(RunWorkflowOnCancelXyClearanceCode, Database::"ACA-XY-FORM", XyclearanceRequestCancelEventDescTxt, 0, false);
+        /*Master Rotation Plan2 */
+        WorkflowEventHandling.AddEventToLibrary(RunWorkflowOnSendMasterRotationPlanForApprovalCode, Database::"Master Rotation Plan2", MasterRotationPlanSendForApprovalEventDescTxt, 0, false);
+        WorkflowEventHandling.AddEventToLibrary(RunWorkflowOnCancelMasterRotationPlanCode, Database::"Master Rotation Plan2", MasterRotationPlanRequestCancelEventDescTxt, 0, false);
 
 
     end;
@@ -50,10 +56,6 @@ codeunit 86006 "Workflow Event Handling Ext."
     var
         WorkflowEvent: Codeunit "Workflow Event Handling";
     begin
-
-
-
-
         //studentClearance
         case EventFunctionName of
             RunWorkflowOnCancelStudentClearanceCode:
@@ -68,16 +70,47 @@ codeunit 86006 "Workflow Event Handling Ext."
             WorkflowEventHandling.RunWorkflowOnApproveApprovalRequestCode:
                 WorkflowEventHandling.AddEventPredecessor(WorkflowEventHandling.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendXyForApprovalCode);
         end;
+        /*Master Rotation Plan2 */
+        case EventFunctionName of
+            RunWorkflowOnCancelMasterRotationPlanCode:
+                WorkflowEventHandling.AddEventPredecessor(RunWorkflowOnCancelMasterRotationPlanCode, RunWorkflowOnSendMasterRotationPlanForApprovalCode);
+            WorkflowEventHandling.RunWorkflowOnApproveApprovalRequestCode:
+                WorkflowEventHandling.AddEventPredecessor(WorkflowEventHandling.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendMasterRotationPlanForApprovalCode);
+        end;
 
     end;
+    /*Master Rotation Plan2 */
+    procedure RunWorkflowOnSendMasterRotationPlanForApprovalCode(): Code[128]
+    begin
+        exit(UpperCase('RunWorkflowOnSendMasterRotationPlanForApproval'));
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approval Mgnt. Util.", 'OnSendMasterRotationPlanForApproval', '', true, true)]
+    local procedure RunWorkflowOnSendMasterRotationPlanForApproval(Var MasterRotationPlan: Record "Master Rotation Plan2")
+    begin
+
+        WorkflowManagement.HandleEvent(RunWorkflowOnSendMasterRotationPlanForApprovalCode, MasterRotationPlan)
+    end;
+
+    procedure RunWorkflowOnCancelMasterRotationPlanCode(): Code[128]
+    begin
+        exit(UpperCase('RunWorkflowOnCancelMasterRotationPlan'));
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approval Mgnt. Util.", 'OnCancelMasterRotationPlanForApproval', '', true, true)]
+    local procedure RunWorkflowOnCancelMasterRotationPlan(Var MasterRotationPlan: Record "Master Rotation Plan2")
+    begin
+        WorkflowManagement.HandleEvent(RunWorkflowOnCancelMasterRotationPlanCode, MasterRotationPlan);
+        MasterRotationPlan.Reset();
+        MasterRotationPlan.SetRange("Plan ID", MasterRotationPlan."Plan ID");
+        if MasterRotationPlan.FindFirst() then begin
+            MasterRotationPlan.Status := MasterRotationPlan.Status::Open;
+            MasterRotationPlan.Modify()
+        end;
+    end;
+
 
     /*************************************************************************************************************************** */
-    //meetingBooking
-
-
-
-
-
     //Student clearance 
     procedure RunWorkflowOnSendStudentClearanceForApprovalCode(): Code[128]
     begin

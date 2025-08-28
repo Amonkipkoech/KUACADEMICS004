@@ -89,6 +89,14 @@ page 68852 "ACA-Student Fin. Role Center"
                 ApplicationArea = All;
                 //Visible = false;
             }
+            action("Post Batch Billing Two ")
+            {
+                Caption = 'Post Batch Billing two';
+                Image = Report2;
+                RunObject = Report "Post Batch Billing two";
+                ApplicationArea = All;
+                //Visible = false;
+            }
             action("Genereal Setup")
             {
                 Caption = 'General Setup';
@@ -300,12 +308,12 @@ page 68852 "ACA-Student Fin. Role Center"
                     RunObject = Report "Student Fee Statement";
                     ApplicationArea = All;
                 }
-                action("Student Receipts")
-                {
-                    Image = Receipt;
-                    RunObject = Report "Student Fee Receipts";
-                    ApplicationArea = All;
-                }
+                // action("Student Receipts")
+                // {
+                //     Image = Receipt;
+                //     RunObject = Report "Student Fee Receipts";
+                //     ApplicationArea = All;
+                // }
                 action("Payment Journals")
                 {
                     Caption = 'Payment Journals';

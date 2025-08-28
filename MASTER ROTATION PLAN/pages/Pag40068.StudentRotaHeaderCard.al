@@ -9,8 +9,8 @@ page 40068 "Student Rota Header Card"
         {
             group(General)
             {
-                field("ID"; "ID") { }
-                field("Semester"; "Semester") { }
+                field("ID"; rec."ID") { }
+                field("Semester"; rec."Semester") { }
                 field("Academic Year"; "Academic Year") { }
                 field("Status"; "Status") { }
                 field("Current"; "Current") { Editable = false; }
@@ -19,7 +19,7 @@ page 40068 "Student Rota Header Card"
 
             part(RotaLines; "Student Rota Line Subpage")
             {
-                SubPageLink = "Header ID" = field(ID);
+                SubPageLink = Semester = field(Semester), "Academic Year" = field("Academic Year");
             }
         }
     }

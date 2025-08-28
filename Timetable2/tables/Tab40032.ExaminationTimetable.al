@@ -9,11 +9,32 @@ table 40032 "Examination Timetable"
         {
             TableRelation = "ACA-Programme".Code;
             trigger OnValidate()
+            var
+                HRMEmployee: Record "HRM-Employee (D)";
+                TimetableRec: Record Timetable;
             begin
                 prog.Reset();
                 prog.SetRange(Code, Programs);
                 if prog.Find('-') then begin
                     "Program Name" := prog.Description;
+                end;
+                // Check if the lecturer is already allocated for the same combination
+                TimetableRec.Reset();
+                TimetableRec.SetRange(Programs, Rec.Programs);
+                TimetableRec.SetRange(Semester, rec.Semester);
+                TimetableRec.SetRange("Academic Year", rec."Academic Year");
+                TimetableRec.SetRange(Department, rec.Department);
+                TimetableRec.SetRange(Day, Rec.Day);
+                TimetableRec.SetRange(TimeSlot, Rec.TimeSlot);
+                TimetableRec.SetRange(Week, Rec.Week);
+                TimetableRec.SetRange(Month, Rec.Month);
+
+
+                if TimetableRec.FindFirst() then begin
+
+                    Error('This Group  %1 are  already allocated a class on %2 during %3 in %4.',
+                         TimetableRec.Programs,
+                        FORMAT(Rec.Day), FORMAT(Rec.TimeSlot), FORMAT(Rec.Month));
                 end;
 
             end;
