@@ -102,7 +102,7 @@ codeunit 86502 "studentportals"
         filename: Text;
         IStream: InStream;
         Bytes: DotNet Bytes;
-        Convert: DotNet Convert;
+        Convert: DotNet Convert;   //MemoryStream.netpackages
         MemStream: DotNet MemoryStream;
         TTTimetableFInalCollector: Record "ACA-Time Table";
         EXTTimetableFInalCollector: Record "ACA-Time Table";
