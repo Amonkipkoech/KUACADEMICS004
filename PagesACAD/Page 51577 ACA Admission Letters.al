@@ -335,7 +335,7 @@ page 51577 "ACA- Admission Letters"
                 var
                     admletter: Record "ACA-Applic. Form Header";
                 begin
-                    if Rec."Programme Level" = Rec."Programme Level"::certificate then begin
+                    if Rec."Programme Level" = Rec."Programme Level"::"Higher Diploma" then begin
                         admletter.Reset();
                         admletter.SetRange("Application No.", Rec."Application No.");
                         Report.Run(66680, true, true, admletter);

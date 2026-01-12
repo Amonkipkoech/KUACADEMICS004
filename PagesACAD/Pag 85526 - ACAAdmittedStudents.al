@@ -3,7 +3,7 @@ page 85526 "ACA-Admitted Students"
     //CardPageID = "ACA-Application Form Header";
     InsertAllowed = false;
     ModifyAllowed = true;
-    Editable=true;
+    Editable = true;
     PageType = List;
     SourceTable = "ACA-Applic. Form Header";
     SourceTableView = WHERE(Status = FILTER(Admitted));
@@ -137,7 +137,7 @@ page 85526 "ACA-Admitted Students"
                 field(Campus; Rec.Campus)
                 {
                     ApplicationArea = All;
-                    
+
                 }
                 field("Intake Code"; Rec."Intake Code")
                 {
@@ -472,7 +472,7 @@ page 85526 "ACA-Admitted Students"
                     var
                         admletter: Record "ACA-Applic. Form Header";
                     begin
-                        if Rec."Programme Level" = Rec."Programme Level"::certificate then begin
+                        if Rec."Programme Level" = Rec."Programme Level"::"Higher Diploma" then begin
                             admletter.Reset();
                             admletter.SetRange("Application No.", Rec."Application No.");
                             Report.Run(66679, true, true, admletter);

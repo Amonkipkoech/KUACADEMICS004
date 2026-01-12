@@ -469,7 +469,7 @@ page 70083 "ACA-Pending Admissions PSSP"
                 var
                     admletter: Record "ACA-Applic. Form Header";
                 begin
-                    if Rec."Programme Level" = Rec."Programme Level"::certificate then begin
+                    if Rec."Programme Level" = Rec."Programme Level"::"Higher Diploma" then begin
                         admletter.Reset();
                         admletter.SetRange("Application No.", Rec."Application No.");
                         Report.Run(66679, true, true, admletter);
