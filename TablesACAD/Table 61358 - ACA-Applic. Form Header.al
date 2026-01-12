@@ -715,7 +715,7 @@ table 61358 "ACA-Applic. Form Header"
         }
         field(50001; "Programme Level"; Option)
         {
-            OptionMembers = " ",Certificate,Diploma;
+            OptionMembers = " ",Diploma,"Higher Diploma";
         }
         field(50002; "Knew Through (Other)"; Text[250])
         {

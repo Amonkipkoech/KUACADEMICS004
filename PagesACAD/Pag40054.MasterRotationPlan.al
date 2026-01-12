@@ -97,44 +97,89 @@ page 40054 "Master Rotation Plan"
                     RunObject = Page "Institute List";
                     ApplicationArea = All;
                 }
-                action("Institute Requests - Open")
+
+                action("Requests - Open")
                 {
                     Image = List;
-                    Caption = 'Institutional Requests - Open';
+                    Caption = 'Requests - Open';
                     RunObject = Page "Institution Request List";
-                    RunPageView = WHERE(Status = CONST(Open));
+                    RunPageView = WHERE("Approval Status" = CONST(Open));
                     ApplicationArea = All;
                 }
 
-                action("Institute Requests - Pending")
+                action("Requests - Director Approval")
                 {
                     Image = Question;
-                    Caption = 'Institutional Requests - Pending Approval';
+                    Caption = 'Requests - Pending Director';
                     RunObject = Page "Institution Request List";
-                    RunPageView = WHERE(Status = CONST("Pending Approval"));
+                    RunPageView = WHERE("Approval Status" = CONST("Pending Director Approval"));
                     ApplicationArea = All;
                 }
 
-                action("Institute Requests - Approved")
+                action("Requests - HOD Feedback")
+                {
+                    Image = Question;
+                    Caption = 'Requests - Pending HOD';
+                    RunObject = Page "Institution Request List";
+                    RunPageView = WHERE("Approval Status" = CONST("Pending HOD Feedback"));
+                    ApplicationArea = All;
+                }
+
+                action("Requests - Director Review")
+                {
+                    Image = Question;
+                    Caption = 'Requests - Director (Post-HOD)';
+                    RunObject = Page "Institution Request List";
+                    RunPageView = WHERE("Approval Status" = CONST("Director Review (Post-HOD)"));
+                    ApplicationArea = All;
+                }
+
+                action("Requests - External Confirmation")
+                {
+                    Image = Question;
+                    Caption = 'Requests - External Confirmation';
+                    RunObject = Page "Institution Request List";
+                    RunPageView = WHERE("Approval Status" = CONST("Pending External Confirmation"));
+                    ApplicationArea = All;
+                }
+
+                action("Requests - Admissions")
                 {
                     Image = Approve;
-                    Caption = 'Institutional Requests - Approved';
+                    Caption = 'Requests - Pending Admissions';
                     RunObject = Page "Institution Request List";
-                    RunPageView = WHERE(Status = CONST(Approved));
+                    RunPageView = WHERE("Approval Status" = CONST("Pending Admissions"));
                     ApplicationArea = All;
                 }
 
-                action("Institute Requests - Rejected")
+                action("Requests - Finance")
+                {
+                    Image = Approve;
+                    Caption = 'Requests - Pending Finance';
+                    RunObject = Page "Institution Request List";
+                    RunPageView = WHERE("Approval Status" = CONST("Pending Finance"));
+                    ApplicationArea = All;
+                }
+
+                action("Requests - Completed")
+                {
+                    Image = Approve;
+                    Caption = 'Requests - Completed';
+                    RunObject = Page "Institution Request List";
+                    RunPageView = WHERE("Approval Status" = CONST(Completed));
+                    ApplicationArea = All;
+                }
+
+                action("Requests - Rejected")
                 {
                     Image = Cancel;
-                    Caption = 'Institutional Requests - Rejected';
+                    Caption = 'Requests - Rejected';
                     RunObject = Page "Institution Request List";
-                    RunPageView = WHERE(Status = CONST(Rejected));
+                    RunPageView = WHERE("Approval Status" = CONST(Rejected));
                     ApplicationArea = All;
                 }
-
-
             }
+
             group("Student MRP  Management")
             {
                 action("Student Group  Assignmnets ")
