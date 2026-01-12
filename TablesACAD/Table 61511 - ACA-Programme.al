@@ -293,7 +293,7 @@ table 61511 "ACA-Programme"
         }
         field(54; Levels; Option)
         {
-            OptionMembers = " ",Certificate,Diploma;
+            OptionMembers = " ",Diploma,"Higher Diploma";
         }
         field(96; "Exam Date"; Date)
         {
