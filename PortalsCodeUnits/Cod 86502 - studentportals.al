@@ -945,7 +945,7 @@ codeunit 86502 "studentportals"
         StudentUnits."Reg. Transacton ID" := RegTransID;
         StudentUnits."Unit Description" := UnitDescription;
         StudentUnits."Academic Year" := AcademicYear;
-        StudentUnits."Unit Category":= StudentUnits."Unit Category"::Exam;
+        StudentUnits."Unit Category" := StudentUnits."Unit Category"::Exam;
         StudentUnits.INSERT(TRUE);
         ReturnMessage := 'Units registered Successfully!';
         StudentUnitBaskets.RESET;
@@ -3641,7 +3641,7 @@ codeunit 86502 "studentportals"
                 programsetups.SetRange(Code, programs.Code);
                 //programsetups.SetRange(Campus, campus);
                 programsetups.SetRange(Modeofstudy, studymode);
-                programsetups.SetRange(Semester, intake);
+                //programsetups.SetRange(Semester, intake);
                 if programsetups.Find('-') then begin
                     Message += programs.Code + ' ::' + programs.Description + '[]';
                 end;
@@ -5031,6 +5031,7 @@ codeunit 86502 "studentportals"
             until stdissues.Next = 0;
         end
     end;
+
     procedure HasApplied(program: Text; email: Text): Boolean
     var
         ApplicHeader: Record "ACA-Applic. Form Header";
